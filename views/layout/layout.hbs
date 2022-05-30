@@ -5,6 +5,8 @@
     
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +28,13 @@
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
-
+    
+    {{#if admin}}
+    {{>admin-header}}
+    {{else}}
+    {{>user-header}}
+    {{/if}}
+    
 
     {{{body}}}
   
