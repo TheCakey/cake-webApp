@@ -30,7 +30,7 @@
              
             </div>
               <div class="submit-wrapper">
-                <button id="div-display" type="submit" class="btn-submit">Next</button>
+                <button id="btn-none" type="submit" class="btn-submit">Next</button>
            </div>
             </form>
 
@@ -46,12 +46,12 @@
 
 
     document.querySelector("#div-display").addEventListener("click", function(){
-        console.log('looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooogggggggggggggggg')
-        int num=document.getElementById('div-num').value;
+       
+       let num=parseInt(document.getElementById('div-num').value);
 $.ajax({
     url:'/mob-num-submission',
     data:{
-        mobnum:num;
+        mobnum:num
     },
     method:'post',
     success:(response)=>{
@@ -59,7 +59,10 @@ $.ajax({
     }
 })
     document.querySelector("#div-none").style.display = "block";
+
     document.querySelector("#div-num").classList.add('ddiv-num')
+     document.querySelector("#div-display").style.display = "none";
+     document.querySelector("#btn-none").style.display = "block";
 
 
 });
@@ -77,6 +80,9 @@ $.ajax({
     #div-none{
     display: none;
 } 
+#btn-none{
+    display: none;
+}
     .ddiv-num{
         pointer-events: none;
     }
