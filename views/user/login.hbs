@@ -1,44 +1,85 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+<body>
 
-<section class="vh-100" style="background-color: #f8f9fd; ">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card shadow-2-strong" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-center">
-         <div class="icon d-flex align-items-center justify-content-center">
-           <i class='fas fa-user-circle' style='font-size:78px;color:#1089ff'></i>
-           </div>
-              <p class="mb-5" style=" font-weight: 300; font-size: 25px">Sign in</p>
-              
-  <form action="/signup" method="post">
-              <div class="form-outline mb-4 ">
-                <input placeholder="Email" type="email" id="typeEmailX-2" name="email" class="form-control form-control-lg login-input-field" />
-              </div>
-  
-              <div class="form-outline mb-1 signup-input-field">
-                <input placeholder="Password" type="password" id="typePasswordX-2" name="pswd" class="form-control form-control-lg login-input-field" />
-              </div>
-  
-              <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-start mb-4">
-                
-              </div>
-  
-               <button type="submit" class="form-control btn btn-primary  submit px-3 mb-3" style="background-color: #1089ff; border-radius: 10px;">Login</button>  
-               </form>
-               <div>
-                              <a href="/signup" style="color:#1089ff ; font-size:15px ;  " class="ml-auto">Register Here</a>
-               </div>
 
-              <hr class="my-4">
-
-              <div class="w-50 text-md-right">
-                 <a href="" style="color:#1089ff ; font-size:15px ;  ">Forgot Password</a>
-                 
-                   </div>
+    <div class="credential-wrapper">
+        <div class="credential-container">
+            <img src="/assets/icons/credential.png" class="credential-badge" alt="">
+            <h1 class="">Signup</h1>
+            <p>or <a href="" class="text-primary login-text-style grow" > create an account</a></p>
+       
+       
+        
+            <div class="field-wrapper" >
+                <label for="number" class="field-label">Please Enter Your 10 Digits Mobile Number Here *</label>
+                <input type="num" id="div-num"  placeholder="Mobile Number" name="number"  class="field">
+             
             </div>
-          </div>
+              <div class="submit-wrapper">
+                <button id="div-display" type="submit" class="btn-submit">Next</button>
+           </div>
+             
+
+
+             <form action="">
+            <div class="field-wrapper " id="div-none">
+                <label for="number" class="field-label"></label>
+                <input type="num" placeholder="Enter your OTP" name="number" id="number" class="field">
+             
+            </div>
+              <div class="submit-wrapper">
+                <button id="div-display" type="submit" class="btn-submit">Next</button>
+           </div>
+            </form>
+
+
+         
+          
         </div>
-      </div>
     </div>
-  </section>
+</body>
+
+
+<script>
+
+
+    document.querySelector("#div-display").addEventListener("click", function(){
+        console.log('looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooogggggggggggggggg')
+        int num=document.getElementById('div-num').value;
+$.ajax({
+    url:'/mob-num-submission',
+    data:{
+        mobnum:num;
+    },
+    method:'post',
+    success:(response)=>{
+        window.alert('otp send')
+    }
+})
+    document.querySelector("#div-none").style.display = "block";
+    document.querySelector("#div-num").classList.add('ddiv-num')
+
+
+});
+
+
+
+
+
+
+
+</script>  
+
+
+<style>
+    #div-none{
+    display: none;
+} 
+    .ddiv-num{
+        pointer-events: none;
+    }
+ 
+</style>
+

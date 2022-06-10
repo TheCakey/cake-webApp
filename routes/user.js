@@ -10,13 +10,30 @@ router.get('/login',(req,res)=>{
   res.render('user/login',{hdr:true})
 })
 
-router.post('/login',(req,res)=>{
+router.post('/mob-num-submission',(req,res)=>{
   console.log(req.body)
-  res.redirect('/')
+  var otp=43567;
+  res.json(otp)
+})
+
+
+
+
+
+
+
+
+
+router.get('/otp',(req,res)=>{
+  res.render('user/otp')
 })
 
 router.get('/signup',(req,res)=>{
   res.render('user/signup',{hdr:true})
+})
+
+router.get('/signup-password-submit',(req,res)=>{
+  res.render('user/index',{})
 })
 
 router.post('/signup',(req,res)=>{
