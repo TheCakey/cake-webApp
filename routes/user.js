@@ -24,8 +24,8 @@ router.post('/mob-num-submission',(req,res)=>{
 
 
 
-router.get('/otp',(req,res)=>{
-  res.render('user/otp')
+router.get('/number-submit',(req,res)=>{
+  res.render('user/registration-form',{hdr:true})
 })
 
 router.get('/signup',(req,res)=>{
