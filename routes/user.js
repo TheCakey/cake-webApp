@@ -32,6 +32,7 @@ router.get('/number-submit',(req,res)=>{
 })
 
 router.get('/signup',(req,res)=>{
+  console.log(req.body)
   res.render('user/signup',{hdr:true})
 })
 
