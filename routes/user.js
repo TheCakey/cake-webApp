@@ -31,17 +31,17 @@ router.post('/otp',(req,res)=>{
 //checking otp;
 if(req.body.otp==otp){
   loginErr=null;
-  res.redirect("/")
+  res.render('user/registration-form',{hdr:true})
 }
 else{
    loginErr="Wrong Otp.Please retry"
   res.redirect('/login')
 }
- 
 })
 
 
 router.get('/signup',(req,res)=>{
+  console.log(req.body)
   res.render('user/signup',{hdr:true})
 })
 
