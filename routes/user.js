@@ -2,19 +2,22 @@
 var express = require('express');
 var router = express.Router();
 
-
+const otp =43567;
+let loginErr;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('user/index',{});
 });
 
 router.get('/login',(req,res)=>{
-  res.render('user/login',{hdr:true})
+  
+  res.render('user/login',{hdr:true,loginErr})
 })
 
 router.post('/mob-num-submission',(req,res)=>{
   console.log(req.body)
-  var otp=43567;
+  loginErr=null;
+  //otp send to mobile number 
  
   res.json(otp)
 })
@@ -23,26 +26,27 @@ router.post('/mob-num-submission',(req,res)=>{
 
 
 
+router.post('/otp',(req,res)=>{
 
-
-
-
-router.get('/otp',(req,res)=>{
-  res.render('user/otp')
+//checking otp;
+if(req.body.otp==otp){
+  loginErr=null;
+  res.redirect("/")
+}
+else{
+   loginErr="Wrong Otp.Please retry"
+  res.redirect('/login')
+}
+ 
 })
+
 
 router.get('/signup',(req,res)=>{
   res.render('user/signup',{hdr:true})
 })
 
-router.get('/signup-password-submit',(req,res)=>{
-  res.render('user/index',{})
-})
 
-router.post('/signup',(req,res)=>{
-  console.log(req.body)
-  res.redirect('/')
-})
+
 
 
 module.exports = router;

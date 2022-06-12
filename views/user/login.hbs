@@ -16,6 +16,9 @@
                 <label for="number" class="field-label">Please Enter Your 10 Digits Mobile Number Here *</label>
                 <input type="num" id="div-num"  placeholder="Mobile Number" name="number"  class="field">
                 <p class="text-danger" id="invalid" >Invalid format Please enter valid number</p>
+              {{#if loginErr}}
+                  <p class="text-danger" id="otp-error"  >Wrong Otp</p>
+                  {{/if}}
             </div>
               <div class="submit-wrapper">
                 <button id="div-display" type="submit" class="btn-submit">Next</button>
@@ -23,10 +26,10 @@
              
 
 
-             <form action="">
+             <form action="/otp" method="post">
             <div class="field-wrapper " id="div-none">
                 <label for="number" class="field-label"></label>
-                <input type="num" placeholder="Enter your OTP" name="number" id="number" class="field">
+                <input type="num" placeholder="Enter your OTP" name="otp" id="number" class="field">
              
             </div>
               <div class="submit-wrapper">
@@ -60,14 +63,16 @@ $.ajax({
     },
     method:'post',
     success:(response)=>{
-        window.alert('otp send')
+      swal("Otp Send!", "Otp send to your mobile number", "success");
+      
     }
 })
+    
      document.querySelector("#div-none").style.display = "block";
      document.querySelector("#div-num").classList.add('ddiv-num')
      document.querySelector("#div-display").style.display = "none";
      document.querySelector("#btn-none").style.display = "block";
-
+     document.querySelector("#otp-error").style.display = "none";
 
              } else {
                  document.querySelector("#invalid").style.display = "block";
