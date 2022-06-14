@@ -32,7 +32,7 @@
         <div class="credential-container input-design m-3">
             <h1 class="registration-form-title ">Create an Account</h1>
             <p>or <a href="" class="text-primary login-text-style grow" > Already have an account?</a></p>
-      <form name="my-form" onsubmit="return validform()" action="/signup" method="get">
+      <form name="my-form" {{!-- onsubmit="return "" validform()" --}} action="/profile" method="post"> 
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name</label>
                                     <div class="col-md-6">
