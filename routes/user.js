@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 
-const otp =43567;
+const otp =123;
 let loginErr;
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -21,6 +21,7 @@ router.post('/mob-num-submission',(req,res)=>{
  
   res.json(otp)
 })
+
 
 
 
@@ -45,6 +46,11 @@ router.get('/signup',(req,res)=>{
   res.render('user/signup',{hdr:true})
 })
 
+
+router.post('/full-details-form',(req,res)=>{
+  console.log(req.body)
+  res.redirect('/')
+})
 
 
 
