@@ -41,11 +41,20 @@ else{
 })
 
 
-router.get('/signup',(req,res)=>{
+router.post('/profile',(req,res)=>{
   console.log(req.body)
-  res.render('user/signup',{hdr:true})
+  res.render('user/profile-page',{hdr:true})
 })
 
+router.get('/myorders',(req,res)=>{
+  res.render('user/myorders',{hdr:true})
+})
+router.get('/manage-address',(req,res)=>{
+  res.render('user/manage-address',{hdr:true})
+})
+router.get('/wishlist',(req,res)=>{
+  res.render('user/wishlist',{hdr:true})
+})
 
 router.post('/full-details-form',(req,res)=>{
   console.log(req.body)
