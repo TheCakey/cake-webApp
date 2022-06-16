@@ -19,7 +19,7 @@ html {
 }
 
 .order-container {
-  padding: 10rem 12%;
+  padding: 3rem 12%;
   background: #eeeeee;
   display: -ms-grid;
   display: grid;
@@ -197,7 +197,7 @@ html {
 }
 
 .order-container .dashboard--container .delete--btn {
-  color: #c44786;
+  color: #ce0f0f;
 }
 
 .order-container .dashboard--container .total--price {
@@ -205,7 +205,7 @@ html {
 }
 
 .order-container .dashboard--container .total--price .price {
-  color: #c44786;
+  color: #5cc447;
 }
 
 .order-container .filter-date {

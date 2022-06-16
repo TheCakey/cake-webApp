@@ -19,10 +19,10 @@ html {
 }
 
 .dashboard--container {
-  padding: 10rem 12%;
+  padding: 3rem 12%;
   background: #eeeeee;
   display: -ms-grid;
-  display: grid;
+  
   -ms-grid-columns: 3fr 5fr;
       grid-template-columns: 3fr 5fr;
   grid-gap: 2rem;
@@ -149,15 +149,15 @@ html {
 }
 
 .dashboard--container .nav--item--active {
-  background: -webkit-gradient(linear, left top, left bottom, from(#C44786), to(#E55C5B));
-  background: linear-gradient(180deg, #C44786 0%, #E55C5B 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#4773c4), to(#5b64e5));
+  background: linear-gradient(180deg, #474fc4 0%, #5b8be5 100%);
   color: #fff;
   border-radius: 10px;
 }
 
 .dashboard--container .nav--item--active:hover {
-  background: -webkit-gradient(linear, left top, left bottom, from(#C44786), to(#E55C5B));
-  background: linear-gradient(180deg, #C44786 0%, #E55C5B 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#4947c4), to(#5d5be5));
+  background: linear-gradient(180deg, #4749c4 0%, #695be5 100%);
   color: #fff;
 }
 
