@@ -22,6 +22,11 @@ router.post('/mob-num-submission',(req,res)=>{
   res.json(otp)
 })
 
+
+
+
+
+
 router.post('/otp',(req,res)=>{
 
 //checking otp;
@@ -36,7 +41,7 @@ else{
 })
 
 
-router.post('/profile',(req,res)=>{
+router.get('/profile',(req,res)=>{
   console.log(req.body)
   res.render('user/profile-page',{hdr:true})
 })
@@ -49,6 +54,11 @@ router.get('/manage-address',(req,res)=>{
 })
 router.get('/wishlist',(req,res)=>{
   res.render('user/wishlist',{hdr:true})
+})
+
+router.post('/full-details-form',(req,res)=>{
+  console.log(req.body)
+  res.redirect('/')
 })
 
 
