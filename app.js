@@ -7,6 +7,7 @@ var logger = require('morgan');
 var adminRouter = require('./routes/admin');
 var userRouter = require('./routes/user');
 
+var db=require('./config/connection')
 var hbs=require('express-handlebars')
 var app = express();
 
@@ -20,6 +21,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+db.connect((err)=>{
+  if(err) console.log('Connection Error'+err)
+  else console.log('Database Connected to Port 27107')
+})
+
 
 app.use('/', userRouter)
 app.use('/admin', adminRouter);

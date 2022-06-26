@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login',(req,res)=>{
-  
   res.render('user/login',{hdr:true,loginErr})
 })
 
@@ -23,15 +22,12 @@ router.post('/mob-num-submission',(req,res)=>{
 })
 
 
-
-
-
-
 router.post('/otp',(req,res)=>{
 
 //checking otp;
 if(req.body.otp==otp){
   loginErr=null;
+  
   res.render('user/registration-form',{hdr:true})
 }
 else{

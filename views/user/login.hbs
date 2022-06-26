@@ -29,8 +29,8 @@
              <form action="/otp" method="post">
             <div class="field-wrapper " id="div-none">
                 <label for="number" class="field-label"></label>
-                <input type="num" placeholder="Enter your OTP" name="otp" id="number" class="field">
-             
+                <input type="number" placeholder="Enter your OTP" name="otp" id="number" class="field">
+               <input type="number" name="mobno" id="tempnum"   class="field">
             </div>
               <div class="submit-wrapper">
                 <button id="btn-none" type="submit" class="btn-submit">Next</button>
@@ -63,6 +63,8 @@ $.ajax({
     },
     method:'post',
     success:(response)=>{
+        document.getElementById("tempnum").value = num;
+        
       swal("Otp Send!", "Otp send to your mobile number", "success");
       
     }
