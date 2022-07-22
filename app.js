@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var adminRouter = require('./routes/admin');
 var userRouter = require('./routes/user');
-
+var db = require('./config/connection')
 var hbs=require('express-handlebars')
 var app = express();
 
@@ -23,6 +23,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', userRouter)
 app.use('/admin', adminRouter);
+
+db.connect((err)=>{
+  if (err)
+  console.log("connection error"+err)
+  else console.log("Database connected")
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

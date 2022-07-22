@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 const otp =123;
+let mobno;
 let loginErr;
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,19 +17,15 @@ router.get('/login',(req,res)=>{
 
 router.post('/mob-num-submission',(req,res)=>{
   console.log(req.body)
+  mobno=req.body.mobnum
   loginErr=null;
   //otp send to mobile number 
  
   res.json(otp)
 })
 
-
-
-
-
-
 router.post('/otp',(req,res)=>{
-
+console.log(req.body)
 //checking otp;
 if(req.body.otp==otp){
   loginErr=null;
