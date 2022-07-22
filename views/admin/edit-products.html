@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div class="container rounded bg-white mt-5 mb-5 " >
+  <div class="row">
+      
+      <div class="col-md-12 col-12 border-right">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="text-right">Edit Product Settings</h4>
+              </div>
+         
+
+  
+              <form action="/admin/products-add" enctype="multipart/form-data" method="POST"  class="form-horizontal" role="form" style="border: solid; border-color: rgb(240, 239, 239); border-width: 0 2px 0px 1px;">
+
+               
+        
+                  <div class="form-group">
+               
+                     
+                   <label for="name" class="col-sm-3 control-label font-weight-bold">Edit Product name</label>
+                   <div class="col-sm-9">
+                     <input type="text" class="form-control" name="Name" id="name" placeholder="Enter Your Product Name">
+                   </div>
+                 </div> <!-- form-group // -->
+                 <div class="form-group">
+                   <label for="name" class="col-sm-3 control-label font-weight-bold"><i class="fa fa-inr pr-2" aria-hidden="true"></i> Price</label>
+                   <div class="col-sm-9">
+                     <input type="text" class="form-control" name="Price" id="name" placeholder="₹ Enter the Price">
+                   </div>
+                   
+                 </div> <!-- form-group // -->
+                 <div class="form-group">
+                   <label for="qty" class="col-sm-3 control-labe font-weight-bold">Estimated Deliver Date</label>
+                   <div class="col-sm-3">
+                  <input type="text" class="form-control" name="EstimateDelivery" id="qty" placeholder="Delivery Date">
+                   </div>
+                
+                 
+                   <label for="name" class="col-sm-3 control-label font-weight-bold">Product Description</label>
+                   <div class="col-sm-9">
+                     <textarea class="form-control" name="ProductDescription" id="exampleFormControlTextarea1" rows="3" placeholder="Product Description" ></textarea>
+                   </div>
+               
+               
+               
+                 <div class="form-group">
+                   <label for="name" class="col-sm-3 control-label mt-3 font-weight-bold">Insert Image</label>
+                   <div class="col-sm-3">
+                     <label  class="control-label small" for="file_img">Image 1 (jpg/png):</label> <input type="file" name="Image">
+                   </div>
+                 <div class="col-sm-3">
+                     <label class="control-label small" for="file_img">Image 2 (jpg/png):</label>  <input type="file" name="Image">
+                   </div>
+                   <div class="col-sm-3">
+                     <label class="control-label small" for="file_img">Image 3 (jpg/png):</label>  <input type="file" name="Image">
+                   </div>
+                 </div> <!-- form-group // -->
+               
+                 </div> <!-- form-group // -->
+                
+                 <div class="form-group">
+                   <div class="col-sm-offset-3 col-sm-9">
+                     <button type="submit" class="btn btn-primary m-3">Submit</button>
+                   </div>
+                 </div> <!-- form-group // -->
+               </form>
+                 
+               </div><!-- panel-body // -->
+               </section><!-- panel// -->
+               
+                 
+               </div> <!-- container// -->
+               
+          </div>
+      </div>
+ 
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<style>
+  body {
+    background: rgb(99, 39, 120)
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+</style>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
