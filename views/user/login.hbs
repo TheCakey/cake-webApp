@@ -7,8 +7,8 @@
     <div class="credential-wrapper">
         <div class="credential-container">
             <img src="/assets/icons/credential.png" class="credential-badge" alt="">
-            <h1 class="">Signup</h1>
-            <p>or <a href="" class="text-primary login-text-style grow" > create an account</a></p>
+            <h1 class="">Login</h1>
+            <p>or <a href="" class="text-primary login-text-style grow" >Already have an account</a></p>
        
        
         
@@ -16,8 +16,9 @@
                 <label for="number" class="field-label">Please Enter Your 10 Digits Mobile Number Here *</label>
                 <input type="num" id="div-num"  placeholder="Mobile Number" name="number"  class="field">
                 <p class="text-danger" id="invalid" >Invalid format Please enter valid number</p>
+                <p class="text-danger" id="invalid-user" >User Not Found, Check your number or Create new account</p>
               {{#if loginErr}}
-                  <p class="text-danger" id="otp-error"  >Wrong Otp</p>
+                  <p class="text-danger" id="otp-error">Wrong Otp</p>
                   {{/if}}
             </div>
               <div class="submit-wrapper">
@@ -26,14 +27,14 @@
              
 
 
-             <form action="/otp" method="post">
+             <form action="/login-otp" method="post">
             <div class="field-wrapper " id="div-none">
                 <label for="number" class="field-label"></label>
                 <input type="num" placeholder="Enter your OTP" name="otp" id="number" class="field">
              
             </div>
               <div class="submit-wrapper">
-                <button id="btn-none" type="submit" class="btn-submit">Next</button>
+                <button id="btn-none" type="submit" class="btn-submit">Login</button>
            </div>
             </form>
 
@@ -54,25 +55,33 @@
         if (filter.test(mobNum)) {
             if(mobNum.length==10){
                  document.querySelector("#invalid").style.display = "none";
+                  document.querySelector("#invalid-user").style.display = "none";
                    
                     let num=parseInt(document.getElementById('div-num').value);
 $.ajax({
-    url:'/mob-num-submission',
+    url:'/login-mob-num-submission',
     data:{
         mobnum:num
     },
     method:'post',
     success:(response)=>{
-      swal("Otp Send!", "Otp send to your mobile number", "success");
-      
-    }
-})
-    
-     document.querySelector("#div-none").style.display = "block";
+        if(response){
+    swal("Otp Send!", "Otp send to your mobile number", "success");
+       document.querySelector("#div-none").style.display = "block";
      document.querySelector("#div-num").classList.add('ddiv-num')
      document.querySelector("#div-display").style.display = "none";
      document.querySelector("#btn-none").style.display = "block";
      document.querySelector("#otp-error").style.display = "none";
+        }
+        else{
+        document.querySelector("#invalid-user").style.display = "block";
+                 
+        }
+      
+    }
+})
+    
+  
 
              } else {
                  document.querySelector("#invalid").style.display = "block";
@@ -111,6 +120,8 @@ $.ajax({
     #invalid{
         display: none;
     }
- 
+  #invalid-user{
+        display: none;
+    }
 </style>
 
