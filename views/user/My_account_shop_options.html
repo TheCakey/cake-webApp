@@ -1,12 +1,14 @@
-
-
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>My account shop options - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="/css/user-profile.css">
 </head>
 <body>
 <div class="container">
@@ -26,7 +28,7 @@
                                             Method</a>
                                         <a href="#address-edit" data-toggle="tab" class="active"><i class="fa fa-map-marker"></i> address</a>
                                         <a href="#account-info" data-toggle="tab" class=""><i class="fa fa-user"></i> Account Details</a>
-                                        <a id="logout" href=""><i class="fa fa-sign-out"></i> Logout</a>
+                                        <a href="#"><i class="fa fa-sign-out"></i> Logout</a>
                                     </div>
                                 </div>
                                 <!-- My Account Tab Menu End -->
@@ -38,7 +40,7 @@
                                             <div class="myaccount-content">
                                                 <h3>Dashboard</h3>
                                                 <div class="welcome">
-                                                    <p>Hello, <strong>{{user.fullname}}</strong> (If Not <strong>{{user.fullname}}!</strong><a href="#" class="logout"> Logout</a>)</p>
+                                                    <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni !</strong><a href="#" class="logout"> Logout</a>)</p>
                                                 </div>
 
                                                 <p class="mb-0">From your account dashboard. you can easily check &amp; view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
@@ -134,12 +136,12 @@
                                             <div class="myaccount-content">
                                                 <h3>Billing Address</h3>
                                                 <address>
-                                                    <p><strong>{{user.fullname}}</strong></p>
-                                                    <p>{{user.permanentaddress}}</p>
-                                                    <p>{{user.pincode}}</p>
-                                                        <p>Mobile: {{user.mobnum}}</p>
+                                                    <p><strong>Alex Tuntuni</strong></p>
+                                                    <p>1355 Market St, Suite 900 <br>
+                                                San Francisco, CA 94103</p>
+                                                        <p>Mobile: (123) 456-7890</p>
                                                 </address>
-                                                <a href="/edit-user-details" class="check-btn sqr-btn "><i class="fa fa-edit"></i> Edit Address</a>
+                                                <a href="#" class="check-btn sqr-btn "><i class="fa fa-edit"></i> Edit Address</a>
                                             </div>
                                         </div>
                                         <!-- Single Tab Content End -->
@@ -153,23 +155,23 @@
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
                                                                     <label for="first-name" class="required">First Name</label>
-                                                                    <input type="text" value="{{user.fullname}}" disabled id="first-name">
+                                                                    <input type="text" id="first-name">
                                                                 </div>
                                                             </div>
-                                                            {{!-- <div class="col-lg-6">
+                                                            <div class="col-lg-6">
                                                                 <div class="single-input-item">
                                                                     <label for="last-name" class="required">Last Name</label>
                                                                     <input type="text" id="last-name">
                                                                 </div>
-                                                            </div> --}}
+                                                            </div>
                                                         </div>
-                                                        {{!-- <div class="single-input-item">
+                                                        <div class="single-input-item">
                                                             <label for="display-name" class="required">Display Name</label>
                                                             <input type="text" id="display-name">
-                                                        </div> --}}
+                                                        </div>
                                                         <div class="single-input-item">
                                                             <label for="email" class="required">Email Addres</label>
-                                                            <input type="email" value="{{user.emailaddress}}" disabled id="email">
+                                                            <input type="email" id="email">
                                                         </div>
                                                         <fieldset>
                                                             <legend>Password change</legend>
@@ -207,28 +209,169 @@
                 </div>
             </div>
 
+<style type="text/css">
+body{margin-top:20px;}
+/*-------- 27. My account style ---------*/
+.myaccount-tab-menu {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.myaccount-tab-menu a {
+  border: 1px solid #ccc;
+  border-bottom: none;
+  font-weight: 600;
+  font-size: 13px;
+  display: block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+}
+
+.myaccount-tab-menu a:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.myaccount-tab-menu a:hover, .myaccount-tab-menu a.active {
+  background-color: #ff6e21;
+  border-color: #ff6e21;
+  color: #ffffff;
+}
+
+.myaccount-tab-menu a i.fa {
+  font-size: 14px;
+  text-align: center;
+  width: 25px;
+}
+
+@media only screen and (max-width: 767px) {
+  #myaccountContent {
+    margin-top: 30px;
+  }
+}
+
+.myaccount-content {
+  border: 1px solid #eeeeee;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 767px) {
+  .myaccount-content {
+    padding: 20px 15px;
+  }
+}
+
+.myaccount-content form {
+  margin-top: -20px;
+}
+
+.myaccount-content h3 {
+  font-size: 20px;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.myaccount-content .welcome a:hover {
+  color: #ff6e21;
+}
+
+.myaccount-content .welcome strong {
+  font-weight: 600;
+  color: #ff6e21;
+}
+
+.myaccount-content fieldset {
+  margin-top: 20px;
+}
+
+.myaccount-content fieldset legend {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.myaccount-content .account-details-form {
+  margin-top: 50px;
+}
+
+.myaccount-content .account-details-form .single-input-item {
+  margin-bottom: 20px;
+}
+
+.myaccount-content .account-details-form .single-input-item label {
+  font-size: 14px;
+  text-transform: capitalize;
+  display: block;
+  margin: 0 0 5px;
+}
+
+.myaccount-content .account-details-form .single-input-item input {
+  border: 1px solid #e8e8e8;
+  height: 50px;
+  background-color: transparent;
+  padding: 2px 20px;
+  color: #1f2226;
+  font-size: 13px;
+}
+
+.myaccount-content .account-details-form .single-input-item input:focus {
+  border: 1px solid #343538;
+}
+
+.myaccount-content .account-details-form .single-input-item button {
+  border: none;
+  background-color: #ff6e21;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 9px 25px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.myaccount-content .account-details-form .single-input-item button:hover {
+  background-color: #1f2226;
+}
+
+.myaccount-table {
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.myaccount-table table th,
+.myaccount-table .table th {
+  padding: 10px;
+  font-weight: 600;
+  background-color: #f8f8f8;
+  border-color: #ccc;
+  border-bottom: 0;
+  color: #1f2226;
+}
+
+.myaccount-table table td,
+.myaccount-table .table td {
+  padding: 10px;
+  vertical-align: middle;
+  border-color: #ccc;
+}
+
+.saved-message {
+  background-color: #fff;
+  border-top: 3px solid #ff6e21;
+  font-size: 14px;
+  padding: 20px 0;
+  color: #333;
+}
+
+</style>
 
 <script type="text/javascript">
- document.querySelector("#logout").addEventListener("click",(e)=>{
-          e.preventDefault();
-            swal("Logout!", "Sure,you need to logout", "warning").then((value)=>{
-               $.ajax({
-                url:'/logout',
-                type:'GET',
-                success:function(data){
-window.location.replace("http://localhost:3000");
-                }
-            });
-            });
 
-            
-            })
-    
 </script>
 </body>
-
-
-
-
-
-
+</html>

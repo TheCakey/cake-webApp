@@ -2,7 +2,7 @@ var db=require('../config/connection')
 var collection=require('../config/collection')
 const { response } = require('../app')
 const bcrypt=require('bcrypt')
-
+const objectId=require('mongodb').ObjectId
 
 module.exports={
 
@@ -24,5 +24,17 @@ module.exports={
          
          
         })
+    },
+
+    editUserDetails:(userData,id)=>{
+return new Promise(async(resolve,reject)=>{
+    db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(id)},{$set: {fullname:userData.fullname,permanentaddress:userData.permanentaddress,pincode:userData.pincode,altNum:userData.altNum }}).then(async ()=>{
+        user= await db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(id)})
+        console.log(user);
+        resolve(user)
+    })
+})
     }
+
+
 }

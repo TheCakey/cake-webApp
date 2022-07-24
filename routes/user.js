@@ -133,20 +133,25 @@ router.post('/login-otp',(req,res)=>{
 
 
 
-router.get('/profile',(req,res)=>{
-
-  res.render('user/profile-page',{})
+//user profile--------------------------------------------
+router.get('/profile',async (req,res)=>{
+  user = req.session.user;
+  console.log(user)
+  res.render('user/profile-page',{user})
 })
 
-router.get('/myorders',(req,res)=>{
-  res.render('user/myorders',{hdr:true})
-})
-router.get('/manage-address',(req,res)=>{
-  res.render('user/manage-address',{hdr:true})
-})
-router.get('/wishlist',(req,res)=>{
-  res.render('user/wishlist',{hdr:true})
+router.get('/edit-user-details',(req,res)=>{
+  user = req.session.user;
+  res.render('user/edit-address',{user})
 })
 
 
+router.post('/edit-user-details',(req,res)=>{
+  
+  userHelper.editUserDetails(req.body,req.session.user._id).then((user)=>{
+    console.log(user);
+    req.session.user=user;
+    res.redirect('/profile')
+  })
+})
 module.exports = router;

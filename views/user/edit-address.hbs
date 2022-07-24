@@ -13,21 +13,9 @@
 <style>
     @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
-body{
-    margin: 0;
-    font-size: .9rem;
-    font-weight: 400;
-    line-height: 1.6;
-    color: #212529;
-    text-align: left;
-    background-color: #f5f8fa;
-}
-#full_name:focus {
- border-color: black
-;
-}
-.input-design{
 
+#full_name:focus {
+ border-color: black;
 }
 
 #address-error,#pincode-error,#fullname-error,#email-error,#psw-error,#psw2-error,#psww2-error{
@@ -105,26 +93,18 @@ body{
 
     <div class="credential-wrapper">
         <div class="credential-container input-design m-3">
-            <h1 class="registration-form-title ">Create an Account</h1>
-            <p>or <a href="/login" class="text-primary login-text-style grow" > Already have an account?</a></p>
-                    <form name="my-form" onsubmit="return validform()" action="/full-details-form" method="post">
+            <h1 class="registration-form-title ">Edit details</h1>
+            <p>or <a href="/" class="text-primary login-text-style grow" > Go Back Home</a></p>
+                    <form name="my-form" onsubmit="return validform()" action="/edit-user-details" method="post">
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name*</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="full_name" class="form-control" name="fullname">
+                                        <input type="text" id="full_name" class="form-control" value="{{user.fullname}}"  name="fullname">
                                          <p id="fullname-error" style="color: red;">Please enter your name</p>
                                     </div>
                                    
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address*</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="email_address" class="form-control" name="emailaddress">
-                                         <p id="email-error" style="color: red;">Please enter your Email Id</p>
-                                    </div>
-
-                                </div>
 
                                 
 
@@ -141,38 +121,33 @@ body{
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Permanent Address*</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="permanent_address" class="form-control" name="permanentaddress">
+                                        <input type="text" id="permanent_address" class="form-control" value="{{user.permanentaddress}}"  name="permanentaddress">
                                          <p id="address-error" style="color: red;">Please enter your address</p>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <label for="user_name" class="col-md-4 col-form-label text-md-right">Pincode*</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="pincode" class="form-control" name="pincode">
+                                        <input type="text" id="pincode" class="form-control" value="{{user.pincode}}"  name="pincode">
                                          <p  id="pincode-error" style="color: red;">Please enter your pincode</p>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Password*</label>
+                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Alternative Number
+                                    </label>
                                     <div class="col-md-6">
-                                        <input type="password" name="psw" class="form-control" id="psw" >
-                                         <p id="psw-error" style="color: red;">Please enter a password</p>
+                                        <input type="text" id="permanent_address" class="form-control" value="{{user.altNum}}" name="altNum">
+                                       
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Re-enter Password*</label>
-                                    <div class="col-md-6">
-                                        <input type="password" name="psw2" class="form-control" id="psw2" >
-                                        <p id="psw2-error" style="color: red;">Please Re-enter password</p>
-                                        <p id="psww2-error" style="color: red;">Password Not Matches</p>
-                                    </div>
-                                </div>
+                                
                                 
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
-                                        Register
+                                        Save
                                         </button>
                                     </div>
                                 </div>
@@ -199,11 +174,9 @@ body{
     function validform() {
 
         var a = document.forms["my-form"]["fullname"].value;
-        var b = document.forms["my-form"]["emailaddress"].value;
         var c = document.forms["my-form"]["permanentaddress"].value;
         var d = document.forms["my-form"]["pincode"].value;
-        var e = document.forms["my-form"]["psw"].value;
-         var f = document.forms["my-form"]["psw2"].value;
+      
 
         if (a==null || a=="")
         {
@@ -212,14 +185,7 @@ body{
 
             return false;
         }
-        else if (b==null || b=="")
-        {
-             document.querySelector("#email_address").style.borderColor = "red";
-            document.querySelector("#full_name").style.borderColor = "#ced4da";
-             document.querySelector("#fullname-error").style.display = "none";
-            document.querySelector("#email-error").style.display = "block";
-            return false;
-        }
+      
         else if (c==null || c=="")
         {
              document.querySelector("#permanent_address").style.borderColor = "red";
@@ -242,42 +208,8 @@ body{
             document.querySelector("#pincode-error").style.display = "block";
             return false;
         }
-        else if (e==null || e=="")
-        {
-            document.querySelector("#psw-error").style.display = "block";
-            document.querySelector("#psw").style.borderColor = "red";
-             document.querySelector("#full_name").style.borderColor = "#ced4da";
-              document.querySelector("#email_address").style.borderColor = "#ced4da";
-                document.querySelector("#permanent_address").style.borderColor = "#ced4da";
-                document.querySelector("#fullname-error").style.display = "none";
-                    document.querySelector("#email-error").style.display = "none";
-                     document.querySelector("#address-error").style.display = "none";
-                      document.querySelector("#pincode-error").style.display = "none";
-            document.querySelector("#pincode").style.borderColor = "#ced4da";
-            return false;
-        }
-          else if (f==null || f=="")
-        {
-             document.querySelector("#psw2-error").style.display = "block";
-            document.querySelector("#psw2").style.borderColor = "red";
-             document.querySelector("#full_name").style.borderColor = "#ced4da";
-              document.querySelector("#email_address").style.borderColor = "#ced4da";
-                document.querySelector("#permanent_address").style.borderColor = "#ced4da";
-                document.querySelector("#pincode").style.borderColor = "#ced4da";
-                document.querySelector("#fullname-error").style.display = "none";
-                    document.querySelector("#email-error").style.display = "none";
-                     document.querySelector("#address-error").style.display = "none";
-                        document.querySelector("#pincode-error").style.display = "none";
-                         document.querySelector("#psw-error").style.display = "none";
-            document.querySelector("#psw").style.borderColor = "#ced4da";
-            return false;
-        }
-        else if(e!=f){
-             document.querySelector("#psw2-error").style.display = "none";
-            document.querySelector("#psww2-error").style.display = "block";
-             document.querySelector("#psw2").style.borderColor = "red";
-            return false;
-        }
+     
+        
 
     }
 </script>
