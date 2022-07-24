@@ -4,6 +4,8 @@ var router = express.Router();
 //var productHelper=require('../helpers/product-helpers')
 var userHelper=require('../helpers/user-helpers')
 
+// CommonJS
+
 
 const otp =123;
 let mobno;
@@ -12,12 +14,8 @@ let loginErr;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  if( req.session.userloggedIn){
     res.render('user/index',{});
-  }
-  else{
-    res.redirect('/login')
-  }
+  
 
 });
 
@@ -25,12 +23,23 @@ router.get('/', function(req, res, next) {
 
 //signup codes
 router.get('/signup',(req,res)=>{
-  res.render('user/signup',{hdr:true,loginErr})
+  if(req.session.userloggedIn){
+    res.redirect('/')
+  }
+  else{
+    res.render('user/signup',{hdr:true,loginErr})
+  }
+
 })
+
+
+///if already have an account with this number we need show that user can login
+/////////////
+///////
 
 router.post('/mob-num-submission',(req,res)=>{
   console.log(req.body)
-  mobno=req.body.mobnum
+ req.session.tempUser=req.body.mobno
   
   loginErr=null;
   //otp send to mobile number
@@ -51,12 +60,13 @@ else{
 }
 })
 
+
+
 router.post('/full-details-form',(req,res)=>{
   console.log(req.body)
   var data=req.body
   data.mobnum=mobno;
   delete data.psw2;
-  console.log("hiiiiiiiiiiiiii")
   console.log(data);
   userHelper.registerUser(req.body,mobno).then((response)=>{
     req.session.userloggedIn=true
@@ -71,7 +81,13 @@ router.post('/full-details-form',(req,res)=>{
 //login codes
 
 router.get('/login',(req,res)=>{
+  if(req.session.userloggedIn){
+  res.redirect('/profile')
+  }
+else{
   res.render('user/login',{hdr:true,loginErr})
+}
+  
 })
 
 
@@ -107,13 +123,19 @@ router.post('/login-otp',(req,res)=>{
   })
 
 
+  router.get('/logout',(req,res)=>{
+
+    req.session.userloggedIn=false;
+    req.session.user=null;
+    res.json({logout:true})
+  })
 //login codes ends..............
 
 
 
 router.get('/profile',(req,res)=>{
-  console.log(req.body)
-  res.render('user/profile-page',{hdr:true})
+
+  res.render('user/profile-page',{})
 })
 
 router.get('/myorders',(req,res)=>{
@@ -125,8 +147,6 @@ router.get('/manage-address',(req,res)=>{
 router.get('/wishlist',(req,res)=>{
   res.render('user/wishlist',{hdr:true})
 })
-
-
 
 
 module.exports = router;

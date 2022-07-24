@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <title>Caseiro Profile</title>
+
 </head>
 <body>
 
@@ -62,7 +62,7 @@
                         </a>
                     </li>
                     <li>
-                       <a href="/login" class="nav--item">
+                       <a href="" id="logout" class="nav--item">
                             <img src="/assets/icons/logout.png" alt="" class="nav--icon">
                             <span>Logout</span>
                        </a>
@@ -121,6 +121,25 @@
 
   
 </body>
+
+<script>
+    document.querySelector("#logout").addEventListener("click",(e)=>{
+          e.preventDefault();
+            swal("Logout!", "Sure,you need to logout", "warning").then((value)=>{
+               $.ajax({
+                url:'/logout',
+                type:'GET',
+                success:function(data){
+window.location.replace("http://localhost:3000");
+                }
+            });
+            });
+
+            
+            })
+    
+</script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="/javascripts/scriptslogin.js"></script>
 </html>

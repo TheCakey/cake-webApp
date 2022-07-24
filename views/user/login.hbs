@@ -4,11 +4,57 @@
 <body>
 
 
+
+
+
+ <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <small><i class="fa fa-map-marker-alt me-2"></i>123 Street, Aluva</small>
+                <small class="ms-4"><i class="fa fa-envelope me-2"></i>cakey@gmail.com</small>
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small>Follow us:</small>
+                <a class="text-body ms-3" href=""><i class="fab fa-facebook-f"></i></a>
+                <a class="text-body ms-3" href=""><i class="fab fa-twitter"></i></a>
+                <a class="text-body ms-3" href=""><i class="fab fa-linkedin-in"></i></a>
+                <a class="text-body ms-3" href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+            <a href="/" class="navbar-brand ms-4 ms-lg-0">
+                <h1 class="fw-bold text-primary m-0">C<span class="text-secondary">ak</span>ey</h1>
+            </a>
+           
+           
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+
+
+
+
+
+
+
+
+
     <div class="credential-wrapper">
         <div class="credential-container">
             <img src="/assets/icons/credential.png" class="credential-badge" alt="">
             <h1 class="">Login</h1>
-            <p>or <a href="" class="text-primary login-text-style grow" >Already have an account</a></p>
+            <p>or <a href="/signup" class="text-primary login-text-style grow" >Create New account</a></p>
        
        
         
@@ -16,7 +62,7 @@
                 <label for="number" class="field-label">Please Enter Your 10 Digits Mobile Number Here *</label>
                 <input type="num" id="div-num"  placeholder="Mobile Number" name="number"  class="field">
                 <p class="text-danger" id="invalid" >Invalid format Please enter valid number</p>
-                <p class="text-danger" id="invalid-user" >User Not Found, Check your number or Create new account</p>
+                <p class="text-danger" id="invalid-user" >User Not Found, Check your number or <a href="/signup"> Create new account</a></p>
               {{#if loginErr}}
                   <p class="text-danger" id="otp-error">Wrong Otp</p>
                   {{/if}}
