@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 //var productHelper=require('../helpers/product-helpers')
 var userHelper=require('../helpers/user-helpers')
-
+var productHelper=require('../helpers/product-helpers')
 
 const otp =123;
 let mobno;
@@ -11,9 +11,15 @@ let loginErr;
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function (req, res, next) {
+
+cakes=await productHelper.getProductCake()
+console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+console.log(cakes);
+
+
   if( req.session.userloggedIn){
-    res.render('user/index',{});
+    res.render('user/index',{cakes});
   }
   else{
     res.redirect('/login')
