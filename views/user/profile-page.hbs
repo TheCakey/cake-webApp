@@ -152,48 +152,47 @@
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="first-name" class="required">First Name</label>
+                                                                    <label for="first-name" class="required">Full Name</label>
                                                                     <input type="text" value="{{user.fullname}}" disabled id="first-name">
                                                                 </div>
                                                             </div>
-                                                            {{!-- <div class="col-lg-6">
+                                                            <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="last-name" class="required">Last Name</label>
-                                                                    <input type="text" id="last-name">
+                                                                    <label for="last-name" class="required">Mobile Number</label>
+                                                                    <input type="text" disabled value="{{user.mobnum}}" id="last-name">
                                                                 </div>
-                                                            </div> --}}
+                                                            </div>
                                                         </div>
-                                                        {{!-- <div class="single-input-item">
-                                                            <label for="display-name" class="required">Display Name</label>
-                                                            <input type="text" id="display-name">
-                                                        </div> --}}
+                                                        <div class="row">
+                                                              <div class="col-lg-12">
+                                                        <div class="single-input-item">
+                                                            <label for="display-name" class="required">Address</label>
+                                                           
+                                                            <textarea name="" placeholder="{{user.permanentaddress}}"  id="display-name" disabled cols="50" rows="3"></textarea>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="row">
+                                                              <div class="col-lg-6">
+                                                        <div class="single-input-item">
+                                                            <label for="display-name" class="required">Pincode</label>
+                                                            <input type="text" value="{{user.pincode}}" disabled id="display-name">
+                                                        </div>
+                                                        </div>
+                                                          <div class="col-lg-6">
                                                         <div class="single-input-item">
                                                             <label for="email" class="required">Email Addres</label>
                                                             <input type="email" value="{{user.emailaddress}}" disabled id="email">
                                                         </div>
+                                                        </div>
+                                                        </div>
+                                                         <a href="/edit-user-details" class="check-btn sqr-btn "><i class="fa fa-edit"></i> Edit Address</a>
                                                         <fieldset>
                                                             <legend>Password change</legend>
-                                                            <div class="single-input-item">
-                                                                <label for="current-pwd" class="required">Current Password</label>
-                                                                <input type="password" id="current-pwd">
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="new-pwd" class="required">New Password</label>
-                                                                        <input type="password" id="new-pwd">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="confirm-pwd" class="required">Confirm Password</label>
-                                                                        <input type="password" id="confirm-pwd">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                           
                                                         </fieldset>
                                                         <div class="single-input-item">
-                                                            <button class="check-btn sqr-btn ">Save Changes</button>
+                                                            <button class="check-btn sqr-btn ">Reset Password</button>
                                                         </div>
                                                     </form>
                                                 </div>
