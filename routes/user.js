@@ -4,7 +4,10 @@ var router = express.Router();
 //var productHelper=require('../helpers/product-helpers')
 var userHelper=require('../helpers/user-helpers')
 
+var productHelper=require('../helpers/product-helpers')
+
 // CommonJS
+
 
 
 const otp =123;
@@ -13,9 +16,14 @@ let loginErr;
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('user/index',{});
-  
+
+router.get('/', async function (req, res, next) {
+
+cakes=await productHelper.getProductCake()
+
+console.log(cakes);
+
+    res.render('user/index',{cakes});
 
 });
 
