@@ -8,21 +8,15 @@ var productHelper=require('../helpers/product-helpers')
 
 // CommonJS
 
-
-
 const otp =123;
 let mobno;
 let loginErr;
 
-
 /* GET home page. */
 
 router.get('/', async function (req, res, next) {
-
 cakes=await productHelper.getProductCake()
-
-console.log(cakes);
-
+cakes=cakes.slice(0, 8);
     res.render('user/index',{cakes});
 
 });
@@ -37,9 +31,7 @@ router.get('/signup',(req,res)=>{
   else{
     res.render('user/signup',{hdr:true,loginErr})
   }
-
 })
-
 
 ///if already have an account with this number we need show that user can login
 /////////////
@@ -48,10 +40,8 @@ router.get('/signup',(req,res)=>{
 router.post('/mob-num-submission',(req,res)=>{
   console.log(req.body)
  req.session.tempUser=req.body.mobno
-  
   loginErr=null;
   //otp send to mobile number
-
   res.json(otp)
 })
 
@@ -67,7 +57,6 @@ else{
   res.redirect('/login')
 }
 })
-
 
 
 router.post('/full-details-form',(req,res)=>{
