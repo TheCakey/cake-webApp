@@ -3,7 +3,12 @@ var express = require('express');
 var router = express.Router();
 //var productHelper=require('../helpers/product-helpers')
 var userHelper=require('../helpers/user-helpers')
+
 var productHelper=require('../helpers/product-helpers')
+
+// CommonJS
+
+
 
 const otp =123;
 let mobno;
@@ -11,19 +16,14 @@ let loginErr;
 
 
 /* GET home page. */
+
 router.get('/', async function (req, res, next) {
 
 cakes=await productHelper.getProductCake()
-console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+
 console.log(cakes);
 
-
-  if( req.session.userloggedIn){
     res.render('user/index',{cakes});
-  }
-  else{
-    res.redirect('/login')
-  }
 
 });
 
@@ -31,12 +31,23 @@ console.log(cakes);
 
 //signup codes
 router.get('/signup',(req,res)=>{
-  res.render('user/signup',{hdr:true,loginErr})
+  if(req.session.userloggedIn){
+    res.redirect('/')
+  }
+  else{
+    res.render('user/signup',{hdr:true,loginErr})
+  }
+
 })
+
+
+///if already have an account with this number we need show that user can login
+/////////////
+///////
 
 router.post('/mob-num-submission',(req,res)=>{
   console.log(req.body)
-  mobno=req.body.mobnum
+ req.session.tempUser=req.body.mobno
   
   loginErr=null;
   //otp send to mobile number
@@ -57,12 +68,13 @@ else{
 }
 })
 
+
+
 router.post('/full-details-form',(req,res)=>{
   console.log(req.body)
   var data=req.body
   data.mobnum=mobno;
   delete data.psw2;
-  console.log("hiiiiiiiiiiiiii")
   console.log(data);
   userHelper.registerUser(req.body,mobno).then((response)=>{
     req.session.userloggedIn=true
@@ -77,7 +89,13 @@ router.post('/full-details-form',(req,res)=>{
 //login codes
 
 router.get('/login',(req,res)=>{
+  if(req.session.userloggedIn){
+  res.redirect('/profile')
+  }
+else{
   res.render('user/login',{hdr:true,loginErr})
+}
+  
 })
 
 
@@ -113,26 +131,35 @@ router.post('/login-otp',(req,res)=>{
   })
 
 
+  router.get('/logout',(req,res)=>{
+
+    req.session.userloggedIn=false;
+    req.session.user=null;
+    res.json({logout:true})
+  })
 //login codes ends..............
 
 
 
-router.get('/profile',(req,res)=>{
-  console.log(req.body)
-  res.render('user/profile-page',{hdr:true})
+//user profile--------------------------------------------
+router.get('/profile',async (req,res)=>{
+  user = req.session.user;
+  console.log(user)
+  res.render('user/profile-page',{user})
 })
 
-router.get('/myorders',(req,res)=>{
-  res.render('user/myorders',{hdr:true})
-})
-router.get('/manage-address',(req,res)=>{
-  res.render('user/manage-address',{hdr:true})
-})
-router.get('/wishlist',(req,res)=>{
-  res.render('user/wishlist',{hdr:true})
+router.get('/edit-user-details',(req,res)=>{
+  user = req.session.user;
+  res.render('user/edit-address',{user})
 })
 
 
-
-
+router.post('/edit-user-details',(req,res)=>{
+  
+  userHelper.editUserDetails(req.body,req.session.user._id).then((user)=>{
+    console.log(user);
+    req.session.user=user;
+    res.redirect('/profile')
+  })
+})
 module.exports = router;

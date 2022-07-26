@@ -1,0 +1,215 @@
+
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  
+</head>
+
+
+
+
+
+
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+
+#full_name:focus {
+ border-color: black;
+}
+
+#address-error,#pincode-error,#fullname-error,#email-error,#psw-error,#psw2-error,#psww2-error{
+    display: none;
+}
+.credential-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  background: #eeeeee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.registration-form-title {
+ 
+  margin: 0;
+
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: ProximaNova,arial,Helvetica Neue,sans-serif;
+}
+
+
+{{!-- inbuild css................................................................................................. --}}
+
+
+.navbar-laravel
+{
+    box-shadow: 0 2px 4px rgba(0,0,0,.04);
+}
+
+.navbar-brand , .nav-link, .my-form, .login-form
+{
+    font-family: Raleway, sans-serif;
+}
+
+.my-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.my-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.login-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.login-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+</style>
+
+<body>
+
+
+
+
+    <div class="credential-wrapper">
+        <div class="credential-container input-design m-3">
+            <h1 class="registration-form-title ">Edit details</h1>
+            <p>or <a href="/" class="text-primary login-text-style grow" > Go Back Home</a></p>
+                    <form name="my-form" onsubmit="return validform()" action="/edit-user-details" method="post">
+                                <div class="form-group row">
+                                    <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name*</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="full_name" class="form-control" value="{{user.fullname}}"  name="fullname">
+                                         <p id="fullname-error" style="color: red;">Please enter your name</p>
+                                    </div>
+                                   
+                                </div>
+
+
+                                
+
+                                {{!-- <div class="form-group row">
+                                    <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="phone_number" class="form-control">
+
+                                    </div>
+                                </div> --}}
+
+                           
+
+                                <div class="form-group row">
+                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Permanent Address*</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="permanent_address" class="form-control" value="{{user.permanentaddress}}"  name="permanentaddress">
+                                         <p id="address-error" style="color: red;">Please enter your address</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Pincode*</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="pincode" class="form-control" value="{{user.pincode}}"  name="pincode">
+                                         <p  id="pincode-error" style="color: red;">Please enter your pincode</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Alternative Number
+                                    </label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="permanent_address" class="form-control" value="{{user.altNum}}" name="altNum">
+                                       
+                                    </div>
+                                </div>
+
+                                
+                                
+                                    <div class="col-md-6 offset-md-4">
+                                        <button type="submit" class="btn btn-primary">
+                                        Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>         
+          
+        </div>
+    </div>
+</body>
+
+
+
+
+{{!-- </html> --}}
+
+
+
+
+
+
+
+
+
+<script>
+    function validform() {
+
+        var a = document.forms["my-form"]["fullname"].value;
+        var c = document.forms["my-form"]["permanentaddress"].value;
+        var d = document.forms["my-form"]["pincode"].value;
+      
+
+        if (a==null || a=="")
+        {
+             document.querySelector("#full_name").style.borderColor = "red";
+              document.querySelector("#fullname-error").style.display = "block";
+
+            return false;
+        }
+      
+        else if (c==null || c=="")
+        {
+             document.querySelector("#permanent_address").style.borderColor = "red";
+              document.querySelector("#full_name").style.borderColor = "#ced4da";
+            document.querySelector("#email_address").style.borderColor = "#ced4da";
+            document.querySelector("#fullname-error").style.display = "none";
+             document.querySelector("#email-error").style.display = "none";
+            document.querySelector("#address-error").style.display = "block";
+            return false;
+        }
+        else if (d==null || d=="")
+        {
+             document.querySelector("#pincode").style.borderColor = "red";
+              document.querySelector("#full_name").style.borderColor = "#ced4da";
+               document.querySelector("#email_address").style.borderColor = "#ced4da";
+            document.querySelector("#permanent_address").style.borderColor = "#ced4da";
+            document.querySelector("#fullname-error").style.display = "none";
+                document.querySelector("#email-error").style.display = "none";
+                  document.querySelector("#address-error").style.display = "none";
+            document.querySelector("#pincode-error").style.display = "block";
+            return false;
+        }
+     
+        
+
+    }
+</script>
