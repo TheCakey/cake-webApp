@@ -22,6 +22,32 @@ module.exports={
         })
     },
 
+    updateProduct:(ProDetails,proId)=>{
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(proId)},{
+                $set:{
+                    Name:ProDetails.Name,
+                    Subcategory:ProDetails.Subcategory,
+                    Price:ProDetails.Price,
+                    Category:ProDetails.Category,
+                    EstimateDelivery:ProDetails.EstimateDelivery,
+                    ProductDescription:ProductDetails.ProductDescription,
+                    Type:ProDetails.Type
+                }
+                
+
+            }).then((response)=>{
+               
+                resolve()
+            }).catch((err)=>{
+
+                console.log(err);
+                reject()
+            })
+        })
+    },
+
+
 
 
 }

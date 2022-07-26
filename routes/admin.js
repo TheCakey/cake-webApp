@@ -106,6 +106,10 @@ router.get('/edit-products',(req,res)=>{
   res.render('admin/edit-products',{admin:true})
 })
 
+router.get('/view-all-cakes',(req,res)=>{
+  res.render('admin/view-all-products')
+})
+
 
 
 
