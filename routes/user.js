@@ -151,4 +151,9 @@ router.post('/edit-user-details',(req,res)=>{
     res.redirect('/profile')
   })
 })
+
+router.get('/products-page',async(req,res)=>{
+  cakes=await productHelper.getProductCake()
+  res.render('user/products-page',{cakes})
+})
 module.exports = router;

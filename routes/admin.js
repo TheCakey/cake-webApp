@@ -91,26 +91,71 @@ router.post('/products-add',(req,res)=>{
     })
   })
 
+})
 
 
-
-
+router.get('/view-all-cakes',async (req,res)=>{
+  let cakes=await productHelpers.getProductCake()
  
+console.log('llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll')
 
+  console.log(cakes);
+  res.render('admin/view-all-products',{admin:true,cakes})
+})
+
+
+
+router.get('/edit-cakes',async(req,res)=>{
+  let proId=req.query.id
+  console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+console.log(proId);
+    let product=await productHelpers.getSingleProduct(proId)
+    res.render('admin/edit-products',{admin:true,product})
   
-
+  
 })
 
 
-router.get('/edit-products',(req,res)=>{
-  res.render('admin/edit-products',{admin:true})
+router.post('/edit-cakes',async(req,res)=>{
+
+  let proId=req.query.id
+  console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+  console.log("proID below")
+  console.log(proId)
+  productHelpers.updateProduct(req.body,proId).then(()=>{
+    res.redirect('/admin')
+    if(req.files.Image){
+      let image=req.files.Image1
+      image.mv('./public/product-images/'+proId+'1'+'.jpg',(err,done)=>{
+        if(err){
+        
+          console.log(err)
+        }
+        
+      })
+    
+      image=req.files.Image2
+      image.mv('./public/product-images/'+proId+'2'+'.jpg',(err,done)=>{
+        if(err){
+        
+          console.log(err)
+        }
+        
+      })
+    
+      image=req.files.Image3
+      image.mv('./public/product-images/'+proId+'3'+'.jpg',(err,done)=>{
+        if(!err){
+          res.redirect('/admin')
+        }else{
+          console.log(err)
+        }
+        
+      })
+    }
+  })
 })
-
-router.get('/view-all-cakes',(req,res)=>{
-  res.render('admin/view-all-products')
-})
-
-
+  
 
 
 module.exports = router;
