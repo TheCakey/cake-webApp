@@ -24,15 +24,13 @@ module.exports={
 
     updateProduct:(ProDetails,proId)=>{
         return new Promise(async(resolve,reject)=>{
+            console.log('DbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbBBBBBBBBBBBBB')
             db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(proId)},{
                 $set:{
                     Name:ProDetails.Name,
-                    Subcategory:ProDetails.Subcategory,
                     Price:ProDetails.Price,
                     Category:ProDetails.Category,
-                    EstimateDelivery:ProDetails.EstimateDelivery,
-                    ProductDescription:ProductDetails.ProductDescription,
-                    Type:ProDetails.Type
+                    ProductDescription:ProDetails.ProductDescription,
                 }
                 
 
@@ -46,6 +44,13 @@ module.exports={
             })
         })
     },
+
+    getSingleProduct:(productId)=>{
+        return new Promise(async(resolve,reject)=>{
+           let product = await db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(productId)})
+           resolve(product)
+        })
+    }
 
 
 

@@ -11,14 +11,12 @@
          
 
   
-              <form action="/admin/products-add" enctype="multipart/form-data" method="POST"  class="form-horizontal" role="form" style="border: solid; border-color: rgb(240, 239, 239); border-width: 0 2px 0px 1px;">
+              <form action="/admin/edit-cakes?id={{product._id}}" enctype="multipart/form-data" method="POST"  class="form-horizontal" role="form" style="border: solid; border-color: rgb(240, 239, 239); border-width: 0 2px 0px 1px;">
 
-               
-        
-                  <div class="form-group">
+                <div class="form-group">
                
                      
-                   <label for="name" class="col-sm-3 control-label font-weight-bold">Edit Product name</label>
+                   <label for="name" class="col-sm-3 control-label font-weight-bold">Product name</label>
                    <div class="col-sm-9">
                      <input type="text" class="form-control" name="Name" id="name" placeholder="Enter Your Product Name">
                    </div>
@@ -31,10 +29,15 @@
                    
                  </div> <!-- form-group // -->
                  <div class="form-group">
-                   <label for="qty" class="col-sm-3 control-labe font-weight-bold">Estimated Deliver Date</label>
+                   {{!-- <label for="qty" class="col-sm-3 control-labe font-weight-bold">Estimated Deliver Date</label>
                    <div class="col-sm-3">
                   <input type="text" class="form-control" name="EstimateDelivery" id="qty" placeholder="Delivery Date">
-                   </div>
+                   </div> --}}
+                   <STRONG class="col-sm-3 control-label font-weight-bold">Category</STRONG> <br>
+
+                   <input type="radio" value="Cream" name="Category" class="ml-4">Cream
+                   <input type="radio" value="Plum" name="Category" class="ml-3">Plum 
+                   <br><br>
                 
                  
                    <label for="name" class="col-sm-3 control-label font-weight-bold">Product Description</label>
@@ -43,20 +46,24 @@
                    </div>
                
                
-               
+
+   
                  <div class="form-group">
                    <label for="name" class="col-sm-3 control-label mt-3 font-weight-bold">Insert Image</label>
                    <div class="col-sm-3">
-                     <label  class="control-label small" for="file_img">Image 1 (jpg/png):</label> <input type="file" name="Image">
+                     <label  class="control-label small " for="file_img">Image 1 (jpg/png):</label> <input type="file"  name="Image1">
                    </div>
                  <div class="col-sm-3">
-                     <label class="control-label small" for="file_img">Image 2 (jpg/png):</label>  <input type="file" name="Image">
+                     <label class="control-label small" for="file_img">Image 2 (jpg/png):</label>  <input type="file" name="Image2">
                    </div>
                    <div class="col-sm-3">
-                     <label class="control-label small" for="file_img">Image 3 (jpg/png):</label>  <input type="file" name="Image">
+                     <label class="control-label small" for="file_img">Image 3 (jpg/png):</label>  <input type="file" name="Image3">
                    </div>
+
                  </div> <!-- form-group // -->
-               
+
+
+
                  </div> <!-- form-group // -->
                 
                  <div class="form-group">
