@@ -154,8 +154,14 @@ router.post('/edit-user-details',(req,res)=>{
 
 
 //cart routes
-router.get('/cart',(req,res)=>{
-  res.render('user/cart')
+router.get('/cart',async (req,res)=>{
+  user=req.session.user;
+  if(user){
+     products=await userHelper.getCartProducts(req.session.user._id);
+     console.log("heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+console.log(products);
+  }
+  res.render('user/cart',{products})
 })
 
 

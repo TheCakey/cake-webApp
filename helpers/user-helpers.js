@@ -82,7 +82,41 @@ return new Promise(async(resolve,reject)=>{
             }
         })
 
-    }
+    },
+    getCartProducts:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let cartItems=await db.get().collection(collection.CART_COLLECTION).aggregate([
+                {
+                    $match:{user:objectId(userId)}
+                },
+                {
+                    $unwind:'$product'
+                },{
+                    $project:{
+                        item:'$product.item',
+                        quantity:'$product.quantity'
+                    }
+                },
+                {
+                    $lookup:{
+                        from:collection.PRODUCT_COLLECTION,
+                        localField:'item',
+                        foreignField:'_id',
+                        as:'product'
+                    }
+                },
+                {
+                    $project:{
+                       item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                    }
+                }
+
+            ]).toArray()
+            
+            resolve(cartItems)
+            
+        })
+    },
 
 
 }
