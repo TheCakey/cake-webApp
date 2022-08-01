@@ -151,4 +151,26 @@ router.post('/edit-user-details',(req,res)=>{
     res.redirect('/profile')
   })
 })
+
+//cart routes
+router.get('/cart',(req,res)=>{
+  res.render('user/cart')
+})
+
+
+
+
+router.get('/addtocart/:id',(req,res)=>{
+  
+  userHelper.addToCart(req.session.user._id,req.params.id).then(()=>{
+    console.log("7777777777777777777777777777777777777777777777777777777777777777777777");
+    res.json(req.params.id)
+  }
+  )
+})
+
+
+
+
+
 module.exports = router;

@@ -34,7 +34,56 @@ return new Promise(async(resolve,reject)=>{
         resolve(user)
     })
 })
+    },
+
+    addToCart:(userId,proId)=>{
+        let proObj={
+            item:objectId(proId),
+            quantity:1
+        }
+        return new Promise(async(resolve,reject)=>{
+            console.log("hlooooooooooooooooooooooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+            let userCart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+            if(userCart){
+                
+                    let proExist=userCart.product.findIndex(product=> product.item==proId)
+                    console.log('prooooooooooooo exist')
+                    console.log(proExist);
+                    if(proExist!=-1){
+                        db.get().collection(collection.CART_COLLECTION)
+                        .updateOne({user:objectId(userId),'product.item':objectId(proId)},
+                        {
+                            $inc:{'product.$.quantity':1}
+                        }
+                        ).then(()=>{
+                            resolve()
+                            
+                        })
+                    }else{
+                db.get().collection(collection.CART_COLLECTION).updateOne({user:objectId(userId)},
+                {
+                   
+                        $push:{product:proObj}
+                    
+                }).then((response)=>{
+                    resolve()
+                })
+            }
+            }  
+            else{
+                cartObj={
+                    user:objectId(userId),
+                    product:[proObj]
+                }
+    
+                db.get().collection(collection.CART_COLLECTION).insertOne(cartObj).then((result)=>{
+                    resolve()
+                })
+            }
+        })
+
     }
 
 
 }
+

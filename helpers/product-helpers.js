@@ -16,7 +16,7 @@ module.exports={
     getProductCake:()=>{
         return new Promise(async (resolve,reject)=>{
             let products= await db.get().collection(collection.PRODUCT_COLLECTION).find({Category:"Cream"}).toArray()
-            console.log(products);
+           
             resolve(products)
 
         })

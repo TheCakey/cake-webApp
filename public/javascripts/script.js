@@ -1,3 +1,26 @@
+function addToCart(prodId){
+$.ajax({
+    url:'/addtocart/'+prodId,
+method:'get',
+success:(response)=>{
+    // window.location = '/cart';
+    console.log("h99999999999999999999999999999999999999999999");
+    window.location = '/cart';
+}
+
+})
+}
+
+
+
+
+
+
+
+
+
+
+
 (function ($) {
     "use strict";
 
@@ -100,6 +123,7 @@ for (var i = 0, list; list = lists[i]; i++) {
     }
   })
 }
+
 
 
 

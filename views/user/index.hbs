@@ -1,4 +1,6 @@
 
+<body>
+
     <!-- Carousel Start -->
     <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -163,7 +165,7 @@
                                         <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>
                                     </small>
                                     <small class="w-50 text-center py-2">
-                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                        <a onclick="addToCart('{{this._id}}')" class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
                                     </small>
                                 </div>
                             </div>
@@ -895,4 +897,7 @@ account_circle
     </div>
     <!-- Footer End -->
 </footer>
+
+
+
 
