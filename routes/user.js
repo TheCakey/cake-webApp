@@ -158,10 +158,9 @@ router.get('/cart',async (req,res)=>{
   user=req.session.user;
   if(user){
      products=await userHelper.getCartProducts(req.session.user._id);
-     console.log("heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-console.log(products);
+     total=await userHelper.getTotalAmount(req.session.user._id)
   }
-  res.render('user/cart',{products})
+  res.render('user/cart',{products,'userId':req.session.user._id,total})
 })
 
 
@@ -171,6 +170,32 @@ router.get('/addtocart/:id',(req,res)=>{
     res.json(req.params.id)
   }
   )
+})
+
+
+router.post('/change-product-quantity',(req,res)=>{
+  console.log(req.body)
+  
+  userHelper.changeProductQuantity(req.body).then(async(response)=>{
+    console.log(response)
+    
+    if(req.body.quantity==1 && req.body.count==-1){
+      response.total=0;
+    }
+    else{
+    response.total=await userHelper.getTotalAmount(req.body.user)
+    // if(response.total>1000){
+    //   response.orgTotal=true
+    //  response.allTotal=response.total
+    // }
+    // else{
+    //  response.allTotal=response.total+40;
+    // }
+  }
+   
+    // console.log(response.allTotal)
+    res.json(response)
+  })
 })
 
 

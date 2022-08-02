@@ -117,7 +117,79 @@ return new Promise(async(resolve,reject)=>{
             
         })
     },
+    
 
+    changeProductQuantity:(details)=>{
+        count=parseInt(details.count)
+        quantity=parseInt(details.quantity)
+        return new Promise((resolve,reject)=>{
+            if(count==-1 && quantity==1){
+                db.get().collection(collection.CART_COLLECTION)
+                .updateOne({_id:objectId(details.cart)},
+                {
+                    $pull:{product:{item:objectId(details.product)}}
+                }
+                ).then((response)=>{
+                    resolve({removeProduct:true})
+                })
+            }else{
+                db.get().collection(collection.CART_COLLECTION)
+                .updateOne({_id:objectId(details.cart),'product.item':objectId(details.product)},
+                {
+                    $inc:{'product.$.quantity':count}
+                }
+                ).then((response)=>{
+                   
+                    resolve({status:true})
+                    
+                })
+            }
+           
+        })
+    },
+    getTotalAmount:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            
+          let  total=await db.get().collection(collection.CART_COLLECTION).aggregate([
+                {
+                    $match:{user:objectId(userId)}
+                },
+                {
+                    $unwind:'$product'
+                },{
+                    $project:{
+                        item:'$product.item',
+                        quantity:'$product.quantity'
+                    }
+                },
+                {
+                    $lookup:{
+                        from:collection.PRODUCT_COLLECTION,
+                        localField:'item',
+                        foreignField:'_id',
+                        as:'product'
+                    }
+                },
+                {
+                    $project:{
+                       item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                    }
+                },
+                {
+                    
+                    $group:{
+                        _id:null,
+                        
+                        total:{$sum:{$multiply: ['$quantity', {$toInt: '$product.Price'}]}}
+                    }
+                }
+
+            ]).toArray()
+          
+            resolve(total[0].total)
+           
+        })
+    },
 
 }
 
