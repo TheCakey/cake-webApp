@@ -155,11 +155,14 @@ router.post('/edit-user-details',(req,res)=>{
 
 //cart routes
 router.get('/cart',async (req,res)=>{
+  console.log('ggggggggggggggggggggggggggggggggggggggggggggggggggggg')
   user=req.session.user;
   if(user){
      products=await userHelper.getCartProducts(req.session.user._id);
      total=await userHelper.getTotalAmount(req.session.user._id)
   }
+  console.log('ggggggggggggggggggggggggggggggggggggggggggggggggggggg')
+
   res.render('user/cart',{products,'userId':req.session.user._id,total})
 })
 
@@ -204,6 +207,16 @@ router.post('/change-product-quantity',(req,res)=>{
 router.get('/products-page',async(req,res)=>{
   cakes=await productHelper.getProductCake()
   res.render('user/products-page',{cakes})
+})
+
+router.get('/product-detail-page', async(req,res)=>{
+  let proId=req.query.id
+  console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+console.log(proId);
+    let product=await productHelper.getSingleProduct(proId)
+   let cakes=await productHelper.getProductCake()
+   
+  res.render('user/product-detail-page',{product,cakes})
 })
 
 module.exports = router;
