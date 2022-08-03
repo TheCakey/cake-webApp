@@ -205,10 +205,36 @@ router.post('/change-product-quantity',(req,res)=>{
 })
 
 
+router.post('/remove-cart-products',(req,res,next)=>{
+  
+  console.log(req.body);
+  userHelper.removeCartProducts(req.body).then((response)=>{
+    res.json(response)
+  })
+})
+
+
 router.get('/checkout',(req,res)=>{
   res.render('user/checkout',{admin:true})
 })
 
+router.post('/Validate-discount-coupon',(req,res)=>{
+//  if(req.session.couponApplied){
+// res.json({valid:false})
+//  }
+//  else{
+  if(req.body.discountCode=="abc@123"){
+    // req.session.couponApplied=true;
+    total=req.body.total-100;
+    res.json({valid:true,total})
+  }else{
+    res.json({valid:false})
+  }
+//  }
+
+
+
+})
 
 
 
