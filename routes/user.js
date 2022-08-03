@@ -155,12 +155,16 @@ router.post('/edit-user-details',(req,res)=>{
 
 //cart routes
 router.get('/cart',async (req,res)=>{
+ 
   user=req.session.user;
+  userId=user._id;
+  let products=null;
+  let total=null
   if(user){
      products=await userHelper.getCartProducts(req.session.user._id);
      total=await userHelper.getTotalAmount(req.session.user._id)
   }
-  res.render('user/cart',{products,'userId':req.session.user._id,total})
+  res.render('user/cart',{products,userId,total})
 })
 
 
@@ -199,8 +203,22 @@ router.post('/change-product-quantity',(req,res)=>{
 })
 
 
+router.get('/checkout',(req,res)=>{
+  res.render('user/checkout')
+})
 
 
+
+
+
+
+
+
+
+
+
+
+//product listing page
 router.get('/products-page',async(req,res)=>{
   cakes=await productHelper.getProductCake()
   res.render('user/products-page',{cakes})
