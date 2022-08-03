@@ -18,11 +18,11 @@
                                 <div class="row">{{this.product.Name}}</div>
                             </div>
                             <div class="col">
-                                <a style="" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>
+                                <a class="cursor-propertyf" style="" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>
                                 <a href="#" id="{{this.product._id}}" class="border">{{this.quantity}}</a>
-                                <a onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</a>
+                                <a class="cursor-property" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</a>
                             </div>
-                            <div class="col">₹ {{this.product.Price}} <span class="close">&#10005;</span></div>
+                            <div class="col">₹ {{this.product.Price}} <a  onclick="removeCartItem('{{this._id}}','{{this.product._id}}')" class="close cursor-property">&#10005;</a></div>
                         </div>
                     </div>
                     {{/each}}
@@ -34,22 +34,24 @@
                     <hr>
                     <div class="row">
                         <div class="col" style="padding-left:0;">ITEMS 3</div>
-                        <div class="col text-right">₹ 132.00</div>
+                        <div class="col text-right">₹ {{total}}</div>
                     </div>
                     <form>
                         <p>PINCODE</p>
                          <input id="pincode" placeholder="Enter your pincode">
                         {{!-- <select><option class="text-muted">Standard-Delivery- &euro;5.00</option>
                         <option class="text-muted">Standard-Delivery- &euro;5.00</option></select> --}}
-                        <p>DISCOUND CODE</p>
-                        <input id="code" placeholder="Enter your code">
+                      </form>
+                        <p>DISCOUND COUPON</p>
+                        <input  onfocusout="CouponValidate({{total}})" id="code" placeholder="Enter your code">
+                        <p id="errorcpnmsg" ></p>
                     </form>
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                         <div class="col">TOTAL PRICE</div>
                         <div id="prodtotal" class="col text-right">₹ {{total}} </div>
                     </div>
                     <p id="errormsg" class="text-danger"></p>
-                    <button id="checkout"  class="btn ">CHECKOUT</button>
+                    <button id="checkout"   class="btn ">CHECKOUT</button>
                 </div>
             </div>
             
@@ -114,5 +116,71 @@ else{
 
 
     })
+
+
+     function removeCartItem(cartId,proId){
+    
+ $.ajax({
+      url:'/remove-cart-products',
+      
+      data:{
+        cart:cartId,
+        product:proId,
+         
+      },
+      method:'post',
+      success:(response)=>{
+        if(response.removeProduct){
+          alert("product removed from cart")
+          location.reload()
+        }
+        
+      }    
+    })
+
+  }
+
+ function CouponValidate(total){
+let discountCode = document.getElementById('code').value;
+document.getElementById("errorcpnmsg").innerHTML = " "
+  console.log(total)
+if(discountCode.length==0){
+  alert("Please enter discount code")
+  return
+ }else{
+ $.ajax({
+      url:'/Validate-discount-coupon',
+      
+      data:{
+        discountCode:discountCode,
+        total:total
+         
+      },
+      method:'post',
+      success:(response)=>{
+
+        console.log(response)
+        if(response.valid){
+document.getElementById("code").disabled = true;
+document.getElementById("errorcpnmsg").style.color = "black";
+
+
+
+        document.getElementById("errorcpnmsg").innerHTML = "Coupon applied"
+          document.getElementById('prodtotal').innerHTML="₹"+response.total
+        }
+        else{
+         
+document.getElementById("errorcpnmsg").style.color = "red";
+
+          document.getElementById("errorcpnmsg").innerHTML = "Invalid coupon"
+        }
+      }    
+    })
+
+
+ }
+ }
+
 
   </script>
