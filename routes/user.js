@@ -206,7 +206,7 @@ router.post('/change-product-quantity',(req,res)=>{
 
 
 router.get('/checkout',(req,res)=>{
-  res.render('user/checkout')
+  res.render('user/checkout',{admin:true})
 })
 
 
