@@ -14,6 +14,17 @@ let loginErr;
 
 /* GET home page. */
 
+const verifyLogin=(req,res,next)=>{
+  if(req.session.userloggedIn){
+      next()
+  }else{
+      res.redirect('/login')
+  }
+}
+
+
+
+
 router.get('/', async function (req, res, next) {
 cakes=await productHelper.getProductCake()
 cakes=cakes.slice(0, 8);
@@ -131,7 +142,7 @@ router.post('/login-otp',(req,res)=>{
 
 
 //user profile--------------------------------------------
-router.get('/profile',async (req,res)=>{
+router.get('/profile',verifyLogin,async (req,res)=>{
   user = req.session.user;
   console.log(user)
   res.render('user/profile-page',{user})
@@ -154,7 +165,7 @@ router.post('/edit-user-details',(req,res)=>{
 
 
 //cart routes
-router.get('/cart',async (req,res)=>{
+router.get('/cart',verifyLogin, async (req,res,next)=>{
 
   user=req.session.user;
   userId=user._id;
@@ -214,8 +225,12 @@ router.post('/remove-cart-products',(req,res,next)=>{
 })
 
 
-router.get('/checkout',(req,res)=>{
-  res.render('user/checkout',{admin:true})
+router.get('/checkout',async(req,res)=>{
+  useraddress= await userHelper.getUserAddress(req.session.user._id)````
+  total=req.query.fullTotal;
+  pincode=req.query.pincode;
+  res.render('user/checkout',{useraddress,pincode,total})
+ 
 })
 
 router.post('/Validate-discount-coupon',(req,res)=>{
