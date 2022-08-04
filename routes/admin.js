@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+
+
+
 const adminHelpers=require('../helpers/admin-helpers')
 const productHelpers=require('../helpers/product-helpers')
 
@@ -56,6 +59,11 @@ adminHelpers.doLogin(req.body).then((response)=>{
       }
   })
 })
+
+router.get('/admin-dashboard',(req,res)=>{
+  res.render('admin/admin-dashboard',{admin:true})
+})
+
 
 router.get('/product-add',(req,res)=>{
   res.render('admin/products-add',{admin:true})
@@ -155,7 +163,8 @@ router.post('/edit-cakes',async(req,res)=>{
     }
   })
 })
-  
+
+
 
 
 module.exports = router;

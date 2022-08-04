@@ -262,4 +262,6 @@ console.log(proId);
   res.render('user/product-detail-page',{product,cakes})
 })
 
+
+
 module.exports = router;
