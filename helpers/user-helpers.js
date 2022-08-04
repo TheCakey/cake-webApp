@@ -159,7 +159,7 @@ return new Promise(async(resolve,reject)=>{
             })
         })
     },
-    
+
     getTotalAmount:(userId)=>{
         return new Promise(async(resolve,reject)=>{
             
@@ -203,6 +203,13 @@ return new Promise(async(resolve,reject)=>{
            
         })
     },
+
+    getUserAddress:(userId)=>{
+        return new Promise(async (resolve, reject)=>{
+            let address= await db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(userId)})
+            resolve(address)
+        })
+    }
 
 }
 

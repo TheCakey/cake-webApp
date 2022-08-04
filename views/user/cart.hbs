@@ -29,6 +29,7 @@
                     
                     <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
                 </div>
+                
                 <div class="col-md-4 summary">
                     <div><h5><b>Summary</b></h5></div>
                     <hr>
@@ -36,22 +37,24 @@
                         <div class="col" style="padding-left:0;">ITEMS 3</div>
                         <div class="col text-right">₹ {{total}}</div>
                     </div>
-                    <form>
+                    <form action="/checkout" method="get">
                         <p>PINCODE</p>
-                         <input id="pincode" placeholder="Enter your pincode">
+                         <input id="pincode" type="number"  name="pincode" placeholder="Enter your pincode">
                         {{!-- <select><option class="text-muted">Standard-Delivery- &euro;5.00</option>
                         <option class="text-muted">Standard-Delivery- &euro;5.00</option></select> --}}
-                      </form>
+                 
                         <p>DISCOUND COUPON</p>
-                        <input  onfocusout="CouponValidate({{total}})" id="code" placeholder="Enter your code">
+                        <input  onfocusout="CouponValidate({{total}})" name="coupon" id="code" placeholder="Enter your code">
+                        <input name="fullTotal" id="prototal" value="{{total}}" type="text" hidden>
                         <p id="errorcpnmsg" ></p>
-                    </form>
+                    
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                         <div class="col">TOTAL PRICE</div>
                         <div id="prodtotal" class="col text-right">₹ {{total}} </div>
                     </div>
                     <p id="errormsg" class="text-danger"></p>
-                    <button id="checkout"   class="btn ">CHECKOUT</button>
+                    <button id="checkout" type="submit"   class="btn ">CHECKOUT</button>
+                    </form>
                 </div>
             </div>
             
@@ -94,6 +97,13 @@
 var pincodeList=["683556", "683101", "683585","683547"];
 check=pincodeList.includes(pincode)
  document.getElementById("errormsg").innerHTML = " "
+total=document.getElementById('prodtotal').innerHTML
+total=total.slice(1);
+let inttotal=parseInt(total)
+parameters={
+  pincode:pincode,
+  total:inttotal
+}
 
  if(pincode.length==0){
   alert("Please enter pincode")
@@ -101,24 +111,22 @@ check=pincodeList.includes(pincode)
  }else{
 
 
-    if(check){
-      
-       window.location = '/checkout';
-    
-     
+    if(check){   
+ return true;
 }
 else{
-  
     document.getElementById("errormsg").innerHTML = "Currently delivery not available to your area"
     
 }
  }
-
-
     })
 
 
+
+
      function removeCartItem(cartId,proId){
+    
+
     
  $.ajax({
       url:'/remove-cart-products',
@@ -168,6 +176,7 @@ document.getElementById("errorcpnmsg").style.color = "black";
 
         document.getElementById("errorcpnmsg").innerHTML = "Coupon applied"
           document.getElementById('prodtotal').innerHTML="₹"+response.total
+          document.getElementById('prototal').value=response.total
         }
         else{
          
