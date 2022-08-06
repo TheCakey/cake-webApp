@@ -226,7 +226,7 @@ router.post('/remove-cart-products',(req,res,next)=>{
 
 
 router.get('/checkout',async(req,res)=>{
-  useraddress= await userHelper.getUserAddress(req.session.user._id)````
+  useraddress= await userHelper.getUserAddress(req.session.user._id)
   total=req.query.fullTotal;
   pincode=req.query.pincode;
   res.render('user/checkout',{useraddress,pincode,total})

@@ -165,6 +165,20 @@ router.post('/edit-cakes',async(req,res)=>{
   })
 })
 
+router.get('/add-coupon',(req,res)=>{
+  
+  res.render('admin/add-coupon',{admin:true})
+})
+router.post('/add-coupon',(req,res)=>{
+  console.log('kkkkkkkkkkkkkkkkkkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+  console.log(req.body)
+  adminHelpers.addCoupon(req.body).then(()=>{
+    console.log('coupon added successfully')
+    res.render('admin/view-all-coupen',{admin:true})
+  })
+})
+
+
 
 
 

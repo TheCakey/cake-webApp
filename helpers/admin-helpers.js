@@ -33,9 +33,23 @@ module.exports={
             }
         })
     },
+    addCoupon:(coupon)=>{
+        
+        console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
+        return new Promise (async (resolve,reject)=>{
+        db.get().collection(collection.COUPON_COLLECTION).insertOne(coupon).then(()=>{
+            console.log('rrrrrrrrrrrrrrrrrr')
+            resolve()
+
+        })
+         
+           
+
+        })
+
+    
 
 
-
-
+}
 
 }
