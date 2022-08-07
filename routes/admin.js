@@ -1,4 +1,5 @@
 var express = require('express');
+const { log } = require('handlebars');
 var router = express.Router();
 
 
@@ -172,10 +173,19 @@ router.get('/add-coupon',(req,res)=>{
 router.post('/add-coupon',(req,res)=>{
   console.log('kkkkkkkkkkkkkkkkkkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
   console.log(req.body)
-  adminHelpers.addCoupon(req.body).then(()=>{
+  adminHelpers.addCoupon(req.body).then(async()=>{
     console.log('coupon added successfully')
-    res.render('admin/view-all-coupen',{admin:true})
+    let coupons = await adminHelpers.viewAllCoupons()
+
+    res.render('admin/view-all-coupons',{admin:true,coupons})
   })
+})
+
+router.get('/view-all-coupons',async(req,res)=>{
+  let coupons = await adminHelpers.viewAllCoupons()
+  console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+  console.log(coupons)
+  res.render('admin/view-all-coupons',{admin:true,coupons})
 })
 
 
