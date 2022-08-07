@@ -31,7 +31,7 @@ body {
 }
 .table-title {
     padding-bottom: 15px;
-    background: #e45529;
+    background: #4529e4;
     color: #fff;
     padding: 16px 30px;
     margin: -20px -25px 10px;
@@ -191,10 +191,10 @@ $(document).ready(function(){
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-5">
-                        <h2>Cake <b>Management</b></h2>
+                        <h2>Coupon <b>Management</b></h2>
                     </div>
                     <div class="col-sm-7">
-                        <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Products</span></a>
+                        <a href="/admin/add-coupon" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Coupons</span></a>
                         <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>						
                     </div>
                 </div>
@@ -222,7 +222,7 @@ $(document).ready(function(){
                         {{!-- <td></td> --}}
                         <td>
                             {{!-- <a href="/admin/edit-cakes?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a> --}}
-                            <a href="/admin/delete-product?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
+                            <a href="/admin/delete-coupon?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
                         </td>
                     </tr>
 

@@ -188,6 +188,15 @@ router.get('/view-all-coupons',async(req,res)=>{
   res.render('admin/view-all-coupons',{admin:true,coupons})
 })
 
+router.get('/delete-coupon',(req,res)=>{
+  let proId=req.query.id
+  console.log(proId)
+  adminHelpers.deleteCoupon(proId).then((response)=>{
+    console.log('Coupen deleted succesfully')
+    res.redirect('/admin/view-all-coupons')
+  })
+
+})
 
 
 

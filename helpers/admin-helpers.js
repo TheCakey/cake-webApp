@@ -2,6 +2,8 @@ var db=require('../config/connection')
 var collection=require('../config/collection')
 const { response } = require('../app')
 const bcrypt=require('bcrypt')
+var objectId=require('mongodb').ObjectID
+
 
 module.exports={
     
@@ -53,7 +55,19 @@ module.exports={
             resolve(coupons)
         })
 
-      }
+      },
+
+      deleteCoupon:(prodId)=>{
+        console.log('product id display');
+        console.log(prodId);
+        return new Promise((resolve,reject)=>{
+            
+            db.get().collection(collection.COUPON_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{
+                
+                resolve(response)
+            })
+        })
+    },
 
 
 
