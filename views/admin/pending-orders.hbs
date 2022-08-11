@@ -203,23 +203,23 @@ $(document).ready(function(){
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>						
+                        <th>User ID</th>						
                         <th>Date of Delivery</th>
-                        <th>Sub-Category</th>
-                        <th>Place</th>
+                        <th>Pincode</th>
+                        <th>Total Amount</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-               {{#if cakes}}
-                    {{#each cakes}}
+               
+                    {{#each pendingOrders}}
 
                    <tr>
                         <td>{{@key}}</td>
-                        <td><a href="#"><img src="/product-images/{{this._id}}1.jpg" class="avatar" style="width: 50px; height: 50px;" alt="Avatar">{{this.Name}}</a></td>
-                        <td>{{this.Category}}</td>                        
-                        <td>{{this.Subcategory}}</td>
-                        <td>{{this.Price}}</td>
+                        <td>{{this.deliveryDetails.name}}</td>
+                        <td>{{this.date}}</td>                        
+                        <td>{{this.deliveryDetails.pincode}}</td>
+                        <td>{{this.totalAmount}}</td>
                         <td>
                             <a href="/admin/edit-cakes?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
                             <a href="/admin/delete-product?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
@@ -265,7 +265,7 @@ $(document).ready(function(){
                     {{/each}}
 
                     {{/if}} --}}
-                    {{/if}}
+                
                     
                 </tbody>
             </table>
