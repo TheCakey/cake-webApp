@@ -55,8 +55,8 @@
       <div class = "product-price">
         <p class = "new-price">Category <span>{{product.Category}}</span></p>
 
-        <p class = "last-price">Old Price: <span>{{product.Price}}</span></p>
-        <p class = "new-price">New Price: <span>$249.00 (5%)</span></p>
+        <p class = "last-price">Old Price: <span>₹{{product.Price}}</span></p>
+        <p class = "new-price">New Price: <span>₹{{product.Price}}</span></p>
 
       </div>
 
@@ -79,7 +79,7 @@
           Add to Cart <i class = "fas fa-shopping-cart"></i>
         </button>
 
-        <button type = "button" class = "btn">Buy Now</button>
+        <a type = "button" href="/buynow?id={{this.product._id}}" class = "btn">Buy Now</a>
       </div>
 
       <div class = "social-links">

@@ -6,74 +6,43 @@
     <h2>Checkout form</h2>
     {{!-- <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p> --}}
   </div>
-
+<form action="/checkout" method="post" id="checkout-form">
   <div class="row">
-    <div class="col-md-4 order-md-2 mb-4">
-      <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted">Your cart</span>
-        <span class="badge badge-secondary badge-pill">3</span>
-      </h4>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-          Products
-          <span>₹{{total}}</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-          Shipping
-          <span>Gratis</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-          <div>
-            <strong>Total amount</strong>
-            <strong>
-              <p class="mb-0">(including VAT)</p>
-            </strong>
-          </div>
-          <span><strong>₹{{total}}</strong></span>
-        </li>
-      </ul>
-
-      <button type="button" class="btn btn-primary btn-lg btn-block">
-        Make purchase
-      </button>
-
-
-      </form>
-    </div>
+    
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Billing address</h4>
-      <form class="needs-validation" novalidate>
+      
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="{{useraddress.fullname}}" required>
+            <input type="text" class="form-control" name="name" id="firstName" placeholder="" value="{{useraddress.fullname}}" required>
             <div class="invalid-feedback">
               Valid first name is required.
             </div>
           </div>
-          <div class="col-md-6 mb-3">
+          {{!-- <div class="col-md-6 mb-3">
             <label for="lastName">Last name</label>
             <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
             <div class="invalid-feedback">
               Valid last name is required.
             </div>
-          </div>
+          </div> --}}
         </div>
         
         <div class="mb-3">
           <label for="Mobile">Mobile Number</label>
-          <input type="number" class="form-control" id="phone" value="{{useraddress.mobnum}}" placeholder="Phone number">
+          <input type="number" name="mobnum" class="form-control" id="phone" value="{{useraddress.mobnum}}" placeholder="Phone number">
         </div>
         <div class="mb-3">
           <label for="Mobile">Mobile Number<span class="text-muted">(Alternative Number)</span></label>
-          <input type="number" class="form-control" id="phone" value="{{useraddress.altNum}}" placeholder="Alternative number">
+          <input type="number" name="altNum" class="form-control" id="phone" value="{{useraddress.altNum}}" placeholder="Alternative number">
         </div>
 
       
 
         <div class="mb-3">
           <label for="address">Address</label>
-          <input type="text" class="form-control" id="address" value="{{useraddress.permanentaddress}}" placeholder="1234 Main St" required>
+          <input type="text" name="permanentaddress" class="form-control" id="address" value="{{useraddress.permanentaddress}}" placeholder="1234 Main St" required>
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>
@@ -82,23 +51,20 @@
        
         <div class="row">
           <div class="col-md-5 mb-3">
-            <label for="country">City</label>
-            <select class="custom-select d-block w-100" id="country" required>
+            <label for="city">City</label>
+            <select name="city" class="custom-select d-block w-100" id="city" required>
               <option value="">Choose...</option>
-              <option>Perumbavoor</option>
-              <option>Aluva</option>
+              <option value="Perumbavoor">Perumbavoor</option>
+              <option value="Aluva">Aluva</option>
 
             </select>
             <div class="invalid-feedback">
-              Please select a valid country.
+              Please select a valid city.
             </div>
           </div>
           <div class="col-md-4 mb-3">
             <label for="state">State</label>
-            <select class="custom-select d-block w-100" id="state" required>
-              <option value="">Choose...</option>
-              <option>California</option>
-            </select>
+            <input type="text" name="state" class="form-control" id="state" value="{{useraddress.state}}" placeholder="State" required>
             <div class="invalid-feedback">
               Please provide a valid state.
             </div>
@@ -106,6 +72,8 @@
           <div class="col-md-3 mb-3">
             <label for="zip">Zip</label>
             <input type="text" class="form-control" id="zip" value="{{pincode}}" placeholder="" disabled >
+                       <input type="text" name="pincode" class="form-control" id="" value="{{pincode}}" placeholder="" hidden >
+
             <div class="invalid-feedback">
               Zip code required.
             </div>
@@ -124,13 +92,61 @@
 
       
       
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-      </form>
     </div>
-  </div>
+
+
+<div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+        <span class="badge badge-secondary badge-pill">3</span>
+      </h4>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+          Products
+          <span>₹{{total}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+          Delivery
+          <span>₹{{dlcharge}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+          <div>
+            <strong>Total amount</strong>
+            <strong>
+              <p class="mb-0">(including GST)</p>
+            </strong>
+          </div>
+          <span><strong>₹{{Ttlamount}}</strong></span>
+        </li>
+      </ul>
+
+      <div class="payment">
+                <p>Payment method</p>
+                <label class="radio-inline">
+                    <input type="radio" name="payment-method" value="COD" disabled >COD (currently not available)
+              <input type="text" name="price" value="{{Ttlamount}}" hidden>
+                </label>
+                <br>
+                <label class="radio-inline mt-2">
+                    <input type="radio" name="payment-method" value="ONLINE" checked >ONLINE PAYMENT
+                </label>
+               
+
+            </div>
+
+      <button type="submit" class="btn btn-primary btn-lg btn-block">
+        Make purchase
+      </button>
+
+
+    
+    </div>
+    </div>
+    </form>
+  
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2017-2019 Company Name</p>
+    <p class="mb-1">&copy; 2021-2022 Cakey</p>
     <ul class="list-inline">
       <li class="list-inline-item"><a href="#">Privacy</a></li>
       <li class="list-inline-item"><a href="#">Terms</a></li>
@@ -138,6 +154,81 @@
     </ul>
   </footer>
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script>
+
+    $("#checkout-form").submit((e)=>{
+       e.preventDefault()
+        $.ajax({
+            url:'/checkout',
+            method:'post',
+            data:$('#checkout-form').serialize(),
+            success:(res)=>{
+                console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+                console.log(res)
+                if(res.cod_success){
+                    location.href='/ordered-response?id=cod'
+                }
+                else{
+                 
+                    razorpayPayment(res)
+                  
+                }
+                
+                
+            }
+        })
+    })
+
+
+    function razorpayPayment (order){
+        var options = {
+    "key": "rzp_test_wwlKdN1HEsAggm", // Enter the Key ID generated from the Dashboard
+    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "MohammedYaseen",
+    "description": "Test Transaction",
+    "image": "LOGO/payment-logo.jpg",
+    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+       // alert(response.razorpay_payment_id);
+       // alert(response.razorpay_order_id);
+       // alert(response.razorpay_signature)
+
+        verifyPayment(response,order)
+    },
+    "prefill": {
+        "name": order.user.fullname ,
+        "email":  order.user.emailaddress,
+        "contact": order.user.mobnum
+    },
+    "notes": {
+        "address":  order.user.permanentaddress
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+
+    }
+    function verifyPayment(payment,order){
+        $.ajax({
+            url:'/verify-payment',
+            data:{
+                payment,
+                order
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    location.href='/ordered-response'
+                }else{
+                    alert('payment failed')
+                }
+            }
+        })
+    }
+</script>

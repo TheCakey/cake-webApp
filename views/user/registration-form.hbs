@@ -29,8 +29,12 @@ body{
 .input-design{
 
 }
-
-#address-error,#pincode-error,#fullname-error,#email-error,#psw-error,#psw2-error,#psww2-error{
+  .required:after {
+    content:" *";
+    color: red;
+  }
+   
+#address-error,#pincode-error,#fullname-error,#email-error,#psw-error,#psw2-error,#psww2-error,#district-error,#state-error{
     display: none;
 }
 .credential-wrapper {
@@ -109,16 +113,16 @@ body{
             <p>or <a href="/login" class="text-primary login-text-style grow" > Already have an account?</a></p>
                     <form name="my-form" onsubmit="return validform()" action="/full-details-form" method="post">
                                 <div class="form-group row">
-                                    <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name*</label>
+                                    <label for="full_name" class=" required col-md-4 col-form-label text-md-right">Full Name</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="full_name" class="form-control" name="fullname">
+                                        <input type="text" id="full_name" class="form-control " name="fullname">
                                          <p id="fullname-error" style="color: red;">Please enter your name</p>
                                     </div>
                                    
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address*</label>
+                                    <label for="email_address" class="required col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                     <div class="col-md-6">
                                         <input type="text" id="email_address" class="form-control" name="emailaddress">
                                          <p id="email-error" style="color: red;">Please enter your Email Id</p>
@@ -139,14 +143,28 @@ body{
                            
 
                                 <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Permanent Address*</label>
+                                    <label for="permanent_address" class=" required col-md-4 col-form-label text-md-right">Permanent Address</label>
                                     <div class="col-md-6">
                                         <input type="text" id="permanent_address" class="form-control" name="permanentaddress">
                                          <p id="address-error" style="color: red;">Please enter your address</p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Pincode*</label>
+                                    <label for="permanent_address" class="required col-md-4 col-form-label text-md-right">District</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="district" class="form-control" name="district">
+                                         <p id="district-error" style="color: red;">Please enter your district</p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="permanent_address" class="required col-md-4 col-form-label text-md-right">State</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="state" class="form-control" name="state">
+                                         <p id="state-error" style="color: red;">Please enter your state</p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="user_name" class="required col-md-4 col-form-label text-md-right">Pincode</label>
                                     <div class="col-md-6">
                                         <input type="text" id="pincode" class="form-control" name="pincode">
                                          <p  id="pincode-error" style="color: red;">Please enter your pincode</p>
@@ -154,7 +172,7 @@ body{
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Password*</label>
+                                    <label for="user_name" class="required col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-6">
                                         <input type="password" name="psw" class="form-control" id="psw" >
                                          <p id="psw-error" style="color: red;">Please enter a password</p>
@@ -162,7 +180,7 @@ body{
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Re-enter Password*</label>
+                                    <label for="user_name" class="required col-md-4 col-form-label text-md-right">Re-enter Password</label>
                                     <div class="col-md-6">
                                         <input type="password" name="psw2" class="form-control" id="psw2" >
                                         <p id="psw2-error" style="color: red;">Please Re-enter password</p>
@@ -204,6 +222,8 @@ body{
         var d = document.forms["my-form"]["pincode"].value;
         var e = document.forms["my-form"]["psw"].value;
          var f = document.forms["my-form"]["psw2"].value;
+         var g=document.forms["my-form"]["district"].value;
+       var h=  document.forms["my-form"]["state"].value;
 
         if (a==null || a=="")
         {
@@ -255,6 +275,9 @@ body{
                       document.querySelector("#pincode-error").style.display = "none";
             document.querySelector("#pincode").style.borderColor = "#ced4da";
             return false;
+        }
+        else if(g==null || g==""){
+            
         }
           else if (f==null || f=="")
         {
