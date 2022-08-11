@@ -170,7 +170,7 @@ router.get('/cart',verifyLogin, async (req,res,next)=>{
   user=req.session.user;
   userId=user._id;
   let products=null;
-  let total=null
+  let total;
   if(user){
      products=await userHelper.getCartProducts(req.session.user._id);
      total=await userHelper.getTotalAmount(req.session.user._id)
@@ -194,7 +194,7 @@ router.post('/change-product-quantity',(req,res)=>{
   console.log(req.body)
   
   userHelper.changeProductQuantity(req.body).then(async(response)=>{
-    console.log(response)
+  
     
     if(req.body.quantity==1 && req.body.count==-1){
       response.total=0;
@@ -227,29 +227,117 @@ router.post('/remove-cart-products',(req,res,next)=>{
 
 router.get('/checkout',async(req,res)=>{
   useraddress= await userHelper.getUserAddress(req.session.user._id)
-  total=req.query.fullTotal;
+
+  dlcharge=40;
+  //set from admin side 
+  total=parseInt(req.query.fullTotal);
+  Ttlamount=total+dlcharge;
+
   pincode=req.query.pincode;
-  res.render('user/checkout',{useraddress,pincode,total})
+  res.render('user/checkout',{useraddress,pincode,total,dlcharge,Ttlamount})
  
 })
 
-router.post('/Validate-discount-coupon',(req,res)=>{
-//  if(req.session.couponApplied){
-// res.json({valid:false})
-//  }
-//  else{
-  if(req.body.discountCode=="abc@123"){
-    // req.session.couponApplied=true;
-    total=req.body.total-100;
-    res.json({valid:true,total})
-  }else{
-    res.json({valid:false})
-  }
-//  }
+router.post('/checkout',async(req,res)=>{
+  
+  req.body.userId=req.session.user._id;
+  user=req.session.user._id;
+  usr=req.session.user;
+  price=  parseInt(req.body.price);
+  
+  let products= req.session.tempCart ? req.session.tempCart : ( await userHelper.getCartProducts(user))
+  console.log(products);
+   userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
+    if(req.body['payment-method']=='COD'){
+      res.json({cod_success:true})
+    }else{
+      userHelper.generateRazorPay(orderId,price,usr).then((response)=>{
+        
+       res.json(response)
+      })
+    }
+
+  })
 
 
 
 })
+
+router.post('/verify-payment',(req,res)=>{
+  console.log(req.body)
+  userHelper.verifyPayment(req.body).then(()=>{
+   userHelper.changePaymentStatus(req.body['order[receipt]']).then(()=>{
+     res.json({status:true})
+   })
+  }).catch((err)=>{
+    res.json({status:false})
+  })
+})
+
+router.get('/ordered-response',async (req,res)=>{
+  let user=req.session.user
+  let mode=req.query.id
+  let cod;
+  let online;
+  userHelper.deleteuserCart(user._id)
+
+  if(mode=='cod'){
+    cod=true
+  }
+  else{
+    online=true;
+  }
+  res.render('user/ordered-response',{user,cod,online})
+})
+
+
+router.post('/Validate-discount-coupon',(req,res)=>{
+
+  //   userHelper.validateDiscoundCoupon(req.body.discountCode).then((res)=>{
+  //     console.log(res);
+  // if(res.coupon===true){
+  //   total=req.body.total-100;
+  //   res.json({valid:true,total})
+  // }else{
+  //   res.json({valid:false})
+  // }
+  //   })
+    if(req.body.discountCode=="abc@123"){
+      // req.session.couponApplied=true;
+      total=req.body.total-100;
+      res.json({valid:true,total})
+    }else{
+      res.json({valid:false})
+    }
+  //  }
+  
+  
+  
+  })
+  
+
+
+//bbuy now--------------------------------------------------------------
+router.get('/buynow',async (req,res)=>{
+  let product= await productHelper.getSingleProduct(req.query.id)
+  // userHelper.addToCart(req.session.user._id,req.query.id).then(()=>{
+   product.quantity=1;
+    res.render('user/buynow',{product})
+  // }
+  // )
+   
+ 
+})
+
+router.post('/tempCart',async (req,res)=>{
+  console.log(req.body);
+  req.session.tempCart=req.body;
+  console.log(req.session.tempCart)
+  res.json({success:true})
+})
+
+
+
 
 
 
@@ -269,7 +357,7 @@ router.get('/products-page',async(req,res)=>{
 
 router.get('/product-detail-page', async(req,res)=>{
   let proId=req.query.id
-  console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+  
 console.log(proId);
     let product=await productHelper.getSingleProduct(proId)
    let cakes=await productHelper.getProductCake()
