@@ -241,8 +241,11 @@ router.post('/checkout',async(req,res)=>{
   req.body.userId=req.session.user._id;
   user=req.session.user._id;
   usr=req.session.user;
-  price=  parseInt(1600);
-  let products=await userHelper.getCartProducts(user)
+  price=  parseInt(req.body.price);
+  
+  let products= req.session.tempCart ? req.session.tempCart : ( await userHelper.getCartProducts(user))
+  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+  console.log(products);
    userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
     if(req.body['payment-method']=='COD'){
       res.json({cod_success:true})
