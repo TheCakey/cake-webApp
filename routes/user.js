@@ -227,10 +227,12 @@ router.post('/remove-cart-products',(req,res,next)=>{
 
 router.get('/checkout',async(req,res)=>{
   useraddress= await userHelper.getUserAddress(req.session.user._id)
+
   dlcharge=40;
   //set from admin side 
   total=parseInt(req.query.fullTotal);
   Ttlamount=total+dlcharge;
+
   pincode=req.query.pincode;
   res.render('user/checkout',{useraddress,pincode,total,dlcharge,Ttlamount})
  
@@ -244,7 +246,6 @@ router.post('/checkout',async(req,res)=>{
   price=  parseInt(req.body.price);
   
   let products= req.session.tempCart ? req.session.tempCart : ( await userHelper.getCartProducts(user))
-  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
   console.log(products);
    userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
     if(req.body['payment-method']=='COD'){
@@ -356,7 +357,7 @@ router.get('/products-page',async(req,res)=>{
 
 router.get('/product-detail-page', async(req,res)=>{
   let proId=req.query.id
-  console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+  
 console.log(proId);
     let product=await productHelper.getSingleProduct(proId)
    let cakes=await productHelper.getProductCake()

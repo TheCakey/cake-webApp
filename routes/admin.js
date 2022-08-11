@@ -1,4 +1,5 @@
 var express = require('express');
+const { log } = require('handlebars');
 var router = express.Router();
 
 
@@ -163,6 +164,38 @@ router.post('/edit-cakes',async(req,res)=>{
       })
     }
   })
+})
+
+router.get('/add-coupon',(req,res)=>{
+  
+  res.render('admin/add-coupon',{admin:true})
+})
+router.post('/add-coupon',(req,res)=>{
+  console.log('kkkkkkkkkkkkkkkkkkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+  console.log(req.body)
+  adminHelpers.addCoupon(req.body).then(async()=>{
+    console.log('coupon added successfully')
+    let coupons = await adminHelpers.viewAllCoupons()
+
+    res.render('admin/view-all-coupons',{admin:true,coupons})
+  })
+})
+
+router.get('/view-all-coupons',async(req,res)=>{
+  let coupons = await adminHelpers.viewAllCoupons()
+  console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+  console.log(coupons)
+  res.render('admin/view-all-coupons',{admin:true,coupons})
+})
+
+router.get('/delete-coupon',(req,res)=>{
+  let proId=req.query.id
+  console.log(proId)
+  adminHelpers.deleteCoupon(proId).then((response)=>{
+    console.log('Coupen deleted succesfully')
+    res.redirect('/admin/view-all-coupons')
+  })
+
 })
 
 
