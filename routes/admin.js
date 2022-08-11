@@ -198,6 +198,10 @@ router.get('/delete-coupon',(req,res)=>{
 
 })
 
+router.get('/pending-orders',(req,res)=>{
+  res.render('admin/pending-orders',{admin:true})
+})
+
 
 
 

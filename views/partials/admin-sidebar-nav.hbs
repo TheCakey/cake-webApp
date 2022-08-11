@@ -11750,9 +11750,24 @@ body {
                             <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/admin/product-add">Add Product</a>
-                                    <a class="nav-link" href="admin/">Delete Product</a>
+                                    <a class="nav-link" href="admin/">Delete product</a>
                                      <a class="nav-link" href="/admin/view-all-cakes">View all Cakes</a>
                                       <a class="nav-link" href="/admin/demo-admin"> Product</a>
+                                </nav>
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Orders Listing
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/admin/pending-orders">Pending Orders</a>
+                                            <a class="nav-link" href="/admin/view-all-coupons">Delivered Orders</a>
+                                            <a class="nav-link" href="password.html">Cancelled Orders</a>
+                                        </nav>
+                                    </div>
+                                   
+                                  
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -11773,6 +11788,7 @@ body {
                                             <a class="nav-link" href="password.html">Forgot Password</a>
                                         </nav>
                                     </div>
+                                    
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
                                         Error
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
