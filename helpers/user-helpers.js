@@ -365,6 +365,17 @@ changePaymentStatus:(orderId)=>{
         })
     })
 },
+getCouponDetails:(couponId)=>{
+    return new Promise((resolve,reject)=>{
+       
+       db.get().collection(collection.COUPON_COLLECTION).findOne({Code:couponId}).then((coupon)=>{
+           
+             console.log(coupon);
+             resolve(coupon)
+    })
+  
+}
 
+    )},
 }
 

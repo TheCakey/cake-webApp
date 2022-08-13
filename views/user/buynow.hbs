@@ -47,12 +47,13 @@
                  
                         <p>DISCOUND COUPON</p>
                         <input  onfocusout="CouponValidate()" name="coupon" id="code" placeholder="Enter your code">
-                        <input name="fullTotal" id="prototal" value="{{product.Price}}" type="text" hidden>
+                       
                         <p id="errorcpnmsg" ></p>
                     
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                         <div class="col">TOTAL PRICE</div>
                         <div id="prodtotal" class="col text-right">₹ {{product.Price}} </div>
+                         <input name="fullTotal" id="prototal" value="{{product.Price}}" type="text" hidden>
                     </div>
                     <p id="errormsg" class="text-danger"></p>
                     </form>
@@ -127,6 +128,8 @@ prodPrice=parseInt(prodPrice)
           nwq=quantity+count
           document.getElementById(proId).innerHTML=nwq
           document.getElementById('prodtotal').innerHTML="₹"+prodPrice*nwq;
+           document.getElementById('prototal').innerHTML="₹"+prodPrice*nwq;
+              document.getElementById('prototal').value=prodPrice*nwq;
           //document.getElementById('alltotal').innerHTML=response.allTotal
         }
   }
@@ -185,7 +188,6 @@ else{
   
   total=total.slice(2);
 total=parseInt(total)
-console.log('heyyyyyyyyyy'+total)
 let discountCode = document.getElementById('code').value;
 document.getElementById("errorcpnmsg").innerHTML = " "
   console.log(total)
@@ -214,6 +216,7 @@ document.getElementById("errorcpnmsg").style.color = "black";
         document.getElementById("errorcpnmsg").innerHTML = "Coupon applied"
           document.getElementById('prodtotal').innerHTML="₹"+response.total
           document.getElementById('prototal').value=response.total
+        
         }
         else{
          

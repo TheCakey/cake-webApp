@@ -143,12 +143,14 @@ router.post('/login-otp',(req,res)=>{
 
 //user profile--------------------------------------------
 router.get('/profile',verifyLogin,async (req,res)=>{
+ 
   user = req.session.user;
   console.log(user)
   res.render('user/profile-page',{user})
 })
 
 router.get('/edit-user-details',(req,res)=>{
+  
   user = req.session.user;
   res.render('user/edit-address',{user})
 })
@@ -166,6 +168,7 @@ router.post('/edit-user-details',(req,res)=>{
 
 //cart routes
 router.get('/cart',verifyLogin, async (req,res,next)=>{
+  req.session.tempCart=null;
 
   user=req.session.user;
   userId=user._id;
@@ -227,10 +230,14 @@ router.post('/remove-cart-products',(req,res,next)=>{
 
 router.get('/checkout',async(req,res)=>{
   useraddress= await userHelper.getUserAddress(req.session.user._id)
-
+console.log(req.query.fullTotal);
+console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii00000000000000000000000000000000000");
   dlcharge=40;
-  //set from admin side 
-  total=parseInt(req.query.fullTotal);
+  //delivery charge set from admin side 
+  
+    total=parseInt(req.query.fullTotal);
+  
+  
   Ttlamount=total+dlcharge;
 
   pincode=req.query.pincode;
@@ -244,23 +251,24 @@ router.post('/checkout',async(req,res)=>{
   user=req.session.user._id;
   usr=req.session.user;
   price=  parseInt(req.body.price);
-  
-  let products= req.session.tempCart ? req.session.tempCart : ( await userHelper.getCartProducts(user))
-  console.log(products);
+  let products
+  if(req.session.tempCart){
+    
+    products=req.session.tempCart 
+    req.session.tempCartCheck=true;
+  }else{
+products=await userHelper.getCartProducts(user);
+  }
+
    userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
     if(req.body['payment-method']=='COD'){
       res.json({cod_success:true})
     }else{
       userHelper.generateRazorPay(orderId,price,usr).then((response)=>{
-        
        res.json(response)
       })
     }
-
   })
-
-
-
 })
 
 router.post('/verify-payment',(req,res)=>{
@@ -279,8 +287,12 @@ router.get('/ordered-response',async (req,res)=>{
   let mode=req.query.id
   let cod;
   let online;
-  userHelper.deleteuserCart(user._id)
-
+  if( req.session.tempCartCheck){
+  req.session.tempCart=null;
+  req.session.tempCartCheck=false;
+  }else{
+    userHelper.deleteuserCart(user._id)
+  }
   if(mode=='cod'){
     cod=true
   }
@@ -291,32 +303,20 @@ router.get('/ordered-response',async (req,res)=>{
 })
 
 
-router.post('/Validate-discount-coupon',(req,res)=>{
-
-  //   userHelper.validateDiscoundCoupon(req.body.discountCode).then((res)=>{
-  //     console.log(res);
-  // if(res.coupon===true){
-  //   total=req.body.total-100;
-  //   res.json({valid:true,total})
-  // }else{
-  //   res.json({valid:false})
-  // }
-  //   })
-    if(req.body.discountCode=="abc@123"){
-      // req.session.couponApplied=true;
-      total=req.body.total-100;
-      res.json({valid:true,total})
-    }else{
-      res.json({valid:false})
-    }
-  //  }
+router.post('/Validate-discount-coupon',async (req,res)=>{
+let couponId=req.body.discountCode;
+  let coupon=await userHelper.getCouponDetails(couponId)
+  if(coupon){
+    total=req.body.total-100;
+    res.json({valid:true,total})
+  }else{
+    res.json({valid:false})
+  }
+    })
   
+ 
   
-  
-  })
-  
-
-
+ 
 //bbuy now--------------------------------------------------------------
 router.get('/buynow',async (req,res)=>{
   let product= await productHelper.getSingleProduct(req.query.id)
@@ -325,28 +325,22 @@ router.get('/buynow',async (req,res)=>{
     res.render('user/buynow',{product})
   // }
   // )
-   
- 
 })
 
 router.post('/tempCart',async (req,res)=>{
   console.log(req.body);
-  req.session.tempCart=req.body;
-  console.log(req.session.tempCart)
+  let product= await productHelper.getSingleProduct(req.body.proid)
+ 
+  let proObj={
+    quantity:req.body.quantity,
+    item:req.body.proid,
+   
+    product
+  }
+  req.session.tempCart=proObj;
+
   res.json({success:true})
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //product listing page

@@ -5,5 +5,5 @@ module.exports={
     CART_COLLECTION:'cart',
     ORDER_COLLECTION:'order',
     TEMPCART_COLLECTION:'tempcart',
-    COUPON_COLLECTION:'coupen',
+    COUPON_COLLECTION:'coupon',
 }
