@@ -68,6 +68,13 @@ module.exports={
             })
         })
     },
+    viewAllPendingOrders:()=>{
+        return new Promise (async (resolve,reject)=>{
+            let pendingOrders = await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
+             resolve(pendingOrders)
+         })
+
+    }
 
 
 

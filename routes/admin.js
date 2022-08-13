@@ -198,6 +198,13 @@ router.get('/delete-coupon',(req,res)=>{
 
 })
 
+router.get('/pending-orders',async (req,res)=>{
+  let pendingOrders = await adminHelpers.viewAllPendingOrders()
+  console.log('Ordesssssssssssssssssssssssssssssssssssssssss');
+  console.log(pendingOrders)
+  res.render('admin/pending-orders',{admin:true,pendingOrders})
+})
+
 
 
 
