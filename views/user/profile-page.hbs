@@ -18,9 +18,9 @@
                             <div class="row">
                                 <div class="col-lg-3 col-md-4">
                                     <div class="myaccount-tab-menu nav" role="tablist">
-                                        <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
+                                        <a href="#dashboad"  data-toggle="tab"><i class="fa fa-dashboard"></i>
                                             Dashboard</a>
-                                        <a href="#orders" data-toggle="tab" class=""><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                                        <a href="#orders" class="active" data-toggle="tab" class=""><i class="fa fa-cart-arrow-down"></i> Orders</a>
                                         <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i> Download</a>
                                         <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i> Payment
                                             Method</a>
@@ -34,7 +34,7 @@
                                 <div class="col-lg-9 col-md-8">
                                     <div class="tab-content" id="myaccountContent">
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade active show" id="dashboad" role="tabpanel">
+                                        <div class="tab-pane fade " id="dashboad" role="tabpanel">
                                             <div class="myaccount-content">
                                                 <h3>Dashboard</h3>
                                                 <div class="welcome">
@@ -46,47 +46,121 @@
                                         </div>
                                         <!-- Single Tab Content End -->
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade" id="orders" role="tabpanel">
-                                            <div class="myaccount-content">
-                                                <h3>Orders</h3>
-                                                <div class="myaccount-table table-responsive text-center">
-                                                    <table class="table table-bordered">
-                                                        <thead class="thead-light">
-                                                            <tr>
-                                                                <th>Order</th>
-                                                                <th>Date</th>
-                                                                <th>Status</th>
-                                                                <th>Total</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Aug 22, 2018</td>
-                                                                <td>Pending</td>
-                                                                <td>₹3000</td>
-                                                                <td><a href="#" class="check-btn sqr-btn ">View</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>2</td>
-                                                                <td>July 22, 2018</td>
-                                                                <td>Approved</td>
-                                                                <td>₹200</td>
-                                                                <td><a href="#" class="check-btn sqr-btn ">View</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td>June 12, 2017</td>
-                                                                <td>On Hold</td>
-                                                                <td>$990</td>
-                                                                <td><a href="#" class="check-btn sqr-btn ">View</a></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
+
+    <div class="tab-pane fade active show" id="orders" role="tabpanel">
+
+
+         <div class="order-desktop">
+                                                                    
+              <div class="myaccount-content">
+                       <button type="button" class="btn btn-outline-primary mb-3 " style="border-radius: 6px; padding: 7px;  " >Orders</button>
+                       <button type="button" class="btn btn-outline-primary mb-3 ml-2" style="border-radius: 6px; padding: 7px;">Cancelled</button>
+                       <button type="button" class="btn btn-outline-primary mb-3 ml-2" style="border-radius: 6px; padding: 7px;">Buy Again</button>
+                                                
+                     <div class="myaccount-table table-responsive text-center">
+
+                       <div class="card shadow-0 border mb-4">
+                       <div class="card-body">
+
+                  <div class="row " >
+                    <div class="col-md-2">
+                      <img src="https://m.media-amazon.com/images/I/41L12hLwO2L._SX425_.jpg"
+                        class="img-fluid" alt="Phone">
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 font-weight-bold">Desktop Chocolate</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small font-weight-bold">Free Delivery</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small font-weight-bold">3.5 KG</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small font-weight-bold">Qty: 1</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small font-weight-bold">₹999</p>
+                    </div>
+                  </div>
+            <button type="button" class="btn btn-outline-primary d-flex ml-auto" >View Details</button>
+
+                  {{!-- <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                  <div class="row d-flex align-items-center">
+                    <div class="col-md-2">
+                      <p class="text-muted mb-0 small">Track Order</p>
+                    </div>
+                    <div class="col-md-10">
+                      <div class="progress" style="height: 6px; border-radius: 16px;">
+                        <div class="progress-bar" role="progressbar"
+                          style="width: 65%; border-radius: 16px; background-color: #5ab83d;" aria-valuenow="65"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="d-flex justify-content-around mb-1">
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for delivary</p>
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
+                      </div>
+                    </div>
+                  </div> --}}
+                </div>
+              </div> 
+                   </div>
+                        </div>
+                            </div>
+
+
+
+ <div class="order-mobile ">
+        <div class="myaccount-content">
+            <button type="button" class="btn btn-outline-primary mb-3 ml-1" style="border-radius: 7px; padding: 8px; ">Orders</button>
+            <button type="button" class="btn btn-outline-primary mb-3 ml-1" style="border-radius: 7px; padding: 8px;">Cancelled</button>
+            <button type="button" class="btn btn-outline-primary mb-3 ml-1" style="border-radius: 7px; padding: 8px;">Buy Again</button>
+                                               
+      <div class="myaccount-table table-responsive ">
+
+         <div class="card shadow-0 border mb-4" style="border-radius:10px ;">
+              <div class="card-body" >
+                <img src="https://m.media-amazon.com/images/I/41L12hLwO2L._SX425_.jpg"
+                        class="col-6" style="float:left" alt="Phone">
+                  <div class="row col-6"  >
+                    
+                    <div class="col-md-2 ">
+                      <p class="text-muted mb-1 font-weight-bold">mobile Chocolate</p>
+                    </div>
+                    <div class="col-md-2 ">
+                      <p class="text-muted mb-1 small font-weight-bold">Free Delivery</p>
+                    </div>
+                    <div class="col-md-2 ">
+                      <p class="text-muted mb-1 small font-weight-bold">3.5 KG</p>
+                    </div>
+                    <div class="col-md-2 ">
+                      <p class="text-muted mb-1 small font-weight-bold">Qty: 1</p>
+                    </div>
+                    <div class="col-md-2 ">
+                      <p class="text-muted mb-1 small font-weight-bold">₹999</p>
+                    </div>
+                    <button type="button" class="btn btn-outline-primary mb-0 " style="border-radius: 10px; padding: 2px;">Details</button>
+
+                  </div>
+                  
+                
+          </div>
+              </div>
+                   </div>
+
+                      </div>
+
+                          </div>
+  
+  
+  
+  
+  
+  
+  
+                                    </div>
                                         <!-- Single Tab Content End -->
                                         <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade" id="download" role="tabpanel">
@@ -265,6 +339,37 @@ window.location.replace("http://localhost:3000");
             })
     
 </script>
+
+
+<style>
+
+   @media (max-width: 991px) {
+    .order-desktop {
+        display: none;
+    }
+.order-mobile {
+       display: block;
+        
+    }
+
+   }
+   
+
+
+   @media (min-width: 991px) {
+    
+.order-mobile {
+    display: none;
+     
+    }
+ .order-desktop {
+        display: block;
+    }
+   }
+</style>
+
+
+
 </body>
 
 

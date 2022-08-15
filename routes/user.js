@@ -145,6 +145,8 @@ router.post('/login-otp',(req,res)=>{
 router.get('/profile',verifyLogin,async (req,res)=>{
  
   user = req.session.user;
+  // let Orders = await adminHelpers.viewAllPendingOrders()
+
   console.log(user)
   res.render('user/profile-page',{user})
 })
