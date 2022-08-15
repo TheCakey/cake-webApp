@@ -146,10 +146,10 @@ $.ajax({
         
       },
       method:'post',
-      success:(pincodeList)=>{
-        console.log(pincodeList)
-        if(pincodeList){
-         check=pincodeList.includes(pincode)
+      success:(response)=>{
+     
+        if(response){
+    
  document.getElementById("errormsg").innerHTML = " "
 
 /*total=document.getElementById('prodtotal').innerHTML
@@ -160,7 +160,7 @@ let inttotal=parseInt(total)*/
   alert("Please enter pincode")
   return
  }else{
-    if(check){   
+    if(response.status==true){   
 document.getElementById("form1").submit();
 }
 else{

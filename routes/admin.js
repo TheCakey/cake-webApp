@@ -103,6 +103,7 @@ router.post('/products-add',(req,res)=>{
 })
 
 
+//product management
 router.get('/view-all-cakes',async (req,res)=>{
   let cakes=await productHelpers.getProductCake()
  
@@ -110,17 +111,13 @@ router.get('/view-all-cakes',async (req,res)=>{
   res.render('admin/view-all-products',{admin:true,cakes})
 })
 
-
-
 router.get('/edit-cakes',async(req,res)=>{
   let proId=req.query.id
 console.log(proId);
     let product=await productHelpers.getSingleProduct(proId)
     res.render('admin/edit-products',{admin:true,product})
-  
-  
-})
 
+})
 
 router.post('/edit-cakes',async(req,res)=>{
 
@@ -161,6 +158,12 @@ router.post('/edit-cakes',async(req,res)=>{
   })
 })
 
+
+
+
+
+//Coupon
+
 router.get('/add-coupon',(req,res)=>{
   
   res.render('admin/add-coupon',{admin:true})
@@ -190,6 +193,7 @@ router.get('/delete-coupon',(req,res)=>{
   })
 
 })
+
 
 router.get('/pending-orders',async (req,res)=>{
   let pendingOrders = await adminHelpers.viewAllPendingOrders()

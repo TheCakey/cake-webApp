@@ -4,7 +4,8 @@ var router = express.Router();
 //var productHelper=require('../helpers/product-helpers')
 var userHelper=require('../helpers/user-helpers')
 
-var productHelper=require('../helpers/product-helpers')
+var productHelper=require('../helpers/product-helpers');
+const adminHelpers = require('../helpers/admin-helpers');
 
 // CommonJS
 
@@ -191,9 +192,17 @@ router.get('/cart',verifyLogin, async (req,res,next)=>{
 
 
 router.post('/checkPincode',async (req,res)=>{
-  var pincodeList=["683556", "683101", "683585","683547"];
+ // var pincodeList=["683556", "683101", "683585","683547"];
 //getpincode from backend
-res.json(pincodeList)
+var response= await adminHelpers.validatePincode(req.body.pincode)
+
+if(response){
+  res.json({status:true})
+}else{
+  res.json({status:false})
+}
+
+
 })
 
 
@@ -296,7 +305,6 @@ router.get('/ordered-response',async (req,res)=>{
   let user=req.session.user
   let mode=req.query.id
   let cod;
-  let online;
   if( req.session.tempCartCheck){
   req.session.tempCart=null;
   req.session.tempCartCheck=false;
@@ -307,9 +315,9 @@ router.get('/ordered-response',async (req,res)=>{
     cod=true
   }
   else{
-    online=true;
+    cod=false
   }
-  res.render('user/ordered-response',{user,cod,online})
+  res.render('user/order-response',{user,cod})
 })
 
 
