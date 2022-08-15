@@ -1,6 +1,16 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/product-add-style.css">
 
+
+<style>
+  .image-upload>input {
+  display: none;
+}
+.image-upload{
+ 
+}
+</style>
+
 <div class="container rounded bg-white mt-5 mb-5 " >
   <div class="row">
       
@@ -48,19 +58,33 @@
                
                
 
-   
+    <label for="name" class="col-sm-3 control-label mt-3 font-weight-bold mb-4">Insert Image</label>
+              
                  <div class="form-group">
-                   <label for="name" class="col-sm-3 control-label mt-3 font-weight-bold">Insert Image</label>
-                   <div class="col-sm-3">
-                     <label  class="control-label small " for="file_img">Image 1 (jpg/png):</label> <input type="file"  name="Image1">
+                  
+                   <div class="col-sm-3  image-upload mb-4" >
+                     <label  class="control-label small " for="file-input">Image 2 (jpg): <br> <img class="btn-image" width="100px" height="100px" src="/admin-assets/icons/upload-icon.png"/></label> 
+                     <input  id="file-input" onchange="viewImage1(event)" type="file"  name="Image1">
+                       <img class=" mt-5" style="width: 200px; height:auto" id="imgView1">
                    </div>
-                 <div class="col-sm-3">
-                     <label class="control-label small" for="file_img">Image 2 (jpg/png):</label>  <input type="file" name="Image2">
+                 
+                 
+                
+                  <div class="col-sm-3 image-upload mb-4">
+                     <label class="control-label small" for="file-input1">Image 2 (jpg):  <br> <img  class="btn-image" width="100px" height="100px" src="/admin-assets/icons/upload-icon.png"/> click here </label>   
+                     <input id="file-input1"  onchange="viewImage2(event)" type="file" name="Image2">
+                     <img  class=" mt-5" style="width: 200px; height:auto" id="imgView2">
                    </div>
-                   <div class="col-sm-3">
-                     <label class="control-label small" for="file_img">Image 3 (jpg/png):</label>  <input type="file" name="Image3">
+                   
+                   
+                   
+                   <div class="col-sm-3 image-upload mb-4" >
+                     <label class="control-label small" for="file-input2">Image 3 (jpg):  <br> <img  class="btn-image" width="100px" height="100px" src="/admin-assets/icons/upload-icon.png"/> click here </label>
+                       <input  id="file-input2" onchange="viewImage3(event)" type="file" name="Image3">
+                        <img class=" mt-5" style="width: 200px; height:auto" id="imgView3">
                    </div>
-
+              
+                
                  </div> <!-- form-group // -->
 
 
@@ -99,7 +123,17 @@
 
 
 
-
+<script>
+    function viewImage1(event){
+        document.getElementById('imgView1').src=URL.createObjectURL(event.target.files[0])
+    }
+      function viewImage2(event){
+        document.getElementById('imgView2').src=URL.createObjectURL(event.target.files[0])
+    }
+      function viewImage3(event){
+        document.getElementById('imgView3').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

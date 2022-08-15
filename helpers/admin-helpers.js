@@ -81,7 +81,24 @@ module.exports={
       viewAllPincodes:()=>{
         return new Promise (async (resolve,reject)=>{
            let pincodes = await db.get().collection(collection.PINCODE_COLLECTION).find().toArray()
-            resolve(pincodes)
+         
+           if(pincodes){
+            resolve({pincode:true})
+           }else{
+            resolve({pincode:false})
+           }
+            
+        })
+
+      },
+      validatePincode:(pincode)=>{
+        return new Promise ((resolve,reject)=>{
+            db.get().collection(collection.PINCODE_COLLECTION).findOne({Pincode:pincode}).then((res)=>{
+           
+                console.log(res);
+                resolve(res)
+       })
+          
         })
 
       },

@@ -3,7 +3,8 @@ var collection=require('../config/collection')
 const { response } = require('../app')
 const bcrypt=require('bcrypt')
 var moment = require('moment'); 
-const Razorpay= require('razorpay')
+const Razorpay= require('razorpay');
+const { resolve } = require('path');
 const objectId=require('mongodb').ObjectId
 var instance = new Razorpay({
     key_id: 'rzp_test_wwlKdN1HEsAggm',
@@ -220,21 +221,24 @@ return new Promise(async(resolve,reject)=>{
 
 
 
-    validateDiscoundCoupon:(cpCode)=>{
-return new Promise(async (resolve,reject)=>{
-    let code=await db.get().collection(collection.COUPON_COLLECTION).findOne({coupon:cpCode})
-    if(code){
-        resolve({coupon:true})
-    }
-    else{
-        resolve({coupon:false})
-    }
-})
-    },
+//     validateDiscoundCoupon:(cpCode)=>{
+// return new Promise(async (resolve,reject)=>{
+//     let code=await db.get().collection(collection.COUPON_COLLECTION).findOne({coupon:cpCode})
+//     if(code){
+//         resolve({coupon:true})
+//     }
+//     else{
+//         resolve({coupon:false})
+//     }
+// })
+//     },
 
     deleteuserCart:(userId)=>{
-        db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(userId)})
-        resolve()
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(userId)})
+            resolve()
+        })
+ 
     },
 
     addToCart:(userId,proId)=>{
