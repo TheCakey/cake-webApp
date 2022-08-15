@@ -36,17 +36,12 @@ module.exports={
         })
     },
     addCoupon:(coupon)=>{
-        
-        console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
+       
         return new Promise (async (resolve,reject)=>{
         db.get().collection(collection.COUPON_COLLECTION).insertOne(coupon).then(()=>{
-            console.log('rrrrrrrrrrrrrrrrrr')
-            resolve()
-
+        resolve()
+        })        
         })
-         
-        })
- 
       },
 
       viewAllCoupons:()=>{
@@ -54,16 +49,13 @@ module.exports={
            let coupons = await db.get().collection(collection.COUPON_COLLECTION).find().toArray()
             resolve(coupons)
         })
-
       },
 
       deleteCoupon:(prodId)=>{
         console.log('product id display');
         console.log(prodId);
         return new Promise((resolve,reject)=>{
-            
-            db.get().collection(collection.COUPON_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{
-                
+            db.get().collection(collection.COUPON_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{               
                 resolve(response)
             })
         })
@@ -74,7 +66,36 @@ module.exports={
              resolve(pendingOrders)
          })
 
-    }
+    },
+
+    addPincode:(pincode)=>{
+        return new Promise (async (resolve,reject)=>{
+        db.get().collection(collection.PINCODE_COLLECTION).insertOne(pincode).then(()=>{
+            resolve()
+
+        })
+         
+        })
+ 
+      },
+      viewAllPincodes:()=>{
+        return new Promise (async (resolve,reject)=>{
+           let pincodes = await db.get().collection(collection.PINCODE_COLLECTION).find().toArray()
+            resolve(pincodes)
+        })
+
+      },
+
+      
+      deletePincode:(prodId)=>{
+        console.log('product id display');
+        console.log(prodId);
+        return new Promise((resolve,reject)=>{ 
+            db.get().collection(collection.PINCODE_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{
+                resolve(response)
+            })
+        })
+    },
 
 
 

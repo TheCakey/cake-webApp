@@ -29,7 +29,7 @@ body {
 }
 .table-title {
     padding-bottom: 15px;
-    background: #248cfc;
+    background: #4529e4;
     color: #fff;
     padding: 16px 30px;
     margin: -20px -25px 10px;
@@ -189,10 +189,10 @@ $(document).ready(function(){
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-5">
-                        <h2>Cake <b>Management</b></h2>
+                        <h2>Pincode <b>Management</b></h2>
                     </div>
                     <div class="col-sm-7">
-                        <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Products</span></a>
+                        <a href="/admin/add-coupon" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Coupons</span></a>
                         <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>						
                     </div>
                 </div>
@@ -201,69 +201,32 @@ $(document).ready(function(){
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>						
-                        <th>Category</th>
-                        <th>Sub-Category</th>
-                        <th>Price</th>
+                        <th>Pincode</th>						
+                        <th>Post office</th>
+                        <th>District</th>
+                        {{!-- <th>Expiry Date</th> --}}
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-               {{#if cakes}}
-                    {{#each cakes}}
+               
+                    {{#each pincodes}}
 
                    <tr>
                         <td>{{@key}}</td>
-                        <td><a href="#"><img src="/product-images/{{this._id}}1.jpg" class="avatar" style="width: 50px; height: 50px;" alt="Avatar">{{this.Name}}</a></td>
-                        <td>{{this.Category}}</td>                        
-                        <td>{{this.Subcategory}}</td>
-                        <td>{{this.Price}}</td>
+                        <td>{{this.Pincode}}</td>
+                        <td>{{this.Postoffice}}</td>                        
+                        <td>{{this.District}}</td>
+                        {{!-- <td></td> --}}
                         <td>
-                            <a href="/admin/edit-cakes?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a href="/admin/delete-product?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
-                        </td>
-                    </tr>
-
-                    {{/each}}
-{{!-- {{else}}
-
-{{#if crafts}}
-{{#each crafts}}
-
-                   <tr>
-                        <td>{{@key}}</td>
-                        <td><a href="#"><img src="/product-images/{{this._id}}1.jpg" class="avatar" style="width: 50px; height: 50px;" alt="Avatar">{{this.Name}}</a></td>
-                        <td>{{this.Category}}</td>                        
-                        <td>{{this.Subcategory}}</td>
-                        <td>{{this.Price}}</td>
-                        <td>
-                            <a href="/admin/edit-crafts?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a href="/admin/delete-product?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
-                        </td>
-                    </tr>
-
-                    {{/each}}
-                    
-{{else}}
- 
-     {{#each gifts}}
-
-                   <tr>
-                        <td>{{@key}}</td>
-                        <td><a href="#"><img src="/product-images/{{this._id}}1.jpg" class="avatar" style="width: 50px; height: 50px;" alt="Avatar">{{this.Name}}</a></td>
-                        <td>{{this.Category}}</td>                        
-                        <td>{{this.Subcategory}}</td>
-                        <td>{{this.Price}}</td>
-                        <td>
-                            <a href="/admin/edit-gifts?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a href="/admin/delete-product?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
+                            {{!-- <a href="/admin/edit-cakes?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a> --}}
+                            <a href="/admin/delete-pincode?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
                         </td>
                     </tr>
 
                     {{/each}}
 
-                    {{/if}} --}}
-                    {{/if}}
+                
                     
                 </tbody>
             </table>

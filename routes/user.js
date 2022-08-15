@@ -231,7 +231,6 @@ router.post('/remove-cart-products',(req,res,next)=>{
 router.get('/checkout',async(req,res)=>{
   useraddress= await userHelper.getUserAddress(req.session.user._id)
 console.log(req.query.fullTotal);
-console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii00000000000000000000000000000000000");
   dlcharge=40;
   //delivery charge set from admin side 
   
