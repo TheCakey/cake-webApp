@@ -173,19 +173,32 @@ router.get('/cart',verifyLogin, async (req,res,next)=>{
   user=req.session.user;
   userId=user._id;
   let products=null;
-  let total;
+  let total=0;
+  let length;
   if(user){
      products=await userHelper.getCartProducts(req.session.user._id);
-     total=await userHelper.getTotalAmount(req.session.user._id)
+      length=products.length;
+     
+     if(products.length>0){
+      total=await userHelper.getTotalAmount(req.session.user._id)
+     }
+    
   }
 
-  res.render('user/cart',{products,userId,total})
+  res.render('user/cart',{products,userId,total,length})
 
 })
 
 
+router.post('/checkPincode',async (req,res)=>{
+  var pincodeList=["683556", "683101", "683585","683547"];
+//getpincode from backend
+res.json(pincodeList)
+})
+
+
+
 router.get('/addtocart/:id',(req,res)=>{
-  
   userHelper.addToCart(req.session.user._id,req.params.id).then(()=>{
     res.json(req.params.id)
   }
@@ -195,10 +208,7 @@ router.get('/addtocart/:id',(req,res)=>{
 
 router.post('/change-product-quantity',(req,res)=>{
   console.log(req.body)
-  
   userHelper.changeProductQuantity(req.body).then(async(response)=>{
-  
-    
     if(req.body.quantity==1 && req.body.count==-1){
       response.total=0;
     }
@@ -212,7 +222,6 @@ router.post('/change-product-quantity',(req,res)=>{
     //  response.allTotal=response.total+40;
     // }
   }
-   
     // console.log(response.allTotal)
     res.json(response)
   })
@@ -220,7 +229,6 @@ router.post('/change-product-quantity',(req,res)=>{
 
 
 router.post('/remove-cart-products',(req,res,next)=>{
-  
   console.log(req.body);
   userHelper.removeCartProducts(req.body).then((response)=>{
     res.json(response)
@@ -231,6 +239,7 @@ router.post('/remove-cart-products',(req,res,next)=>{
 router.get('/checkout',async(req,res)=>{
   useraddress= await userHelper.getUserAddress(req.session.user._id)
 console.log(req.query.fullTotal);
+
   dlcharge=40;
   //delivery charge set from admin side 
   
@@ -247,6 +256,8 @@ console.log(req.query.fullTotal);
 router.post('/checkout',async(req,res)=>{
   
   req.body.userId=req.session.user._id;
+  console.log("--------------------------------------------");
+  console.log(req.body);
   user=req.session.user._id;
   usr=req.session.user;
   price=  parseInt(req.body.price);
