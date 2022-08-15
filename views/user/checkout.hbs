@@ -78,6 +78,9 @@
               Zip code required.
             </div>
           </div>
+
+
+        
         </div>
         <hr class="mb-4">
         <!-- <div class="custom-control custom-checkbox">
@@ -157,16 +160,18 @@
 
 
 <script>
+  
 
     $("#checkout-form").submit((e)=>{
+
+
        e.preventDefault()
         $.ajax({
             url:'/checkout',
             method:'post',
             data:$('#checkout-form').serialize(),
             success:(res)=>{
-                console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-                console.log(res)
+              
                 if(res.cod_success){
                     location.href='/ordered-response?id=cod'
                 }
