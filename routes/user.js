@@ -147,9 +147,9 @@ router.get('/profile',verifyLogin,async (req,res)=>{
  
   user = req.session.user;
  // let Orders = await adminHelpers.viewAllPendingOrders()
-let products= await userHelper.getOrderProducts(user._id)
-  console.log(user)
-  res.render('user/profile-page',{user})
+let orders= await userHelper.getPendingOrderProducts(user._id)
+ console.log(orders);
+  res.render('user/profile-page',{user,orders})
 })
 
 router.get('/edit-user-details',(req,res)=>{
@@ -267,8 +267,6 @@ console.log(req.query.fullTotal);
 router.post('/checkout',async(req,res)=>{
   
   req.body.userId=req.session.user._id;
-  console.log("--------------------------------------------");
-  console.log(req.body);
   user=req.session.user._id;
   usr=req.session.user;
   price=  parseInt(req.body.price);

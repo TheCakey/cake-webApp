@@ -82,11 +82,7 @@ module.exports={
         return new Promise (async (resolve,reject)=>{
            let pincodes = await db.get().collection(collection.PINCODE_COLLECTION).find().toArray()
          
-           if(pincodes){
-            resolve({pincode:true})
-           }else{
-            resolve({pincode:false})
-           }
+       resolve(pincodes)
             
         })
 
