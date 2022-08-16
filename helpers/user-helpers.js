@@ -218,7 +218,57 @@ return new Promise(async(resolve,reject)=>{
         })
     },
 
+    getOrderProducts:(userId)=>{
+        return new Promise(async (resolve, reject)=>{
+            
 
+            
+            
+          let  products=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+            {
+
+                $match:
+                
+                    {userId:objectId(userId)}, 
+                  
+                  
+                
+
+              
+            },
+            {
+                $unwind:'$product'
+            },{
+                $project:{
+                    item:'$product.item',
+                    quantity:'$product.quantity'
+                }
+            },
+            {
+                $lookup:{
+                    from:collection.PRODUCT_COLLECTION,
+                    localField:'item',
+                    foreignField:'_id',
+                    as:'product'
+                }
+            },
+            {
+                $project:{
+                   item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                }
+            },
+         
+
+        ]).toArray()
+   console.log("heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        console.log(products)
+        resolve(products)
+        })
+    },
+
+
+
+  
 
 
 //     validateDiscoundCoupon:(cpCode)=>{
