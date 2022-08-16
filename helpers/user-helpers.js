@@ -227,7 +227,13 @@ return new Promise(async(resolve,reject)=>{
         })
     },
 
+    getOrderDetails:(orderId)=>{
+        return new Promise(async (resolve,reject)=>{
+            let order=await db.get().collection(collection.ORDER_COLLECTION).findOne({_id:objectId(orderId)})
+            resolve(order)
+        })
 
+    },
 
   
 

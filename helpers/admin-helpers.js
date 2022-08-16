@@ -100,11 +100,11 @@ module.exports={
       },
 
       
-      deletePincode:(prodId)=>{
-        console.log('product id display');
-        console.log(prodId);
+      deletePincode:(pincode)=>{
+        
+      
         return new Promise((resolve,reject)=>{ 
-            db.get().collection(collection.PINCODE_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{
+            db.get().collection(collection.PINCODE_COLLECTION).deleteOne({_id:objectId(pincode)}).then((response)=>{
                 resolve(response)
             })
         })

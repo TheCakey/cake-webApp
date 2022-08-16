@@ -152,6 +152,7 @@ let orders= await userHelper.getPendingOrderProducts(user._id)
   res.render('user/profile-page',{user,orders})
 })
 
+
 router.get('/edit-user-details',(req,res)=>{
   
   user = req.session.user;
@@ -333,6 +334,16 @@ let couponId=req.body.discountCode;
     })
   
  
+    router.get('/viewDetailedOrder',(req,res)=>{
+console.log(req.query.id)
+userHelper.getOrderDetails(req.query.id).then((response)=>{
+  console.log("_____________________------------------------------");
+  console.log(response);
+  res.redirect('/profile')
+  // res.render('user/viewDetailedOrder')
+
+})
+    })
   
  
 //bbuy now--------------------------------------------------------------
