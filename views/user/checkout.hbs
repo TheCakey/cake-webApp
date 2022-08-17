@@ -7,7 +7,8 @@
     {{!-- <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p> --}}
   </div>
 <form action="/checkout" method="post" id="checkout-form">
-  <div class="row">
+
+  <div class="row container">
     
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Delivery address</h4>
@@ -31,14 +32,38 @@
         
         <div class="mb-3">
           <label for="Mobile">Mobile Number</label>
-          <input type="number" name="mobnum" class="form-control" id="phone" value="{{useraddress.mobnum}}" placeholder="Phone number">
+          <input type="number" name="mobnum" class="form-control" id="phone" value="{{useraddress.mobnum}}" placeholder="Phone number" required>
         </div>
         <div class="mb-3">
           <label for="Mobile">Mobile Number<span class="text-muted">(Alternative Number)</span></label>
-          <input type="number" name="altNum" class="form-control" id="phone" value="{{useraddress.altNum}}" placeholder="Alternative number">
+          <input type="number" name="altNum" class="form-control" id="phone" value="{{useraddress.altNum}}" placeholder="Alternative number" required>
         </div>
-
+       
+       <div class="row">
+        <div class="mb-3 col-md-6">
+        <label  for="Expected date">Expected Date:</label>
+        <input class="form-control" type="date" id="date" name="expectedDate" value="{{expectedDate}}" required>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label  for="appt">Select a time:</label>
+           <input class="form-control" type="time" id="appt" name="deliveryTime" value="{{deliveryTime}}" required>
+        
+         </div>
+      </div>
       
+       <div class="row">
+        <div class="mb-3 col-md-6">
+        <label for="place">Place</label>
+        <input type="text" class="form-control" name="place" id="place" placeholder="Enter Your Place" value="{{useraddress.place}}" required>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="landmark">Landmark</label>
+        <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Landmark" value="{{useraddress.landmark}}" required>
+        
+         </div>
+      </div>
+
+
 
         <div class="mb-3">
           <label for="address">Address</label>
@@ -98,7 +123,7 @@
     </div>
 
 
-<div class="col-md-4 order-md-2 mb-4">
+<div class="col-md-4 order-md-2 mb-4 ">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Your cart</span>
         <span class="badge badge-secondary badge-pill">3</span>
