@@ -266,6 +266,8 @@ console.log(req.query.fullTotal);
 })
 
 router.post('/checkout',async(req,res)=>{
+  console.log(req.body)
+  console.log('GGGGGGGGGGGGGGGGGGGGGGGgggggggggggggggggggggggggggggGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG')
   
   req.body.userId=req.session.user._id;
   user=req.session.user._id;
@@ -279,6 +281,7 @@ router.post('/checkout',async(req,res)=>{
   }else{
 products=await userHelper.getCartProducts(user);
   }
+  
 
    userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
     if(req.body['payment-method']=='COD'){

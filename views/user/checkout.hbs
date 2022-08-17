@@ -32,14 +32,38 @@
         
         <div class="mb-3">
           <label for="Mobile">Mobile Number</label>
-          <input type="number" name="mobnum" class="form-control" id="phone" value="{{useraddress.mobnum}}" placeholder="Phone number">
+          <input type="number" name="mobnum" class="form-control" id="phone" value="{{useraddress.mobnum}}" placeholder="Phone number" required>
         </div>
         <div class="mb-3">
           <label for="Mobile">Mobile Number<span class="text-muted">(Alternative Number)</span></label>
-          <input type="number" name="altNum" class="form-control" id="phone" value="{{useraddress.altNum}}" placeholder="Alternative number">
+          <input type="number" name="altNum" class="form-control" id="phone" value="{{useraddress.altNum}}" placeholder="Alternative number" required>
         </div>
-
+       
+       <div class="row">
+        <div class="mb-3 col-md-6">
+        <label  for="Expected date">Expected Date:</label>
+        <input class="form-control" type="date" id="date" name="expectedDate" value="{{expectedDate}}" required>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label  for="appt">Select a time:</label>
+           <input class="form-control" type="time" id="appt" name="deliveryTime" value="{{deliveryTime}}" required>
+        
+         </div>
+      </div>
       
+       <div class="row">
+        <div class="mb-3 col-md-6">
+        <label for="place">Place</label>
+        <input type="text" class="form-control" name="place" id="place" placeholder="Enter Your Place" value="{{useraddress.place}}" required>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="landmark">Landmark</label>
+        <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Landmark" value="{{useraddress.landmark}}" required>
+        
+         </div>
+      </div>
+
+
 
         <div class="mb-3">
           <label for="address">Address</label>
