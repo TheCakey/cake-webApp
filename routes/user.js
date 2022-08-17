@@ -338,12 +338,16 @@ let couponId=req.body.discountCode;
   
  
     router.get('/viewDetailedOrder',(req,res)=>{
-console.log(req.query.id)
+let paymentmethod=null;
 userHelper.getOrderDetails(req.query.id).then((response)=>{
-  console.log("_____________________------------------------------");
   console.log(response);
-
-  res.render('user/viewDetailedOrder',{orderdata:response})
+  console.log("jjjjjjjjjjjeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+ console.log(response.paymentMethod);
+  if(response.paymentMethod=="ONLINE"){
+    console.log("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+    paymentmethod=response.paymentMethod;
+  }
+  res.render('user/viewDetailedOrder',{orderdata:response,paymentmethod})
 
 })
     })
