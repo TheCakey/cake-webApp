@@ -339,8 +339,8 @@ console.log(req.query.id)
 userHelper.getOrderDetails(req.query.id).then((response)=>{
   console.log("_____________________------------------------------");
   console.log(response);
-  res.redirect('/profile')
-  // res.render('user/viewDetailedOrder')
+
+  res.render('user/viewDetailedOrder',{orderdata:response})
 
 })
     })
@@ -380,9 +380,7 @@ router.get('/products-page',async(req,res)=>{
 
 router.get('/product-detail-page', async(req,res)=>{
   let proId=req.query.id
-  
-console.log(proId);
-    let product=await productHelper.getSingleProduct(proId)
+  let product=await productHelper.getSingleProduct(proId)
    let cakes=await productHelper.getProductCake()
    
   res.render('user/product-detail-page',{product,cakes})
