@@ -16,7 +16,7 @@ module.exports={
 
     registerUser:(userData)=>{
         return new Promise(async(resolve,reject)=>{
-        userData.Psw=await bcrypt.hash(userData.psw,10)
+        userData.psw=await bcrypt.hash(userData.psw,10)
         db.get().collection(collection.USER_COLLECTION).insertOne(userData).then
             resolve(userData)
         })
