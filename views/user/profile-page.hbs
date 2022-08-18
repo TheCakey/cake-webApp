@@ -333,15 +333,34 @@ account_circle
 <script type="text/javascript">
  document.querySelector("#logout").addEventListener("click",(e)=>{
           e.preventDefault();
-            swal("Logout!", "Sure,you need to logout", "warning").then((value)=>{
-               $.ajax({
+          swal({
+  title: "Are you sure?",
+  text: "Are you sure, want to logou!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+ 
+    swal("You! have been logout!", {
+      icon: "success",
+    }).then((value)=>{
+  $.ajax({
                 url:'/logout',
                 type:'GET',
                 success:function(data){
 window.location.replace("http://localhost:3000");
                 }
             });
-            });
+    })
+
+
+  } else {
+    swal("Your imaginary file is safe!");
+  }
+});
+           
 
             
             })
