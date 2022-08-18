@@ -115,8 +115,7 @@ body{
                                 <div class="form-group row">
                                     <label for="full_name" class=" required col-md-4 col-form-label text-md-right">Full Name</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="full_name" class="form-control " name="fullname">
-                                         <p id="fullname-error" style="color: red;">Please enter your name</p>
+                                        <input type="text" id="full_name" class="form-control " name="fullname" required>
                                     </div>
                                    
                                 </div>
@@ -124,8 +123,8 @@ body{
                                 <div class="form-group row">
                                     <label for="email_address" class="required col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="email_address" class="form-control" name="emailaddress">
-                                         <p id="email-error" style="color: red;">Please enter your Email Id</p>
+                                        <input type="text" id="email_address" class="form-control" name="emailaddress" required>
+                                         <p id="email-error" style="color: red;">Please enter a valid Email Address</p>
                                     </div>
 
                                 </div>
@@ -145,45 +144,48 @@ body{
                                 <div class="form-group row">
                                     <label for="permanent_address" class=" required col-md-4 col-form-label text-md-right">Permanent Address</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="permanent_address" class="form-control" name="permanentaddress">
-                                         <p id="address-error" style="color: red;">Please enter your address</p>
+                                        <input type="text" id="permanent_address" class="form-control" name="permanentaddress" required>
+                                    </div>
+                                </div>
+
+                                 <div class="form-group row">
+                                    <label for="place" class="required col-md-4 col-form-label text-md-right">Place</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="place" class="form-control" name="place" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="permanent_address" class="required col-md-4 col-form-label text-md-right">District</label>
+                                    <label for="district" class="required col-md-4 col-form-label text-md-right">District</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="district" class="form-control" name="district">
-                                         <p id="district-error" style="color: red;">Please enter your district</p>
+                                        <input type="text" id="district" class="form-control" name="district" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="permanent_address" class="required col-md-4 col-form-label text-md-right">State</label>
+                                    <label for="state" class="required col-md-4 col-form-label text-md-right">State</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="state" class="form-control" name="state">
-                                         <p id="state-error" style="color: red;">Please enter your state</p>
+                                        <input type="text" id="state" class="form-control" name="state" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="user_name" class="required col-md-4 col-form-label text-md-right">Pincode</label>
+                                    <label for="pincode" class="required col-md-4 col-form-label text-md-right">Pincode</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="pincode" class="form-control" name="pincode">
-                                         <p  id="pincode-error" style="color: red;">Please enter your pincode</p>
+                                        <input type="text" id="pincode" class="form-control" name="pincode" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="user_name" class="required col-md-4 col-form-label text-md-right">Password</label>
+                                    <label for="psw" class="required col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-6">
-                                        <input type="password" name="psw" class="form-control" id="psw" >
-                                         <p id="psw-error" style="color: red;">Please enter a password</p>
+                                        <input type="password" name="psw" class="form-control" id="password"  required >
+                                        <i class="bi bi-eye-slash" id="togglePassword"></i>
+                                         <p id="psw-error" style="color: red;"></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="user_name" class="required col-md-4 col-form-label text-md-right">Re-enter Password</label>
+                                    <label for="psw2" class="required col-md-4 col-form-label text-md-right">Re-enter Password</label>
                                     <div class="col-md-6">
-                                        <input type="password" name="psw2" class="form-control" id="psw2" >
-                                        <p id="psw2-error" style="color: red;">Please Re-enter password</p>
+                                        <input type="password" name="psw2" class="form-control" id="psw2" required>
                                         <p id="psww2-error" style="color: red;">Password Not Matches</p>
                                     </div>
                                 </div>
@@ -214,93 +216,68 @@ body{
 
 
 <script>
+          const togglePassword = document
+            .querySelector('#togglePassword');
+  
+        const password = document.querySelector('#password');
+  
+        togglePassword.addEventListener('click', () => {
+  
+            // Toggle the type attribute using
+            // getAttribure() method
+            const type = password
+                .getAttribute('type') === 'password' ?
+                'text' : 'password';
+                  
+            password.setAttribute('type', type);
+  
+            // Toggle the eye and bi-eye icon
+            this.classList.toggle('bi-eye');
+        });
+
+
     function validform() {
 
-        var a = document.forms["my-form"]["fullname"].value;
+     
         var b = document.forms["my-form"]["emailaddress"].value;
-        var c = document.forms["my-form"]["permanentaddress"].value;
-        var d = document.forms["my-form"]["pincode"].value;
-        var e = document.forms["my-form"]["psw"].value;
+        var e = document.forms["my-form"]["password"].value;
          var f = document.forms["my-form"]["psw2"].value;
-         var g=document.forms["my-form"]["district"].value;
-       var h=  document.forms["my-form"]["state"].value;
-
-        if (a==null || a=="")
-        {
-             document.querySelector("#full_name").style.borderColor = "red";
-              document.querySelector("#fullname-error").style.display = "block";
-
-            return false;
-        }
-        else if (b==null || b=="")
-        {
-             document.querySelector("#email_address").style.borderColor = "red";
-            document.querySelector("#full_name").style.borderColor = "#ced4da";
-             document.querySelector("#fullname-error").style.display = "none";
-            document.querySelector("#email-error").style.display = "block";
-            return false;
-        }
-        else if (c==null || c=="")
-        {
-             document.querySelector("#permanent_address").style.borderColor = "red";
-              document.querySelector("#full_name").style.borderColor = "#ced4da";
+        
+if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(b))
+  {
+    if(/^[A-Za-z]\w{7,14}$/.test(e)){
+ if(e!=f){
+     document.querySelector("#psw-error").style.display = "none";
+             document.querySelector("#password").style.borderColor = "#ced4da";
             document.querySelector("#email_address").style.borderColor = "#ced4da";
-            document.querySelector("#fullname-error").style.display = "none";
-             document.querySelector("#email-error").style.display = "none";
-            document.querySelector("#address-error").style.display = "block";
-            return false;
-        }
-        else if (d==null || d=="")
-        {
-             document.querySelector("#pincode").style.borderColor = "red";
-              document.querySelector("#full_name").style.borderColor = "#ced4da";
-               document.querySelector("#email_address").style.borderColor = "#ced4da";
-            document.querySelector("#permanent_address").style.borderColor = "#ced4da";
-            document.querySelector("#fullname-error").style.display = "none";
-                document.querySelector("#email-error").style.display = "none";
-                  document.querySelector("#address-error").style.display = "none";
-            document.querySelector("#pincode-error").style.display = "block";
-            return false;
-        }
-        else if (e==null || e=="")
-        {
-            document.querySelector("#psw-error").style.display = "block";
-            document.querySelector("#psw").style.borderColor = "red";
-             document.querySelector("#full_name").style.borderColor = "#ced4da";
-              document.querySelector("#email_address").style.borderColor = "#ced4da";
-                document.querySelector("#permanent_address").style.borderColor = "#ced4da";
-                document.querySelector("#fullname-error").style.display = "none";
                     document.querySelector("#email-error").style.display = "none";
-                     document.querySelector("#address-error").style.display = "none";
-                      document.querySelector("#pincode-error").style.display = "none";
-            document.querySelector("#pincode").style.borderColor = "#ced4da";
-            return false;
-        }
-        else if(g==null || g==""){
-            
-        }
-          else if (f==null || f=="")
-        {
-             document.querySelector("#psw2-error").style.display = "block";
-            document.querySelector("#psw2").style.borderColor = "red";
-             document.querySelector("#full_name").style.borderColor = "#ced4da";
-              document.querySelector("#email_address").style.borderColor = "#ced4da";
-                document.querySelector("#permanent_address").style.borderColor = "#ced4da";
-                document.querySelector("#pincode").style.borderColor = "#ced4da";
-                document.querySelector("#fullname-error").style.display = "none";
-                    document.querySelector("#email-error").style.display = "none";
-                     document.querySelector("#address-error").style.display = "none";
-                        document.querySelector("#pincode-error").style.display = "none";
-                         document.querySelector("#psw-error").style.display = "none";
-            document.querySelector("#psw").style.borderColor = "#ced4da";
-            return false;
-        }
-        else if(e!=f){
-             document.querySelector("#psw2-error").style.display = "none";
             document.querySelector("#psww2-error").style.display = "block";
              document.querySelector("#psw2").style.borderColor = "red";
             return false;
+        }else{
+            return true
         }
+    }else{
+         document.querySelector("#email_address").style.borderColor = "#ced4da";
+          document.querySelector("#email-error").style.display = "none";
+            document.querySelector("#psw-error").style.display = "block";
+           document.getElementById("psw-error").innerHTML = "Weak Password, [7 to 16 characters which contain only characters, numeric digits, underscore and first character must be a letter]"
+
+             document.querySelector("#password").style.borderColor = "red";
+  return false;
+    }
+     
+  }else{
+    document.querySelector("#email_address").style.borderColor = "red";
+   document.querySelector("#email-error").style.display = "block";
+     return false;
+}
+
+      
 
     }
+
+
+ 
+
 </script>

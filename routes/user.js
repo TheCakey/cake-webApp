@@ -49,12 +49,18 @@ router.get('/signup',(req,res)=>{
 /////////////
 ///////
 
-router.post('/mob-num-submission',(req,res)=>{
+router.post('/mob-num-submission',async (req,res)=>{
   console.log(req.body)
- req.session.tempUser=req.body.mobno
+ req.session.tempUser=req.body.mobnum
   loginErr=null;
-  //otp send to mobile number
-  res.json(otp)
+  mobnum=await userHelper.findUserByMobNum(req.body.mobnum);
+  if(mobnum){
+    res.json(false)
+  }else{
+//otp send to mobile number
+res.json(true)
+  }
+  
 })
 
 router.post('/otp',(req,res)=>{
@@ -74,10 +80,11 @@ else{
 router.post('/full-details-form',(req,res)=>{
   console.log(req.body)
   var data=req.body
-  data.mobnum=mobno;
+  data.mobnum=req.session.tempUser;
+  req.session.tempUser=null;
   delete data.psw2;
   console.log(data);
-  userHelper.registerUser(req.body,mobno).then((response)=>{
+  userHelper.registerUser(data).then((response)=>{
     req.session.userloggedIn=true
     req.session.user=response
     res.redirect('/')

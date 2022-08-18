@@ -21,7 +21,7 @@ module.exports={
             resolve(userData)
         })
     },
-
+   
     findUserByMobNum:(mobNum)=>{
         return new Promise(async (resolve,reject)=>{
             let user=null;
