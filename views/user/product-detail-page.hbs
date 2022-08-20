@@ -74,7 +74,7 @@
       </div>
 
       <div class = "purchase-info">
-        <input type = "number" min = "0" value = "1">
+        {{!-- <input type = "number" min = "0" value = "1"> --}}
         <button type = "button" onclick="addToCart('{{this.product._id}}')" class = "btn">
           Add to Cart <i class = "fas fa-shopping-cart"></i>
         </button>
@@ -105,6 +105,22 @@
 </div>
 
 <style>
+   /*By asif - if we remove the .card css there is another css connected with bootstrap.min. css that changes will autoapply*/
+    .card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+    .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: 1rem;
+}
+    /* .card css ends here..............*/
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 
 *{
@@ -120,6 +136,7 @@ body{
 .card-wrapper{
     max-width: 1100px;
     margin: 0 auto;
+    
 }
 img{
     width: 100%;
