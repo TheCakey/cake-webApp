@@ -85,8 +85,8 @@ router.post('/full-details-form',(req,res)=>{
   delete data.psw2;
   console.log(data);
   userHelper.registerUser(data).then((response)=>{
-    req.session.userloggedIn=true
-    req.session.user=response
+    req.session.userloggedIn=true;
+    req.session.user=response;
     res.redirect('/')
   })
  
@@ -186,6 +186,7 @@ router.get('/cart',verifyLogin, async (req,res,next)=>{
   let products=null;
   let total=0;
   let length;
+  let producttotal
   if(user){
      products=await userHelper.getCartProducts(req.session.user._id);
       length=products.length;
@@ -195,7 +196,7 @@ router.get('/cart',verifyLogin, async (req,res,next)=>{
      }
     
   }
-
+let a=10
   res.render('user/cart',{products,userId,total,length})
 
 })
@@ -256,25 +257,27 @@ router.post('/remove-cart-products',(req,res,next)=>{
 
 
 router.get('/checkout',async(req,res)=>{
+  let coupon=null;
+  let delivery = null;
   useraddress= await userHelper.getUserAddress(req.session.user._id)
-console.log(req.query.fullTotal);
 
+
+delivery="cod";
   dlcharge=40;
   //delivery charge set from admin side 
-  
     total=parseInt(req.query.fullTotal);
-  
-  
-  Ttlamount=total+dlcharge;
 
+  Ttlamount=total+dlcharge;
+let productTotal=req.query.producttotal;
+coupon=req.query.coupon
   pincode=req.query.pincode;
-  res.render('user/checkout',{useraddress,pincode,total,dlcharge,Ttlamount})
+  if(req.query.producttotal)
+  res.render('user/checkout',{useraddress,pincode,total,dlcharge,Ttlamount,productTotal,coupon,delivery})
  
 })
 
 router.post('/checkout',async(req,res)=>{
   console.log(req.body)
-  console.log('GGGGGGGGGGGGGGGGGGGGGGGgggggggggggggggggggggggggggggGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG')
   
   req.body.userId=req.session.user._id;
   user=req.session.user._id;

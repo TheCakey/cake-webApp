@@ -309,10 +309,7 @@ return new Promise(async(resolve,reject)=>{
     },
     PlaceOrder:(order,product,total)=>{
         return new Promise((resolve,reject)=>{
-            console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-            console.log(order)
-            console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-
+          
             let status=order['payment-method']==='COD'?'placed':'pending'
            let nwdate=new Date()
             var date= moment(nwdate).format('MMM Do YY');
@@ -331,11 +328,16 @@ return new Promise(async(resolve,reject)=>{
                     landmark:order.landmark,
                     deliveryTime:order.deliveryTime,
 
+
                 },
                 userId:objectId(order.userId),
                 paymentMethod:order['payment-method'],
                 product:product,
                 totalAmount:total,
+                coupon: order.coupon,
+  deliveryCharge: order.deliveryCharge,
+  ProductTotal: order.ProductTotal,
+  totalwithoutdelivery: order.totalwithoutdelivery,
                 date:date,
                 time:time,
                 status:status

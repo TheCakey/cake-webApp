@@ -114,19 +114,20 @@ a {
             <tfoot>
               <tr>
                 <td colspan="2">Subtotal</td>
-                <td class="text-end">₹{{orderdata.totalAmount}}</td>
+                <td class="text-end">₹{{orderdata.ProductTotal}}</td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">Discount (Code: {{orderdata.coupon}})</td>
+                <td class="text-end">₹{{orderdata.totalwithoutdelivery}}</td>
               </tr>
               <tr>
                 <td colspan="2">Shipping</td>
-                <td class="text-end">$20.00</td>
-              </tr>
-              <tr>
-                <td colspan="2">Discount (Code: NEWYEAR)</td>
-                <td class="text-danger text-end">-$10.00</td>
+                <td class="text-end">₹{{orderdata.deliveryCharge}}</td>
               </tr>
               <tr class="fw-bold">
                 <td colspan="2">TOTAL</td>
-                <td class="text-end">$169,98</td>
+                <td class="text-end">₹{{orderdata.totalAmount}}</td>
               </tr>
             </tfoot>
           </table>
