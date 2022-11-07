@@ -51,6 +51,28 @@ module.exports={
         })
       },
 
+      viewAllUser:()=>{
+        return new Promise (async (resolve,reject)=>{
+           let users = await db.get().collection(collection.USER_COLLECTION).find().toArray()
+            resolve(users)
+        })
+      },
+
+      getAllorder:()=>{
+        return new Promise (async (resolve,reject)=>{
+           let orders = await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
+            resolve(orders)
+        })
+      },
+
+      
+      getAllpincodes:()=>{
+        return new Promise (async (resolve,reject)=>{
+           let pincodes = await db.get().collection(collection.PINCODE_COLLECTION).find().toArray()
+            resolve(pincodes)
+        })
+      },
+
       deleteCoupon:(prodId)=>{
         console.log('product id display');
         console.log(prodId);

@@ -63,6 +63,7 @@
                 <input type="num" id="div-num"  placeholder="Mobile Number" name="number"  class="field">
                 <p class="text-danger" id="invalid" >Invalid format Please enter valid number</p>
                 <p class="text-danger" id="invalid-user" >User Not Found, Check your number or <a href="/signup"> Create new account</a></p>
+                 <p class="text-danger" id="blocked-user" >Account blocked by admin try <a href="/signup"> Signup</a></p>
               {{#if loginErr}}
                   <p class="text-danger" id="otp-error">Wrong Otp</p>
                   {{/if}}
@@ -102,7 +103,7 @@
             if(mobNum.length==10){
                  document.querySelector("#invalid").style.display = "none";
                   document.querySelector("#invalid-user").style.display = "none";
-                   
+                    document.querySelector("#blocked-user").style.display = "none";
                     let num=parseInt(document.getElementById('div-num').value);
 $.ajax({
     url:'/login-mob-num-submission',
@@ -112,12 +113,22 @@ $.ajax({
     method:'post',
     success:(response)=>{
         if(response){
-    swal("Otp Send!", "Otp send to your mobile number", "success");
+
+            if(response.status==='blocked'){
+
+                    document.querySelector("#blocked-user").style.display = "block";
+
+            }else{
+swal("Otp Send!", "Otp send to your mobile number", "success");
        document.querySelector("#div-none").style.display = "block";
      document.querySelector("#div-num").classList.add('ddiv-num')
      document.querySelector("#div-display").style.display = "none";
      document.querySelector("#btn-none").style.display = "block";
      document.querySelector("#otp-error").style.display = "none";
+    document.querySelector("#blocked-user").style.display = "none";
+
+            }
+    
         }
         else{
         document.querySelector("#invalid-user").style.display = "block";
@@ -167,6 +178,9 @@ $.ajax({
         display: none;
     }
   #invalid-user{
+        display: none;
+    }
+    #blocked-user{
         display: none;
     }
 </style>

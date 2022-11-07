@@ -7,6 +7,10 @@ var router = express.Router();
 const adminHelpers=require('../helpers/admin-helpers')
 const productHelpers=require('../helpers/product-helpers')
 
+let usersList; 
+let ordersList;
+let productList;
+let pincodeList;
 
 const verifyLogin=(req,res,next)=>{
   if(req.session.adminLoggedIn){
@@ -18,10 +22,18 @@ const verifyLogin=(req,res,next)=>{
 
 
 /* GET users listing. */
-router.get('/',function(req, res, next) {
+router.get('/',async function(req, res, next) {
 
 if(req.session.adminLoggedIn){
-  res.render('admin/index',{admin:true}); 
+   usersList=await adminHelpers.viewAllUser()
+   ordersList=await adminHelpers.getAllorder();
+   pincodeList=await adminHelpers.getAllpincodes();
+   productList=await productHelpers.getProductCake();
+  let usrlength = usersList.length;
+  let orderlength = ordersList.length;
+  let productlength = productList.length;
+  let pincodelength = pincodeList.length;
+  res.render('admin/index',{admin:true,users:usersList,usrlength,orderlength,productlength,pincodelength}); 
 }
 else{
   res.redirect('admin/login')
@@ -62,6 +74,11 @@ adminHelpers.doLogin(req.body).then((response)=>{
   })
 })
 
+router.get('/logout',(req,res)=>{
+  req.session.admin=null;
+  req.session.adminLoggedIn=false;
+  res.redirect('/admin/login')
+})
 router.get('/admin-dashboard',(req,res)=>{
   res.render('admin/admin-dashboard',{admin:true})
 })

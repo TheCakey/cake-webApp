@@ -162,7 +162,8 @@ total=total.slice(1);
 let inttotal=parseInt(total)*/
 
  if(pincode.length==0){
-  alert("Please enter pincode")
+  swal("Please enter pincode!", "","warning");
+
   return
  }else{
     if(response.status==true){   
@@ -191,9 +192,17 @@ else{
 
      function removeCartItem(cartId,proId){
     
+swal({
+  title: "Are you sure?",
+  text: "Once deleted, you need to re add to cart for purchase!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
 
-    
- $.ajax({
+$.ajax({
       url:'/remove-cart-products',
       
       data:{
@@ -204,12 +213,25 @@ else{
       method:'post',
       success:(response)=>{
         if(response.removeProduct){
-          alert("product removed from cart")
+          swal("Poof! Your product has been deleted!", {
+      icon: "success",
+    });
           location.reload()
         }
         
       }    
     })
+
+
+   
+  } else {
+
+  }
+});
+    
+ 
+
+
 
   }
 
@@ -218,7 +240,7 @@ let discountCode = document.getElementById('code').value;
 document.getElementById("errorcpnmsg").innerHTML = " "
   console.log(total)
 if(discountCode.length==0){
-  alert("Please enter discount code")
+  
   return
  }else{
  $.ajax({
@@ -232,8 +254,10 @@ if(discountCode.length==0){
       method:'post',
       success:(response)=>{
 
-        console.log(response)
+
         if(response.valid){
+
+          swal("Discount Coupon added!", "Your coupon is valid!", "success");
 document.getElementById("code").disabled = true;
 document.getElementById("coupon-pass").value=discountCode;
 document.getElementById("errorcpnmsg").style.color = "black";
@@ -246,6 +270,7 @@ document.getElementById("errorcpnmsg").style.color = "black";
         }
         else{
          
+          swal("Can't add Discount Coupon!", "Your coupon is not valid!", "error");
 document.getElementById("errorcpnmsg").style.color = "red";
 
           document.getElementById("errorcpnmsg").innerHTML = "Invalid coupon"

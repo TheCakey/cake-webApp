@@ -81,6 +81,7 @@ router.post('/full-details-form',(req,res)=>{
   console.log(req.body)
   var data=req.body
   data.mobnum=req.session.tempUser;
+  data.status="active";
   req.session.tempUser=null;
   delete data.psw2;
   console.log(data);
@@ -113,9 +114,12 @@ router.post('/login-mob-num-submission',(req,res)=>{
   userHelper.findUserByMobNum(mobno).then((response)=>{
   console.log(response)
   loginErr=null;
-  //otp send to mobile number
+ 
+//otp send to mobile number
 req.session.tempUser=response;
   res.json(response)
+  
+  
   })
   
 })
@@ -219,10 +223,15 @@ if(response){
 
 
 router.get('/addtocart/:id',(req,res)=>{
-  userHelper.addToCart(req.session.user._id,req.params.id).then(()=>{
-    res.json(req.params.id)
+  if(req.session.user){
+    userHelper.addToCart(req.session.user._id,req.params.id).then(()=>{
+      res.json(req.params.id)
+    })
+  }else{
+    res.json(false)
   }
-  )
+
+  
 })
 
 
