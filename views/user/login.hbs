@@ -32,7 +32,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
             <a href="/" class="navbar-brand ms-4 ms-lg-0">
-                <h1 class="fw-bold text-primary m-0">C<span class="text-secondary">ak</span>ey</h1>
+                <h1 class="fw-bold text-primary m-0 ">C<span class="text-secondary">ak</span>ey</h1>
             </a>
            
            
@@ -50,11 +50,11 @@
 
 
 
-    <div class="credential-wrapper">
-        <div class="credential-container">
+    <div class="credential-wrapper ">
+        <div class="credential-container ">
             <img src="/assets/icons/credential.png" class="credential-badge" alt="">
-            <h1 class="">Login</h1>
-            <p>or <a href="/signup" class="text-primary login-text-style grow" >Create New account</a></p>
+            <h1 class="" style="margin-left: 35%; font-family: ;">Login</h1>
+            {{!-- <p>or <a href="/signup" class="text-primary login-text-style grow" >Create New account</a></p> --}}
        
        
         
@@ -68,11 +68,12 @@
                   <p class="text-danger" id="otp-error">Wrong Otp</p>
                   {{/if}}
             </div>
+            
               <div class="submit-wrapper">
                 <button id="div-display" type="submit" class="btn-submit">Next</button>
            </div>
-             
-
+         
+        
 
              <form action="/login-otp" method="post">
             <div class="field-wrapper " id="div-none">
@@ -80,16 +81,19 @@
                 <input type="num" placeholder="Enter your OTP" name="otp" id="number" class="field">
              
             </div>
+            
               <div class="submit-wrapper">
                 <button id="btn-none" type="submit" class="btn-submit">Login</button>
            </div>
+           <p>  By continuing, you agree to Cakey's<a href=""> Conditions of Use </a>and<a href=""> Privacy Notice.</a></p>
             </form>
 
 
-         
-          
+        <p href="/signup" class=" submit-wrapper" style="">New to Cakey's?</p>
+          <button type="button" class="btn btn-light" style="padding-left: 20%; padding-right: 20%;  margin-left: 7%;">Create Your Cakey account </button>
         </div>
     </div>
+    
 </body>
 
 
@@ -185,3 +189,6 @@ swal("Otp Send!", "Otp send to your mobile number", "success");
     }
 </style>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
