@@ -113,8 +113,9 @@ adminHelpers.deleteUser(req.query.id).then(()=>{
 })
 
 
-router.get('/product-add',(req,res)=>{
-  res.render('admin/products-add',{admin:true})
+router.get('/product-add',async (req,res)=>{
+  let category = await adminHelpers.viewAllCategory()
+  res.render('admin/products-add',{admin:true,category})
 })
 
 router.post('/products-add',(req,res)=>{
@@ -218,9 +219,8 @@ router.post('/add-coupon',(req,res)=>{
   console.log(req.body)
   adminHelpers.addCoupon(req.body).then(async()=>{
     console.log('coupon added successfully')
-    let coupons = await adminHelpers.viewAllCoupons()
+    res.redirect('/admin/view-all-coupons')
 
-    res.render('admin/view-all-coupons',{admin:true,coupons})
   })
 })
 
@@ -241,11 +241,51 @@ router.get('/delete-coupon',(req,res)=>{
 })
 
 
+
+//category
+
+router.get('/add-category',(req,res)=>{
+  
+  res.render('admin/add-category',{admin:true})
+})
+router.post('/add-category',(req,res)=>{
+  console.log(req.body)
+  adminHelpers.addCategory(req.body).then(async()=>{
+    console.log('category added successfully')
+    res.redirect('/admin/view-all-category')
+
+  })
+})
+
+router.get('/view-all-category',async(req,res)=>{
+  let category = await adminHelpers.viewAllCategory()
+  console.log(category)
+  res.render('admin/view-all-category',{admin:true,category})
+})
+
+router.get('/delete-category',(req,res)=>{
+  let catId=req.query.id
+  console.log(catId)
+  adminHelpers.deleteCategory(catId).then((response)=>{
+    console.log('Coupen deleted succesfully')
+    res.redirect('/admin/view-all-category')
+  })
+
+})
+
+
+
+
 router.get('/pending-orders',async (req,res)=>{
   let pendingOrders = await adminHelpers.viewAllPendingOrders()
   console.log(pendingOrders)
   res.render('admin/pending-orders',{admin:true,pendingOrders})
 })
+
+
+
+
+// Pincode 
 
 router.get('/add-pincode',(req,res)=>{
   

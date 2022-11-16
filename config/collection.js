@@ -7,5 +7,6 @@ module.exports={
     TEMPCART_COLLECTION:'tempcart',
     COUPON_COLLECTION:'coupon',
     PINCODE_COLLECTION:'pincode',
+    CATEGORY_COLLECTION:'category'
     
 }
