@@ -81,14 +81,20 @@ router.post('/full-details-form',(req,res)=>{
   console.log(req.body)
   var data=req.body
   data.mobnum=req.session.tempUser;
-  data.status="active";
+  data.status=true;
   req.session.tempUser=null;
   delete data.psw2;
   console.log(data);
   userHelper.registerUser(data).then((response)=>{
     req.session.userloggedIn=true;
     req.session.user=response;
-    res.redirect('/')
+    if(req.session.tempProdId){
+      prodId=req.session.tempProdId;
+      req.session.tempProdId=null;
+       res.redirect('/product-detail-page?id='+prodId)
+    }else{
+      res.redirect('/')
+    }
   })
  
 })
@@ -102,6 +108,9 @@ router.get('/login',(req,res)=>{
   res.redirect('/profile')
   }
 else{
+  if(req.query.id){
+    req.session.tempProdId=req.query.id;
+  }
   res.render('user/login',{hdr:true,loginErr})
 }
   
@@ -133,7 +142,16 @@ router.post('/login-otp',(req,res)=>{
     req.session.userloggedIn=true;
     console.log(req.session.user)
     req.session.tempUser=null;
-    res.redirect('/')
+
+    if(req.session.tempProdId){
+
+      prodId=req.session.tempProdId;
+      req.session.tempProdId=null;
+       res.redirect('/product-detail-page?id='+prodId)
+    }else{
+      res.redirect('/')
+    }
+   
   }
   else{
     

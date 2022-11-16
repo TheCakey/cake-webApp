@@ -101,7 +101,12 @@
                                             <td>{{this.place}}</td>
                                             <td>{{this.district}}</td>
                                             <td>{{this.mobnum}}</td>
-                                            <td><Button onclick="changeStatus()" class="btn">{{this.status}}</Button></td>
+                                               {{#if this.status}}
+                  <td><a href="/admin/change-user-status?id={{this._id}}&status={{this.status}}" onclick="return confirm('Are you sure want to Block/Unblock {{this.fullname}}')" class="btn btn-success">Active</a></td>
+                 {{else}}
+                 <td><a href="/admin/change-user-status?id={{this._id}}&status={{this.status}}" onclick="return confirm('Are you sure want to Block/Unblock {{this.fullname}}')" class="btn btn-warning">Blocked</a></td>
+               {{/if}}
+                                            <td><a href="/admin/delete-user?id={{this._id}}" class="btn btn-danger">Delete</a></td>
                                         </tr>
                                         
                                         {{/each}}

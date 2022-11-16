@@ -15,7 +15,7 @@ if(response===false){
       })
       .then((toLoggin) => {
         if (toLoggin) {
-         window.location = '/login'
+         window.location = '/login?id='+prodId
         } 
       });
 

@@ -47,7 +47,7 @@ else{
 
 router.get('/login', (req,res)=>{
 if(!req.session.adminLoggedIn){
-  res.render('admin/login',{admin:true,"loginErr":req.session.adminloginErr})
+  res.render('admin/login',{admin:true,adminlog:true,"loginErr":req.session.adminloginErr})
   req.session.userloginErr=null;
   
 }
@@ -81,6 +81,35 @@ router.get('/logout',(req,res)=>{
 })
 router.get('/admin-dashboard',(req,res)=>{
   res.render('admin/admin-dashboard',{admin:true})
+})
+
+
+router.get('/change-user-status',verifyLogin,(req,res)=>{
+  console.log(req.query.id)
+  console.log(req.query.status);
+  console.log(req.query.status+'   dfffffffffffffffffffffffffffffff');
+  let status=req.query.status
+  if(status==='true'){
+  
+    adminHelpers.manageUser(req.query.id,'true').then(()=>{
+      console.log('Blocked')
+      res.redirect('/admin')
+    })
+  }
+  else{
+    adminHelpers.manageUser(req.query.id,'false').then(()=>{
+      console.log('unBlocked')
+      res.redirect('/admin')
+    })
+  }
+})
+
+router.get('/delete-user',verifyLogin,(req,res)=>{
+
+adminHelpers.deleteUser(req.query.id).then(()=>{
+  res.redirect('/admin')
+})
+
 })
 
 

@@ -21,6 +21,7 @@
                                 <a class="cursor-property" style="" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>
                                 <a href="#" id="{{this.product._id}}" class="border">{{this.quantity}}</a>
                                 <a class="cursor-property" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</a>
+                                
                             </div>
                             <div class="col">₹ {{this.product.Price}} <a  onclick="removeCartItem('{{this._id}}','{{this.product._id}}')" class="close cursor-property">&#10005;</a></div>
                         </div>

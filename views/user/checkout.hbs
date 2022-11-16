@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"><div class="row">
   
    <div class="container">
-  <div class="py-5 text-center">
+  <div class="py-5 text-center mt-5">
     
-    <h2>Checkout form</h2>
+  
     {{!-- <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p> --}}
   </div>
 <form action="/checkout" method="post" id="checkout-form">
@@ -15,7 +15,7 @@
       
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="firstName">First name</label>
+            <label for="firstName">Ful name</label>
             <input type="text" class="form-control" name="name" id="firstName" placeholder="" value="{{useraddress.fullname}}" required>
             <div class="invalid-feedback">
               Valid first name is required.
@@ -103,12 +103,7 @@
               Zip code required.
             </div>
           </div>
-     <input type="text" name="price" value="{{Ttlamount}}" >
-    <input type="text" name="coupon" value="{{coupon}}" >
-    <input type="text" name="deliveryCharge" value="{{dlcharge}}" >
-      <input type="text" name="ProductTotal" value="{{productTotal}}" >
-      <input type="text" name="totalwithoutdelivery" value="{{total}}" >
-
+  
 
         
         </div>

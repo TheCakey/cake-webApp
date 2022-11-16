@@ -35,6 +35,29 @@ module.exports={
             }
         })
     },
+
+    manageUser:(userId,status)=>{
+        return new Promise((resolve,reject)=>{
+            if(status==='true'){
+                console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+                db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{ $set: { "status" : false } })
+
+            }else{
+                console.log('hlooooooooooooooooooooooooooooooooooooooooooooo');
+                db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{ $set: { "status" : true } })
+
+            }
+         resolve()
+        })
+    },
+
+    deleteUser:(userId,status)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.USER_COLLECTION).deleteOne({_id:objectId(userId)})
+         resolve()
+        })
+    },
+
     addCoupon:(coupon)=>{
        
         return new Promise (async (resolve,reject)=>{

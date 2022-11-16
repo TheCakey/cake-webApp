@@ -116,11 +116,13 @@ a {
                 <td colspan="2">Subtotal</td>
                 <td class="text-end">₹{{orderdata.ProductTotal}}</td>
               </tr>
-              
+              {{#if orderdata.coupon}}
               <tr>
                 <td colspan="2">Discount (Code: {{orderdata.coupon}})</td>
                 <td class="text-end">₹{{orderdata.totalwithoutdelivery}}</td>
               </tr>
+              {{/if}}
+
               <tr>
                 <td colspan="2">Shipping</td>
                 <td class="text-end">₹{{orderdata.deliveryCharge}}</td>
