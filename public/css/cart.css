@@ -112,7 +112,18 @@ select{
     width: 100%;
     background-color: rgb(247, 247, 247);
 }
-input{
+.inputKG{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    
+    margin-bottom: 1vh;
+    outline: none;
+    width: 50%;
+    background-color: rgb(247, 247, 247);
+
+}
+
+.inputPincode{
     border: 1px solid rgba(0, 0, 0, 0.137);
     padding: 1vh;
     margin-bottom: 4vh;
@@ -120,7 +131,7 @@ input{
     width: 100%;
     background-color: rgb(247, 247, 247);
 }
-input:focus::-webkit-input-placeholder
+.inputPincode:focus::-webkit-input-placeholder
 {
       color:transparent;
 }
