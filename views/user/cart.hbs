@@ -10,12 +10,16 @@
                         </div>
                     </div>    
                      {{#each products}}
+                      <div class="col pt-3 pb-1">
+                                <div class="row">{{this.product.Name}}</div>
+                            </div>
                     <div class="row border-top border-bottom">
                         <div class="row main align-items-center">
                             <div class="col-2"><img class="img-fluid" src="/product-images/{{this.product._id}}1.jpg"></div>
-                            <div class="col">
-                                <div class="row text-muted">{{this.product.Category}}</div>
-                                <div class="row">{{this.product.Name}}</div>
+                           <div class="col">KG
+                                <a class="cursor-property" style="" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>
+                                <a href="#" id="{{this.product._id}}" class="border">{{this.quantity}}</a>
+                                <a class="cursor-property" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</a>
                             </div>
                             <div class="col">
                                 <a class="cursor-property" style="" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>

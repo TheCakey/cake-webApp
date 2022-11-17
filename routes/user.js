@@ -283,16 +283,8 @@ router.post('/checkout',async(req,res)=>{
   user=req.session.user._id;
   usr=req.session.user;
   price=  parseInt(req.body.price);
-  let products
-  if(req.session.tempCart){
-    
-    products=req.session.tempCart 
-    req.session.tempCartCheck=true;
-  }else{
-products=await userHelper.getCartProducts(user);
-  }
-  
-
+  let products =await userHelper.getCartProducts(user);
+ 
    userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
     if(req.body['payment-method']=='COD'){
       res.json({cod_success:true})
@@ -319,12 +311,9 @@ router.get('/ordered-response',async (req,res)=>{
   let user=req.session.user
   let mode=req.query.id
   let cod;
-  if( req.session.tempCartCheck){
-  req.session.tempCart=null;
-  req.session.tempCartCheck=false;
-  }else{
+  
     userHelper.deleteuserCart(user._id)
-  }
+ 
   if(mode=='cod'){
     cod=true
   }
@@ -362,31 +351,6 @@ userHelper.getOrderDetails(req.query.id).then((response)=>{
 })
     })
   
- 
-//bbuy now--------------------------------------------------------------
-router.get('/buynow',async (req,res)=>{
-  let product= await productHelper.getSingleProduct(req.query.id)
-  // userHelper.addToCart(req.session.user._id,req.query.id).then(()=>{
-   product.quantity=1;
-    res.render('user/buynow',{product})
-  // }
-  // )
-})
-
-router.post('/tempCart',async (req,res)=>{
-  console.log(req.body);
-  let product= await productHelper.getSingleProduct(req.body.proid)
- 
-  let proObj={
-    quantity:req.body.quantity,
-    item:req.body.proid,
-   
-    product
-  }
-  req.session.tempCart=proObj;
-
-  res.json({success:true})
-})
 
 
 //product listing page
