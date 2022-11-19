@@ -1,7 +1,7 @@
-function addToCart(prodId){
+function addToCart(prodId,weight){
   
 $.ajax({
-    url:'/addtocart/'+prodId,
+    url:'/addtocart/'+prodId+'/'+weight,
 method:'get',
 success:(response)=>{
     

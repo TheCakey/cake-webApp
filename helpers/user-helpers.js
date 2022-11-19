@@ -258,11 +258,12 @@ return new Promise(async(resolve,reject)=>{
  
     },
 
-    addToCart:(userId,proId)=>{
+    addToCart:(userId,proId,weight)=>{
+        weight=parseInt(weight);
         let proObj={
             item:objectId(proId),
             quantity:1,
-            weight:1
+            weight:weight
         }
         return new Promise(async(resolve,reject)=>{
 

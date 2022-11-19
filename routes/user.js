@@ -240,9 +240,10 @@ if(response){
 
 
 
-router.get('/addtocart/:id',(req,res)=>{
+router.get('/addtocart/:id/:weight',(req,res)=>{
   if(req.session.user){
-    userHelper.addToCart(req.session.user._id,req.params.id).then(()=>{
+    
+    userHelper.addToCart(req.session.user._id,req.params.id,req.params.weight).then(()=>{
       res.json(req.params.id)
     })
   }else{

@@ -72,19 +72,17 @@
         </ul>
       </div>
 
-{{!-- <p>Weight: </p>
-<div class="cable-choose">
 
-          <button>Half Kg</button>
-          <button>1 Kg</button>
-          <button>2 Kg</button>
-        </div> --}}
 
       <div class = "purchase-info">
-      
-        <button  type = "button" onclick="addToCart('{{this.product._id}}')" class = "btn btncolor">
+     
+       
+        <input type="number" id="weight" name="weight" placeholder="Enter Weight" required>
+        
+ <button  onclick="addtocartform('{{this.product._id}}')"  class ="btn btncolor">
           Add to Cart <i class = "fas fa-shopping-cart"></i>
         </button>
+   
 
         {{!-- <a type = "button" href="/buynow?id={{this.product._id}}" class = "btn btncolor">Buy Now</a> --}}
       </div>
@@ -359,6 +357,21 @@ img{
 </style>
 
 <script>
+
+  function addtocartform(id)
+{
+ w= document.getElementById("weight").value ;
+ if(w==''){
+swal("Please enter cake weight!", "","warning");
+ }else{
+addToCart(id,w)
+ }
+   
+  
+  
+}
+
+
 const imgs = document.querySelectorAll('.img-select a');
 const imgBtns = [...imgs];
 let imgId = 1;
