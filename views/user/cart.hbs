@@ -15,20 +15,14 @@
                             </div>
                     <div class="row border-top border-bottom">
                         <div class="row main align-items-center">
-                            <div class="col-2 " style="margin-right: 1vh;"><img class="img-fluid" src="/product-images/{{this.product._id}}1.jpg"></div>
-                           <div class="col  " style="">KG
-                                <input class="inputKG" type="text" name="city" list="weight" style="width: 10% height:10px;">
-<datalist id="weight" >
-    <option name="1kg" value="1">
-    <option value="2">
-</datalist>
-                            </div>
+                            <div class="col-2 " style="margin-right: 5vh;"><img class="img-fluid" src="/product-images/{{this.product._id}}1.jpg"></div>
+                
                             <div class="col">
-                                <a class="cursor-property" style="" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>
-                                <a href="#" style="" id="{{this.product._id}}" class="border ">{{this.quantity}}</a>
-                                <a class="cursor-property" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</a>
+                                <a class="cursor-property"  style="font-size: 15px;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>
+                                <a href="#" class="" style="font-size: 15px;" id="{{this.product._id}}"  >{{this.quantity}}</a>
+                                <a class="cursor-property" style="font-size: 15px;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</a>
                             </div>
-                            <div class="col pl-5">₹ {{this.product.Price}}<a  onclick="removeCartItem('{{this._id}}','{{this.product._id}}')" class="close cursor-property">&#10005;</a></div>
+                            <div class="col ">₹ {{this.product.Price}}<a  onclick="removeCartItem('{{this._id}}','{{this.product._id}}')" class="close cursor-property">&#10005;</a></div>
                         </div>
                     </div>
                     {{/each}}

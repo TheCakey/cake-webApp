@@ -80,6 +80,7 @@ input::-webkit-inner-spin-button {
     width: 100%;
 }
 .col-2, .col{
+    
     padding: 0 0vh;
 }
 a{
@@ -112,16 +113,7 @@ select{
     width: 100%;
     background-color: rgb(247, 247, 247);
 }
-.inputKG{
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    padding: 1vh;
-    
-    margin-bottom: 1vh;
-    outline: none;
-    width: 50%;
-    background-color: rgb(247, 247, 247);
 
-}
 
 .inputPincode{
     border: 1px solid rgba(0, 0, 0, 0.137);
