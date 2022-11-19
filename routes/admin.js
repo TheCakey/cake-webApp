@@ -318,4 +318,60 @@ router.get('/delete-pincode',(req,res)=>{
 })
 
 
+//site dynamic
+
+router.get('/aboutSection',async(req,res)=>{
+    let about=await adminHelpers.getSiteDetails()
+console.log(about)
+    if(about.length !== 0){
+      res.render('admin/editAboutSection',{admin:true,about})
+     
+    }else{
+      res.render('admin/addAboutSection',{admin:true})
+    }
+})
+
+router.post('/addAboutSection',async(req,res)=>{
+  adminHelpers.addSiteDetails(req.body).then((res)=>{
+    res.redirect('/admin')
+  })
+})
+
+router.post('/editAboutSection',async(req,res)=>{
+  let id = req.body.siteid;
+console.log(req.body)
+  adminHelpers.updateSite(req.body,id).then(()=>{
+    res.redirect('/admin')
+  })
+})
+
+
+//site social links
+
+router.get('/linksection',async(req,res)=>{
+  let links=await adminHelpers.getSocialLinks()
+console.log(links)
+  if(links.length !== 0){
+    res.render('admin/editSocialLinks',{admin:true,links})
+   
+  }else{
+    res.render('admin/addSocialLinks',{admin:true})
+  }
+})
+
+router.post('/addSocialLinks',async(req,res)=>{
+  adminHelpers.addSocialLinks(req.body).then(()=>{
+    res.redirect('/admin')
+  })
+})
+
+router.post('/editSocialLinks',async(req,res)=>{
+  let id = req.body.id;
+console.log(req.body)
+  adminHelpers.updateSocialLinks(req.body,id).then(()=>{
+    res.redirect('/admin')
+  })
+})
+
+
 module.exports = router;

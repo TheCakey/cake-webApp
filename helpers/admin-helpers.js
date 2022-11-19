@@ -197,7 +197,96 @@ module.exports={
     },
 
 
+    //site details
+
+    getSiteDetails:()=>{
+        return new Promise(async(resolve,reject)=>{
+           let about = await db.get().collection(collection.SITE_COLLECTION).find().toArray()
+           resolve(about)
+        })
+    },
+
+    addSiteDetails:(details)=>{
+       
+        return new Promise (async (resolve,reject)=>{
+        db.get().collection(collection.SITE_COLLECTION).insertOne(details).then(()=>{
+        resolve()
+        })        
+        })
+      },
 
 
+    updateSite:(SiteDetails,siteId)=>{
+        return new Promise(async(resolve,reject)=>{
+      
+            db.get().collection(collection.SITE_COLLECTION).updateOne({_id:objectId(siteId)},{
+                $set:{
+                    siteName:SiteDetails.siteName,
+                    address:SiteDetails.address,
+                    mob1:SiteDetails.mob1,
+                    mob2:SiteDetails.mob1,
+                    domainName:SiteDetails.domainName,
+                    email:SiteDetails.email,
+                    SiteDescription:SiteDetails.SiteDescription,
+                    deliveryMode:SiteDetails.deliveryMode
+                }
+                
+
+            }).then((response)=>{
+               
+                resolve()
+            }).catch((err)=>{
+
+                console.log(err);
+                reject()
+            })
+        })
+    },
+
+
+    
+    
+    getSocialLinks:()=>{
+        return new Promise(async(resolve,reject)=>{
+           let links = await db.get().collection(collection.LINK_COLLECTION).find().toArray()
+           resolve(links)
+        })
+    },
+
+    addSocialLinks:(details)=>{
+       
+        return new Promise (async (resolve,reject)=>{
+        db.get().collection(collection.LINK_COLLECTION).insertOne(details).then(()=>{
+        resolve()
+        })        
+        })
+      },
+
+      updateSocialLinks:(SiteDetails,siteId)=>{
+        return new Promise(async(resolve,reject)=>{
+      
+            db.get().collection(collection.SITE_COLLECTION).updateOne({_id:objectId(siteId)},{
+                $set:{
+                    siteName:SiteDetails.siteName,
+                    address:SiteDetails.address,
+                    mob1:SiteDetails.mob1,
+                    mob2:SiteDetails.mob1,
+                    domainName:SiteDetails.domainName,
+                    email:SiteDetails.email,
+                    SiteDescription:SiteDetails.SiteDescription,
+                    deliveryMode:SiteDetails.deliveryMode
+                }
+                
+
+            }).then((response)=>{
+               
+                resolve()
+            }).catch((err)=>{
+
+                console.log(err);
+                reject()
+            })
+        })
+    },
 
 }

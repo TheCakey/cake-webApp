@@ -12,7 +12,7 @@ const adminHelpers = require('../helpers/admin-helpers');
 const otp =123;
 let mobno;
 let loginErr;
-
+let sitedetails;
 /* GET home page. */
 
 const verifyLogin=(req,res,next)=>{
@@ -27,9 +27,10 @@ const verifyLogin=(req,res,next)=>{
 
 
 router.get('/', async function (req, res, next) {
+  sitedetails = await adminHelpers.getSiteDetails()
 cakes=await productHelper.getProductCake()
 cakes=cakes.slice(0, 8);
-    res.render('user/index',{cakes});
+    res.render('user/index',{cakes,sitedetails});
 
 });
 
@@ -178,14 +179,14 @@ router.get('/profile',verifyLogin,async (req,res)=>{
  // let Orders = await adminHelpers.viewAllPendingOrders()
 let orders= await userHelper.getPendingOrderProducts(user._id)
  console.log(orders);
-  res.render('user/profile-page',{user,orders})
+  res.render('user/profile-page',{user,orders,sitedetails})
 })
 
 
 router.get('/edit-user-details',(req,res)=>{
   
   user = req.session.user;
-  res.render('user/edit-address',{user})
+  res.render('user/edit-address',{user,sitedetails})
 })
 
 
@@ -219,7 +220,7 @@ router.get('/cart',verifyLogin, async (req,res,next)=>{
     
   }
 let a=10
-  res.render('user/cart',{products,userId,total,length})
+  res.render('user/cart',{products,userId,total,length,sitedetails})
 
 })
 
@@ -288,19 +289,27 @@ router.get('/checkout',async(req,res)=>{
   let coupon=null;
   let delivery = null;
   useraddress= await userHelper.getUserAddress(req.session.user._id)
+  
+  deliverydetails = await adminHelpers.getSiteDetails()
+console.log(deliverydetails[0].deliveryMode);
+let COD=null,ONLINE=null,BOTH=null;
+if(deliverydetails[0].deliveryMode==='BOTH'){
+  BOTH=true
+}else if(deliverydetails[0].deliveryMode==='COD'){
+COD=true
+}else{
+  ONLINE=true
+}
 
-
-delivery="cod";
   dlcharge=40;
   //delivery charge set from admin side 
     total=parseInt(req.query.fullTotal);
-
   Ttlamount=total+dlcharge;
 let productTotal=req.query.producttotal;
 coupon=req.query.coupon
   pincode=req.query.pincode;
   if(req.query.producttotal)
-  res.render('user/checkout',{useraddress,pincode,total,dlcharge,Ttlamount,productTotal,coupon,delivery})
+  res.render('user/checkout',{useraddress,pincode,total,dlcharge,Ttlamount,productTotal,coupon,COD,ONLINE,BOTH,sitedetails})
  
 })
 
@@ -348,7 +357,7 @@ router.get('/ordered-response',async (req,res)=>{
   else{
     cod=false
   }
-  res.render('user/order-response',{user,cod})
+  res.render('user/order-response',{user,cod,sitedetails})
 })
 
 
@@ -374,7 +383,7 @@ userHelper.getOrderDetails(req.query.id).then((response)=>{
     console.log("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
     paymentmethod=response.paymentMethod;
   }
-  res.render('user/viewDetailedOrder',{orderdata:response,paymentmethod})
+  res.render('user/viewDetailedOrder',{orderdata:response,paymentmethod,sitedetails})
 
 })
     })
@@ -384,7 +393,7 @@ userHelper.getOrderDetails(req.query.id).then((response)=>{
 //product listing page
 router.get('/products-page',async(req,res)=>{
   cakes=await productHelper.getProductCake()
-  res.render('user/products-page',{cakes})
+  res.render('user/products-page',{cakes,sitedetails})
 })
 
 router.get('/product-detail-page', async(req,res)=>{
@@ -392,7 +401,7 @@ router.get('/product-detail-page', async(req,res)=>{
   let product=await productHelper.getSingleProduct(proId)
    let cakes=await productHelper.getProductCake()
    
-  res.render('user/product-detail-page',{product,cakes})
+  res.render('user/product-detail-page',{product,cakes,sitedetails})
 })
 
 

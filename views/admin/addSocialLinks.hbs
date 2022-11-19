@@ -1,0 +1,149 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/product-add-style.css">
+
+
+<style>
+  .image-upload>input {
+  display: none;
+}
+.image-upload{
+ 
+}
+</style>
+
+<div class="container rounded bg-white mt-5 mb-5 " >
+  <div class="row">
+      
+      <div class="col-md-12 col-12 border-right">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="text-right">Add Social Links</h4>
+              </div>
+         
+
+  
+              <form action="/admin/addSocialLinks" enctype="multipart/form-data" method="POST"  class="form-horizontal" role="form" style="border: solid; border-color: rgb(240, 239, 239); border-width: 0 2px 0px 1px;">
+               
+                  <div class="form-group">
+               
+                     <i class="fa-brands fa-facebook"></i>
+                   <label for="name" class="col-sm-3 control-label font-weight-bold">Facebook</label>
+                   <div class="col-sm-9">
+                    
+                     <input type="text" class="form-control" name="facebook" id="name" placeholder="Enter Your Social Link">
+                   </div>
+                 </div> <!-- form-group // -->
+                
+
+                  <div class="form-group">
+               
+                     <i class="fa-brands fa-instagram"></i>
+                   <label for="name" class="col-sm-3 control-label font-weight-bold">Instagram</label>
+                   <div class="col-sm-9">
+                     <input type="text" class="form-control" name="instagram" id="name" placeholder="Enter Your Social Link">
+                   </div>
+                 </div> <!-- form-group // -->
+                 
+                  <div class="form-group">
+               
+                     <i class="fa-brands fa-youtube"></i>
+                   <label for="name" class="col-sm-3 control-label font-weight-bold">Youtube</label>
+                   <div class="col-sm-9">
+                     <input type="text" class="form-control" name="youtube" id="name" placeholder="Enter Your Social Link">
+                   </div>
+                 </div> <!-- form-group // -->
+
+                 
+                  <div class="form-group">
+               
+                     <i class="fa-brands fa-twitter"></i>
+                   <label for="name" class="col-sm-3 control-label font-weight-bold">Twitter</label>
+                   <div class="col-sm-9">
+                     <input type="text" class="form-control" name="twitter" id="name" placeholder="Enter Your Social Link">
+                   </div>
+                 </div> <!-- form-group // -->
+  
+                   
+               
+
+    {{!-- <label for="name" class="col-sm-3 control-label mt-3 font-weight-bold mb-4">Insert Image</label>
+              
+                 <div class="form-group">
+                  
+                   <div class="col-sm-3  image-upload mb-4" >
+                     <label  class="control-label small " for="file-input">Image 2 (jpg): <br> <img class="btn-image" width="100px" height="100px" src="/admin-assets/icons/upload-icon.png"/></label> 
+                     <input  id="file-input" onchange="viewImage1(event)" type="file"  name="Image1">
+                       <img class=" mt-5" style="width: 200px; height:auto" id="imgView1">
+                   </div>
+                 
+                 
+                
+                  <div class="col-sm-3 image-upload mb-4">
+                     <label class="control-label small" for="file-input1">Image 2 (jpg):  <br> <img  class="btn-image" width="100px" height="100px" src="/admin-assets/icons/upload-icon.png"/> click here </label>   
+                     <input id="file-input1"  onchange="viewImage2(event)" type="file" name="Image2">
+                     <img  class=" mt-5" style="width: 200px; height:auto" id="imgView2">
+                   </div>
+                   
+                   
+                   
+                   <div class="col-sm-3 image-upload mb-4" >
+                     <label class="control-label small" for="file-input2">Image 3 (jpg):  <br> <img  class="btn-image" width="100px" height="100px" src="/admin-assets/icons/upload-icon.png"/> click here </label>
+                       <input  id="file-input2" onchange="viewImage3(event)" type="file" name="Image3">
+                        <img class=" mt-5" style="width: 200px; height:auto" id="imgView3">
+                   </div>
+              
+                
+                 </div> <!-- form-group // --> --}}
+
+
+
+                 </div> <!-- form-group // -->
+                
+                 <div class="form-group">
+                   <div class="col-sm-offset-3 col-sm-9">
+                     <button type="submit" class="btn btn-primary m-3">Submit</button>
+                   </div>
+                 </div> <!-- form-group // -->
+               </form>
+                 
+               </div><!-- panel-body // -->
+               </section><!-- panel// -->
+               
+                 
+               </div> <!-- container// -->
+               
+               
+
+
+
+
+
+
+
+
+          </div>
+      </div>
+ 
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<script>
+    function viewImage1(event){
+        document.getElementById('imgView1').src=URL.createObjectURL(event.target.files[0])
+    }
+      function viewImage2(event){
+        document.getElementById('imgView2').src=URL.createObjectURL(event.target.files[0])
+    }
+      function viewImage3(event){
+        document.getElementById('imgView3').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+

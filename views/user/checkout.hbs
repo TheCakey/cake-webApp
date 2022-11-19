@@ -185,7 +185,7 @@
         {{/if}}
         
  
-{{#if delivery}}
+{{#if BOTH}}
   <div class="payment">
                 <p>Payment method</p>
                 <label class="radio-inline">
@@ -200,8 +200,8 @@
 
             </div>
 
-
-{{else}}
+{{/if}}
+{{#if ONLINE}}
   <div class="payment">
                 <p>Payment method</p>
                 <label class="radio-inline">
@@ -211,6 +211,23 @@
                 <br>
                 <label class="radio-inline mt-2">
                     <input type="radio" name="payment-method" value="ONLINE" checked >ONLINE PAYMENT
+                </label>
+               
+
+            </div>
+
+{{/if}}
+
+{{#if COD}}
+  <div class="payment">
+                <p>Payment method</p>
+                <label class="radio-inline">
+                    <input type="radio" name="payment-method" value="COD" checked >COD 
+            
+                </label>
+                <br>
+                <label class="radio-inline mt-2">
+                    <input type="radio" name="payment-method" value="ONLINE" disabled >ONLINE PAYMENT (currently not available)
                 </label>
                
 
