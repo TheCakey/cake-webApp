@@ -191,7 +191,7 @@ $(document).ready(function(){
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-5">
-                        <h2>Pending Orders <b>Management</b></h2>
+                        <h2>Delivered Orders <b>Management</b></h2>
                     </div>
                     <div class="col-sm-7">
                         <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Products</span></a>
@@ -207,23 +207,20 @@ $(document).ready(function(){
                         <th>Date of Delivery</th>
                         <th>Pincode</th>
                         <th>Total Amount</th>
-                        <th>Action</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                
-                    {{#each pendingOrders}}
+                    {{#each deliveredOrders}}
 
                    <tr>
                         <td>{{@key}}</td>
                         <td>{{this.deliveryDetails.name}}</td>
-                        <td>{{this.deliveryDetails.expectedDate}}</td>                        
+                        <td>{{this.date}}</td>                        
                         <td>{{this.deliveryDetails.pincode}}</td>
-                        <td>₹ {{this.totalAmount}}</td>
-                        <td >
-                            <a href="/admin/deliveredstatus?id={{this._id}}" class="settings" title="Delivered" data-toggle="tooltip"><i class="fa-solid fa-thumbs-up fa-xl"></i></a>
-                            <a href="/admin/cancelledstatus?id={{this._id}}" class="delete" title="Cancelled" data-toggle="tooltip" onclick="return confirm('Are you sure want to cancel this order')"><i class="fa-solid fa-ban fa-xl"></i></a>
-                        </td>
+                        <td>{{this.totalAmount}}</td>
+                        <td>{{this.status}}</td>
                     </tr>
 
                     {{/each}}

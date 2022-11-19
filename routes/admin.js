@@ -274,12 +274,41 @@ router.get('/delete-category',(req,res)=>{
 })
 
 
-
-
+//orders
 router.get('/pending-orders',async (req,res)=>{
   let pendingOrders = await adminHelpers.viewAllPendingOrders()
   console.log(pendingOrders)
   res.render('admin/pending-orders',{admin:true,pendingOrders})
+})
+
+router.get('/delivered-order',async (req,res)=>{
+  let deliveredOrders = await adminHelpers.viewAlldeliveredOrders()
+  console.log(deliveredOrders)
+  res.render('admin/delivered-orders',{admin:true,deliveredOrders})
+})
+
+router.get('/cancelled-orders',async (req,res)=>{
+  let cancelledOrders = await adminHelpers.viewAllCancelledOrders()
+  console.log(cancelledOrders)
+  res.render('admin/cancelled-orders',{admin:true,cancelledOrders})
+})
+
+
+router.get('/deliveredstatus',verifyLogin,(req,res)=>{
+  console.log(req.query.id)
+  
+    adminHelpers.deliveredstatus(req.query.id).then(()=>{
+      res.redirect('/admin/pending-orders')
+    })
+})
+
+
+router.get('/cancelledstatus',verifyLogin,(req,res)=>{
+  console.log(req.query.id)
+  
+    adminHelpers.cancelledstatus(req.query.id).then(()=>{
+      res.redirect('/admin/pending-orders')
+    })
 })
 
 

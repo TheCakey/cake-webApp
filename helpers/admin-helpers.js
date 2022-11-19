@@ -139,11 +139,44 @@ module.exports={
 
     viewAllPendingOrders:()=>{
         return new Promise (async (resolve,reject)=>{
-            let pendingOrders = await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
+            let pendingOrders = await db.get().collection(collection.ORDER_COLLECTION).find({status:'placed'}).toArray()
              resolve(pendingOrders)
          })
 
     },
+
+    
+    viewAlldeliveredOrders:()=>{
+        return new Promise (async (resolve,reject)=>{
+            let pendingOrders = await db.get().collection(collection.ORDER_COLLECTION).find({status:'delivered'}).toArray()
+             resolve(pendingOrders)
+         })
+
+    },
+
+    
+    viewAllCancelledOrders:()=>{
+        return new Promise (async (resolve,reject)=>{
+            let pendingOrders = await db.get().collection(collection.ORDER_COLLECTION).find({status:'cancelled'}).toArray()
+             resolve(pendingOrders)
+         })
+
+    },
+
+    deliveredstatus:(Id)=>{
+        return new Promise((resolve,reject)=>{
+                db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(Id)},{ $set: { "status" : 'delivered' } })
+         resolve()
+        })
+    },
+    cancelledstatus:(Id)=>{
+        return new Promise((resolve,reject)=>{
+                db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(Id)},{ $set: { "status" : 'cancelled' } })
+         resolve()
+        })
+    },
+
+
 
 
     //pincode
