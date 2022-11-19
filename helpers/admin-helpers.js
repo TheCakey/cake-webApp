@@ -35,6 +35,41 @@ module.exports={
             }
         })
     },
+
+
+    //user 
+    
+    viewAllUser:()=>{
+        return new Promise (async (resolve,reject)=>{
+           let users = await db.get().collection(collection.USER_COLLECTION).find().toArray()
+            resolve(users)
+        })
+      },
+
+    manageUser:(userId,status)=>{
+        return new Promise((resolve,reject)=>{
+            if(status==='true'){
+                console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+                db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{ $set: { "status" : false } })
+
+            }else{
+                console.log('hlooooooooooooooooooooooooooooooooooooooooooooo');
+                db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{ $set: { "status" : true } })
+
+            }
+         resolve()
+        })
+    },
+
+    deleteUser:(userId,status)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.USER_COLLECTION).deleteOne({_id:objectId(userId)})
+         resolve()
+        })
+    },
+
+    //coupon
+
     addCoupon:(coupon)=>{
        
         return new Promise (async (resolve,reject)=>{
@@ -50,7 +85,7 @@ module.exports={
             resolve(coupons)
         })
       },
-
+      
       deleteCoupon:(prodId)=>{
         console.log('product id display');
         console.log(prodId);
@@ -60,6 +95,48 @@ module.exports={
             })
         })
     },
+
+//category
+
+      addCategory:(category)=>{
+       
+        return new Promise (async (resolve,reject)=>{
+        db.get().collection(collection.CATEGORY_COLLECTION).insertOne(category).then(()=>{
+        resolve()
+        })        
+        })
+      },
+
+      viewAllCategory:()=>{
+        return new Promise (async (resolve,reject)=>{
+           let category = await db.get().collection(collection.CATEGORY_COLLECTION).find().toArray()
+            resolve(category)
+        })
+      },
+      deleteCategory:(catId)=>{
+        console.log('product id display');
+        console.log(catId);
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.CATEGORY_COLLECTION).deleteOne({_id:objectId(catId)}).then((response)=>{               
+                resolve(response)
+            })
+        })
+    },
+
+
+      
+
+      //order
+
+      getAllorder:()=>{
+        return new Promise (async (resolve,reject)=>{
+           let orders = await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
+            resolve(orders)
+        })
+      },
+
+      
+
     viewAllPendingOrders:()=>{
         return new Promise (async (resolve,reject)=>{
             let pendingOrders = await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
@@ -68,6 +145,8 @@ module.exports={
 
     },
 
+
+    //pincode
     addPincode:(pincode)=>{
         return new Promise (async (resolve,reject)=>{
         db.get().collection(collection.PINCODE_COLLECTION).insertOne(pincode).then(()=>{
@@ -97,6 +176,13 @@ module.exports={
           
         })
 
+      },
+      
+      getAllpincodes:()=>{
+        return new Promise (async (resolve,reject)=>{
+           let pincodes = await db.get().collection(collection.PINCODE_COLLECTION).find().toArray()
+            resolve(pincodes)
+        })
       },
 
       

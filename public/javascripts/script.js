@@ -1,11 +1,28 @@
 function addToCart(prodId){
+  
 $.ajax({
     url:'/addtocart/'+prodId,
 method:'get',
 success:(response)=>{
-    // window.location = '/cart';
-    console.log("h99999999999999999999999999999999999999999999");
+    
+if(response===false){
+    swal({
+        title: "You are not Loggedin?",
+        text: "First you need to login to purchase",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((toLoggin) => {
+        if (toLoggin) {
+         window.location = '/login?id='+prodId
+        } 
+      });
+
+}else{
     window.location = '/cart';
+}
+   
 }
 
 })

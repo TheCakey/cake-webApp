@@ -1,4 +1,5 @@
  <!-- Page Header Start -->
+
    
     <!-- Page Header End -->
 
@@ -42,48 +43,54 @@
     
     <div class = "product-content">
       <h2 class = "product-title">{{product.Name}}</h2>
-      <a href = "#" class = "product-link">visit nike store</a>
-      <div class = "product-rating">
+      {{!-- <a href = "#" class = "product-link">visit nike store</a> --}}
+      {{!-- <div class = "product-rating">
         <i class = "fas fa-star"></i>
         <i class = "fas fa-star"></i>
         <i class = "fas fa-star"></i>
         <i class = "fas fa-star"></i>
         <i class = "fas fa-star-half-alt"></i>
         <span>4.7(21)</span>
-      </div>
+      </div> --}}
 
       <div class = "product-price">
         <p class = "new-price">Category <span>{{product.Category}}</span></p>
 
-        <p class = "last-price">Old Price: <span>₹{{product.Price}}</span></p>
+        {{!-- <p class = "last-price">Old Price: <span>₹{{product.Price}}</span></p> --}}
         <p class = "new-price">New Price: <span>₹{{product.Price}}</span></p>
 
       </div>
 
       <div class = "product-detail">
         <h2>about this item: </h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+<p>{{product.ProductDescription}}</p>
         <ul>
-          <li>Color: <span>Black</span></li>
-          <li>Available: <span>in stock</span></li>
-          <li>Category: <span>Shoes</span></li>
+          <li>Cake Flavour: <span>Vanilla</span></li>
+          <li>Type of Cake: <span>{{product.Category}}</span></li>
           <li>Shipping Area: <span>All over the world</span></li>
           <li>Shipping Fee: <span>Free</span></li>
         </ul>
       </div>
 
+{{!-- <p>Weight: </p>
+<div class="cable-choose">
+
+          <button>Half Kg</button>
+          <button>1 Kg</button>
+          <button>2 Kg</button>
+        </div> --}}
+
       <div class = "purchase-info">
-        {{!-- <input type = "number" min = "0" value = "1"> --}}
-        <button type = "button" onclick="addToCart('{{this.product._id}}')" class = "btn">
+      
+        <button  type = "button" onclick="addToCart('{{this.product._id}}')" class = "btn btncolor">
           Add to Cart <i class = "fas fa-shopping-cart"></i>
         </button>
 
-        <a type = "button" href="/buynow?id={{this.product._id}}" class = "btn">Buy Now</a>
+        {{!-- <a type = "button" href="/buynow?id={{this.product._id}}" class = "btn btncolor">Buy Now</a> --}}
       </div>
-
+ <p>Share At: </p>
       <div class = "social-links">
-        <p>Share At: </p>
+       
         <a href = "#">
           <i class = "fab fa-facebook-f"></i>
         </a>
@@ -122,6 +129,8 @@
 }
     /* .card css ends here..............*/
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
+
 
 *{
     box-sizing: border-box;
@@ -222,7 +231,7 @@ img{
     text-decoration: line-through;
 }
 .new-price span{
-    color: #256eff;
+    color: #3CB815;
 }
 .product-detail h2{
     text-transform: capitalize;
@@ -270,12 +279,13 @@ img{
 .purchase-info .btn{
     cursor: pointer;
     color: #fff;
+    width: 300px;
 }
 .purchase-info .btn:first-of-type{
     background: #256eff;
 }
 .purchase-info .btn:last-of-type{
-    background: #f64749;
+    background: #F65005;
 }
 .purchase-info .btn:hover{
     opacity: 0.9;
@@ -324,6 +334,27 @@ img{
     .product-content{
         padding-top: 0;
     }
+}
+.cable-choose {
+  margin-bottom: 20px;
+}
+ 
+.cable-choose button {
+  border: 2px solid #E1E8EE;
+  border-radius: 6px;
+  padding: 13px 20px;
+  font-size: 14px;
+  color: #5E6977;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all .5s;
+}
+ 
+.cable-choose button:hover,
+.cable-choose button:active,
+.cable-choose button:focus {
+  border: 2px solid #86939E;
+  outline: none;
 }
 </style>
 

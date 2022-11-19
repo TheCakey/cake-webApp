@@ -261,7 +261,8 @@ return new Promise(async(resolve,reject)=>{
     addToCart:(userId,proId)=>{
         let proObj={
             item:objectId(proId),
-            quantity:1
+            quantity:1,
+            weight:1
         }
         return new Promise(async(resolve,reject)=>{
 

@@ -81,13 +81,20 @@ router.post('/full-details-form',(req,res)=>{
   console.log(req.body)
   var data=req.body
   data.mobnum=req.session.tempUser;
+  data.status=true;
   req.session.tempUser=null;
   delete data.psw2;
   console.log(data);
   userHelper.registerUser(data).then((response)=>{
     req.session.userloggedIn=true;
     req.session.user=response;
-    res.redirect('/')
+    if(req.session.tempProdId){
+      prodId=req.session.tempProdId;
+      req.session.tempProdId=null;
+       res.redirect('/product-detail-page?id='+prodId)
+    }else{
+      res.redirect('/')
+    }
   })
  
 })
@@ -101,6 +108,9 @@ router.get('/login',(req,res)=>{
   res.redirect('/profile')
   }
 else{
+  if(req.query.id){
+    req.session.tempProdId=req.query.id;
+  }
   res.render('user/login',{hdr:true,loginErr})
 }
   
@@ -113,9 +123,12 @@ router.post('/login-mob-num-submission',(req,res)=>{
   userHelper.findUserByMobNum(mobno).then((response)=>{
   console.log(response)
   loginErr=null;
-  //otp send to mobile number
+ 
+//otp send to mobile number
 req.session.tempUser=response;
   res.json(response)
+  
+  
   })
   
 })
@@ -129,7 +142,16 @@ router.post('/login-otp',(req,res)=>{
     req.session.userloggedIn=true;
     console.log(req.session.user)
     req.session.tempUser=null;
-    res.redirect('/')
+
+    if(req.session.tempProdId){
+
+      prodId=req.session.tempProdId;
+      req.session.tempProdId=null;
+       res.redirect('/product-detail-page?id='+prodId)
+    }else{
+      res.redirect('/')
+    }
+   
   }
   else{
     
@@ -219,10 +241,15 @@ if(response){
 
 
 router.get('/addtocart/:id',(req,res)=>{
-  userHelper.addToCart(req.session.user._id,req.params.id).then(()=>{
-    res.json(req.params.id)
+  if(req.session.user){
+    userHelper.addToCart(req.session.user._id,req.params.id).then(()=>{
+      res.json(req.params.id)
+    })
+  }else{
+    res.json(false)
   }
-  )
+
+  
 })
 
 

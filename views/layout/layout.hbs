@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{title}}</title>
+    <title>Cakey</title>
 
 
 
@@ -57,8 +57,13 @@
   <body>
     
     {{#if admin}}
-    {{>admin-sidebar-nav}}
+      {{#if adminlog}}
+
+        {{else}}
+         {{>admin-sidebar-nav}}
+      {{/if}}
     {{else}}
+    
     {{#if hdr}}
      
     {{else}}
