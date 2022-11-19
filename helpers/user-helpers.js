@@ -100,7 +100,8 @@ return new Promise(async(resolve,reject)=>{
                 },{
                     $project:{
                         item:'$product.item',
-                        quantity:'$product.quantity'
+                        quantity:'$product.quantity',
+                        weight:'$product.weight'
                     }
                 },
                 {
@@ -113,7 +114,7 @@ return new Promise(async(resolve,reject)=>{
                 },
                 {
                     $project:{
-                       item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                       item:1,quantity:1,weight:1,product:{$arrayElemAt:['$product',0]}
                     }
                 }
 
