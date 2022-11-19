@@ -10,20 +10,19 @@
                         </div>
                     </div>    
                      {{#each products}}
-                    <div class="row border-top border-bottom">
-                        <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="/product-images/{{this.product._id}}1.jpg"></div>
-                            <div class="col">
-                                <div class="row text-muted">{{this.product.Category}}</div>
+                      <div class="col pt-3 pb-1">
                                 <div class="row">{{this.product.Name}}</div>
                             </div>
+                    <div class="row border-top border-bottom">
+                        <div class="row main align-items-center">
+                            <div class="col-2 " style="margin-right: 5vh;"><img class="img-fluid" src="/product-images/{{this.product._id}}1.jpg"></div>
+                
                             <div class="col">
-                                <a class="cursor-property" style="" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>
-                                <a href="#" id="{{this.product._id}}" class="border">{{this.quantity}}</a>
-                                <a class="cursor-property" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</a>
-                                
+                                <a class="cursor-property"  style="font-size: 15px;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>
+                                <a href="#" class="" style="font-size: 15px;" id="{{this.product._id}}"  >{{this.quantity}}</a>
+                                <a class="cursor-property" style="font-size: 15px;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</a>
                             </div>
-                            <div class="col">₹ {{this.product.Price}} <a  onclick="removeCartItem('{{this._id}}','{{this.product._id}}')" class="close cursor-property">&#10005;</a></div>
+                            <div class="col ">₹ {{this.product.Price}}<a  onclick="removeCartItem('{{this._id}}','{{this.product._id}}')" class="close cursor-property">&#10005;</a></div>
                         </div>
                     </div>
                     {{/each}}
@@ -42,12 +41,12 @@
 
                     <form action="/checkout" id="form1" method="get">
                         <p>PINCODE</p>
-                         <input id="pincode" type="number"  name="pincode" placeholder="Enter your pincode">
+                         <input class="inputPincode" id="pincode" type="number"  name="pincode" placeholder="Enter your pincode">
                         {{!-- <select><option class="text-muted">Standard-Delivery- &euro;5.00</option>
                         <option class="text-muted">Standard-Delivery- &euro;5.00</option></select> --}}
                  
                         <p>DISCOUND COUPON</p>
-                        <input  onfocusout="CouponValidate({{total}})" name="" id="code" placeholder="Enter your code">
+                        <input class="inputPincode" onfocusout="CouponValidate({{total}})" name="" id="code" placeholder="Enter your code">
                         <input name="fullTotal" id="prototal" value="{{total}}" type="text" hidden>
                              <input type="text" name="producttotal"  value="{{total}}" hidden>
 <input type="text" id="coupon-pass" name="coupon" hidden>

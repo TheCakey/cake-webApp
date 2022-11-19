@@ -53,7 +53,7 @@
     <div class="credential-wrapper ">
         <div class="credential-container ">
             <img src="/assets/icons/credential.png" class="credential-badge" alt="">
-            <h1 class="" style="margin-left: 35%;;">Login</h1>
+            <h1 class="pb-2" style="margin-left: 35%;  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Login</h1>
             {{!-- <p>or <a href="/signup" class="text-primary login-text-style grow" >Create New account</a></p> --}}
        
        
@@ -70,7 +70,7 @@
             </div>
             
               <div class="submit-wrapper">
-                <button id="div-display" type="submit" class="btn-submit">Next</button>
+                <button id="div-display" type="submit" class="btn-submit">Login</button>
            </div>
          
         
@@ -85,12 +85,13 @@
               <div class="submit-wrapper">
                 <button id="btn-none" type="submit" class="btn-submit">Login</button>
            </div>
-           <p>  By continuing, you agree to Cakey's<a href=""> Conditions of Use </a>and<a href=""> Privacy Notice.</a></p>
             </form>
 
+  <div class="submit-wrapper ">
 
-        <p href="/signup" class=" submit-wrapper" style="">New to Cakey's?</p>
-          <button type="button" class="btn btn-light" style="padding-left: 20%; padding-right: 20%;  margin-left: 7%;">Create Your Cakey account </button>
+<a href="/signup" type="button" class="" style=" ">Create Your Cakey Account </a>
+  </div>
+          
         </div>
     </div>
     
@@ -184,9 +185,15 @@ swal("Otp Send!", "Otp send to your mobile number", "success");
   #invalid-user{
         display: none;
     }
+<<<<<<< HEAD
+
+
+    
+=======
     #blocked-user{
         display: none;
     }
+>>>>>>> e272d858db3c8e8b318c2f2490b46eb49c3639e5
 </style>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
