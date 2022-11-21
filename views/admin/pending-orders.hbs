@@ -216,12 +216,11 @@ $(document).ready(function(){
 
                    <tr  >
                         <td>{{@key}}</td>
-                        <td>{{this.deliveryDetails.name}}</td>
+                    <td>  <a href="/admin/viewPendingOrders?id={{this._id}}" >  {{this.deliveryDetails.name}}</a></td>
                         <td>{{this.deliveryDetails.expectedDate}}</td>                        
                         <td>{{this.deliveryDetails.pincode}}</td>
                         <td>₹ {{this.totalAmount}}</td>
                         <td >
-                                                        <a href="/admin/viewPendingOrders?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
 
                             <a href="/admin/deliveredstatus?id={{this._id}}" class="settings" title="Delivered" data-toggle="tooltip"><i class="fa-solid fa-thumbs-up fa-xl"></i></a>
                             <a href="/admin/cancelledstatus?id={{this._id}}" class="delete" title="Cancelled" data-toggle="tooltip" onclick="return confirm('Are you sure want to cancel this order')"><i class="fa-solid fa-ban fa-xl"></i></a>
