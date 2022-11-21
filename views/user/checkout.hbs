@@ -14,8 +14,8 @@
       <h4 class="mb-3">Delivery address</h4>
       
         <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="firstName">Ful name</label>
+          <div class=" mb-3">
+            <label for="firstName">Full name</label>
             <input type="text" class="form-control" name="name" id="firstName" placeholder="" value="{{useraddress.fullname}}" required>
             <div class="invalid-feedback">
               Valid first name is required.
@@ -29,24 +29,25 @@
             </div>
           </div> --}}
         </div>
-        
-        <div class="mb-3">
+        <div class="row">
+        <div class="mb-3 col-md-6">
           <label for="Mobile">Mobile Number</label>
           <input type="number" name="mobnum" class="form-control" id="phone" value="{{useraddress.mobnum}}" placeholder="Phone number" required>
         </div>
-        <div class="mb-3">
+        <div class="mb-3 col-md-6">
           <label for="Mobile">Mobile Number<span class="text-muted">(Alternative Number)</span></label>
           <input type="number" name="altNum" class="form-control" id="phone" value="{{useraddress.altNum}}" placeholder="Alternative number" required>
+        </div>
         </div>
        
        <div class="row">
         <div class="mb-3 col-md-6">
         <label  for="Expected date">Expected Date:</label>
-        <input class="form-control" type="date" id="date" name="expectedDate" value="{{expectedDate}}" required>
+        <input class="form-control" type="date" id="expecteddate" name="expectedDate" value="{{expectedDate}}" required>
         </div>
         <div class="mb-3 col-md-6">
           <label  for="appt">Select a time:</label>
-           <input class="form-control" type="time" id="appt" name="deliveryTime" value="{{deliveryTime}}" required>
+           <input class="form-control" type="time" id="time" name="deliveryTime" value="{{deliveryTime}}" required>
         
          </div>
       </div>
@@ -95,7 +96,7 @@
             </div>
           </div>
           <div class="col-md-3 mb-3">
-            <label for="zip">Zip</label>
+            <label for="zip">Pincode</label>
             <input type="text" class="form-control" id="zip" value="{{pincode}}" placeholder="" disabled >
                        <input type="text" name="pincode" class="form-control" id="" value="{{pincode}}" placeholder="" hidden >
 
@@ -152,9 +153,9 @@
         <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
           <div>
             <strong>Total amount</strong>
-            <strong>
+            {{!-- <strong>
               <p class="mb-0">(including GST)</p>
-            </strong>
+            </strong> --}}
           </div>
           <span><strong>₹{{Ttlamount}}</strong></span>
         </li>
@@ -263,6 +264,9 @@
 
     $("#checkout-form").submit((e)=>{
 
+
+ w= document.getElementById("expecteddate").value ;
+ console.log(w)
 
        e.preventDefault()
         $.ajax({

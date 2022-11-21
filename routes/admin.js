@@ -6,6 +6,7 @@ var router = express.Router();
 
 const adminHelpers=require('../helpers/admin-helpers')
 const productHelpers=require('../helpers/product-helpers')
+const userHelper=require('../helpers/user-helpers')
 
 let usersList; 
 let ordersList;
@@ -402,5 +403,21 @@ console.log(req.body)
   })
 })
 
+router.get('/viewPendingOrders',async(req,res)=>{
+  let paymentmethod=null;
+  userHelper.getOrderDetails(req.query.id).then((response)=>{
+    console.log(response);
+    console.log("jjjjjjjjjjjeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+   console.log(response.paymentMethod);
+    if(response.paymentMethod=="ONLINE"){
+      console.log("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+      paymentmethod=response.paymentMethod;
+    }
+    res.render('admin/viewPendingOrders',{admin:true,orderdata:response,paymentmethod})
+  
+  })
+  
+  })
+  
 
 module.exports = router;

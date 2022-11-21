@@ -84,7 +84,7 @@ input::-webkit-inner-spin-button {
     padding: 0 0vh;
 }
 a{
-    padding: 0 1vh;
+    padding: 0 0.7vh;
 }
 .close{
     margin-left: auto;
