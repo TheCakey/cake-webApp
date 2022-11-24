@@ -362,7 +362,7 @@ console.log(about)
 })
 
 router.post('/addAboutSection',async(req,res)=>{
-  adminHelpers.addSiteDetails(req.body).then((res)=>{
+  adminHelpers.addSiteDetails(req.body).then(()=>{
     res.redirect('/admin')
   })
 })
