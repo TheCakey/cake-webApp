@@ -334,7 +334,7 @@ return new Promise(async(resolve,reject)=>{
           
             let status=order['payment-method']==='COD'?'placed':'pending'
            let nwdate=new Date()
-            var date= moment(nwdate).format('MMM Do YY');
+            var date= moment(nwdate).format('MMM Do YYYY');
             var time= moment(nwdate).format('LT')
             let orderObj={
                 deliveryDetails:{

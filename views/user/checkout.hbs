@@ -56,7 +56,7 @@
         </div>
         <div class="mb-3 col-md-6">
           <label  for="appt">Select a time:</label>
-           <input class="form-control required" type="time"  max='24:00' min='07:00' id="time" name="deliveryTime" value="{{deliveryTime}}" required>
+           <input class="form-control required" type="time"  max='20:00' min='07:00' id="time" name="deliveryTime" value="{{deliveryTime}}" required>
         
          </div>
       </div>
@@ -114,6 +114,11 @@
             </div>
           </div>
   
+  <input type="text" name="price" value="{{Ttlamount}}" hidden>
+    <input type="text" name="coupon" value="{{coupon}}" hidden>
+    <input type="text" name="deliveryCharge" value="{{dlcharge}}" hidden>
+      <input type="text" name="ProductTotal" value="{{productTotal}}" hidden>
+      <input type="text" name="totalwithoutdelivery" value="{{total}}" hidden>
 
         
         </div>
