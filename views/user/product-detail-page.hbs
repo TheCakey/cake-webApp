@@ -77,7 +77,7 @@
       <div class = "purchase-info">
      
        
-        <input type="number" id="weight" name="weight" placeholder="Enter Weight" required>
+        <input class="Kg-edits" type="number" id="weight" name="weight" placeholder="Enter KG" required>
         
  <button  onclick="addtocartform('{{this.product._id}}')"  class ="btn btncolor">
           Add to Cart <i class = "fas fa-shopping-cart"></i>
@@ -137,6 +137,11 @@
     
     font-family: 'Open Sans', sans-serif;
 }
+
+.Kg-edits{
+  width: 70%;
+}
+
 body{
     line-height: 1.5;
 }
@@ -263,7 +268,7 @@ img{
 }
 .purchase-info input,
 .purchase-info .btn{
-    border: 1.5px solid #ddd;
+    border: 1.5px solid #F65005;
     border-radius: 25px;
     text-align: center;
     padding: 0.45rem 0.8rem;
@@ -272,12 +277,14 @@ img{
     margin-bottom: 1rem;
 }
 .purchase-info input{
-    width: 60px;
+    width: 25%;
 }
 .purchase-info .btn{
+  margin-left: 2%;
+  margin-top: 2.5%;
     cursor: pointer;
     color: #fff;
-    width: 300px;
+    width: 230px;
 }
 .purchase-info .btn:first-of-type{
     background: #256eff;
