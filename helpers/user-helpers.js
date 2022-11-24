@@ -228,6 +228,25 @@ return new Promise(async(resolve,reject)=>{
         })
     },
 
+    getCancelledOrderProducts:(userId)=>{
+        return new Promise(async (resolve, reject)=>{
+            
+          let  order=await db.get().collection(collection.ORDER_COLLECTION).find({$and: [  {userId:objectId(userId)},{status:"cancelled"}] }).toArray()
+        
+        resolve(order)
+        })
+    },
+
+    
+    getDeliveredOrderProducts:(userId)=>{
+        return new Promise(async (resolve, reject)=>{
+            
+          let  order=await db.get().collection(collection.ORDER_COLLECTION).find({$and: [  {userId:objectId(userId)},{status:"delivered"}] }).toArray()
+        
+        resolve(order)
+        })
+    },
+
     getOrderDetails:(orderId)=>{
         return new Promise(async (resolve,reject)=>{
             let order=await db.get().collection(collection.ORDER_COLLECTION).findOne({_id:objectId(orderId)})
