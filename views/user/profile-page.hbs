@@ -352,8 +352,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="first-name" class="required">Full Name</label>
-                                                                    <input type="text" value="{{user.fullname}}" disabled id="first-name">
+                                                                    <label for="first-name" class="required" >Full Name</label>
+                                                                    <input class="account-detailes-inputs" type="text" value="{{user.fullname}}"  disabled id="first-name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
@@ -368,7 +368,7 @@
                                                         <div class="single-input-item">
                                                             <label for="display-name" class="required">Address</label>
                                                            
-                                                            <textarea name="" placeholder="{{user.permanentaddress}}"  id="display-name" disabled cols="50" rows="3"></textarea>
+                                                            <textarea name="" placeholder="{{user.permanentaddress}}"  id="display-name" disabled cols="37" rows="3"></textarea>
                                                         </div>
                                                         </div>
                                                         </div>
@@ -517,6 +517,7 @@ window.location.replace("http://localhost:3000");
     .order-desktop {
         display: none;
     }
+
 .order-mobile {
        display: block;
         
@@ -524,7 +525,6 @@ window.location.replace("http://localhost:3000");
 
    }
    
-
 
    @media (min-width: 991px) {
     
@@ -535,6 +535,11 @@ window.location.replace("http://localhost:3000");
  .order-desktop {
         display: block;
     }
+   }
+
+
+   .account-detailes-inputs{
+    width: 80%;
    }
 </style>
 
