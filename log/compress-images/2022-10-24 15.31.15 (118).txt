@@ -1,0 +1,8 @@
+File from: [./public/product-images/637f40eaa23194cd1cc828ce1.jpg]
+
+File to: [./public/product-images/637f40eaa23194cd1cc828ce1.jpg637f40eaa23194cd1cc828ce1.jpg]
+
+Compression algorithm: [mozjpeg]
+
+Description: Error: Command failed: C:\Users\Yaseen\OneDrive\Desktop\cake-webApp\node_modules\mozjpeg\vendor\cjpeg.exe -quality 60 -outfile ./public/product-images/637f40eaa23194cd1cc828ce1.jpg637f40eaa23194cd1cc828ce1.jpg ./public/product-images/637f40eaa23194cd1cc828ce1.jpg
+Unrecognized input file format --- perhaps you need -targa

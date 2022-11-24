@@ -29,13 +29,13 @@
                      
                    <label for="name" class="col-sm-3 control-label font-weight-bold">Product name</label>
                    <div class="col-sm-9">
-                     <input type="text" class="form-control" name="Name" id="name" placeholder="Enter Your Product Name">
+                     <input type="text" class="form-control" name="Name" id="name" value="test"  placeholder="Enter Your Product Name" required>
                    </div>
                  </div> <!-- form-group // -->
                  <div class="form-group">
                    <label for="name" class="col-sm-3 control-label font-weight-bold"><i class="fa fa-inr pr-2" aria-hidden="true"></i> Price</label>
                    <div class="col-sm-9">
-                     <input type="text" class="form-control" name="Price" id="name" placeholder="₹ Enter the Price">
+                     <input type="text" class="form-control" name="Price" id="name" value="1353" placeholder="₹ Enter the Price" required>
                    </div>
                    
                  </div> <!-- form-group // -->
@@ -47,7 +47,7 @@
                    <STRONG class="col-sm-3 control-label font-weight-bold">Category</STRONG> <br>
                     
                     {{#each category}}
-<input type="radio" value={{this.Name}} name="Category" class="ml-4">{{this.Name}}
+<input type="radio" value={{this.Name}} name="Category" class="ml-4" required>{{this.Name}}
 
                     {{/each}}
                  
@@ -56,7 +56,7 @@
                  
                    <label for="name" class="col-sm-3 control-label font-weight-bold">Product Description</label>
                    <div class="col-sm-9">
-                     <textarea class="form-control" name="ProductDescription" id="exampleFormControlTextarea1" rows="3" placeholder="Product Description" ></textarea>
+                     <textarea class="form-control" name="ProductDescription" id="exampleFormControlTextarea1" rows="3" placeholder="Product Description" required>sdafsdfsdafsdfdsfasfd</textarea>
                    </div>
                
                
@@ -67,7 +67,7 @@
                   
                    <div class="col-sm-3  image-upload mb-4" >
                      <label  class="control-label small " for="file-input">Image 2 (jpg): <br> <img class="btn-image" width="100px" height="100px" src="/admin-assets/icons/upload-icon.png"/></label> 
-                     <input  id="file-input" onchange="viewImage1(event)" type="file"  name="Image1">
+                     <input  id="file-input" onchange="viewImage1(event)" type="file"  name="Image1" required>
                        <img class=" mt-5" style="width: 200px; height:auto" id="imgView1">
                    </div>
                  
@@ -75,7 +75,7 @@
                 
                   <div class="col-sm-3 image-upload mb-4">
                      <label class="control-label small" for="file-input1">Image 2 (jpg):  <br> <img  class="btn-image" width="100px" height="100px" src="/admin-assets/icons/upload-icon.png"/> click here </label>   
-                     <input id="file-input1"  onchange="viewImage2(event)" type="file" name="Image2">
+                     <input id="file-input1"  onchange="viewImage2(event)" type="file" name="Image2" required>
                      <img  class=" mt-5" style="width: 200px; height:auto" id="imgView2">
                    </div>
                    
@@ -83,7 +83,7 @@
                    
                    <div class="col-sm-3 image-upload mb-4" >
                      <label class="control-label small" for="file-input2">Image 3 (jpg):  <br> <img  class="btn-image" width="100px" height="100px" src="/admin-assets/icons/upload-icon.png"/> click here </label>
-                       <input  id="file-input2" onchange="viewImage3(event)" type="file" name="Image3">
+                       <input  id="file-input2" onchange="viewImage3(event)" type="file" name="Image3" required>
                         <img class=" mt-5" style="width: 200px; height:auto" id="imgView3">
                    </div>
               

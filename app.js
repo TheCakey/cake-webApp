@@ -10,7 +10,8 @@ var db = require('./config/connection')
 var hbs=require('express-handlebars')
 var app = express();
 var fileUpload=require('express-fileupload')
-
+var fs = require('fs');
+// import { ImageCompressor } from 'image-compressor';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
