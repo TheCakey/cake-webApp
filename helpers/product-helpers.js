@@ -32,6 +32,7 @@ module.exports={
                     Price:ProDetails.Price,
                     Category:ProDetails.Category,
                     ProductDescription:ProDetails.ProductDescription,
+                    flavour:ProDetails.flavour
                 }
                 
 
