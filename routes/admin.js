@@ -1,8 +1,8 @@
 var express = require('express');
 const { log } = require('handlebars');
 var router = express.Router();
-
-
+var fs = require('fs');
+const compress_images = require("compress-images");
 
 const adminHelpers=require('../helpers/admin-helpers')
 const productHelpers=require('../helpers/product-helpers')
@@ -120,35 +120,128 @@ router.get('/product-add',async (req,res)=>{
 })
 
 router.post('/products-add',(req,res)=>{
-  console.log(req.body)
-  console.log(req.files.Image1)
-  
-  productHelpers.addProduct(req.body,(id)=>{
+ 
+  productHelpers.addProduct(req.body,async (id)=>{
+    
+    //img1
     let image=req.files.Image1
-    image.mv('./public/product-images/'+id+'1'+'.jpg',(err,done)=>{
+    image.mv('./public/product-imagesfull/'+id+'1'+'.jpg', (err,done)=>{
       if(err){
         console.log(err)
-      }
+        productHelpers.deleteProduct(id).then(()=>{
+          res.render('admin/productError',{admin:true,adminlog:true})
+        })
       
-    })
-  
+      }
+else{
+var INPUT_path_to_your_images = './public/product-imagesfull/'+id+'1'+'.jpg';
+var OUTPUT_path = './public/product-images/';
+
+ compress_images(INPUT_path_to_your_images, OUTPUT_path, { compress_force: false, statistic: true, autoupdate: true }, false,
+                { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
+                { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+                { svg: { engine: "svgo", command: "--multipass" } },
+                { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+  function (error, completed, statistic) {
+    console.log("-------------");
+    console.log(error);
+    console.log(completed);
+    console.log(statistic);
+    console.log("-------------");
+
+    if(error){
+      productHelpers.deleteProduct(id).then(()=>{
+        res.render('admin/productError',{admin:true,adminlog:true})
+      })
+    }
+     //img2
+    
     image=req.files.Image2
-    image.mv('./public/product-images/'+id+'2'+'.jpg',(err,done)=>{
+    console.log(image);
+    image.mv('./public/product-imagesfull/'+id+'2'+'.jpg', (err,done)=>{
+
       if(err){ 
         console.log(err)
+        productHelpers.deleteProduct(id).then(()=>{
+          res.render('admin/productError',{admin:true,adminlog:true})
+        })
       }    
-    })
+else{
+  console.log("image 2 real started")
+
+      var INPUT_path_to_your_images = './public/product-imagesfull/'+id+'2'+'.jpg';
+      var OUTPUT_path = './public/product-images/';
+      
+       compress_images(INPUT_path_to_your_images, OUTPUT_path, { compress_force: false, statistic: true, autoupdate: true }, false,
+        { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
+        { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+        { svg: { engine: "svgo", command: "--multipass" } },
+        { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+function (error, completed, statistic) {
+console.log("-------------");
+console.log(error);
+console.log(completed);
+console.log(statistic);
+console.log("-------------");
+
+if(error){
+  productHelpers.deleteProduct(id).then(()=>{
+    res.render('admin/productError',{admin:true,adminlog:true})
+  })
+}
+
+//img3
     image=req.files.Image3
-    image.mv('./public/product-images/'+id+'3'+'.jpg',(err,done)=>{
-      if(!err){
-        res.redirect('/admin/product-add')
-      }else{
+    image.mv('./public/product-imagesfull/'+id+'3'+'.jpg', (err,done)=>{
+      if(err){
         console.log(err)
-      } 
-    })
+        productHelpers.deleteProduct(id).then(()=>{
+          res.render('admin/productError',{admin:true,adminlog:true})
+        })
+      }else{
+
+       
+
+        var INPUT_path_to_your_images = './public/product-imagesfull/'+id+'3'+'.jpg';
+        var OUTPUT_path = './public/product-images/';
+        
+         compress_images(INPUT_path_to_your_images, OUTPUT_path, { compress_force: false, statistic: true, autoupdate: true }, false,
+                        { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
+                        { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+                        { svg: { engine: "svgo", command: "--multipass" } },
+                        { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+          function (error, completed, statistic) {
+            console.log(error);
+            console.log(completed);
+            console.log(statistic);
+           if(error){
+            productHelpers.deleteProduct(id).then(()=>{
+              res.render('admin/productError',{admin:true,adminlog:true})
+            })
+           }
+  
+          }
+        )
+        }  
+            })
+     
+       
+        }
+      );
+}
+            
+          })
+   
+  }
+);
+}
+ })
+
+     res.redirect('/admin/product-add')
+          })
+         
   })
 
-})
 
 
 //product management
@@ -172,42 +265,163 @@ router.post('/edit-cakes',async(req,res)=>{
   let proId=req.query.id
   console.log("proID below")
   console.log(proId)
-  productHelpers.updateProduct(req.body,proId).then(()=>{
-    res.redirect('/admin')
-    if(req.files.Image){
+  productHelpers.updateProduct(req.body,proId).then(async()=>{
+    console.log("hiiiiii");
+    console.log(req.files)
+    if(req.files){
+    
+
       let image=req.files.Image1
-      image.mv('./public/product-images/'+proId+'1'+'.jpg',(err,done)=>{
-        if(err){
-        
-          console.log(err)
-        }
-        
-      })
+
+      if(image){
+        console.log("image11111111111111111111111111");
+       await image.mv('./public/product-imagesfull/'+proId+'1'+'.jpg',(err,done)=>{
+          if(err){
+            console.log(err)
+              res.render('admin/productError',{admin:true,adminlog:true})
+          }else{
+            console.log("error not here")
+            var img='./public/product-imagesfull/'+proId+'1'+'.jpg';
+            fs.unlinkSync(img);
+            var INPUT_path_to_your_images = './public/product-imagesfull/'+proId+'1'+'.jpg';
+            var OUTPUT_path = './public/product-images/';
+            
+             compress_images(INPUT_path_to_your_images, OUTPUT_path, { compress_force: false, statistic: true, autoupdate: true }, false,
+                            { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
+                            { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+                            { svg: { engine: "svgo", command: "--multipass" } },
+                            { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+              function (error, completed, statistic) {
+                console.log(error);
+                console.log(completed);
+                console.log(statistic);
+               if(error){
+              
+                  res.render('admin/productError',{admin:true,adminlog:true})
+                
+               }
+      
+              }
+            )
+          }
+          
+        })
+      }
+      
     
       image=req.files.Image2
-      image.mv('./public/product-images/'+proId+'2'+'.jpg',(err,done)=>{
-        if(err){
-        
-          console.log(err)
+
+      if(image){
+        console.log("image2222222222222222222");
+        image.mv('./public/product-imagesfull/'+proId+'2'+'.jpg',(err,done)=>{
+          if(err){
+          
+            console.log(err)
+            res.render('admin/productError',{admin:true,adminlog:true})
+          }
+        else{
+          var img='./public/product-imagesfull/'+proId+'2'+'.jpg';
+          fs.unlinkSync(img);
+          var INPUT_path_to_your_images = './public/product-imagesfull/'+proId+'2'+'.jpg';
+          var OUTPUT_path = './public/product-images/';
+          
+           compress_images(INPUT_path_to_your_images, OUTPUT_path, { compress_force: false, statistic: true, autoupdate: true }, false,
+                          { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
+                          { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+                          { svg: { engine: "svgo", command: "--multipass" } },
+                          { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+            function (error, completed, statistic) {
+              console.log(error);
+              console.log(completed);
+              console.log(statistic);
+             if(error){
+            
+                res.render('admin/productError',{admin:true,adminlog:true})
+              
+             }
+    
+            }
+          )
         }
-        
-      })
+          
+        })
+
+      }
+    
     
       image=req.files.Image3
-      image.mv('./public/product-images/'+proId+'3'+'.jpg',(err,done)=>{
-        if(!err){
-          res.redirect('/admin')
-        }else{
-          console.log(err)
-        }
-        
-      })
+      if(image){
+        console.log("image33333333333333333333333");
+        image.mv('./public/product-imagesfull/'+proId+'3'+'.jpg',(err,done)=>{
+          if(!err){
+  
+            var img='./public/product-imagesfull/'+proId+'3'+'.jpg';
+            fs.unlinkSync(img);
+            var INPUT_path_to_your_images = './public/product-imagesfull/'+proId+'3'+'.jpg';
+            var OUTPUT_path = './public/product-images/';
+            
+             compress_images(INPUT_path_to_your_images, OUTPUT_path, { compress_force: false, statistic: true, autoupdate: true }, false,
+                            { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
+                            { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+                            { svg: { engine: "svgo", command: "--multipass" } },
+                            { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+              function (error, completed, statistic) {
+                console.log(error);
+                console.log(completed);
+                console.log(statistic);
+               if(error){
+              
+                  res.render('admin/productError',{admin:true,adminlog:true})
+                
+               }else{
+                res.redirect('/admin')
+               }
+      
+              }
+            )
+          
+           
+          }else{
+            console.log(err)
+            res.render('admin/productError',{admin:true,adminlog:true})
+          }
+          
+        })
+      }
+      res.redirect('/admin/view-all-cakes')
+    }else{
+      res.redirect('/admin/view-all-cakes')
     }
+  })
+})
+
+router.get('/delete-product', (req,res)=>{
+ id=req.query.id
+  productHelpers.deleteProduct(id).then(()=>{
+    console.log(req.query.id)
+    
+    var img1 = './public/product-images/'+id+'1'+'.jpg'; 
+    var img2 = './public/product-images/'+id+'2'+'.jpg'; 
+    var img3 = './public/product-images/'+id+'3'+'.jpg'; 
+
+    var imgf1 = './public/product-imagesfull/'+id+'1'+'.jpg'; 
+    var imgf2 = './public/product-imagesfull/'+id+'2'+'.jpg'; 
+    var imgf3 = './public/product-imagesfull/'+id+'3'+'.jpg'; 
+
+    fs.unlinkSync(img1)
+      fs.unlinkSync(img2)
+        fs.unlinkSync(img3)
+          fs.unlinkSync(imgf1)
+             fs.unlinkSync(imgf2)
+               fs.unlinkSync(imgf3)
+          res.redirect('/admin')
+       
   })
 })
 
 
 
+//62dff3e8d486bd431653b096
 
 
 //Coupon
