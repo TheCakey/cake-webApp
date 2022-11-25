@@ -239,7 +239,6 @@ if(error){
 
      res.redirect('/admin/product-add')
           })
-         
   })
 
 
@@ -281,7 +280,7 @@ router.post('/edit-cakes',async(req,res)=>{
               res.render('admin/productError',{admin:true,adminlog:true})
           }else{
             console.log("error not here")
-            var img='./public/product-imagesfull/'+proId+'1'+'.jpg';
+            var img='./public/product-images/'+proId+'1'+'.jpg';
             fs.unlinkSync(img);
             var INPUT_path_to_your_images = './public/product-imagesfull/'+proId+'1'+'.jpg';
             var OUTPUT_path = './public/product-images/';
@@ -309,18 +308,18 @@ router.post('/edit-cakes',async(req,res)=>{
       }
       
     
-      image=req.files.Image2
+     let image2=req.files.Image2
 
-      if(image){
+      if(image2){
         console.log("image2222222222222222222");
-        image.mv('./public/product-imagesfull/'+proId+'2'+'.jpg',(err,done)=>{
+        image2.mv('./public/product-imagesfull/'+proId+'2'+'.jpg',(err,done)=>{
           if(err){
           
             console.log(err)
             res.render('admin/productError',{admin:true,adminlog:true})
           }
         else{
-          var img='./public/product-imagesfull/'+proId+'2'+'.jpg';
+          var img='./public/product-images/'+proId+'2'+'.jpg';
           fs.unlinkSync(img);
           var INPUT_path_to_your_images = './public/product-imagesfull/'+proId+'2'+'.jpg';
           var OUTPUT_path = './public/product-images/';
@@ -349,13 +348,13 @@ router.post('/edit-cakes',async(req,res)=>{
       }
     
     
-      image=req.files.Image3
-      if(image){
+     let image3=req.files.Image3
+      if(image3){
         console.log("image33333333333333333333333");
-        image.mv('./public/product-imagesfull/'+proId+'3'+'.jpg',(err,done)=>{
+        image3.mv('./public/product-imagesfull/'+proId+'3'+'.jpg',(err,done)=>{
           if(!err){
   
-            var img='./public/product-imagesfull/'+proId+'3'+'.jpg';
+            var img='./public/product-images/'+proId+'3'+'.jpg';
             fs.unlinkSync(img);
             var INPUT_path_to_your_images = './public/product-imagesfull/'+proId+'3'+'.jpg';
             var OUTPUT_path = './public/product-images/';
@@ -373,8 +372,7 @@ router.post('/edit-cakes',async(req,res)=>{
               
                   res.render('admin/productError',{admin:true,adminlog:true})
                 
-               }else{
-                res.redirect('/admin')
+               
                }
       
               }
