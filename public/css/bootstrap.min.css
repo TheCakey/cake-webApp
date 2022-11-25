@@ -232,7 +232,7 @@ sup {
 }
 
 a {
-    color: #3CB815;
+    color: #555;
     text-decoration: none
 }
 
@@ -2235,6 +2235,7 @@ progress {
     font-weight: 400;
     line-height: 1.5;
     color: #555;
+    
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -8287,9 +8288,7 @@ fieldset:disabled .btn {
     color: #3CB815 !important
 }
 
-.text-secondary {
-    color: #F65005 !important
-}
+
 
 .text-success {
     color: #198754 !important

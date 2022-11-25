@@ -431,5 +431,16 @@ getCouponDetails:(couponId)=>{
 }
 
     )},
+
+    addSubscription:(subEmail)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.SUBSCRIPTION_COLLECTION).insertOne(subEmail).then(()=>{
+                resolve()
+            })
+       
+        })
+    
+    }
+
 }
 

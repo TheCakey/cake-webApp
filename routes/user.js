@@ -412,5 +412,11 @@ router.get('/reset-password',(req,res)=>{
   res.render('user/reset-password',)
 })
 
+router.post('/subscription',(req,res)=>{
+  userHelper.addSubscription(req.body).then(()=>{
+    res.redirect('/')
+  })
+})
+
 
 module.exports = router;
