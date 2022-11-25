@@ -408,6 +408,9 @@ router.get('/product-detail-page', async(req,res)=>{
   res.render('user/product-detail-page',{product,cakes,sitedetails})
 })
 
+router.get('/reset-password',(req,res)=>{
+  res.render('user/reset-password',)
+})
 
 
 module.exports = router;
