@@ -1,0 +1,7 @@
+File from: [./public/product-images/6380d6a7e6e28dcd1aa3ef422.jpg]
+
+File to: [./public/product-images/6380d6a7e6e28dcd1aa3ef422.jpg]
+
+Compression algorithm: [-]
+
+Description: File does not exist!
