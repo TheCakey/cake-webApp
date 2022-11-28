@@ -41,15 +41,6 @@
     <!-- Navbar End -->
 
 
-
-
-
-
-
-
-
-
-
     <div class="credential-wrapper ">
         <div class="credential-container ">
             <img src="/assets/icons/credential.png" class="credential-badge" alt="">
@@ -70,20 +61,39 @@
             </div>
             
               <div class="submit-wrapper">
-                <button id="div-display" type="submit" class="btn-submit">Login</button>
+                <button id="div-display1" type="submit" class="btn-submit">Send Otp</button>
+              <button id="div-display2" type="submit" class="btn-submit">Password</button>
+
            </div>
+           
          
         
 
              <form action="/login-otp" method="post">
-            <div class="field-wrapper " id="div-none">
+            <div class="field-wrapper " id="div-none1">
                 <label for="number" class="field-label"></label>
                 <input type="num" placeholder="Enter your OTP" name="otp" id="number" class="field">
              
             </div>
             
               <div class="submit-wrapper">
-                <button id="btn-none" type="submit" class="btn-submit">Login</button>
+                <button id="btn-none1" type="submit" class="btn-submit">Login</button>
+           </div>
+
+
+           
+            </form>
+
+            
+             <form action="/login-pass" method="post">
+            <div class="field-wrapper " id="div-none2">
+                <label for="number" class="field-label"></label>
+                <input type="num" placeholder="Enter your Password" name="otp" id="number" class="field">
+             
+            </div>
+            
+              <div class="submit-wrapper">
+                <button id="btn-none2" type="submit" class="btn-submit">Login</button>
            </div>
             </form>
 
@@ -100,7 +110,17 @@
 
 
 <script>
-    document.querySelector("#div-display").addEventListener("click", function(){
+document.querySelector('#div-display1').addEventListener("click",function(){
+     document.querySelector("#div-display2").style.display = "none";
+     document.querySelector("#btn-none2").style.display = "none";
+})
+document.querySelector('#div-display2').addEventListener("click",function(){
+     document.querySelector("#div-display1").style.display = "none";
+     document.querySelector("#btn-none1").style.display = "none";
+})
+
+
+    document.querySelector("#div-display1").addEventListener("click", function(){
   
     var mobNum = document.getElementById('div-num').value
         var filter = /^\d*(?:\.\d{1,2})?$/;
@@ -125,10 +145,72 @@ $.ajax({
 
             }else{
 swal("Otp Send!", "Otp send to your mobile number", "success");
-       document.querySelector("#div-none").style.display = "block";
+       document.querySelector("#div-none1").style.display = "block";
      document.querySelector("#div-num").classList.add('ddiv-num')
-     document.querySelector("#div-display").style.display = "none";
-     document.querySelector("#btn-none").style.display = "block";
+     document.querySelector("#div-display1").style.display = "none";
+     document.querySelector("#btn-none1").style.display = "block";
+     document.querySelector("#otp-error").style.display = "none";
+    document.querySelector("#blocked-user").style.display = "none";
+
+            }
+    
+        }
+        else{
+        document.querySelector("#invalid-user").style.display = "block";
+                 
+        }
+      
+    }
+})
+    
+  
+
+             } else {
+                 document.querySelector("#invalid").style.display = "block";
+                 
+
+                return false;
+              }
+            }
+            else{
+              document.querySelector("#invalid").style.display = "block";
+             
+              return false;
+           }
+      
+});
+
+{{!-- Button two PAssword --}}
+
+    document.querySelector("#div-display2").addEventListener("click", function(){
+  
+    var mobNum = document.getElementById('div-num').value
+        var filter = /^\d*(?:\.\d{1,2})?$/;
+        if (filter.test(mobNum)) {
+            if(mobNum.length==10){
+                 document.querySelector("#invalid").style.display = "none";
+                  document.querySelector("#invalid-user").style.display = "none";
+                    document.querySelector("#blocked-user").style.display = "none";
+                    let num=parseInt(document.getElementById('div-num').value);
+$.ajax({
+    url:'/login-mob-num-submission',
+    data:{
+        mobnum:num
+    },
+    method:'post',
+    success:(response)=>{
+        if(response){
+
+            if(response.status==='blocked'){
+
+                    document.querySelector("#blocked-user").style.display = "block";
+
+            }else{
+swal("Otp Send!", "Otp send to your mobile number", "success");
+       document.querySelector("#div-none2").style.display = "block";
+     document.querySelector("#div-num").classList.add('ddiv-num')
+     document.querySelector("#div-display2").style.display = "none";
+     document.querySelector("#btn-none2").style.display = "block";
      document.querySelector("#otp-error").style.display = "none";
     document.querySelector("#blocked-user").style.display = "none";
 
@@ -163,17 +245,20 @@ swal("Otp Send!", "Otp send to your mobile number", "success");
 
 
 
-
-
-
 </script>  
 
 
 <style>
-    #div-none{
+    #div-none1{
     display: none;
 } 
-#btn-none{
+  #div-none2{
+    display: none;
+} 
+#btn-none1{
+    display: none;
+}
+#btn-none2{
     display: none;
 }
     .ddiv-num{

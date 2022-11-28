@@ -170,6 +170,18 @@ router.post('/login-otp',(req,res)=>{
   })
 //login codes ends..............
 
+//Login with Pass
+
+
+
+
+
+//Login pass ends............................
+
+
+
+
+
 
 
 //user profile--------------------------------------------
