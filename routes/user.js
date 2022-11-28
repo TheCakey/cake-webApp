@@ -122,6 +122,7 @@ router.post('/login-mob-num-submission',(req,res)=>{
   console.log(req.body)
   mobno=req.body.mobnum
   userHelper.findUserByMobNum(mobno).then((response)=>{
+    console.log('mob nummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm')
   console.log(response)
   loginErr=null;
  
@@ -171,7 +172,13 @@ router.post('/login-otp',(req,res)=>{
 //login codes ends..............
 
 //Login with Pass
+router.post('/login-pass',(req,res)=>{
+  console.log('passsssssssssssssssssssssssssssssssssssssssssssssssss');
+  console.log(req.body)
 
+ 
+
+  })
 
 
 

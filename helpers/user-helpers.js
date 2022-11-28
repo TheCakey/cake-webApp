@@ -21,6 +21,34 @@ module.exports={
             resolve(userData)
         })
     },
+
+    userPassLogin:(userData)=>{
+        console.log(userData)
+       
+       return new Promise(async (resolve,reject)=>{
+           let loginStatus=false
+           let response={}
+           let user=await db.get().collection(collection.USER_COLLECTION).findOne({Email:userData.Email})
+           
+           if(admin){
+               bcrypt.compare(userData.Password,admin.Password).then((status)=>{
+                   if(status){
+                       
+                       response.admin=admin
+                       response.status=true
+                       console.log(response);
+                       resolve(response)
+                   }else{
+                      
+                       resolve({status:false,error:"Password Does Not Match"})
+                   }
+               })
+           }else{
+           
+               resolve({status:false,error:'Email Does Not Exist'})
+           }
+       })
+   },
    
     findUserByMobNum:(mobNum)=>{
         return new Promise(async (resolve,reject)=>{
