@@ -9,6 +9,6 @@ module.exports={
     PINCODE_COLLECTION:'pincode',
     CATEGORY_COLLECTION:'category',
     SITE_COLLECTION:'sitedetails',
-    LINK_COLLECTION:'sociallinks'
-    
+    LINK_COLLECTION:'sociallinks',
+    SUBSCRIPTION_COLLECTION:'subscription'
 }

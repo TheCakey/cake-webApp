@@ -3,8 +3,8 @@
    
     <!-- Page Header End -->
 
-<div class = "card-wrapper" style="margin-top: 7%;">
-  <div class = "card">
+<div class = "card-wrapper " style="">
+  <div class = "card margin-mob-pc">
     <!-- card left -->
     
     <div class = "product-imgs">
@@ -32,11 +32,7 @@
             <img src = "product-images/{{this.product._id}}3.jpg" alt = "shoe image">
           </a>
         </div>
-        <div class = "img-item">
-          <a href = "#" data-id = "4">
-            <img src = "product-images/{{this.product._id}}1.jpg" alt = "shoe image">
-          </a>
-        </div>
+        
       </div>
     </div>
     <!-- card right -->
@@ -137,13 +133,20 @@
 *{
     box-sizing: border-box;
     padding: 0;
-    margin: 0;
+  
     
     font-family: 'Open Sans', sans-serif;
 }
 
 .Kg-edits{
   width: 70%;
+}
+
+@media (min-width:391px){
+
+.margin-mob-pc{
+  margin-top: 20%;
+}
 }
 
 body{

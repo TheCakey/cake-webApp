@@ -122,6 +122,7 @@ router.post('/login-mob-num-submission',(req,res)=>{
   console.log(req.body)
   mobno=req.body.mobnum
   userHelper.findUserByMobNum(mobno).then((response)=>{
+    console.log('mob nummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm')
   console.log(response)
   loginErr=null;
  
@@ -169,6 +170,24 @@ router.post('/login-otp',(req,res)=>{
     res.json({logout:true})
   })
 //login codes ends..............
+
+//Login with Pass
+router.post('/login-pass',(req,res)=>{
+  console.log('passsssssssssssssssssssssssssssssssssssssssssssssssss');
+  console.log(req.body)
+
+ 
+
+  })
+
+
+
+
+//Login pass ends............................
+
+
+
+
 
 
 
@@ -429,6 +448,15 @@ router.post('/verifyCart',async(req,res)=>{
   }
 })
 
+router.get('/reset-password',(req,res)=>{
+  res.render('user/reset-password',)
+})
+
+router.post('/subscription',(req,res)=>{
+  userHelper.addSubscription(req.body).then(()=>{
+    res.redirect('/')
+  })
+})
 
 
 module.exports = router;
