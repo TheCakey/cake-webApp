@@ -179,7 +179,8 @@ return new Promise(async(resolve,reject)=>{
                 },{
                     $project:{
                         item:'$product.item',
-                        quantity:'$product.quantity'
+                        quantity:'$product.quantity',
+                        weight:'$product.weight'
                     }
                 },
                 {
@@ -192,7 +193,7 @@ return new Promise(async(resolve,reject)=>{
                 },
                 {
                     $project:{
-                       item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                       item:1,quantity:1,weight:1,product:{$arrayElemAt:['$product',0]}
                     }
                 },
                 {
@@ -200,7 +201,7 @@ return new Promise(async(resolve,reject)=>{
                     $group:{
                         _id:null,
                         
-                        total:{$sum:{$multiply: ['$quantity', {$toInt: '$product.Price'}]}}
+                        total:{$sum:{$multiply: ['$quantity', {$toInt: '$product.Price'},{$toInt:'$weight'}]}}
                     }
                 }
 
@@ -329,6 +330,31 @@ return new Promise(async(resolve,reject)=>{
         })
 
     },
+      
+    verifyCart:(proId,uid)=>{    
+        return new Promise(async(resolve,reject)=>{
+            let cart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(uid)})
+            if(cart){
+                let proExist=cart.product.findIndex(product=> product.item==proId.id)
+         
+                if(proExist!=-1){
+                    console.log('item here');
+                    resolve({status:true})
+                }
+                else{
+                    console.log('itemm not here');
+                    resolve({status:false})
+                }
+               
+            }else{
+                console.log('no cart');
+                resolve({status:false})
+            }
+        })
+    },
+
+
+
     PlaceOrder:(order,product,total)=>{
         return new Promise((resolve,reject)=>{
           

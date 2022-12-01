@@ -14,6 +14,15 @@ module.exports={
         })
     },
 
+    searchProduct:(search)=>{
+        return new Promise(async(resolve,reject)=>{
+        var search=new RegExp(search,'i')
+        db.get().collection(collection.PRODUCT_COLLECTION).find({$or:[{name:search},{category:search}]}).toArray().then((data)=>{
+           resolve(data)
+        })
+    })
+    },
+
     getProductCake:()=>{
         return new Promise(async (resolve,reject)=>{
             let products= await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
@@ -32,7 +41,8 @@ module.exports={
                     Price:ProDetails.Price,
                     Category:ProDetails.Category,
                     ProductDescription:ProDetails.ProductDescription,
-                    flavour:ProDetails.flavour
+                    flavour:ProDetails.flavour,
+                    kgstatus:ProDetails.kgstatus,
                 }
                 
 
@@ -66,7 +76,15 @@ module.exports={
    
 
 
-
+    searchProduct:(searchs)=>{
+        return new Promise(async(resolve,reject)=>{
+        var search=new RegExp(searchs,'i')
+        db.get().collection(collection.PRODUCT_COLLECTION).find({$or:[{Name:search},{Category:search}]}).toArray().then((data)=>{
+            console.log(data);
+           resolve(data)
+        })
+    })
+    }
 
 
 }

@@ -403,9 +403,30 @@ router.get('/products-page',async(req,res)=>{
 router.get('/product-detail-page', async(req,res)=>{
   let proId=req.query.id
   let product=await productHelper.getSingleProduct(proId)
-   let cakes=await productHelper.getProductCake()
+  let kgstatus = false
+  console.log(product)
+  if(product.kgstatus==='yes'){
+    kgstatus=true
+  }
    
-  res.render('user/product-detail-page',{product,cakes,sitedetails})
+  res.render('user/product-detail-page',{product,sitedetails,kgstatus})
+})
+
+router.get('/search',async(req,res)=>{
+  let search=req.query.search
+  let searchProduct=await productHelper.searchProduct(search)
+  res.render('user/search',{searchProduct,sitedetails})
+})
+
+
+router.post('/verifyCart',async(req,res)=>{
+  if(req.session.user){
+   userHelper.verifyCart(req.body,req.session.user._id).then((response)=>{
+    res.json(response.status)
+  })}
+  else{
+    res.json({status:'none'})
+  }
 })
 
 
