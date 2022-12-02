@@ -266,8 +266,9 @@ if(response){
 
 router.get('/addtocart/:id/:weight',(req,res)=>{
   if(req.session.user){
-    
-    userHelper.addToCart(req.session.user._id,req.params.id,req.params.weight).then(()=>{
+    let weight= parseFloat(req.params.weight)
+   console.log(weight);
+    userHelper.addToCart(req.session.user._id,req.params.id,weight).then(()=>{
       res.json(req.params.id)
     })
   }else{
@@ -400,10 +401,10 @@ let couponId=req.body.discountCode;
 let paymentmethod=null;
 userHelper.getOrderDetails(req.query.id).then((response)=>{
   console.log(response);
-  console.log("jjjjjjjjjjjeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+
  console.log(response.paymentMethod);
   if(response.paymentMethod=="ONLINE"){
-    console.log("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+   
     paymentmethod=response.paymentMethod;
   }
   res.render('user/viewDetailedOrder',{orderdata:response,paymentmethod,sitedetails})

@@ -1,10 +1,10 @@
 function addToCart(prodId,weight){
-  
+    alert(weight)
 $.ajax({
     url:'/addtocart/'+prodId+'/'+weight,
 method:'get',
 success:(response)=>{
-    
+ 
 if(response===false){
     swal({
         title: "You are not Loggedin?",

@@ -229,7 +229,7 @@ return new Promise(async(resolve,reject)=>{
                     $group:{
                         _id:null,
                         
-                        total:{$sum:{$multiply: ['$quantity', {$toInt: '$product.Price'},{$toInt:'$weight'}]}}
+                        total:{$sum:{$multiply: ['$quantity', {$toInt: '$product.Price'},'$weight']}}
                     }
                 }
 
@@ -308,7 +308,7 @@ return new Promise(async(resolve,reject)=>{
     },
 
     addToCart:(userId,proId,weight)=>{
-        weight=parseInt(weight);
+   
         let proObj={
             item:objectId(proId),
             quantity:1,
