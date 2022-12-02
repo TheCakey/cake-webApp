@@ -423,12 +423,15 @@ router.get('/product-detail-page', async(req,res)=>{
   let proId=req.query.id
   let product=await productHelper.getSingleProduct(proId)
   let kgstatus = false
+  let twokgstatus = false
   console.log(product)
   if(product.kgstatus==='yes'){
     kgstatus=true
+  }else if(product.kgstatus==='2kg'){
+    twokgstatus=true;
   }
    
-  res.render('user/product-detail-page',{product,sitedetails,kgstatus})
+  res.render('user/product-detail-page',{product,sitedetails,kgstatus,twokgstatus})
 })
 
 router.get('/search',async(req,res)=>{

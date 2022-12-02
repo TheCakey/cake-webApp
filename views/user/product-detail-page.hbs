@@ -73,11 +73,28 @@
       <div class = "purchase-info">
      
        {{#if kgstatus}}
-        <input class="Kg-edits" type="number" id="weight" name="weight" value="1" placeholder="Enter KG"  hidden>
+        <input class="Kg-edits" type="number" id="weight" name="weight" value="{{product.defaultweight}}" placeholder="Enter KG"  hidden>
         {{else}}
-        <input class="Kg-edits" type="number" id="weight" name="weight" placeholder="Enter KG" required>
+        {{#if twokgstatus}}
+ <label for="">Choose weight:</label>
+  <select name="weight" id="weight">
+      <option value="">choose</option>
+    <option value="1">1kg</option>
+    <option value="2">2kg</option>
+  </select>
 
+        {{else}}
+        <label for="">Choose weight:</label>
+  <select name="weight" id="weight">
+      <option value="">choose</option>
+    <option value="1">1kg</option>
+    <option value="2">2kg</option>
+      <option value="3">3kg</option>
+        <option value="4">4kg</option>
+          <option value="5">5kg</option>
+  </select>
 
+{{/if}}
         {{/if}}
  <button  onclick="addtocartform('{{this.product._id}}')"  class ="btn btncolor">
           Add to Cart <i class = "fas fa-shopping-cart"></i>
@@ -382,30 +399,25 @@ $.ajax({
     },
     method:'post',
     success:function(data){
-      alert(data)
+     
       if(data===true)
       {
-        alert('Product already added to cart');
-        window.location.replace("http://localhost:3000/cart");
+        swal("Product already added to cart!", "if you want to buy different weight of same product then please remove the product from cart and add again!").then(()=>{
+          window.location.href='/cart';
+      
+        })
+      
       }
-   else if(data==='none'){
-    swal({
-        title: "You are not Loggedin?",
-        text: "First you need to login to purchase",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((toLoggin) => {
-        if (toLoggin) {
-         window.location = '/login?id='+prodId
-        } 
-      });
+   else if(data.status==='none'){
+ 
+         window.location = '/login?id='+id
+   
 
 }
       else
       {
        w= document.getElementById("weight").value ;
+      
  if(w==''){
 swal("Please enter cake weight!", "","warning");
  }else{

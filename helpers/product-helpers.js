@@ -43,6 +43,7 @@ module.exports={
                     ProductDescription:ProDetails.ProductDescription,
                     flavour:ProDetails.flavour,
                     kgstatus:ProDetails.kgstatus,
+                    defaultweight:ProDetails.defaultweight,
                 }
                 
 
