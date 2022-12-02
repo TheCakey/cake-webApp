@@ -345,7 +345,7 @@ router.post('/checkout',async(req,res)=>{
   usr=req.session.user;
   price=  parseInt(req.body.price);
   let products =await userHelper.getCartProducts(user);
- 
+ console.log('jellooooooooooo');
    userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
     if(req.body['payment-method']=='COD'){
       res.json({cod_success:true})
@@ -372,7 +372,7 @@ router.get('/ordered-response',async (req,res)=>{
   let user=req.session.user
   let mode=req.query.id
   let cod;
-    let products =await userHelper.getCartProducts(user);
+    let products =await userHelper.getCartProducts(user._id);
     userHelper.deleteuserCart(user._id)
  
   if(mode=='cod'){

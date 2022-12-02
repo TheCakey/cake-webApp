@@ -119,6 +119,7 @@ return new Promise(async(resolve,reject)=>{
     },
     getCartProducts:(userId)=>{
         return new Promise(async(resolve,reject)=>{
+            console.log(userId);
             let cartItems=await db.get().collection(collection.CART_COLLECTION).aggregate([
                 {
                     $match:{user:objectId(userId)}
