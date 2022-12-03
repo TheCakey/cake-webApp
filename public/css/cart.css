@@ -5,7 +5,6 @@ body{
     display: flex;
     font-family: sans-serif;
     
-    font-weight: bold;
 }
 .cart-text{
     font-size: 0.8rem;
@@ -149,9 +148,7 @@ select{
 .btn:hover{
     color: white;
 }
-a{
-    color: black; 
-}
+
 a:hover{
     color: black;
     text-decoration: none;

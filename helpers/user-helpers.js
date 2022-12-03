@@ -23,20 +23,19 @@ module.exports={
     },
 
     userPassLogin:(userData)=>{
+        console.log('tttttttttttttttttttttttttttttttttttttttttttttt')
         console.log(userData)
        
        return new Promise(async (resolve,reject)=>{
            let loginStatus=false
            let response={}
-           let user=await db.get().collection(collection.USER_COLLECTION).findOne({Email:userData.Email})
+           let user=await db.get().collection(collection.USER_COLLECTION).findOne({mobnum:userData.mobnum})
            
-           if(admin){
-               bcrypt.compare(userData.Password,admin.Password).then((status)=>{
+           if(user){
+               bcrypt.compare(userData.psw,user.psw).then((status)=>{
                    if(status){
                        
-                       response.admin=admin
-                       response.status=true
-                       console.log(response);
+                       
                        resolve(response)
                    }else{
                       
@@ -45,7 +44,7 @@ module.exports={
                })
            }else{
            
-               resolve({status:false,error:'Email Does Not Exist'})
+               resolve({status:false,error:'Mobile number Does Not Exist'})
            }
        })
    },

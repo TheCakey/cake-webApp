@@ -119,14 +119,19 @@ else{
 
 
 router.post('/login-mob-num-submission',(req,res)=>{
+  console.log('checkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+
   console.log(req.body)
   mobno=req.body.mobnum
   userHelper.findUserByMobNum(mobno).then((response)=>{
+    loginErr=null;
+    if(req.body.pass===false){
+
+//otp send to mobile number
+    }
     console.log('mob nummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm')
   console.log(response)
-  loginErr=null;
  
-//otp send to mobile number
 req.session.tempUser=response;
   res.json(response)
   
@@ -162,6 +167,38 @@ router.post('/login-otp',(req,res)=>{
   }
   })
 
+  router.post('/login-psw',(req,res)=>{
+    console.log(req.body)
+   
+
+    userHelper.doLogin(req.body).then((response)=>{
+
+
+    })
+    if(req.body.otp==otp){
+      loginErr=null;
+      req.session.user=req.session.tempUser;
+      req.session.userloggedIn=true;
+      console.log(req.session.user)
+      req.session.tempUser=null;
+  
+      if(req.session.tempProdId){
+  
+        prodId=req.session.tempProdId;
+        req.session.tempProdId=null;
+         res.redirect('/product-detail-page?id='+prodId)
+      }else{
+        res.redirect('/')
+      }
+     
+    }
+    else{
+      
+       loginErr="Wrong Otp.Please retry"
+      res.redirect('/login')
+    }
+    })
+
 
   router.get('/logout',(req,res)=>{
 
@@ -172,9 +209,22 @@ router.post('/login-otp',(req,res)=>{
 //login codes ends..............
 
 //Login with Pass
-router.post('/login-pass',(req,res)=>{
+router.post('/pass-mob-num-submission',(req,res)=>{
   console.log('passsssssssssssssssssssssssssssssssssssssssssssssssss');
   console.log(req.body)
+  userHelper.userPassLogin(req.body).then((response)=>{
+    if(response.status){
+      console.log('routes succcccccccccccccccccccccccccccccccccc')
+      req.session.user=req.session.tempUser;
+    req.session.userloggedIn=true;
+    console.log(req.session.user)
+    req.session.tempUser=null;
+  }else{
+      req.session.userloginErr=response.error
+      res.redirect('/user/login')
+  }
+
+  })
 
  
 
