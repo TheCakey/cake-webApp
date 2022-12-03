@@ -27,23 +27,24 @@ module.exports={
         console.log(userData)
        
        return new Promise(async (resolve,reject)=>{
-           let loginStatus=false
+           let loginStatus=false;
            let response={}
            let user=await db.get().collection(collection.USER_COLLECTION).findOne({mobnum:userData.mobnum})
            
            if(user){
                bcrypt.compare(userData.psw,user.psw).then((status)=>{
                    if(status){
-                       
-                       
+                       console.log('login success')
+                       response.user=user
+                       response.status=true
                        resolve(response)
                    }else{
-                      
+                      console.log('login failed');
                        resolve({status:false,error:"Password Does Not Match"})
                    }
                })
            }else{
-           
+           console.log('mobnum not found');
                resolve({status:false,error:'Mobile number Does Not Exist'})
            }
        })

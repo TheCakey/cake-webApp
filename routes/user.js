@@ -112,7 +112,9 @@ else{
   if(req.query.id){
     req.session.tempProdId=req.query.id;
   }
-  res.render('user/login',{hdr:true,loginErr})
+let err = loginErr;
+loginErr=null;
+  res.render('user/login',{hdr:true,err})
 }
   
 })
@@ -167,37 +169,7 @@ router.post('/login-otp',(req,res)=>{
   }
   })
 
-  router.post('/login-psw',(req,res)=>{
-    console.log(req.body)
-   
 
-    userHelper.doLogin(req.body).then((response)=>{
-
-
-    })
-    if(req.body.otp==otp){
-      loginErr=null;
-      req.session.user=req.session.tempUser;
-      req.session.userloggedIn=true;
-      console.log(req.session.user)
-      req.session.tempUser=null;
-  
-      if(req.session.tempProdId){
-  
-        prodId=req.session.tempProdId;
-        req.session.tempProdId=null;
-         res.redirect('/product-detail-page?id='+prodId)
-      }else{
-        res.redirect('/')
-      }
-     
-    }
-    else{
-      
-       loginErr="Wrong Otp.Please retry"
-      res.redirect('/login')
-    }
-    })
 
 
   router.get('/logout',(req,res)=>{
@@ -210,18 +182,18 @@ router.post('/login-otp',(req,res)=>{
 
 //Login with Pass
 router.post('/pass-mob-num-submission',(req,res)=>{
-  console.log('passsssssssssssssssssssssssssssssssssssssssssssssssss');
-  console.log(req.body)
   userHelper.userPassLogin(req.body).then((response)=>{
     if(response.status){
-      console.log('routes succcccccccccccccccccccccccccccccccccc')
       req.session.user=req.session.tempUser;
     req.session.userloggedIn=true;
     console.log(req.session.user)
     req.session.tempUser=null;
+    res.json(response)
   }else{
-      req.session.userloginErr=response.error
-      res.redirect('/user/login')
+
+    console.log(response.error);
+  
+   res.json(response)
   }
 
   })
@@ -393,7 +365,7 @@ router.post('/checkout',async(req,res)=>{
   req.body.userId=req.session.user._id;
   user=req.session.user._id;
   usr=req.session.user;
-  price=  parseInt(req.body.price);
+  price=  parseFloat(req.body.price);
   let products =await userHelper.getCartProducts(user);
  console.log('jellooooooooooo');
    userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
