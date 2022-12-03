@@ -72,9 +72,30 @@
 
       <div class = "purchase-info">
      
-       
-        <input class="Kg-edits" type="number" id="weight" name="weight" placeholder="Enter KG" required>
-        
+       {{#if kgstatus}}
+        <input class="Kg-edits" type="number" id="weight" name="weight" value="{{product.defaultweight}}" placeholder="Enter KG"  hidden>
+        {{else}}
+        {{#if twokgstatus}}
+ <label for="">Choose weight:</label>
+  <select name="weight" id="weight">
+      <option value="">choose</option>
+    <option value="1">1kg</option>
+    <option value="2">2kg</option>
+  </select>
+
+        {{else}}
+        <label for="">Choose weight:</label>
+  <select name="weight" id="weight">
+      <option value="">choose</option>
+    <option value="1">1kg</option>
+    <option value="2">2kg</option>
+      <option value="3">3kg</option>
+        <option value="4">4kg</option>
+          <option value="5">5kg</option>
+  </select>
+
+{{/if}}
+        {{/if}}
  <button  onclick="addtocartform('{{this.product._id}}')"  class ="btn btncolor">
           Add to Cart <i class = "fas fa-shopping-cart"></i>
         </button>
@@ -370,12 +391,43 @@ img{
 
   function addtocartform(id)
 {
- w= document.getElementById("weight").value ;
+
+$.ajax({
+  url:'/verifyCart',
+   data:{
+        id:id,
+    },
+    method:'post',
+    success:function(data){
+     
+      if(data===true)
+      {
+        swal("Product already added to cart!", "if you want to buy different weight of same product then please remove the product from cart and add again!").then(()=>{
+          window.location.href='/cart';
+      
+        })
+      
+      }
+   else if(data.status==='none'){
+ 
+         window.location = '/login?id='+id
+   
+
+}
+      else
+      {
+       w= document.getElementById("weight").value ;
+      
  if(w==''){
 swal("Please enter cake weight!", "","warning");
  }else{
 addToCart(id,w)
  }
+      }
+    }
+  })
+
+
    
   
   

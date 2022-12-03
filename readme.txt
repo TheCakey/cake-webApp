@@ -1,0 +1,1 @@
+localhost cart page redirecting from product details page
