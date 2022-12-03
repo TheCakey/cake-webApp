@@ -372,7 +372,7 @@ router.get('/ordered-response',async (req,res)=>{
   let user=req.session.user
   let mode=req.query.id
   let cod;
-    let products =await userHelper.getCartProducts(user._id);
+    let products =await userHelper.getCartProducts(user.id);
     userHelper.deleteuserCart(user._id)
  
   if(mode=='cod'){
