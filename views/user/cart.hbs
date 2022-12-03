@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="css/cart.css">
 
-<div class="card cart-text">
+<div class="card cart-text" style="font-weight: bold;">
             <div class="row">
                 <div class="col-md-8 cart">
                     <div class="title">
                         <div class="row">
                             <div class="col "><h4><b>Shopping Cart</b></h4></div>
-                            <div class="col  align-self-center text-right text-muted">{{length}} items</div>
+                            <div  class="col  align-self-center text-right text-muted">{{length}} items</div>
                         </div>
                     </div>    
                         {{#each products}}
@@ -68,47 +68,7 @@
             
         </div>
 
-         <footer class="mobile-footer">
-  <div class="mdc-bottom-navigation pt-2 fixed-bottom  mt-5">
-        <nav class="mdc-bottom-navigation__list">
-            <span class="mdc-bottom-navigation__list-item mdc-ripple-surface mdc-ripple-surface--primary"
-                data-mdc-auto-init="MDCRipple" data-mdc-ripple-is-unbounded>
-                <span class="material-icons">home</span>
-               <a href="/"> <span class="mdc-bottom-navigation__list-item__text">Home</span></a>
-            </span>
 
-            <span class="mdc-bottom-navigation__list-item mdc-ripple-surface mdc-ripple-surface--primary"
-                data-mdc-auto-init="MDCRipple" data-mdc-ripple-is-unbounded>
-                <span class="material-icons">
-moped
-</span>
-              <a href="/cart"> <span class="mdc-bottom-navigation__list-item__text">Order</span></a>
-            </span>
-
-            <span
-            {{!-- mdc-bottom-navigation__list-item--activated --}}
-                class="mdc-bottom-navigation__list-item  mdc-ripple-surface mdc-ripple-surface--primary"
-                data-mdc-auto-init="MDCRipple" data-mdc-ripple-is-unbounded>
-                
-                   <span class="material-icons">
-favorite
-</span>
-
-                <span class="mdc-bottom-navigation__list-item__text">Wishlist</span>
-            </span>
-            
-            <span class="mdc-bottom-navigation__list-item mdc-ripple-surface mdc-ripple-surface--primary"
-                data-mdc-auto-init="MDCRipple" data-mdc-ripple-is-unbounded>
-              <a href="/profile"> <span class="material-icons">
-account_circle
-</span></a>
-                <span class="mdc-bottom-navigation__list-item__text">Profile</span>
-            </span>
-        </nav>
-    </div>
-</footer>
-
-<footer>
 
 
 

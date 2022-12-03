@@ -55,6 +55,7 @@
                 <p class="text-danger" id="invalid" >Invalid format Please enter valid number</p>
                 <p class="text-danger" id="invalid-user" >User Not Found, Check your number or <a href="/signup"> Create new account</a></p>
                  <p class="text-danger" id="blocked-user" >Account blocked by admin try <a href="/signup"> Signup</a></p>
+                   <p class="text-danger" id="wrong-psw" >Wrong password try again<a href="/signin"> Signup</a></p>
               {{#if loginErr}}
                   <p class="text-danger" id="otp-error">Wrong Otp</p>
                   {{/if}}
@@ -85,10 +86,10 @@
             </form>
 
             
-             <form action="/login-pass" method="post">
+             <form onsubmit="validatepass()">
             <div class="field-wrapper " id="div-none2">
                 <label for="number" class="field-label"></label>
-                <input type="password" placeholder="Enter your Password" name="password" id="password" class="field">
+                <input type="password" placeholder="Enter your Password" name="password" id="psw" class="field" required>
              
             </div>
             
@@ -110,6 +111,31 @@
 
 
 <script>
+
+
+
+    function validatepass(){
+    var psw = document.getElementById('psw').value
+  let num=parseInt(document.getElementById('div-num').value);
+
+
+$.ajax({
+    url:'/pass-mob-num-submission',
+    data:{
+        mobnum:num,
+        psw:psw
+    },
+    method:'post',
+    success:(response)=>{
+        console.log('ajaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+      
+      
+    }
+})
+    }
+
+
+
 document.querySelector('#div-display1').addEventListener("click",function(){
      document.querySelector("#div-display2").style.display = "none";
      document.querySelector("#btn-none2").style.display = "none";
@@ -133,7 +159,8 @@ document.querySelector('#div-display2').addEventListener("click",function(){
 $.ajax({
     url:'/login-mob-num-submission',
     data:{
-        mobnum:num
+        mobnum:num,
+        pass:false
     },
     method:'post',
     success:(response)=>{
@@ -182,7 +209,7 @@ swal("Otp Send!", "Otp send to your mobile number", "success");
 
 {{!-- Button two PAssword --}}
 
-    document.querySelector("#div-display2").addEventListener("click", function(){
+     document.querySelector("#div-display2").addEventListener("click", function(){
   
     var mobNum = document.getElementById('div-num').value
         var filter = /^\d*(?:\.\d{1,2})?$/;
@@ -192,10 +219,13 @@ swal("Otp Send!", "Otp send to your mobile number", "success");
                   document.querySelector("#invalid-user").style.display = "none";
                     document.querySelector("#blocked-user").style.display = "none";
                     let num=parseInt(document.getElementById('div-num').value);
+
+
 $.ajax({
     url:'/login-mob-num-submission',
     data:{
-        mobnum:num
+        mobnum:num,
+        pass:true
     },
     method:'post',
     success:(response)=>{
@@ -206,13 +236,15 @@ $.ajax({
                     document.querySelector("#blocked-user").style.display = "block";
 
             }else{
-swal("Otp Send!", "Otp send to your mobile number", "success");
+
        document.querySelector("#div-none2").style.display = "block";
      document.querySelector("#div-num").classList.add('ddiv-num')
-     document.querySelector("#div-display2").style.display = "none";
+
+          document.querySelector("#div-display2").style.display = "none";
      document.querySelector("#btn-none2").style.display = "block";
      document.querySelector("#otp-error").style.display = "none";
     document.querySelector("#blocked-user").style.display = "none";
+    
 
             }
     
@@ -241,8 +273,10 @@ swal("Otp Send!", "Otp send to your mobile number", "success");
            }
       
 });
+    
+  
 
-
+          
 
 
 </script>  
@@ -271,6 +305,9 @@ swal("Otp Send!", "Otp send to your mobile number", "success");
         display: none;
     }
     #blocked-user{
+        display: none;
+    }
+    #wrong-psw{
         display: none;
     }
 </style>
