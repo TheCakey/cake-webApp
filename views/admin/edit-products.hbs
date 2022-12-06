@@ -34,14 +34,15 @@
                  </div> <!-- form-group // -->
 
                  <div class="form-group">
-                   <label for="name" class="col-sm-3 control-label font-weight-bold">Only 1kg available?</label>
+                   <label for="name" class="col-sm-3 control-label font-weight-bold">Only one weight available?</label>
                    <div class="col-sm-9">
                     
                      <input type="radio" name="kgstatus" class="ml-4" value="yes"   required> Yes
                     <input type="radio"  name="kgstatus" class="ml-4"  value="no" required> No
-
+  <input type="radio"  name="kgstatus" class="ml-4"  value="2kg" required> 1 and 2 kg
                    </div>
                  </div> <!-- form-group // -->
+                 
                  {{#if product.defaultweight}}
 
  <label for="name" class="col-sm-3 control-label font-weight-bold">If it is only one weight available enter weight</label>

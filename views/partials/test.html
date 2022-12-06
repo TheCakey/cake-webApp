@@ -1,0 +1,142 @@
+<div class="container">
+    <div class="wrapper-searchbar">
+      <input class="input-searchbar" type="text" name="search" id="search" placeholder="Type to search" autocomplete="chrome-off">
+      <button class="button-searchbar"><i class="fa fa-search"></i></button>
+      <div class="results">
+        <ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #6d7b98;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+
+}
+
+.wrapper-searchbar {
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.15);
+  position: relative;
+  width: 450px;
+}
+
+.inputinput-searchbar {
+  width:100%;
+  border: none;
+  height: 50px;
+  border-radius: 5px;
+  padding: 0px 40px 0px 10px;
+  font-size: 18px;
+  box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
+}
+
+.input-searchbar:focus {
+  outline: none;
+}
+
+.button-searchbar {
+  position: absolute;
+  border: none;
+  background: none;
+  top: 0;
+  right: 0;
+  height: 50px;
+  line-height: 50px;
+  padding: 0;
+  width: 50px;
+}
+
+.button-searchbar:focus {
+  outline: none;
+}
+
+.button-searchbar i {
+  width: 100%;
+  color: #6d7b98;
+  line-height: 50px;
+  font-size: 22px;
+}
+
+.results {
+  padding: 0px;
+}
+
+.results ul {margin: 0; padding: 0; }
+.results ul li {
+  list-style: none;
+  border-radius: 3px;
+  opacity: 0;
+  display: none;
+  padding: 8px 12px;
+  transition: all .5s linear;
+}
+
+.show .results ul li {
+  opacity: 1;
+  display: block;
+}
+
+.show .results {
+  padding: 10px;
+}
+
+.results ul li:hover {
+  background: #ececec
+}
+  </style>
+
+  <script>let searchable = [
+    'Elastic',
+    'PHP',
+    'Something about CSS',
+    'How to code',
+    'JavaScript',
+    'Coding',
+    'Some other item',
+  ];
+  
+  const searchInput = document.getElementById('search');
+  const searchWrapper = document.querySelector('.wrapper-searchbar');
+  const resultsWrapper = document.querySelector('.results');
+  
+  searchInput.addEventListener('keyup', () => {
+    let results = [];
+    let input = searchInput.value;
+    if (input.length) {
+      results = searchable.filter((item) => {
+        return item.toLowerCase().includes(input.toLowerCase());
+      });
+    }
+    renderResults(results);
+  });
+  
+  function renderResults(results) {
+    if (!results.length) {
+      return searchWrapper.classList.remove('show');
+    }
+  
+    const content = results
+      .map((item) => {
+        return `<li>${item}</li>`;
+      })
+      .join('');
+  
+    searchWrapper.classList.add('show');
+    resultsWrapper.innerHTML = `<ul>${content}</ul>`;
+  }
+  </script>
