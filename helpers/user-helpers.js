@@ -416,6 +416,9 @@ return new Promise(async(resolve,reject)=>{
   ProductTotal: order.ProductTotal,
   totalwithoutdelivery: order.totalwithoutdelivery,
                 date:date,
+                
+                year:moment(nwdate).format('YYYY'),
+                month:moment(nwdate).format('MMM'),
                 time:time,
                 status:status
             }
