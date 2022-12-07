@@ -39,11 +39,27 @@
 
                 <div class="navbar-nav ms-auto p-4 p-lg-0 ">
 
-<div class="contianer">
+
+                
+                    <a href="/" class="nav-item nav-link active">Home</a>
+                    
+                    <a href="/products-page" class="nav-item nav-link">Products</a>
+                    {{!-- <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                            <a href="feature.html" class="dropdown-item">Our Features</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="404.html" class="dropdown-item">404 Page</a>
+                        </div>
+                    </div> --}}
+                    <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+
+					<div class="contianer">
    	<div class="TopHeader">
 			<!-- search input box start -->
    		<div class="InputBox">
-   			<input type="search" placeholder="Search for product, brands and more" id="SearchInput">
+   			<input class="input-searchbar" type="search" placeholder="Search" id="SearchInput">
 				<div class="SearchIcon">
 					<i class="fa fa-search"></i>
 				</div>
@@ -62,20 +78,6 @@
    	</div>
    </div>
 
-                
-                    <a href="/" class="nav-item nav-link active">Home</a>
-                    
-                    <a href="/products-page" class="nav-item nav-link">Products</a>
-                    {{!-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="feature.html" class="dropdown-item">Our Features</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="404.html" class="dropdown-item">404 Page</a>
-                        </div>
-                    </div> --}}
-                    <a href="contact.html" class="nav-item nav-link">Contact Us</a>
                 </div>
 
                 
@@ -111,21 +113,17 @@
 	top: 0;
 	left: 0;
 }
-.contianer .TopHeader{
-	margin-right: 3%;
-	margin-top: 7%;
-	min-height: 2rem;
+.input-searchbar{
 	background-color: rgb(255, 255, 255);
-	box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
-	display: flex;
-	justify-content: center;
-	-ms-align-items: center;
-	align-items: center;
-	max-width: 600px;
+	    border-radius: 0.8rem;
+		
+	
+
 }
+
 .contianer .TopHeader .InputBox{
 	max-width: 600px;
-	height: 36px;
+	height: 34px;
 	display: -webkit-flex;
 	display: -ms-flex;
 	display: flex;
@@ -134,7 +132,36 @@
 	-webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
 	box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
 	position: relative;
+	    border-radius: 0.8rem;
 }
+
+.contianer .TopHeader{
+	margin-right: 1%;
+	margin-top: 8.5%;
+	min-height: 2rem;
+	background-color: rgb(255, 255, 255);
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+	display: flex;
+	justify-content: center;
+	-ms-align-items: center;
+	align-items: center;
+	max-width: 600px;
+	    border-radius: 0.8rem;
+	
+}
+
+.contianer .TopHeader .InputBox .SearchResult{
+	position: absolute;
+	top:36px;
+	left: 0;
+	background-color: #fff;
+	width: 100%;
+	border-top: 1px solid #ccc;
+	border-radius: 0.8rem;
+	display: none;
+	box-shadow: 2px 3px 4px 0 rgba(0,0,0,0.4);
+}
+
 .contianer .TopHeader .InputBox input{
 	border: none;
 	outline: none;
@@ -153,18 +180,9 @@
 	cursor: pointer;
 }
 .contianer .TopHeader .InputBox .SearchIcon .fa-search{
-	color: blue;
+	color: #555;
 }
-.contianer .TopHeader .InputBox .SearchResult{
-	position: absolute;
-	top:36px;
-	left: 0;
-	background-color: #fff;
-	width: 100%;
-	border-top: 1px solid #ccc;
-	display: none;
-	box-shadow: 2px 3px 4px 0 rgba(0,0,0,0.4);
-}
+
 .contianer .TopHeader .InputBox .SearchResult li{
 	list-style: none;
 	padding-left: 20px;
@@ -184,6 +202,8 @@
 }
 .contianer .TopHeader .InputBox .SearchResult li:hover{
 	background-color: #eee;
+	border-radius: 0.8rem;
+	
 }
 .contianer .TopHeader .InputBox .SearchResult li .fa{
 	color: #afa6a6;
@@ -205,11 +225,8 @@ window.onload=function(){
 	}
 };
 
-{{!-- function openSearch() {
-  document.getElementById("myOverlay").style.display = "block";
-}
 
-function closeSearch() {
-  document.getElementById("myOverlay").style.display = "none";
-} --}}
+
+
+
 </script>
