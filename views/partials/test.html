@@ -1,0 +1,132 @@
+<div class="contianer">
+    <div class="TopHeader">
+         <!-- search input box start -->
+        <div class="InputBox">
+            <input type="search" placeholder="Search for product, brands and more" id="SearchInput">
+             <div class="SearchIcon">
+                 <i class="fa fa-search"></i>
+             </div>
+             <!-- search result dropdown box start -->
+             <ul class="SearchResult" id="ResultBox">
+                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+             </ul>
+             <!-- search result dropdown box End -->
+        </div>
+         <!-- search input box End -->
+    </div>
+</div>
+
+<script>
+    window.onload=function(){
+	var SearchResult = document.getElementById("ResultBox");
+	document.onclick=function(event){
+		if(event.target.id !== "ResultBox"){
+       SearchResult.style.display = "block";
+		}
+		if(event.target.id !== "SearchInput"){
+       SearchResult.style.display = "none";
+		}
+	}
+};
+</script>
+
+<style>
+    *{
+	padding: 0;
+	margin: 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+body{
+	background: #c0392b;
+}
+.contianer{
+	position: relative;
+	top: 0;
+	left: 0;
+}
+.contianer .TopHeader{
+	min-height: 4rem;
+	background-color: royalblue;
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+	display: flex;
+	justify-content: center;
+	-ms-align-items: center;
+	align-items: center;
+}
+.contianer .TopHeader .InputBox{
+	max-width: 600px;
+	height: 36px;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	flex-grow: 1;
+  background-color: #fff;
+	-webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+	position: relative;
+}
+.contianer .TopHeader .InputBox input{
+	border: none;
+	outline: none;
+	padding: 8px 0 8px 15px;
+	width: 100%;
+}
+.contianer .TopHeader .InputBox .SearchIcon{
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	justify-content: center;
+	-ms-align-items: center;
+	align-items: center;
+	padding: 0 15px;
+	font-size: 19px;
+	cursor: pointer;
+}
+.contianer .TopHeader .InputBox .SearchIcon .fa-search{
+	color: blue;
+}
+.contianer .TopHeader .InputBox .SearchResult{
+	position: absolute;
+	top:36px;
+	left: 0;
+	background-color: #fff;
+	width: 100%;
+	border-top: 1px solid #ccc;
+	display: none;
+	box-shadow: 2px 3px 4px 0 rgba(0,0,0,0.4);
+}
+.contianer .TopHeader .InputBox .SearchResult li{
+	list-style: none;
+	padding-left: 20px;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	-ms-align-items: center;
+	align-items: center;
+}
+.contianer .TopHeader .InputBox .SearchResult li a{
+	text-decoration: none;
+	font-size: 14px;
+	padding: 10px 15px;
+	display: block;
+	width: 100%;
+	color: #696262;
+}
+.contianer .TopHeader .InputBox .SearchResult li:hover{
+	background-color: #eee;
+}
+.contianer .TopHeader .InputBox .SearchResult li .fa{
+	color: #afa6a6;
+	font-size: 14px;
+}
+
+</style>
