@@ -344,8 +344,9 @@ COD=true
 }
 
   dlcharge=deliverydetails[0].deliveryCharge;
+  dlcharge= parseFloat(dlcharge)
   //delivery charge set from admin side 
-    total=parseInt(req.query.fullTotal);
+    total=parseFloat(req.query.fullTotal);
   Ttlamount=total+dlcharge;
 let productTotal=req.query.producttotal;
 coupon=req.query.coupon
