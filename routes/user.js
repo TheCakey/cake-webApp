@@ -221,7 +221,7 @@ router.get('/profile',verifyLogin,async (req,res)=>{
 let orders= await userHelper.getPendingOrderProducts(user._id)
 let cnOrders= await userHelper.getCancelledOrderProducts(user._id)
 let dlOrders= await userHelper.getDeliveredOrderProducts(user._id)
-console.log(cnOrders)
+console.log("Cn order" + cnOrders)
 console.log('-----------------------------ewwwwwwwwwwwwwwwwwwww');
  console.log(orders);
   res.render('user/profile-page',{user,orders,sitedetails,cnOrders,dlOrders})
@@ -254,6 +254,7 @@ router.get('/cart',verifyLogin, async (req,res,next)=>{
   let products=null;
   let total=0;
   let length;
+  let blank=false;
   let producttotal
   if(user){
      products=await userHelper.getCartProducts(req.session.user._id);
@@ -261,11 +262,12 @@ router.get('/cart',verifyLogin, async (req,res,next)=>{
      
      if(products.length>0){
       total=await userHelper.getTotalAmount(req.session.user._id)
+     }else{
+        blank=true;
      }
     
   }
-let a=10
-  res.render('user/cart',{products,userId,total,length,sitedetails})
+  res.render('user/cart',{products,userId,total,length,sitedetails,blank})
 
 })
 
@@ -460,7 +462,6 @@ router.get('/product-detail-page', async(req,res)=>{
 router.get('/search',async(req,res)=>{
   let search=req.query.search
   let searchProduct=await productHelper.searchProduct(search)
-  console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
   console.log(searchProduct);
   res.json(searchProduct)
 })

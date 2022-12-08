@@ -12,7 +12,7 @@ let usersList;
 let ordersList;
 let productList;
 let pincodeList;
-
+let adminName=null;
 const verifyLogin=(req,res,next)=>{
   if(req.session.adminLoggedIn){
       next()
@@ -34,7 +34,7 @@ if(req.session.adminLoggedIn){
   let orderlength = ordersList.length;
   let productlength = productList.length;
   let pincodelength = pincodeList.length;
-  res.render('admin/index',{admin:true,users:usersList,usrlength,orderlength,productlength,pincodelength}); 
+  res.render('admin/index',{admin:true,users:usersList,usrlength,orderlength,productlength,pincodelength,adminName}); 
 }
 else{
   res.redirect('admin/login')
@@ -65,6 +65,7 @@ adminHelpers.doLogin(req.body).then((response)=>{
 
       if(response.status){
           req.session.admin=response.admin
+          adminName=response.admin.name
           console.log(response.admin);
           req.session.adminLoggedIn=true
           res.redirect('/admin')
@@ -114,7 +115,7 @@ adminHelpers.deleteUser(req.query.id).then(()=>{
 
 router.get('/product-add',verifyLogin,async (req,res)=>{
   let category = await adminHelpers.viewAllCategory()
-  res.render('admin/products-add',{admin:true,category})
+  res.render('admin/products-add',{admin:true,category,adminName})
 })
 
 router.post('/products-add',(req,res)=>{
@@ -246,14 +247,14 @@ router.get('/view-all-cakes',verifyLogin,async (req,res)=>{
   let cakes=await productHelpers.getProductCake()
  
   console.log(cakes);
-  res.render('admin/view-all-products',{admin:true,cakes})
+  res.render('admin/view-all-products',{admin:true,cakes,adminName})
 })
 
 router.get('/edit-cakes',verifyLogin,async(req,res)=>{
   let proId=req.query.id
 console.log(proId);
     let product=await productHelpers.getSingleProduct(proId)
-    res.render('admin/edit-products',{admin:true,product})
+    res.render('admin/edit-products',{admin:true,product,adminName})
 
 })
 
@@ -417,14 +418,13 @@ router.get('/delete-product',verifyLogin, (req,res)=>{
 
 
 
-//62dff3e8d486bd431653b096
 
 
 //Coupon
 
 router.get('/add-coupon',verifyLogin,(req,res)=>{
   
-  res.render('admin/add-coupon',{admin:true})
+  res.render('admin/add-coupon',{admin:true,adminName})
 })
 router.post('/add-coupon',(req,res)=>{
   console.log(req.body)
@@ -438,7 +438,7 @@ router.post('/add-coupon',(req,res)=>{
 router.get('/view-all-coupons',verifyLogin,async(req,res)=>{
   let coupons = await adminHelpers.viewAllCoupons()
   console.log(coupons)
-  res.render('admin/view-all-coupons',{admin:true,coupons})
+  res.render('admin/view-all-coupons',{admin:true,coupons,adminName})
 })
 
 router.get('/delete-coupon',(req,res)=>{
@@ -457,7 +457,7 @@ router.get('/delete-coupon',(req,res)=>{
 
 router.get('/add-category',verifyLogin,(req,res)=>{
   
-  res.render('admin/add-category',{admin:true})
+  res.render('admin/add-category',{admin:true,adminName})
 })
 router.post('/add-category',(req,res)=>{
   console.log(req.body)
@@ -471,7 +471,7 @@ router.post('/add-category',(req,res)=>{
 router.get('/view-all-category',verifyLogin,async(req,res)=>{
   let category = await adminHelpers.viewAllCategory()
   console.log(category)
-  res.render('admin/view-all-category',{admin:true,category})
+  res.render('admin/view-all-category',{admin:true,category,adminName})
 })
 
 router.get('/delete-category',verifyLogin,(req,res)=>{
@@ -489,19 +489,19 @@ router.get('/delete-category',verifyLogin,(req,res)=>{
 router.get('/pending-orders',verifyLogin,async (req,res)=>{
   let pendingOrders = await adminHelpers.viewAllPendingOrders()
   console.log(pendingOrders)
-  res.render('admin/pending-orders',{admin:true,pendingOrders})
+  res.render('admin/pending-orders',{admin:true,pendingOrders,adminName})
 })
 
 router.get('/delivered-order',verifyLogin,async (req,res)=>{
   let deliveredOrders = await adminHelpers.viewAlldeliveredOrders()
   console.log(deliveredOrders)
-  res.render('admin/delivered-orders',{admin:true,deliveredOrders})
+  res.render('admin/delivered-orders',{admin:true,deliveredOrders,adminName})
 })
 
 router.get('/cancelled-orders',verifyLogin,async (req,res)=>{
   let cancelledOrders = await adminHelpers.viewAllCancelledOrders()
   console.log(cancelledOrders)
-  res.render('admin/cancelled-orders',{admin:true,cancelledOrders})
+  res.render('admin/cancelled-orders',{admin:true,cancelledOrders,adminName})
 })
 
 
@@ -529,7 +529,7 @@ router.get('/cancelledstatus',verifyLogin,(req,res)=>{
 
 router.get('/add-pincode',verifyLogin,(req,res)=>{
   
-  res.render('admin/add-pincode',{admin:true})
+  res.render('admin/add-pincode',{admin:true,adminName})
 })
 router.post('/add-pincode',(req,res)=>{
   console.log(req.body)
@@ -544,7 +544,7 @@ router.post('/add-pincode',(req,res)=>{
 router.get('/view-all-pincodes',verifyLogin,async(req,res)=>{
   let pincodes = await adminHelpers.viewAllPincodes()
   console.log(pincodes)
-  res.render('admin/view-all-pincodes',{admin:true,pincodes})
+  res.render('admin/view-all-pincodes',{admin:true,pincodes,adminName})
 })
 
 router.get('/delete-pincode',verifyLogin,(req,res)=>{
@@ -564,7 +564,7 @@ router.get('/aboutSection',verifyLogin,async(req,res)=>{
     let about=await adminHelpers.getSiteDetails()
 console.log(about)
     if(about.length !== 0){
-      res.render('admin/editAboutSection',{admin:true,about})
+      res.render('admin/editAboutSection',{admin:true,about,adminName})
      
     }else{
       res.render('admin/addAboutSection',{admin:true})
@@ -592,10 +592,10 @@ router.get('/linksection',verifyLogin,async(req,res)=>{
   let links=await adminHelpers.getSocialLinks()
 console.log(links)
   if(links.length !== 0){
-    res.render('admin/editSocialLinks',{admin:true,links})
+    res.render('admin/editSocialLinks',{admin:true,links,adminName})
    
   }else{
-    res.render('admin/addSocialLinks',{admin:true})
+    res.render('admin/addSocialLinks',{admin:true,adminName})
   }
 })
 
@@ -623,15 +623,16 @@ router.get('/viewPendingOrders',verifyLogin,async(req,res)=>{
       console.log("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
       paymentmethod=response.paymentMethod;
     }
-    res.render('admin/viewPendingOrders',{admin:true,orderdata:response,paymentmethod})
+    res.render('admin/viewPendingOrders',{admin:true,orderdata:response,paymentmethod,adminName})
   
   })
   
   })
-  router.get('/calculateMonthlyRevenue',verifyLogin,async(req,res)=>{
+  router.get('/calculateMonthlyRevenue',async(req,res)=>{
     let revenue=await adminHelpers.calculateMonthlyRevenue()
     console.log(revenue)
-    res.render('admin/monthlyRevenue',{admin:true,revenue})
+res.json(revenue)
+    // res.render('admin/monthlyRevenue',{admin:true,revenue})
   })
   
 
