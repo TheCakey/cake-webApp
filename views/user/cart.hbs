@@ -62,7 +62,14 @@
                     <p id="errormsg" class="text-danger"></p>
                     
                     </form>
+                    {{#if blank}}
+
+ <button id="checkout" type="submit"   class="btn " disabled>CHECKOUT</button>
+                    {{else}}
+
+
                     <button id="checkout" type="submit"   class="btn ">CHECKOUT</button>
+                    {{/if}}
                 </div>
             </div>
             

@@ -325,66 +325,66 @@ module.exports={
             })
         })
     },
-    calculateMonthlyRevenue:()=>{
-        return new Promise(async(resolve,reject)=>{
-            let date = new Date()
-            let month = date.getMonth()
-            let year = date.getFullYear()
-            let revenue = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-                {
-                    $match:{status:'delivered'}
-                },
-                {
-                    $project:{
-                        month:{$month:'$date'},
-                        year:{$year:'$date'},
-                        total:{$sum:'$total'}
-                    }
-                },
-                {
-                    $match:{month:month,year:year}
-                },
-                {
-                    $group:{
-                        _id:null,
-                        total:{$sum:'$total'}
-                    }
-                }
-            ]).toArray()
-            resolve(revenue)
-        })
-    },
+    // calculateMonthlyRevenue:()=>{
+    //     return new Promise(async(resolve,reject)=>{
+    //         let date = new Date()
+    //         let month = "Dec"
+    //         console.log(month);
+    //         let year = date.getFullYear()
+    //         let revenue = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+    //             {
+    //                 $match:{status:'delivered'}
+    //             },
+    //             {
+    //                 $project:{
+                       
+    //                     total:'$totalAmount'
+    //                 }
+    //             },
+              
+    //             {
+    //                 $group:{
+    //                     _id:null,
+    //                     total:{$sum:'$totalAmount'}
+    //                 }
+    //             }
+    //         ]).toArray()
+    //         resolve(revenue)
+    //     })
+    // },
 
-    calculateDailyRevenue:()=>{
-        return new Promise(async(resolve,reject)=>{
-            let date = new Date()
-            let day = date.getDate()
-            let month = date.getMonth()
-            let year = date.getFullYear()
-            let revenue = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-                {
-                    $match:{status:'delivered'}
-                },
-                {
-                    $project:{
-                        day:{$dayOfMonth:'$date'},
-                        month:{$month:'$date'},
-                        year:{$year:'$date'},
-                        total:{$sum:'$total'}
-                    }
-                },
-                {
-                    $match:{day:day,month:month,year:year}
-                },
-                {
-                    $group:{
-                        _id:null,
-                        total:{$sum:'$total'}
-                    }
-                }
-            ]).toArray()
-            resolve(revenue)
-        })
-    }
+    // calculateDailyRevenue:()=>{
+    //     return new Promise(async(resolve,reject)=>{
+    //         let date = new Date()
+    //         let day = date.getDate()
+    //         let month = date.getMonth()
+    //         let year = date.getFullYear()
+    //         let revenue = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+    //             {
+    //                 $match:{status:'delivered'}
+    //             },
+    //             {
+    //                 $project:{
+    //                     day:{$dayOfMonth:'$date'},
+    //                     month:{$month:'$date'},
+    //                     year:{$year:'$date'},
+    //                     total:{$sum:'$total'}
+    //                 }
+    //             },
+    //             {
+    //                 $match:{day:day,month:month,year:year}
+    //             },
+    //             {
+    //                 $group:{
+    //                     _id:null,
+    //                     total:{$sum:'$total'}
+    //                 }
+    //             }
+    //         ]).toArray()
+    //         resolve(revenue)
+    //     })
+    // },
+
+    
     
 }

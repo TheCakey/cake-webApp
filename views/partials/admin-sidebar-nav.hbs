@@ -11726,10 +11726,14 @@ body {
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
+                          <div style="text-align: center;" class="small">Logged in as:
+                       {{adminName}}
+                    </div>
                         <li><a class="dropdown-item" href="/admin/logout">Logout</a></li>
                     </ul>
                 </li>
             </ul>
+          
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -11911,7 +11915,7 @@ body {
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                       {{adminName}}
                     </div>
                 </nav>
             </div>
