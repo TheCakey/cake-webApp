@@ -392,7 +392,7 @@ router.get('/add-coupon',verifyLogin,(req,res)=>{
   res.render('admin/add-coupon',{admin:true})
 })
 router.post('/add-coupon',(req,res)=>{
-  adminHelpers.addCoupon(req.body).then(async()=>{
+  adminHelpers.addCoupon(req.body).then(async(res)=>{
     res.redirect('/admin/view-all-coupons')
 
   })
@@ -531,14 +531,53 @@ router.get('/aboutSection',verifyLogin,async(req,res)=>{
 })
 
 router.post('/addAboutSection',verifyLogin,async(req,res)=>{
-  adminHelpers.addSiteDetails(req.body).then(()=>{
-    res.redirect('/admin')
+  adminHelpers.addSiteDetails(req.body).then((result)=>{
+
+if(req.files){
+
+    let image=req.files.Image1
+  image.mv('./public/img/master-carasoul-1.jpg',(err,done)=>{
+    if(err){
+      console.log("err1"+err)
+    }
+    
   })
+
+  let image1=req.files.Image2
+  image1.mv('./public/img/master-carasoul-2.jpg',(err,done)=>{
+    if(err){
+      console.log("err2"+err)
+    }
+
+   
+  })
+  res.redirect('/admin')
+
+}
+})
+
+
 })
 
 router.post('/editAboutSection',verifyLogin,async(req,res)=>{
   let id = req.body.siteid;
   adminHelpers.updateSite(req.body,id).then(()=>{
+    let image=req.files.Image1
+    image.mv('./public/img/master-carasoul-1.jpg',(err,done)=>{
+      if(err){
+        console.log(err)
+      }
+      
+    })
+  
+    let image1=req.files.Image2
+    image1.mv('./public/img/master-carasoul-2.jpg',(err,done)=>{
+      if(err){
+        console.log(err)
+      }
+  
+     
+    })
     res.redirect('/admin')
   })
 })

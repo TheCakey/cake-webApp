@@ -30,6 +30,7 @@ router.get('/', async function (req, res, next) {
   sitedetails = await adminHelpers.getSiteDetails()
 cakes=await productHelper.getProductCake()
 season = await productHelper.getCurrentSeason()
+console.log(season.season);
 let SeasonName = season.season
 seasonalProducts = await productHelper.getSeasonalProducts(season.season)
 console.log(seasonalProducts);
@@ -38,6 +39,13 @@ cakes=cakes.slice(0, 8);
 
 });
 
+router.get('/browse-season-product',async function (req, res, next) {
+  sitedetails = await adminHelpers.getSiteDetails()
+  let season = req.query.name
+  let seasonalProducts = await productHelper.getSeasonalProducts(season)
+  res.render('user/browse-season-product',{sitedetails,seasonalProducts,season})
+
+})
 
 
 //signup codes

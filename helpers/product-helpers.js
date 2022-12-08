@@ -40,8 +40,11 @@ module.exports={
 
         getSeasonalProducts:(season)=>{
             return new Promise(async (resolve,reject)=>{
+                console.log(season);
                 let products= await db.get().collection(collection.PRODUCT_COLLECTION).find({Category:season}).toArray()
+                console.log(products);
                 resolve(products)
+
             })},
 
     updateProduct:(ProDetails,proId)=>{
