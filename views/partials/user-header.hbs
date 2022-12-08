@@ -56,7 +56,7 @@
                     <a href="contact.html" class="nav-item nav-link">Contact Us</a>
 
 					<div class="contianer">
-   	<div class="TopHeader">
+   	<div class="TopHeader" id="TopHeader">
 			<!-- search input box start -->
    		<div class="InputBox" id="inputBar">
    			<input class="input-searchbar" type="search" placeholder="Search" id="SearchInput" >
@@ -259,10 +259,7 @@
 */
 
 // getting all required elementsconst elem = document.getElementById('elemenent')
-const elem = document.getElementById('inputBar')
-elem.onmouseout = function () {
-  alert('mouse out occured!')
-}
+
 
 
 
@@ -273,6 +270,9 @@ var SearchResult = document.getElementById("ResultBox");
 // const icon = searchInput.querySelector(".SearchIcon");
 // let linkTag = searchInput.querySelector("a");
 let webLink;
+
+
+
 
 // if user press any key and release
 input.onkeyup = (e)=>{
@@ -285,7 +285,9 @@ input.onkeyup = (e)=>{
 		type: 'GET',
 		data: {search: userData},
 		success: function (data) {
-			
+			console.log("response data:"+data)
+            if(data.length > 0){
+                
 			emptyArray = data.map(function (val) {
     return (val ) ;
 });
@@ -293,7 +295,6 @@ console.log(emptyArray)
  emptyArray = emptyArray.map((data)=>{
 					
 
-			console.log("data i:"+data.Name);
             // passing return data inside li tag
             return data = '<li> <a href="/product-detail-page?id='+data._id+'">'+ data.Name +'</a></li>';
         });
@@ -307,7 +308,11 @@ console.log(emptyArray)
             allList[i].setAttribute("onclick", "select(this)");
         }
 
-
+        }else{
+  
+             data = '<ul> </ul>';
+              resultBox.innerHTML = data;
+        }
 		}
 
 	})
@@ -321,6 +326,17 @@ else{
 function clearsuggestion(){
 	SearchResult.style.display = "none";
 }
+
+const elem = document.getElementById('inputBar')
+elem.onmouseover = function () {
+   SearchResult.style.display = "block";
+}
+
+
+elem.onmouseout = function () {
+   SearchResult.style.display = "none";
+}
+
 
 function showSuggestions(list){
     let listData;
