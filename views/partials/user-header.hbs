@@ -58,7 +58,7 @@
 					<div class="contianer">
    	<div class="TopHeader">
 			<!-- search input box start -->
-   		<div class="InputBox">
+   		<div class="InputBox" id="inputBar">
    			<input class="input-searchbar" type="search" placeholder="Search" id="SearchInput" >
 				<div class="SearchIcon">
 					<i class="fa fa-search"></i>
@@ -258,7 +258,14 @@
 };
 */
 
-// getting all required elements
+// getting all required elementsconst elem = document.getElementById('elemenent')
+const elem = document.getElementById('inputBar')
+elem.onmouseout = function () {
+  alert('mouse out occured!')
+}
+
+
+
 const searchInput = document.querySelector(".InputBox");
 const input = searchInput.querySelector("input");
 const resultBox = searchInput.querySelector(".resultBox");
