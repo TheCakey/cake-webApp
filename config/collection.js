@@ -10,5 +10,7 @@ module.exports={
     CATEGORY_COLLECTION:'category',
     SITE_COLLECTION:'sitedetails',
     LINK_COLLECTION:'sociallinks',
-    SUBSCRIPTION_COLLECTION:'subscription'
+    SUBSCRIPTION_COLLECTION:'subscription',
+    SEASON_COLLECTION:'currentseason',
+    
 }

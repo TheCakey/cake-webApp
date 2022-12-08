@@ -4,19 +4,23 @@
       
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
         <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-          <h1 style="color:#007bff">Add Your New Category</h1>
+          <h1 style="color:#007bff">Current Season</h1>
         </div>
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
-              <span class="padding-bottom--15">Enter your category name</span>
-              <form action="/admin/add-category" method="post">
-                <div class="field padding-bottom--24">
-                    
-                  <label for="number">category Name</label>
-                  <input type="text" name="Name">
-                  
-                </div>
+              <span class="padding-bottom--15">Choose current season</span>
+              <form action="/admin/add-current-season" method="post">
+  <select name="season" id="weight" class="Kg-selector">
+      <option value="">choose</option>
+         {{#each category}}
+
+<option value="{{this.Name}}">{{this.Name}}</option>
+                    {{/each}}
+                 
+    
+    
+  </select>
                 
                 {{!-- <div class="field padding-bottom--24">
                   <div class="grid--50-50">
@@ -27,7 +31,7 @@
                 </div> --}}
                 
                 <div class="field padding-bottom--24">
-                  <input type="submit">
+                  <input type="submit"  >
                 </div>
              
               </form>
@@ -51,6 +55,26 @@ body {
     min-height: 100%;
     background-color: #ffffff;
 }
+
+  .Kg-selector{
+  margin-bottom: 10%;
+    cursor:pointer;
+  border-radius:10px;
+  padding:13px 140px;
+  outline:none;
+  background:#fff;
+  border:1px solid #e9e9e9;
+  }
+  .Kg-selector option{
+
+    cursor:pointer;
+  border-radius:10px;
+  padding:25px 50px;
+  outline:none;
+  background:#fff;
+  border:1px solid #e9e9e9;
+  }
+
 h1 {
     letter-spacing: -1px;
 }

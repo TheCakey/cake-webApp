@@ -31,6 +31,18 @@ module.exports={
 
         })
     },
+    getCurrentSeason:()=>{
+        return new Promise(async (resolve,reject)=>{
+            let season= await db.get().collection(collection.SEASON_COLLECTION).findOne()
+            resolve(season)
+        })},
+
+
+        getSeasonalProducts:(season)=>{
+            return new Promise(async (resolve,reject)=>{
+                let products= await db.get().collection(collection.PRODUCT_COLLECTION).find({Category:season}).toArray()
+                resolve(products)
+            })},
 
     updateProduct:(ProDetails,proId)=>{
         return new Promise(async(resolve,reject)=>{
@@ -52,7 +64,6 @@ module.exports={
                 resolve()
             }).catch((err)=>{
 
-                console.log(err);
                 reject()
             })
         })
@@ -81,11 +92,11 @@ module.exports={
         return new Promise(async(resolve,reject)=>{
         var search=new RegExp(searchs,'i')
         db.get().collection(collection.PRODUCT_COLLECTION).find({$or:[{Name:search},{Category:search}]}).toArray().then((data)=>{
-            console.log(data);
            resolve(data)
         })
     })
     }
-
+   ,
+   
 
 }

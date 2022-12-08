@@ -23,8 +23,6 @@ module.exports={
     },
 
     userPassLogin:(userData)=>{
-        console.log('tttttttttttttttttttttttttttttttttttttttttttttt')
-        console.log(userData)
        
        return new Promise(async (resolve,reject)=>{
            let loginStatus=false;
@@ -34,17 +32,14 @@ module.exports={
            if(user){
                bcrypt.compare(userData.psw,user.psw).then((status)=>{
                    if(status){
-                       console.log('login success')
                        response.user=user
                        response.status=true
                        resolve(response)
                    }else{
-                      console.log('login failed');
                        resolve({status:false,error:"Password Does Not Match"})
                    }
                })
            }else{
-           console.log('mobnum not found');
                resolve({status:false,error:'Mobile number Does Not Exist'})
            }
        })
@@ -65,7 +60,6 @@ module.exports={
 return new Promise(async(resolve,reject)=>{
     db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(id)},{$set: {fullname:userData.fullname,permanentaddress:userData.permanentaddress,pincode:userData.pincode,altNum:userData.altNum,district:userData.district,state:userData.state }}).then(async ()=>{
         user= await db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(id)})
-        console.log(user);
         resolve(user)
     })
 })
@@ -81,8 +75,7 @@ return new Promise(async(resolve,reject)=>{
             if(userCart){
                 
                     let proExist=userCart.product.findIndex(product=> product.item==proId)
-                    console.log('prooooooooooooo exist')
-                    console.log(proExist);
+              
                     if(proExist!=-1){
                         db.get().collection(collection.CART_COLLECTION)
                         .updateOne({user:objectId(userId),'product.item':objectId(proId)},
@@ -119,7 +112,6 @@ return new Promise(async(resolve,reject)=>{
     },
     getCartProducts:(userId)=>{
         return new Promise(async(resolve,reject)=>{
-            console.log(userId);
             let cartItems=await db.get().collection(collection.CART_COLLECTION).aggregate([
                 {
                     $match:{user:objectId(userId)}
@@ -323,8 +315,7 @@ return new Promise(async(resolve,reject)=>{
             if(userCart){
                 
                     let proExist=userCart.product.findIndex(product=> product.item==proId)
-                    console.log('prooooooooooooo exist')
-                    console.log(proExist);
+                   
                     if(proExist!=-1){
                         db.get().collection(collection.CART_COLLECTION)
                         .updateOne({user:objectId(userId),'product.item':objectId(proId)},
@@ -367,16 +358,13 @@ return new Promise(async(resolve,reject)=>{
                 let proExist=cart.product.findIndex(product=> product.item==proId.id)
          
                 if(proExist!=-1){
-                    console.log('item here');
                     resolve({status:true})
                 }
                 else{
-                    console.log('itemm not here');
                     resolve({status:false})
                 }
                
             }else{
-                console.log('no cart');
                 resolve({status:false})
             }
         })
@@ -424,7 +412,6 @@ return new Promise(async(resolve,reject)=>{
             }
             db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
               
-               console.log(response);
                 resolve(response.insertedId)
             })
         })
@@ -439,13 +426,10 @@ return new Promise(async(resolve,reject)=>{
                  receipt: ""+orderId,  
                  notes: {    key1: "value3",    key2: "value2"  }},(err,order)=>{
                     
-                     console.log(order)
                      if(err){
                          
-                         console.log(err);
                      }else{
                          order.user=user
-                    console.log("new Order:",order)
                     resolve(order)
                      }
                  })
@@ -482,7 +466,6 @@ getCouponDetails:(couponId)=>{
        
        db.get().collection(collection.COUPON_COLLECTION).findOne({Code:couponId}).then((coupon)=>{
            
-             console.log(coupon);
              resolve(coupon)
     })
   

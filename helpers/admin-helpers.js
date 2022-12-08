@@ -9,7 +9,6 @@ module.exports={
     
 
      doLogin:(userData)=>{
-         console.log(userData)
         
         return new Promise(async (resolve,reject)=>{
             let loginStatus=false
@@ -22,7 +21,6 @@ module.exports={
                         
                         response.admin=admin
                         response.status=true
-                        console.log(response);
                         resolve(response)
                     }else{
                        
@@ -49,11 +47,9 @@ module.exports={
     manageUser:(userId,status)=>{
         return new Promise((resolve,reject)=>{
             if(status==='true'){
-                console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
                 db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{ $set: { "status" : false } })
 
             }else{
-                console.log('hlooooooooooooooooooooooooooooooooooooooooooooo');
                 db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{ $set: { "status" : true } })
 
             }
@@ -87,8 +83,7 @@ module.exports={
       },
       
       deleteCoupon:(prodId)=>{
-        console.log('product id display');
-        console.log(prodId);
+        
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.COUPON_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{               
                 resolve(response)
@@ -106,6 +101,18 @@ module.exports={
         })        
         })
       },
+      
+      addCurrentSeason:(season)=>{
+       
+        return new Promise (async (resolve,reject)=>{
+        db.get().collection(collection.SEASON_COLLECTION).remove({}).then(()=>{
+            db.get().collection(collection.SEASON_COLLECTION).insertOne(season).then(()=>{
+                resolve()
+        })
+        
+        })        
+        })
+      },
 
       viewAllCategory:()=>{
         return new Promise (async (resolve,reject)=>{
@@ -114,8 +121,7 @@ module.exports={
         })
       },
       deleteCategory:(catId)=>{
-        console.log('product id display');
-        console.log(catId);
+       
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.CATEGORY_COLLECTION).deleteOne({_id:objectId(catId)}).then((response)=>{               
                 resolve(response)
@@ -203,7 +209,6 @@ module.exports={
         return new Promise ((resolve,reject)=>{
             db.get().collection(collection.PINCODE_COLLECTION).findOne({Pincode:pincode}).then((res)=>{
            
-                console.log(res);
                 resolve(res)
        })
           
@@ -261,7 +266,8 @@ module.exports={
                     domainName:SiteDetails.domainName,
                     email:SiteDetails.email,
                     SiteDescription:SiteDetails.SiteDescription,
-                    deliveryMode:SiteDetails.deliveryMode
+                    deliveryMode:SiteDetails.deliveryMode,
+                    deliveryCharge:SiteDetails.deliveryCharge
                 }
                 
 
@@ -270,7 +276,6 @@ module.exports={
                 resolve()
             }).catch((err)=>{
 
-                console.log(err);
                 reject()
             })
         })
@@ -316,7 +321,6 @@ module.exports={
                 resolve()
             }).catch((err)=>{
 
-                console.log(err);
                 reject()
             })
         })

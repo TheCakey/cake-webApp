@@ -190,7 +190,6 @@ else{
 total=parseInt(total)
 let discountCode = document.getElementById('code').value;
 document.getElementById("errorcpnmsg").innerHTML = " "
-  console.log(total)
 if(discountCode.length==0){
   alert("Please enter discount code")
   return 
@@ -206,7 +205,6 @@ if(discountCode.length==0){
       method:'post',
       success:(response)=>{
 
-        console.log(response)
         if(response.valid){
 document.getElementById("code").disabled = true;
 document.getElementById("errorcpnmsg").style.color = "black";

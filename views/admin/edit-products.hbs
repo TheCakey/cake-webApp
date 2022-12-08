@@ -65,8 +65,10 @@
                    </div> --}}
                    <STRONG class="col-sm-3 control-label font-weight-bold">Category</STRONG> <br>
 
-                   <input type="radio" value="Cream" name="Category" class="ml-4">Cream
-                   <input type="radio" value="Plum" name="Category" class="ml-3">Plum 
+                  {{#each category}}
+<input type="radio" value={{this.Name}} name="Category" class="ml-4" required/>{{this.Name}}
+
+                    {{/each}}
                    <br><br>
                 
                  

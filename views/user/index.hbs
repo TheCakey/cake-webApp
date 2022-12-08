@@ -126,14 +126,14 @@
 
 
 
-
+{{#if SeasonName}}
  <!-- Product Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-0 gx-5 align-items-end">
                 <div class="col-lg-6">
                     <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                        <h1 class="display-5 mb-3">Gift</h1>
+                        <h1 class="display-5 mb-3">{{SeasonName}}</h1>
                         {{!-- <p>Tempor ut dolore lorem kasd vero ipsum sit eirmo</p> --}}
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                     <div class="row g-4">
                       
                        
-                       {{#each cakes}}
+                       {{#each seasonalProducts}}
 
                         <div class="col-xl-3 col-lg-4 col-md-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
                             
@@ -184,7 +184,7 @@
     <!-- Product End -->
 
 
-
+{{/if}}
 
 
 
@@ -198,8 +198,8 @@
                 <div class="col-lg-3 col-md-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="bg-white text-center h-100 p-4 p-xl-5">
                         <img class="img-fluid mb-4" src="img/icon-1.png" alt="">
-                        <h4 class="mb-3">Fastest Delivery</h4>
-                        <p class="mb-4">Fast delivery for orders above ₹499</p>
+                        <h4 class="mb-3">On Time Delivery</h4>
+                        <p class="mb-4">Delivery at right time at right place</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -220,7 +220,7 @@
                     <div class="bg-white text-center h-100 p-4 p-xl-5">
                         <img class="img-fluid mb-4" src="img/icon-4.png" alt="">
                         <h4 class="mb-3">24/7 Help Centre</h4>
-                        <p class="mb-4">Dedicated 24/7 support for customers</p>
+                        <p class="mb-4">Dedicated 24/7 support</p>
                     </div>
                 </div>
             </div>
@@ -230,57 +230,44 @@
 
 
     <!-- Testimonial Start -->
-    <div class="container-fluid bg-light bg-icon py-6 mb-5">
+    <div class="container-fluid bg-light bg-icon py-6 mb-5" >
         <div class="container">
             <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <h1 class="display-5 mb-3">Customer Review</h1>
-                <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                <div class="testimonial-item position-relative bg-white p-5 mt-4">
+                <div class="testimonial-item position-relative bg-white p-5 mt-4" style="height: 280px;">
                     <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                    <p class="mb-4">The cake is soft and really delicious. I like the cinnamon taste and there are big chunks of walnut. Thanyou Cakey
+Delivered on time too.</p>
                     <div class="d-flex align-items-center">
                         <img class="flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" alt="">
                         <div class="ms-3">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
+                            <h5 class="mb-1">Shera</h5>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-item position-relative bg-white p-5 mt-4">
+                <div class="testimonial-item position-relative bg-white p-5 mt-4" style="height: 280px;">
                     <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                    <p class="mb-4">it's my 2nd order from Cakey . Gifted for birthday... He just love it...The cake taste delicious... Highly recommended..</p>
                     <div class="d-flex align-items-center">
                         <img class="flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg" alt="">
                         <div class="ms-3">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
+                            <h5 class="mb-1">Alex</h5>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-item position-relative bg-white p-5 mt-4">
+                <div class="testimonial-item position-relative bg-white p-5 mt-4" style="height: 280px;">
                     <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                    <p class="mb-4">The cake look nice, taste good, a little too sweet but is okay if is shared among. Overall experience with TheCakey platform is good</p>
                     <div class="d-flex align-items-center">
                         <img class="flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg" alt="">
                         <div class="ms-3">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
+                            <h5 class="mb-1">Belle</h5>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-item position-relative bg-white p-5 mt-4">
-                    <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    <div class="d-flex align-items-center">
-                        <img class="flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg" alt="">
-                        <div class="ms-3">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -288,11 +275,10 @@
 
 
     <!-- Blog Start -->
-    <div class="container-xxl py-4 mb-4">
+    {{!-- <div class="container-xxl py-4 mb-4">
         <div class="container">
             <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <h1 class="display-5 mb-3">Latest Blog</h1>
-                {{!-- <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p> --}}
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -300,7 +286,6 @@
                     <div class="bg-light p-4">
                         <a class="d-block h5 lh-base mb-4" href="">Time for Cake party</a>
                         <div class="text-muted border-top pt-4">
-                            {{!-- <small class="me-3"><i class="fa fa-user text-primary me-2"></i>Admin</small> --}}
                             <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i>01 Jan, 2022</small>
                         </div>
                     </div>
@@ -310,7 +295,6 @@
                     <div class="bg-light p-4">
                         <a class="d-block h5 lh-base mb-4" href="">Yaah.. it's delicious</a>
                         <div class="text-muted border-top pt-4">
-                            {{!-- <small class="me-3"><i class="fa fa-user text-primary me-2"></i>Admin</small> --}}
                             <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i>01 Jan, 2022</small>
                         </div>
                     </div>
@@ -320,14 +304,13 @@
                     <div class="bg-light p-4">
                         <a class="d-block h5 lh-base mb-4" href="">Coming Sooon!</a>
                         <div class="text-muted border-top pt-4">
-                            {{!-- <small class="me-3"><i class="fa fa-user text-primary me-2"></i>Admin</small> --}}
                             <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i>01 Jan, 2022</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
    
 {{!-- 

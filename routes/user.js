@@ -29,8 +29,12 @@ const verifyLogin=(req,res,next)=>{
 router.get('/', async function (req, res, next) {
   sitedetails = await adminHelpers.getSiteDetails()
 cakes=await productHelper.getProductCake()
+season = await productHelper.getCurrentSeason()
+let SeasonName = season.season
+seasonalProducts = await productHelper.getSeasonalProducts(season.season)
+console.log(seasonalProducts);
 cakes=cakes.slice(0, 8);
-    res.render('user/index',{cakes,sitedetails});
+    res.render('user/index',{cakes,sitedetails,SeasonName,seasonalProducts});
 
 });
 
@@ -51,7 +55,6 @@ router.get('/signup',(req,res)=>{
 ///////
 
 router.post('/mob-num-submission',async (req,res)=>{
-  console.log(req.body)
  req.session.tempUser=req.body.mobnum
   loginErr=null;
   mobnum=await userHelper.findUserByMobNum(req.body.mobnum);
@@ -65,7 +68,6 @@ res.json(true)
 })
 
 router.post('/otp',(req,res)=>{
-console.log(req.body)
 //checking otp;
 if(req.body.otp==otp){
   loginErr=null;
@@ -79,13 +81,11 @@ else{
 
 
 router.post('/full-details-form',(req,res)=>{
-  console.log(req.body)
   var data=req.body
   data.mobnum=req.session.tempUser;
   data.status=true;
   req.session.tempUser=null;
   delete data.psw2;
-  console.log(data);
   userHelper.registerUser(data).then((response)=>{
     req.session.userloggedIn=true;
     req.session.user=response;
@@ -121,9 +121,7 @@ loginErr=null;
 
 
 router.post('/login-mob-num-submission',(req,res)=>{
-  console.log('checkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
 
-  console.log(req.body)
   mobno=req.body.mobnum
   userHelper.findUserByMobNum(mobno).then((response)=>{
     loginErr=null;
@@ -131,8 +129,7 @@ router.post('/login-mob-num-submission',(req,res)=>{
 
 //otp send to mobile number
     }
-    console.log('mob nummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm')
-  console.log(response)
+ 
  
 req.session.tempUser=response;
   res.json(response)
@@ -143,13 +140,11 @@ req.session.tempUser=response;
 })
 
 router.post('/login-otp',(req,res)=>{
-  console.log(req.body)
   //checking otp;
   if(req.body.otp==otp){
     loginErr=null;
     req.session.user=req.session.tempUser;
     req.session.userloggedIn=true;
-    console.log(req.session.user)
     req.session.tempUser=null;
 
     if(req.session.tempProdId){
@@ -186,12 +181,10 @@ router.post('/pass-mob-num-submission',(req,res)=>{
     if(response.status){
       req.session.user=req.session.tempUser;
     req.session.userloggedIn=true;
-    console.log(req.session.user)
     req.session.tempUser=null;
     res.json(response)
   }else{
 
-    console.log(response.error);
   
    res.json(response)
   }
@@ -215,21 +208,19 @@ router.post('/pass-mob-num-submission',(req,res)=>{
 
 //user profile--------------------------------------------
 router.get('/profile',verifyLogin,async (req,res)=>{
- 
+  sitedetails = await adminHelpers.getSiteDetails()
   user = req.session.user;
  // let Orders = await adminHelpers.viewAllPendingOrders()
 let orders= await userHelper.getPendingOrderProducts(user._id)
 let cnOrders= await userHelper.getCancelledOrderProducts(user._id)
 let dlOrders= await userHelper.getDeliveredOrderProducts(user._id)
-console.log(cnOrders)
-console.log('-----------------------------ewwwwwwwwwwwwwwwwwwww');
- console.log(orders);
+
   res.render('user/profile-page',{user,orders,sitedetails,cnOrders,dlOrders})
 })
 
 
-router.get('/edit-user-details',(req,res)=>{
-  
+router.get('/edit-user-details',async(req,res)=>{
+  sitedetails = await adminHelpers.getSiteDetails()
   user = req.session.user;
   res.render('user/edit-address',{user,sitedetails})
 })
@@ -238,7 +229,6 @@ router.get('/edit-user-details',(req,res)=>{
 router.post('/edit-user-details',(req,res)=>{
   
   userHelper.editUserDetails(req.body,req.session.user._id).then((user)=>{
-    console.log(user);
     req.session.user=user;
     res.redirect('/profile')
   })
@@ -247,6 +237,7 @@ router.post('/edit-user-details',(req,res)=>{
 
 //cart routes
 router.get('/cart',verifyLogin, async (req,res,next)=>{
+  sitedetails = await adminHelpers.getSiteDetails()
   req.session.tempCart=null;
 
   user=req.session.user;
@@ -286,10 +277,10 @@ if(response){
 
 
 
-router.get('/addtocart/:id/:weight',(req,res)=>{
+router.get('/addtocart/:id/:weight',async(req,res)=>{
+  sitedetails = await adminHelpers.getSiteDetails()
   if(req.session.user){
     let weight= parseFloat(req.params.weight)
-   console.log(weight);
     userHelper.addToCart(req.session.user._id,req.params.id,weight).then(()=>{
       res.json(req.params.id)
     })
@@ -302,7 +293,6 @@ router.get('/addtocart/:id/:weight',(req,res)=>{
 
 
 router.post('/change-product-quantity',(req,res)=>{
-  console.log(req.body)
   userHelper.changeProductQuantity(req.body).then(async(response)=>{
     if(req.body.quantity==1 && req.body.count==-1){
       response.total=0;
@@ -317,14 +307,12 @@ router.post('/change-product-quantity',(req,res)=>{
     //  response.allTotal=response.total+40;
     // }
   }
-    // console.log(response.allTotal)
     res.json(response)
   })
 })
 
 
 router.post('/remove-cart-products',(req,res,next)=>{
-  console.log(req.body);
   userHelper.removeCartProducts(req.body).then((response)=>{
     res.json(response)
   })
@@ -332,12 +320,12 @@ router.post('/remove-cart-products',(req,res,next)=>{
 
 
 router.get('/checkout',async(req,res)=>{
+  sitedetails = await adminHelpers.getSiteDetails()
   let coupon=null;
   let delivery = null;
   useraddress= await userHelper.getUserAddress(req.session.user._id)
   
   deliverydetails = await adminHelpers.getSiteDetails()
-console.log(deliverydetails[0].deliveryMode);
 let COD=null,ONLINE=null,BOTH=null;
 if(deliverydetails[0].deliveryMode==='BOTH'){
   BOTH=true
@@ -347,7 +335,7 @@ COD=true
   ONLINE=true
 }
 
-  dlcharge=40;
+  dlcharge=deliverydetails[0].deliveryCharge;
   //delivery charge set from admin side 
     total=parseInt(req.query.fullTotal);
   Ttlamount=total+dlcharge;
@@ -360,14 +348,12 @@ coupon=req.query.coupon
 })
 
 router.post('/checkout',async(req,res)=>{
-  console.log(req.body)
   
   req.body.userId=req.session.user._id;
   user=req.session.user._id;
   usr=req.session.user;
   price=  parseFloat(req.body.price);
   let products =await userHelper.getCartProducts(user);
- console.log('jellooooooooooo');
    userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
     if(req.body['payment-method']=='COD'){
       res.json({cod_success:true})
@@ -380,7 +366,6 @@ router.post('/checkout',async(req,res)=>{
 })
 
 router.post('/verify-payment',(req,res)=>{
-  console.log(req.body)
   userHelper.verifyPayment(req.body).then(()=>{
    userHelper.changePaymentStatus(req.body['order[receipt]']).then(()=>{
      res.json({status:true})
@@ -391,6 +376,7 @@ router.post('/verify-payment',(req,res)=>{
 })
 
 router.get('/ordered-response',async (req,res)=>{
+  sitedetails = await adminHelpers.getSiteDetails()
   let user=req.session.user
   let mode=req.query.id
   let cod;
@@ -419,12 +405,11 @@ let couponId=req.body.discountCode;
     })
   
  
-    router.get('/viewDetailedOrder',(req,res)=>{
+    router.get('/viewDetailedOrder',async(req,res)=>{
+      sitedetails = await adminHelpers.getSiteDetails()
 let paymentmethod=null;
 userHelper.getOrderDetails(req.query.id).then((response)=>{
-  console.log(response);
 
- console.log(response.paymentMethod);
   if(response.paymentMethod=="ONLINE"){
    
     paymentmethod=response.paymentMethod;
@@ -438,16 +423,18 @@ userHelper.getOrderDetails(req.query.id).then((response)=>{
 
 //product listing page
 router.get('/products-page',async(req,res)=>{
+  sitedetails = await adminHelpers.getSiteDetails()
   cakes=await productHelper.getProductCake()
   res.render('user/products-page',{cakes,sitedetails})
 })
 
 router.get('/product-detail-page', async(req,res)=>{
+  sitedetails = await adminHelpers.getSiteDetails()
+  console.log(sitedetails);
   let proId=req.query.id
   let product=await productHelper.getSingleProduct(proId)
   let kgstatus = false
   let twokgstatus = false
-  console.log(product)
   if(product.kgstatus==='yes'){
     kgstatus=true
   }else if(product.kgstatus==='2kg'){
@@ -460,8 +447,7 @@ router.get('/product-detail-page', async(req,res)=>{
 router.get('/search',async(req,res)=>{
   let search=req.query.search
   let searchProduct=await productHelper.searchProduct(search)
-  console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-  console.log(searchProduct);
+
   res.json(searchProduct)
 })
 

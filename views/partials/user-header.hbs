@@ -59,17 +59,12 @@
    	<div class="TopHeader" id="TopHeader">
 			<!-- search input box start -->
    		<div class="InputBox" id="inputBar">
-   			<input class="input-searchbar" type="search" placeholder="Search" id="SearchInput" >
+   			<input class="input-searchbar" type="search" placeholder="Search" id="SearchInput" autocomplete="off" >
 				<div class="SearchIcon">
 					<i class="fa fa-search"></i>
 				</div>
 				<!-- search result dropdown box start -->
 				<ul class="SearchResult resultBox" id="ResultBox">
-					{{!-- <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-					<li><i class="fa fa-search"></i><a href="#">Product one</a></li> --}}
 			
 				</ul>
 				<!-- search result dropdown box End -->
@@ -277,7 +272,7 @@ let webLink;
 // if user press any key and release
 input.onkeyup = (e)=>{
     let userData = e.target.value; //user enetered data
-	console.log(userData)
+
 	let emptyArray = [{}];
      if(userData){
 	$.ajax({
@@ -285,13 +280,12 @@ input.onkeyup = (e)=>{
 		type: 'GET',
 		data: {search: userData},
 		success: function (data) {
-			console.log("response data:"+data)
             if(data.length > 0){
                 
 			emptyArray = data.map(function (val) {
     return (val ) ;
 });
-console.log(emptyArray)
+
  emptyArray = emptyArray.map((data)=>{
 					
 
@@ -323,9 +317,7 @@ else{
     }
 }
 
-function clearsuggestion(){
-	SearchResult.style.display = "none";
-}
+
 
 const elem = document.getElementById('inputBar')
 elem.onmouseover = function () {
@@ -340,7 +332,6 @@ elem.onmouseout = function () {
 
 function showSuggestions(list){
     let listData;
-	console.log(list);
     if(!list.length){
         userValue = inputBox.value;
 		return data = '<ul>'+ data +'</ul>';
