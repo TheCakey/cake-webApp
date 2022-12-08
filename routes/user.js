@@ -460,6 +460,8 @@ router.get('/product-detail-page', async(req,res)=>{
 router.get('/search',async(req,res)=>{
   let search=req.query.search
   let searchProduct=await productHelper.searchProduct(search)
+  console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+  console.log(searchProduct);
   res.json(searchProduct)
 })
 

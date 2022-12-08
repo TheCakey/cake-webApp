@@ -59,17 +59,17 @@
    	<div class="TopHeader">
 			<!-- search input box start -->
    		<div class="InputBox">
-   			<input class="input-searchbar" type="search" placeholder="Search" id="SearchInput">
+   			<input class="input-searchbar" type="search" placeholder="Search" id="SearchInput" onfocusout="clearsuggestion()">
 				<div class="SearchIcon">
 					<i class="fa fa-search"></i>
 				</div>
 				<!-- search result dropdown box start -->
-				<ul class="SearchResult" id="ResultBox">
+				<ul class="SearchResult resultBox" id="ResultBox">
+					{{!-- <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
 					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
 					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
 					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+					<li><i class="fa fa-search"></i><a href="#">Product one</a></li> --}}
 			
 				</ul>
 				<!-- search result dropdown box End -->
@@ -213,7 +213,39 @@
 
 
 <script>
-window.onload=function(){
+
+	let suggestions = [
+    "Channel",
+    "CodingLab",
+    "CodingNepal",
+    "YouTube",
+    "YouTuber",
+    "YouTube Channel",
+    "Blogger",
+    "Bollywood",
+    "Vlogger",
+    "Vechiles",
+    "Facebook",
+    "Freelancer",
+    "Facebook Page",
+    "Designer",
+    "Developer",
+    "Web Designer",
+    "Web Developer",
+    "Login Form in HTML & CSS",
+    "How to learn HTML & CSS",
+    "How to learn JavaScript",
+    "How to became Freelancer",
+    "How to became Web Designer",
+    "How to start Gaming Channel",
+    "How to start YouTube Channel",
+    "What does HTML stands for?",
+    "What does CSS stands for?",
+];
+
+
+
+/*window.onload=function(){
 	var SearchResult = document.getElementById("ResultBox");
 	document.onclick=function(event){
 		if(event.target.id !== "ResultBox"){
@@ -224,6 +256,76 @@ window.onload=function(){
 		}
 	}
 };
+*/
+
+// getting all required elements
+const searchInput = document.querySelector(".InputBox");
+const input = searchInput.querySelector("input");
+const resultBox = searchInput.querySelector(".resultBox");
+var SearchResult = document.getElementById("ResultBox");
+// const icon = searchInput.querySelector(".SearchIcon");
+// let linkTag = searchInput.querySelector("a");
+let webLink;
+
+// if user press any key and release
+input.onkeyup = (e)=>{
+    let userData = e.target.value; //user enetered data
+	console.log(userData)
+	let emptyArray = [{}];
+     if(userData){
+	$.ajax({
+        url: '/search',
+		type: 'GET',
+		data: {search: userData},
+		success: function (data) {
+			
+			emptyArray = data.map(function (val) {
+    return (val ) ;
+});
+console.log(emptyArray)
+ emptyArray = emptyArray.map((data)=>{
+					
+
+			console.log("data i:"+data.Name);
+            // passing return data inside li tag
+            return data = '<li> <a href="/product-detail-page?id='+data._id+'">'+ data.Name +'</a></li>';
+        });
+
+
+        SearchResult.style.display = "block"; //show autocomplete box
+        showSuggestions(emptyArray);
+        let allList = resultBox.querySelectorAll("li");
+        for (let i = 0; i < allList.length; i++) {
+            //adding onclick attribute in all li tag
+            allList[i].setAttribute("onclick", "select(this)");
+        }
+
+
+		}
+
+	})
+     }
+else{
+		
+		SearchResult.style.display = "none"; //hide autocomplete box
+    }
+}
+
+function clearsuggestion(){
+	SearchResult.style.display = "none";
+}
+
+function showSuggestions(list){
+    let listData;
+	console.log(list);
+    if(!list.length){
+        userValue = inputBox.value;
+		return data = '<ul>'+ data +'</ul>';
+    }else{
+        listData = list.join('');
+    }
+    resultBox.innerHTML = listData;
+}
 
 
 

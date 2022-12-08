@@ -2,21 +2,25 @@
     <div class="TopHeader">
          <!-- search input box start -->
         <div class="InputBox">
-            <input type="search" placeholder="Search for product, brands and more" id="SearchInput">
+            <input type="text" placeholder="Search for product, brands and more" id="SearchInput">
              <div class="SearchIcon">
                  <i class="fa fa-search"></i>
              </div>
              <!-- search result dropdown box start -->
-             <ul class="SearchResult" id="ResultBox">
-                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-                 <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
-             </ul>
+			 <div class=" " id="" >
+			 <ul class="SearchResult resultBox" id="ResultBox">
+					<!-- <li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+					<li><i class="fa fa-search"></i><a href="#">Product one</a></li>
+			--> 
+			</ul> 
+			 </div>
+            
              <!-- search result dropdown box End -->
         </div>
          <!-- search input box End -->
@@ -24,17 +28,99 @@
 </div>
 
 <script>
-    window.onload=function(){
-	var SearchResult = document.getElementById("ResultBox");
-	document.onclick=function(event){
-		if(event.target.id !== "ResultBox"){
-       SearchResult.style.display = "block";
-		}
-		if(event.target.id !== "SearchInput"){
-       SearchResult.style.display = "none";
-		}
-	}
-};
+
+let suggestions = [
+    "Channel",
+    "CodingLab",
+    "CodingNepal",
+    "YouTube",
+    "YouTuber",
+    "YouTube Channel",
+    "Blogger",
+    "Bollywood",
+    "Vlogger",
+    "Vechiles",
+    "Facebook",
+    "Freelancer",
+    "Facebook Page",
+    "Designer",
+    "Developer",
+    "Web Designer",
+    "Web Developer",
+    "Login Form in HTML & CSS",
+    "How to learn HTML & CSS",
+    "How to learn JavaScript",
+    "How to became Freelancer",
+    "How to became Web Designer",
+    "How to start Gaming Channel",
+    "How to start YouTube Channel",
+    "What does HTML stands for?",
+    "What does CSS stands for?",
+];
+
+// getting all required elements
+const searchInput = document.querySelector(".InputBox");
+const input = searchInput.querySelector("input");
+const resultBox = searchInput.querySelector(".resultBox");
+var SearchResult = document.getElementById("ResultBox");
+// const icon = searchInput.querySelector(".SearchIcon");
+// let linkTag = searchInput.querySelector("a");
+let webLink;
+
+// if user press any key and release
+input.onkeyup = (e)=>{
+    let userData = e.target.value; //user enetered data
+	console.log(userData);
+	console.log(e.target.value);
+    let emptyArray = [];
+    if(userData){
+		 emptyArray = [];
+        emptyArray = suggestions.filter((data)=>{
+			console.log(userData);
+            //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
+            return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase()); 
+        });
+        emptyArray = emptyArray.map((data)=>{
+			
+            // passing return data inside li tag
+            return data = '<li>'+ data +'</li>';
+        });
+		
+        SearchResult.style.display = "block"; //show autocomplete box
+        showSuggestions(emptyArray);
+        let allList = resultBox.querySelectorAll("li");
+        for (let i = 0; i < allList.length; i++) {
+            //adding onclick attribute in all li tag
+            allList[i].setAttribute("onclick", "select(this)");
+        }
+    }else{
+		SearchResult.style.display = "none"; //hide autocomplete box
+    }
+}
+
+function showSuggestions(list){
+    let listData;
+	console.log(list);
+    if(!list.length){
+        userValue = inputBox.value;
+		return data = '<ul>'+ data +'</ul>';
+    }else{
+        listData = list.join('');
+    }
+    resultBox.innerHTML = listData;
+}
+
+//     window.onload=function(){
+// 	var SearchResult = document.getElementById("ResultBox");
+// 	document.onclick=function(event){
+// 		if(event.target.id !== "ResultBox"){
+//        SearchResult.style.display = "block";
+// 		}
+// 		if(event.target.id !== "SearchInput"){
+//        SearchResult.style.display = "none";
+// 		}
+// 	}
+// };
 </script>
 
 <style>
@@ -91,6 +177,11 @@ body{
 	font-size: 19px;
 	cursor: pointer;
 }
+
+.InputBox.active .resultBox li{
+  display: block;
+}
+
 .contianer .TopHeader .InputBox .SearchIcon .fa-search{
 	color: blue;
 }

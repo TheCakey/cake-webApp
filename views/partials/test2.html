@@ -150,7 +150,7 @@ input.onkeyup = (e)=>{
         });
         emptyArray = emptyArray.map((data)=>{
             // passing return data inside li tag
-            return data = '<li>'+ data +'</li>';
+            return data = '<li>'+ data +'</li></ul>';
         });
         searchInput.classList.add("active"); //show autocomplete box
         showSuggestions(emptyArray);
@@ -166,9 +166,10 @@ input.onkeyup = (e)=>{
 
 function showSuggestions(list){
     let listData;
+   
     if(!list.length){
         userValue = inputBox.value;
-        listData = '<li>'+ userValue +'</li>';
+        listData = '<ul class="SearchResult" id="ResultBox">'+ userValue +'</ul>';
     }else{
         listData = list.join('');
     }
