@@ -470,7 +470,16 @@ $.ajax({
  if(w==''){
 swal("Please enter cake weight!", "","warning");
  }else{
-addToCart(id,w)
+  swal("Write message in cake if any (otherwise just tap OK):", {
+  content: "input",
+})
+.then((value) => {
+ if(value.length<1){
+  value='no message written';
+ }
+  addToCart(id,w,value)
+});
+
  }
       }
     }

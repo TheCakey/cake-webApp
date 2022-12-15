@@ -570,6 +570,7 @@ if(req.files){
 router.post('/editAboutSection',verifyLogin,async(req,res)=>{
   let id = req.body.siteid;
   adminHelpers.updateSite(req.body,id).then(()=>{
+    if(req.files){
     let image=req.files.Image1
     image.mv('./public/img/master-carasoul-1.jpg',(err,done)=>{
       if(err){
@@ -584,8 +585,8 @@ router.post('/editAboutSection',verifyLogin,async(req,res)=>{
         console.log(err)
       }
   
-     
     })
+  }
     res.redirect('/admin')
   })
 })

@@ -28,12 +28,19 @@ const verifyLogin=(req,res,next)=>{
 
 router.get('/', async function (req, res, next) {
   sitedetails = await adminHelpers.getSiteDetails()
+  let cakes = null;
+  let SeasonName = null;
+let seasonalProducts = null;
 cakes=await productHelper.getProductCake()
 season = await productHelper.getCurrentSeason()
-console.log(season.season);
-let SeasonName = season.season
-seasonalProducts = await productHelper.getSeasonalProducts(season.season)
-console.log(seasonalProducts);
+if(season){
+  SeasonName= season.season
+}
+if(SeasonName!=null){
+  seasonalProducts = await productHelper.getSeasonalProducts(season.season)
+
+}
+
 cakes=cakes.slice(0, 8);
     res.render('user/index',{cakes,sitedetails,SeasonName,seasonalProducts});
 
@@ -286,11 +293,11 @@ if(response){
 
 
 
-router.get('/addtocart/:id/:weight',async(req,res)=>{
+router.get('/addtocart/:id/:weight/:msg',async(req,res)=>{
   sitedetails = await adminHelpers.getSiteDetails()
   if(req.session.user){
     let weight= parseFloat(req.params.weight)
-    userHelper.addToCart(req.session.user._id,req.params.id,weight).then(()=>{
+    userHelper.addToCart(req.session.user._id,req.params.id,weight,req.params.msg).then(()=>{
       res.json(req.params.id)
     })
   }else{
@@ -406,8 +413,10 @@ router.get('/ordered-response',async (req,res)=>{
 router.post('/Validate-discount-coupon',async (req,res)=>{
 let couponId=req.body.discountCode;
   let coupon=await userHelper.getCouponDetails(couponId)
+  console.log(coupon);
   if(coupon){
-    total=req.body.total-100;
+    total=(req.body.total/100)*coupon.Discount
+    total=parseFloat(total).toFixed(2)
     res.json({valid:true,total})
   }else{
     res.json({valid:false})
