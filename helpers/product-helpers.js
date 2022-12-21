@@ -5,11 +5,11 @@ var objectId=require('mongodb').ObjectID
 module.exports={
   
     addProduct:(product,callback)=>{
-      
+        console.log('2sd stage');
         db.get().collection(collection.PRODUCT_COLLECTION).insertOne(product).then((data)=>{
-           
+            console.log('3st stage');
             callback(data.insertedId)
-            
+            console.log('4st stage');
 
         })
     },

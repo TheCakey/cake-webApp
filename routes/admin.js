@@ -116,9 +116,9 @@ router.get('/product-add',verifyLogin,async (req,res)=>{
 })
 
 router.post('/products-add',(req,res)=>{
- 
+  console.log('1st stage');
   productHelpers.addProduct(req.body,async (id)=>{
-    
+    console.log('5st stage');
     //img1
     let image=req.files.Image1
     image.mv('./public/product-imagesfull/'+id+'1'+'.jpg', (err,done)=>{
@@ -218,7 +218,7 @@ if(error){
 );
 }
  })
-
+ console.log('6st stage');
      res.redirect('/admin/product-add')
           })
   })
@@ -570,7 +570,6 @@ if(req.files){
 router.post('/editAboutSection',verifyLogin,async(req,res)=>{
   let id = req.body.siteid;
   adminHelpers.updateSite(req.body,id).then(()=>{
-    if(req.files){
     let image=req.files.Image1
     image.mv('./public/img/master-carasoul-1.jpg',(err,done)=>{
       if(err){
@@ -585,8 +584,8 @@ router.post('/editAboutSection',verifyLogin,async(req,res)=>{
         console.log(err)
       }
   
+     
     })
-  }
     res.redirect('/admin')
   })
 })
