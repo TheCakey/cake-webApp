@@ -325,6 +325,22 @@ module.exports={
             })
         })
     },
+    addBaker(bakerDetails){
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.BAKERS_COLLECTION).insertOne(bakerDetails).then((data)=>{
+                resolve()
+            })
+        })
+    },
+    viewAllBakers(){
+        return new Promise(async(resolve,reject)=>{
+            let bakers = await db.get().collection(collection.BAKERS_COLLECTION).find().toArray()
+            resolve(bakers)
+        })
+    },
+
+
+
     // calculateMonthlyRevenue:()=>{
     //     return new Promise(async(resolve,reject)=>{
     //         let date = new Date()

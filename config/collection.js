@@ -12,5 +12,6 @@ module.exports={
     LINK_COLLECTION:'sociallinks',
     SUBSCRIPTION_COLLECTION:'subscription',
     SEASON_COLLECTION:'currentseason',
+    BAKERS_COLLECTION:'bakers',
     
 }

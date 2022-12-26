@@ -169,6 +169,7 @@ function (error, completed, statistic) {
 
 
 if(error){
+  console.log("deleteddddddddddddddddd111111111111111");
   productHelpers.deleteProduct(id).then(()=>{
     res.render('admin/productError',{admin:true,adminlog:true})
   })
@@ -180,6 +181,8 @@ if(error){
       if(err){
        
         productHelpers.deleteProduct(id).then(()=>{
+          console.log("deleteddddddddddddddddd2222222222222222");
+
           res.render('admin/productError',{admin:true,adminlog:true})
         })
       }else{
@@ -198,6 +201,8 @@ if(error){
         
            if(error){
             productHelpers.deleteProduct(id).then(()=>{
+              console.log("deleteddddddddddddddddd3333333333333333");
+
               res.render('admin/productError',{admin:true,adminlog:true})
             })
            }
@@ -635,7 +640,19 @@ res.json(revenue)
     // res.render('admin/monthlyRevenue',{admin:true,revenue})
   })
 
-  
-  
+
+  router.get('/add-baker',verifyLogin,(req,res)=>{
+    res.render('admin/add-baker',{admin:true,adminName})
+  })
+  router.get('/view-all-bakers',verifyLogin,async(req,res)=>{
+    let bakers=await adminHelpers.viewAllBakers()
+    console.log(bakers)
+    res.render('admin/view-all-bakers',{admin:true,bakers,adminName})
+  })
+  router.post('/add-baker',verifyLogin,(req,res)=>{
+    adminHelpers.addBaker(req.body).then(()=>{
+      res.redirect('/admin')
+    })
+  })
 
 module.exports = router;
