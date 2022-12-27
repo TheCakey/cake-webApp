@@ -11,6 +11,7 @@
     "compressorjs": "^1.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
     "emailjs": "^4.0.1",
     "express": "~4.16.1",
     "express-fileupload": "^1.4.0",
@@ -30,7 +31,8 @@
     "razorpay": "^2.8.3",
     "save": "^2.5.0",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^11.4.17"
+    "sweetalert2": "^11.4.17",
+    "twilio": "^3.84.0"
   },
   "devDependencies": {
     "compress-images": "^2.0.5"

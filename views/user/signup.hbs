@@ -65,7 +65,7 @@
             <div class="field-wrapper " id="div-none">
                 <label for="number" class="field-label"></label>
                 <input type="num" placeholder="Enter your OTP" name="otp" id="number" class="field">
-             
+              <p> Resend OTP in <span id="countdowntimer">60 </span> Seconds</p>
             </div>
               <div class="submit-wrapper">
                 <button id="btn-none" type="submit" class="btn-submit">Next</button>
@@ -82,13 +82,8 @@
 
 
 <script>
-    document.querySelector("#div-display").addEventListener("click", function(){
-  
-    var mobNum = document.getElementById('div-num').value
-        var filter = /^\d*(?:\.\d{1,2})?$/;
-        if (filter.test(mobNum)) {
-            if(mobNum.length==10){
-                 document.querySelector("#invalid").style.display = "none";
+function otpsend(){
+     document.querySelector("#invalid").style.display = "none";
                    
                     let num=parseInt(document.getElementById('div-num').value);
 $.ajax({
@@ -100,6 +95,18 @@ $.ajax({
     success:(response)=>{
         if(response){
                 swal("Otp Send!", "Otp send to your mobile number", "success");
+                //timer
+var timeleft = 60;
+    var downloadTimer = setInterval(function(){
+    timeleft--;
+    document.getElementById("countdowntimer").textContent = timeleft;
+    if(timeleft <= 0){
+        clearInterval(downloadTimer);
+        
+ otpsend();
+    }
+    },1000);
+    //timer
   document.querySelector("#div-none").style.display = "block";
      document.querySelector("#div-num").classList.add('ddiv-num');
      document.querySelector("#div-display").style.display = "none";
@@ -114,6 +121,15 @@ $.ajax({
     }
 })
     
+}
+
+    document.querySelector("#div-display").addEventListener("click", function(){
+  
+    var mobNum = document.getElementById('div-num').value
+        var filter = /^\d*(?:\.\d{1,2})?$/;
+        if (filter.test(mobNum)) {
+            if(mobNum.length==10){
+                otpsend();
    
 
              } else {

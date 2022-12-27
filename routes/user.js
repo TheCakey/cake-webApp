@@ -6,15 +6,16 @@ var userHelper=require('../helpers/user-helpers')
 
 var productHelper=require('../helpers/product-helpers');
 const adminHelpers = require('../helpers/admin-helpers');
-
+const twilio = require('twilio');
 // CommonJS
 
-const otp =123;
+let otp ;
 let mobno;
 let loginErr;
 let sitedetails;
 /* GET home page. */
-
+const accountSid = "AC05cf34ea495a54a41ced42c748302c04";
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const verifyLogin=(req,res,next)=>{
   if(req.session.userloggedIn){
       next()
@@ -71,12 +72,26 @@ router.get('/signup',(req,res)=>{
 
 router.post('/mob-num-submission',async (req,res)=>{
  req.session.tempUser=req.body.mobnum
+ let mobno=req.body.mobnum
+ console.log(mobno)
   loginErr=null;
   mobnum=await userHelper.findUserByMobNum(req.body.mobnum);
   if(mobnum){
     res.json(false)
   }else{
-//otp send to mobile number
+    otp = Math.floor(1000 + Math.random() * 9000);
+    console.log(otp);
+       
+        console.log(process.env.TWILIO_AUTH_TOKEN)
+       
+    
+        
+        const client = require("twilio")(accountSid, authToken);
+        
+        client.messages
+          .create({ body:"Your cakey login otp "+otp, from: "+12067597347", to: "+91"+mobno})
+          .then(message => console.log(message.sid));
+     
 res.json(true)
   }
   
@@ -136,15 +151,26 @@ loginErr=null;
 
 
 router.post('/login-mob-num-submission',(req,res)=>{
-
-  mobno=req.body.mobnum
+ let mobno=req.body.mobnum
   userHelper.findUserByMobNum(mobno).then((response)=>{
     loginErr=null;
-    if(req.body.pass===false){
+//     if(req.body.pass===false){
+// //otp send to mobile number
 
-//otp send to mobile number
-    }
+// //otp send to mobile number
+//     }
+otp = Math.floor(1000 + Math.random() * 9000);
+console.log(otp);
  
+    console.log(process.env.TWILIO_AUTH_TOKEN)
+   
+console.log(mobno);
+   
+    const client = require("twilio")(accountSid, authToken);
+    
+    client.messages
+      .create({ body:"Your cakey login otp "+otp, from: "+12067597347", to: "+917356252657"})
+      .then(message => console.log(message.sid));
  
 req.session.tempUser=response;
   res.json(response)
@@ -168,6 +194,7 @@ router.post('/login-otp',(req,res)=>{
       req.session.tempProdId=null;
        res.redirect('/product-detail-page?id='+prodId)
     }else{
+      otp=null;
       res.redirect('/')
     }
    
@@ -415,7 +442,7 @@ let couponId=req.body.discountCode;
   let coupon=await userHelper.getCouponDetails(couponId)
   console.log(coupon);
   if(coupon){
-    total=(req.body.total/100)*coupon.Discount
+    total=(req.body.total) - (req.body.total/100)*coupon.Discount
     total=parseFloat(total).toFixed(2)
     res.json({valid:true,total})
   }else{

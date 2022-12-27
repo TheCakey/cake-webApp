@@ -11,6 +11,7 @@ var hbs=require('express-handlebars')
 var app = express();
 var fileUpload=require('express-fileupload')
 var fs = require('fs');
+require('dotenv').config()
 // import { ImageCompressor } from 'image-compressor';
 
 // view engine setup
