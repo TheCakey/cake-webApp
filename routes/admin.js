@@ -116,9 +116,9 @@ router.get('/product-add',verifyLogin,async (req,res)=>{
 })
 
 router.post('/products-add',(req,res)=>{
- 
+  console.log('1st stage');
   productHelpers.addProduct(req.body,async (id)=>{
-    
+    console.log('5st stage');
     //img1
     let image=req.files.Image1
     image.mv('./public/product-imagesfull/'+id+'1'+'.jpg', (err,done)=>{
@@ -169,6 +169,7 @@ function (error, completed, statistic) {
 
 
 if(error){
+  console.log("deleteddddddddddddddddd111111111111111");
   productHelpers.deleteProduct(id).then(()=>{
     res.render('admin/productError',{admin:true,adminlog:true})
   })
@@ -180,6 +181,8 @@ if(error){
       if(err){
        
         productHelpers.deleteProduct(id).then(()=>{
+          console.log("deleteddddddddddddddddd2222222222222222");
+
           res.render('admin/productError',{admin:true,adminlog:true})
         })
       }else{
@@ -198,6 +201,8 @@ if(error){
         
            if(error){
             productHelpers.deleteProduct(id).then(()=>{
+              console.log("deleteddddddddddddddddd3333333333333333");
+
               res.render('admin/productError',{admin:true,adminlog:true})
             })
            }
@@ -218,7 +223,7 @@ if(error){
 );
 }
  })
-
+ console.log('6st stage');
      res.redirect('/admin/product-add')
           })
   })
@@ -570,7 +575,6 @@ if(req.files){
 router.post('/editAboutSection',verifyLogin,async(req,res)=>{
   let id = req.body.siteid;
   adminHelpers.updateSite(req.body,id).then(()=>{
-    if(req.files){
     let image=req.files.Image1
     image.mv('./public/img/master-carasoul-1.jpg',(err,done)=>{
       if(err){
@@ -585,8 +589,8 @@ router.post('/editAboutSection',verifyLogin,async(req,res)=>{
         console.log(err)
       }
   
+     
     })
-  }
     res.redirect('/admin')
   })
 })
@@ -636,7 +640,19 @@ res.json(revenue)
     // res.render('admin/monthlyRevenue',{admin:true,revenue})
   })
 
-  
-  
+
+  router.get('/add-baker',verifyLogin,(req,res)=>{
+    res.render('admin/add-baker',{admin:true,adminName})
+  })
+  router.get('/view-all-bakers',verifyLogin,async(req,res)=>{
+    let bakers=await adminHelpers.viewAllBakers()
+    console.log(bakers)
+    res.render('admin/view-all-bakers',{admin:true,bakers,adminName})
+  })
+  router.post('/add-baker',verifyLogin,(req,res)=>{
+    adminHelpers.addBaker(req.body).then(()=>{
+      res.redirect('/admin')
+    })
+  })
 
 module.exports = router;

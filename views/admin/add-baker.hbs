@@ -1,0 +1,133 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/product-add-style.css">
+
+
+<style>
+  .image-upload>input {
+  display: none;
+}
+.image-upload{
+ 
+}
+</style>
+
+<div class="container rounded bg-white mt-5 mb-5 " >
+  <div class="row">
+      
+      <div class="col-md-12 col-12 border-right">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="text-right">Product Settings</h4>
+              </div>
+         
+
+  
+              <form action="/admin/add-baker" enctype="multipart/form-data" method="POST"  class="form-horizontal" role="form" style="border: solid; border-color: rgb(240, 239, 239); border-width: 0 2px 0px 1px;">
+               
+                  <div class="form-group">
+               
+                     
+                   <label for="name" class="col-sm-3 control-label font-weight-bold">Full Name</label>
+                   <div class="col-sm-9">
+                     <input type="text" class="form-control" name="name" id="name"   placeholder="Enter Your Full Name" required>
+                   </div>
+
+                   <div class="form-group">
+                   <label for="name" class="col-sm-3 control-label font-weight-bold pt-2">Student from Al-ameen college</label>
+                   <div class="col-sm-9">
+                    
+                     <input type="radio" name="al-ameen" class="ml-4" value="yes"   required> Yes
+                    <input type="radio"  name="al-ameen" class="ml-4"  value="no" required> No
+                   </div>
+                 </div> <!-- form-group // -->
+
+                    <label for="name" class="col-sm-3 control-label font-weight-bold">Department</label>
+                   <div class="col-sm-9">
+                     <input type="text" class="form-control" name="department" id="name"   placeholder="Enter Your Department" required>
+                   </div>
+                    <label for="name" class="col-sm-3 control-label font-weight-bold">Address</label>
+                   <div class="col-sm-9">
+                     <input type="text" class="form-control" name="address" id="name"   placeholder="Enter Your Address" required>
+                   </div>
+                 </div> <!-- form-group // -->
+                 <div class="form-group">
+                   <label for="name" class="col-sm-3 control-label font-weight-bold"><i class="" aria-hidden="true"></i> Mobile Number</label>
+                   <div class="col-sm-9">
+                  <input type="number" name="mobnum" class="form-control" id="phone" value="" placeholder="Phone number" required>
+                   </div>
+                 </div> 
+                 <div class="form-group">
+                   <label for="name" class="col-sm-3 control-label font-weight-bold"><i class="" aria-hidden="true"></i>Pincode</label>
+                   <div class="col-sm-9">
+                  <input type="number" name="pincode" class="form-control" id="" value="" placeholder="Enter Your Pincode here" required>
+                   </div>
+                 </div>
+
+      <label for="name" class="col-sm-3 control-label font-weight-bold"><i class=" " aria-hidden="true"></i>Experience in Banking</label>
+            <select name='experience' class="custom-select d-block w-100 col-sm-9 ml-3" id="city" required>
+              <option value="">Choose...</option>
+              <option value="1">1 Year</option>
+              <option value="2">2 Year</option>
+              <option value="3">3 Year</option>
+               <option value="4">4 Year</option>
+               <option value="4+">More tha 4 Year</option>
+
+
+            </select>
+
+                     
+              <div class="form-group">
+                   <label for="name" class="col-sm-3 control-label font-weight-bold mt-2">FSSAI Registered?</label>
+                   <div class="col-sm-9">
+                    
+                     <input type="radio" name="fssaistatus" class="ml-4" value="yes"   required> Yes
+                    <input type="radio"  name="fssaistatus" class="ml-4"  value="no" required> No
+                   </div>
+                 </div> <!-- form-group // -->
+
+                  <div class="form-group">
+                   <label for="name" class="col-sm-3 control-label font-weight-bold"><i class="" aria-hidden="true"></i>FSSAI Licence Number</label>
+                   <div class="col-sm-9">
+                 <input type="number" name="licencenum" class="form-control" id="" value="" placeholder="Licence Number" required>
+                   </div>
+                 </div> <!-- form-group // -->
+
+                 <label for="name" class="col-sm-3 control-label font-weight-bold">Social Profile Link</label>
+                   <div class="col-sm-9">
+                     <input type="text" class="form-control" name="socialprofilelink" id="name" placeholder="Enter Your Social Link" required>
+                   </div>
+                 
+             
+               
+
+         
+                
+                 <div class="form-group">
+                   <div class="col-sm-offset-3 col-sm-9">
+                     <button type="submit" class="btn btn-primary m-3">Submit</button>
+                   </div>
+                 </div> <!-- form-group // -->
+               </form>
+                 
+               </div><!-- panel-body // -->
+               </section><!-- panel// -->
+               
+                 
+               </div> <!-- container// -->
+               
+               
+
+
+          </div>
+      </div>
+ 
+  </div>
+</div>
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
