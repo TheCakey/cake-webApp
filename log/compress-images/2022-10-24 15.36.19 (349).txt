@@ -1,7 +1,0 @@
-File from: [./public/product-images/637f421baf12463dcb11f4011]
-
-File to: [./public/product-images/637f421baf12463dcb11f4011.jpg637f421baf12463dcb11f4011]
-
-Compression algorithm: [-]
-
-Description: File does not exist!

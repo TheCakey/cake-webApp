@@ -1,7 +1,0 @@
-File from: [./public/product-images/637f41e4bf519f2e3e5a014a1]
-
-File to: [./public/product-images/637f41e4bf519f2e3e5a014a1.jpg637f41e4bf519f2e3e5a014a1]
-
-Compression algorithm: [-]
-
-Description: File does not exist!
