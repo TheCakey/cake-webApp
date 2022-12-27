@@ -162,14 +162,13 @@ router.post('/login-mob-num-submission',(req,res)=>{
 otp = Math.floor(1000 + Math.random() * 9000);
 console.log(otp);
  
-    console.log(process.env.TWILIO_AUTH_TOKEN)
    
 console.log(mobno);
    
     const client = require("twilio")(accountSid, authToken);
     
     client.messages
-      .create({ body:"Your cakey login otp "+otp, from: "+12067597347", to: "+917356252657"})
+      .create({ body:"Your cakey login otp "+otp, from: "+12067597347", to: "+91"+mobno})
       .then(message => console.log(message.sid));
  
 req.session.tempUser=response;
