@@ -271,43 +271,29 @@ $.ajax({
         if(response){
 
             if(response.status==='blocked'){
-
                     document.querySelector("#blocked-user").style.display = "block";
-
             }else{
 
        document.querySelector("#div-none2").style.display = "block";
-     document.querySelector("#div-num").classList.add('ddiv-num')
-
-          document.querySelector("#div-display2").style.display = "none";
-     document.querySelector("#btn-none2").style.display = "block";
-     document.querySelector("#otp-error").style.display = "none";
-    document.querySelector("#blocked-user").style.display = "none";
-    
-
-            }
-    
+       document.querySelector("#div-num").classList.add('ddiv-num');
+       document.querySelector("#div-display2").style.display = "none";
+       document.querySelector("#btn-none2").style.display = "block";
+       document.querySelector("#otp-error").style.display = "none";
+       document.querySelector("#blocked-user").style.display = "none";
+            } 
         }
         else{
-        document.querySelector("#invalid-user").style.display = "block";
-                 
-        }
-      
+        document.querySelector("#invalid-user").style.display = "block";           
+        }   
     }
 })
-    
-  
-
              } else {
                  document.querySelector("#invalid").style.display = "block";
-                 
-
                 return false;
               }
             }
             else{
               document.querySelector("#invalid").style.display = "block";
-             
               return false;
            }
       

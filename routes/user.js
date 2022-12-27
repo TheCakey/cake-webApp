@@ -7,6 +7,7 @@ var userHelper=require('../helpers/user-helpers')
 var productHelper=require('../helpers/product-helpers');
 const adminHelpers = require('../helpers/admin-helpers');
 const twilio = require('twilio');
+const { response } = require('../app');
 // CommonJS
 
 let otp ;
@@ -509,6 +510,26 @@ router.post('/verifyCart',async(req,res)=>{
 
 router.get('/reset-password',(req,res)=>{
   res.render('user/reset-password',)
+})
+
+router.post('/reset-password',async(req,res)=>{
+  console.log('post;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;')
+
+  let email=req.body.email;
+  let user=await userHelper.getUserByEmail(email)
+  console.log('post;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;')
+  if(user){
+    let otp=Math.floor(1000 + Math.random() * 9000);
+    console.log(otp);
+    
+    res.json({res:true})
+  //   let subject="Reset Password"
+  //   let text=`Your OTP is ${otp}`
+  //   userHelper.sendMail(email,subject,text)
+  //   res.json({status:true,otp:otp})
+  // }else{
+  //   res.json({status:false})
+  }
 })
 
 router.post('/subscription',(req,res)=>{

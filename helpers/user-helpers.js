@@ -482,7 +482,17 @@ getCouponDetails:(couponId)=>{
        
         })
     
-    }
+    },
+    getUserByEmail:(email)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.USER_COLLECTION).findOne({Email:email}).then((user)=>{
+                resolve(user)
+            })  
+        })
+    },
+    
+
+
 
 }
 
