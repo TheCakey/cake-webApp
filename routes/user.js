@@ -163,7 +163,6 @@ router.post('/login-mob-num-submission',(req,res)=>{
 otp = Math.floor(1000 + Math.random() * 9000);
 console.log(otp);
  
-    console.log(process.env.TWILIO_AUTH_TOKEN)
    
 console.log(mobno);
    
@@ -521,7 +520,7 @@ router.post('/reset-password',async(req,res)=>{
   if(user){
     let otp=Math.floor(1000 + Math.random() * 9000);
     console.log(otp);
-    
+
     res.json({res:true})
   //   let subject="Reset Password"
   //   let text=`Your OTP is ${otp}`

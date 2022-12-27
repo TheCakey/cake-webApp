@@ -3,8 +3,8 @@ const state={
     db:null
 }
 module.exports.connect=(done)=>{
-    const url='mongodb://localhost:27017'
-    const dbname='cakeshop'
+    const url='mongodb+srv://thecakey:'+process.env.DB_PASS+'@cluster0.4ohp2pm.mongodb.net'
+    const dbname='thecakey'
 
     mongoClient.connect(url,(err,data)=>{
         if(err) return done (err)
