@@ -96,10 +96,17 @@ router.get('/change-user-status',verifyLogin,(req,res)=>{
   }
   else{
     adminHelpers.manageUser(req.query.id,'false').then(()=>{
+
       res.redirect('/admin')
     })
   }
 })
+router.get('/view-all-users',verifyLogin,async(req,res)=>{
+  
+
+  res.render('admin/view-all-users',{admin:true,users:usersList,adminName})
+})
+
 
 router.get('/delete-user',verifyLogin,(req,res)=>{
 
@@ -654,5 +661,7 @@ res.json(revenue)
       res.redirect('/admin')
     })
   })
+
+  
 
 module.exports = router;

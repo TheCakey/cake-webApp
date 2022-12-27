@@ -189,11 +189,9 @@ $(document).ready(function(){
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-5">
-                        <h2>Bakers <b>Management</b></h2>
+                        <h2>User <b>Management</b></h2>
                     </div>
                     <div class="col-sm-7">
-                        <a href="/admin/add-baker" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Baker</span></a>
-                        <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>						
                     </div>
                 </div>
             </div>
@@ -202,33 +200,40 @@ $(document).ready(function(){
                     <tr>
                         <th>#</th>
                         <th>Name</th>						
-                        <th>Pincode</th>
-                        <th>Mobile Number</th>
-                        <th>Years of experience</th>
-
-                        {{!-- <th>Expiry Date</th> --}}
+                        <th>Email</th>
+                        <th>Place</th>
+                        <th>District</th>
+                        <th>Phone</th>
                         <th>Action</th>
+                        <th>Delete</th>
+                        {{!-- <th>Expiry Date</th> --}}     
                     </tr>
                 </thead>
                 <tbody>
                
-                    {{#each bakers}}
+                    {{#each users}}
 
                    <tr>
                         <td>{{@key}}</td>
-                        <td>{{this.name}}</td>
-                        <td>{{this.pincode}}</td>                        
-                        <td>{{this.mobnum}}</td>
-                        <td>{{this.experience}}</td>                        
+                        <td>{{this.fullname}}</td>
+                        <td>{{this.emailaddress}}</td>                        
+                        <td>{{this.place}}</td>
+                        <td>{{this.district}}</td>
+                        <td>{{this.mobnum}}</td>                        
 
                         {{!-- <td></td> --}}
-                        <td>
-                            {{!-- <a href="/admin/edit-cakes?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a> --}}
-                            <a href="/admin/delete-coupon?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
-                        </td>
-                    </tr>
-
-                    {{/each}}
+                        {{#if this.status}}
+                       
+                  <td><a href="/admin/change-user-status?id={{this._id}}&status={{this.status}}" onclick="return confirm('Are you sure want to Block/Unblock {{this.fullname}}')" class="btn btn-success text-white">Active</a></td>
+                 {{else}}
+                
+                 <td><a href="/admin/change-user-status?id={{this._id}}&status={{this.status}}" onclick="return confirm('Are you sure want to Block/Unblock {{this.fullname}}')" class="btn btn-warning text-white">Blocked</a></td>
+               {{/if}}
+                <td><a href="/admin/delete-user?id={{this._id}}" class="btn btn-danger text-white">Delete</a></td>
+                     </tr>
+                                        
+                                        {{/each}}
+                    
 
                 
                     

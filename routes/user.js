@@ -166,11 +166,11 @@ console.log(otp);
    
 console.log(mobno);
    
-    const client = require("twilio")(accountSid, authToken);
+    // const client = require("twilio")(accountSid, authToken);
     
-    client.messages
-      .create({ body:"Your cakey login otp "+otp, from: "+12067597347", to: "+917356252657"})
-      .then(message => console.log(message.sid));
+    // client.messages
+    //   .create({ body:"Your cakey login otp "+otp, from: "+12067597347", to: "+917356252657"})
+    //   .then(message => console.log(message.sid));
  
 req.session.tempUser=response;
   res.json(response)
