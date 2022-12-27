@@ -1,0 +1,13 @@
+
+# product-images/
+
+
+# # exclude everything
+# images/product-imagesfull/*
+
+# # exception to the rule
+# !images/imgf/.gitkeep 
+
+
+/node_modules
+.env
