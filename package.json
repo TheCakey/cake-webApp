@@ -22,6 +22,7 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "image-compressor": "^2.0.3",
+    "loaderjs": "^1.0.0",
     "moment": "^2.29.4",
     "mongodb": "^4.6.0",
     "morgan": "~1.9.1",
