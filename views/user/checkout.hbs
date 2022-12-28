@@ -54,11 +54,20 @@
         <label  for="Expected date">Expected Date:</label>
         <input class="form-control required" type="date" id="inputdate" name="expectedDate" value="{{expectedDate}}" required>
         </div>
-        <div class="mb-3 col-md-6">
-          <label  for="appt">Select a time:</label>
-           <input class="form-control required" type="time"  max='20:00' min='07:00' id="time" name="deliveryTime" value="{{deliveryTime}}" required>
-        
-         </div>
+        <div class="col-md-5 mb-3">
+            <label for="time" class="required">Select a time</label>
+            <select name="deliveryTime" class="custom-select d-block w-100 " id="time" required>
+              <option value="">Choose...</option>
+              <option value="8am-12pm">08 AM - 12 PM</option>
+              <option value="12pm-3pm">12 PM - 03 PM</option>
+              <option value="3pm-6pm">03 PM - 06 PM</option>
+              <option value="6pm-8pm">06 PM - 08 PM</option>
+
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid time.
+            </div>
+          </div>
       </div>
       
        <div class="row">
