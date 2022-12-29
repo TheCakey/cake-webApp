@@ -62,42 +62,45 @@
 
     <div class="tab-pane fade active show" id="orders" role="tabpanel">
 
-
          <div class="order-desktop">
                                
               <div class="myaccount-content">
                        <button type="button" onclick="pending()" class="btn btn-outline-primary mb-3 " style="border-radius: 6px; padding: 7px;  " >Orders</button>
                        <button type="button" onclick="cancelled()" class="btn btn-outline-primary mb-3 ml-2" style="border-radius: 6px; padding: 7px;">Cancelled</button>
                        <button type="button" onclick="delivered()" class="btn btn-outline-primary mb-3 ml-2" style="border-radius: 6px; padding: 7px;">Buy Again</button>
-                                  {{#each orders}}   
-                                   {{#each this.product}}                
-                     <div id="tab-1" class="myaccount-table table-responsive text-center">
+
+                       <div id="tab-1">
+                        {{#if orders}}
+                               {{#each orders}}   
+                                             
+                     <div  class="myaccount-table table-responsive text-center">
 
                        <div class="card shadow-0 border mb-4">
                        <div class="card-body">
 
                   <div class="row " >
                     <div class="col-md-2">
-                      <img src="/product-images/{{this.item}}1.jpg"
+                      <img src="/product-images/{{this.product.[0].item}}1.jpg"
                         class="img-fluid" alt="Phone">
+                        <div style="background-color: #3084df;" class=" rounded text-white position-absolute start-0 top-0 ml-1 py-1 px-2">orders</div>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 font-weight-bold">{{this.product.Name}}</p>
+                      <p class="text-muted mb-0 font-weight-bold">{{this.date}}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">Free Delivery</p>
+                      <p class="text-muted mb-0 small font-weight-bold">{{this.paymentMethod}}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">{{this.weight}}KG</p>
+                      <p class="text-muted mb-0 small font-weight-bold">{{this.deliveryDetails.expectedDate}}</p>
                     </div>
-                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    {{!-- <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                       <p class="text-muted mb-0 small font-weight-bold">Qty: {{this.quantity}}</p>
-                    </div>
+                    </div> --}}
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">₹{{this.product.Price}}</p>
+                      <p class="text-muted mb-0 small font-weight-bold">₹{{this.ProductTotal}}</p>
                     </div>
                   </div>
-            <a style="color: transparent;" href="/viewDetailedOrder?id={{../_id}}"><button type="button" class="btn btn-outline-primary d-flex ml-auto" >View Details</button></a>
+            <a style="color: transparent;" href="/viewDetailedOrder?id={{this._id}}"><button type="button" class="btn btn-outline-primary d-flex ml-auto" >View Details</button></a>
 
                   {{!-- <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                   <div class="row d-flex align-items-center">
@@ -119,93 +122,48 @@
                 </div>
               </div> 
                    </div>
-                    {{/each}}
+                  
  {{/each}}
-
-
+  {{else}}
+  <div class="myaccount-content">
+    <h3>Orders</h3>
+    <div class="welcome">
+        <p>You have no orders</p>
+    </div>
+</div>
+{{/if}}
+</div>
+<div  id="tab-2">
+  {{#if cnOrders}}
    {{#each cnOrders}}   
-                                   {{#each this.product}}                
-                     <div  id="tab-2" class="myaccount-table table-responsive text-center">
+                       <div  class="myaccount-table table-responsive text-center">
 
                        <div class="card shadow-0 border mb-4">
                        <div class="card-body">
 
                   <div class="row " >
                     <div class="col-md-2">
-                      <img src="/product-images/{{this.item}}1.jpg"
-                        class="img-fluid" alt="wait">
-                    </div>
-                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 font-weight-bold">{{this.product.Name}}</p>
-                    </div>
-                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">Free Delivery</p>
-                    </div>
-                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">3.5 KG</p>
-                    </div>
-                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">Qty: {{this.quantity}}</p>
-                    </div>
-                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">₹{{this.product.Price}}</p>
-                    </div>
-                  </div>
-            <a style="color: transparent;" href="/viewDetailedOrder?id={{../_id}}"><button type="button" class="btn btn-outline-primary d-flex ml-auto" >View Details</button></a>
-
-                  {{!-- <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
-                  <div class="row d-flex align-items-center">
-                    <div class="col-md-2">
-                      <p class="text-muted mb-0 small">Track Order</p>
-                    </div>
-                    <div class="col-md-10">
-                      <div class="progress" style="height: 6px; border-radius: 16px;">
-                        <div class="progress-bar" role="progressbar"
-                          style="width: 65%; border-radius: 16px; background-color: #5ab83d;" aria-valuenow="65"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <div class="d-flex justify-content-around mb-1">
-                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for delivary</p>
-                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
-                      </div>
-                    </div>
-                  </div> --}}
-                </div>
-              </div> 
-                   </div>
-                    {{/each}}
- {{/each}}
-
-
-   {{#each dlOrders}}   
-                                   {{#each this.product}}                
-                     <div id="tab-3" class="myaccount-table table-responsive text-center">
-
-                       <div class="card shadow-0 border mb-4">
-                       <div class="card-body">
-
-                  <div class="row " >
-                    <div class="col-md-2">
-                      <img src="/product-images/{{this.item}}1.jpg"
+                      <img src="/product-images/{{this.product.[0].item}}1.jpg"
                         class="img-fluid" alt="Phone">
+                        <div style="background-color: #3084df;" class=" rounded text-white position-absolute start-0 top-0 ml-1 py-1 px-2">orders</div>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 font-weight-bold">{{this.product.Name}}</p>
+                      <p class="text-muted mb-0 font-weight-bold">{{this.date}}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">Free Delivery</p>
+                      <p class="text-muted mb-0 small font-weight-bold">{{this.paymentMethod}}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">3.5 KG</p>
+                      <p class="text-muted mb-0 small font-weight-bold">{{this.deliveryDetails.expectedDate}}</p>
                     </div>
-                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    {{!-- <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                       <p class="text-muted mb-0 small font-weight-bold">Qty: {{this.quantity}}</p>
-                    </div>
+                    </div> --}}
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small font-weight-bold">₹{{this.product.Price}}</p>
+                      <p class="text-muted mb-0 small font-weight-bold">₹{{this.ProductTotal}}</p>
                     </div>
                   </div>
-            <a style="color: transparent;" href="/viewDetailedOrder?id={{../_id}}"><button type="button" class="btn btn-outline-primary d-flex ml-auto" >View Details</button></a>
+            <a style="color: transparent;" href="/viewDetailedOrder?id={{this._id}}"><button type="button" class="btn btn-outline-primary d-flex ml-auto" >View Details</button></a>
 
                   {{!-- <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                   <div class="row d-flex align-items-center">
@@ -227,8 +185,84 @@
                 </div>
               </div> 
                    </div>
-                    {{/each}}
  {{/each}}
+  {{else}}
+  <div class="myaccount-content">
+    <h3>Cancelled</h3>
+    <div class="welcome">
+        <p>You have no cancelled orders</p>
+    </div>
+    </div>
+{{/if}}
+</div>
+
+<div id="tab-3">
+  {{#if dlOrders}}
+   {{#each dlOrders}}   
+
+   {{!-- <div class="position-relative bg-light overflow-hidden" >
+                            <a href="/product-detail-page?id={{this._id}}"> <img class="img-fluid w-100"  src="product-images/{{this._id}}1.jpg" alt=""  ></a>  
+                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
+                                </div> --}}
+                             <div  class="myaccount-table table-responsive text-center">
+
+                       <div class="card shadow-0 border mb-4">
+                       <div class="card-body">
+
+                  <div class="row " >
+                    <div class="col-md-2">
+                      <img src="/product-images/{{this.product.[0].item}}1.jpg" style=""
+                        class="img-fluid" alt="Phone">
+                        <div style="background-color: #3084df;" class=" rounded text-white position-absolute start-0 top-0 ml-1 py-1 px-2">orders</div>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 font-weight-bold">{{this.date}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small font-weight-bold">{{this.paymentMethod}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small font-weight-bold">{{this.deliveryDetails.expectedDate}}</p>
+                    </div>
+                    {{!-- <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small font-weight-bold">Qty: {{this.quantity}}</p>
+                    </div> --}}
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small font-weight-bold">₹{{this.ProductTotal}}</p>
+                    </div>
+                  </div>
+            <a style="color: transparent;" href="/viewDetailedOrder?id={{this._id}}"><button type="button" class="btn btn-outline-primary d-flex ml-auto" >View Details</button></a>
+
+                  {{!-- <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                  <div class="row d-flex align-items-center">
+                    <div class="col-md-2">
+                      <p class="text-muted mb-0 small">Track Order</p>
+                    </div>
+                    <div class="col-md-10">
+                      <div class="progress" style="height: 6px; border-radius: 16px;">
+                        <div class="progress-bar" role="progressbar"
+                          style="width: 65%; border-radius: 16px; background-color: #5ab83d;" aria-valuenow="65"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="d-flex justify-content-around mb-1">
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for delivary</p>
+                        <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
+                      </div>
+                    </div>
+                  </div> --}}
+                </div>
+              </div> 
+                   </div>
+ {{/each}}
+  {{else}}
+  <div class="myaccount-content">
+    <h3>Delivered</h3>
+    <div class="welcome">
+        <p>You have no deliverd orders</p>
+    </div>
+    </div>
+{{/if}}
+ </div>
                         </div>
 
 
@@ -250,6 +284,7 @@
               <div class="card-body" >
                 <img src="/product-images/{{this.item}}1.jpg"
                         class="col-6" style="float:left" alt="Phone">
+                        
                   <div class="row col-6"  >
                     
                     <div class="col-md-2 ">

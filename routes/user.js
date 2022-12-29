@@ -256,6 +256,10 @@ router.get('/profile',verifyLogin,async (req,res)=>{
 let orders= await userHelper.getPendingOrderProducts(user._id)
 let cnOrders= await userHelper.getCancelledOrderProducts(user._id)
 let dlOrders= await userHelper.getDeliveredOrderProducts(user._id)
+console.log('profileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+console.log(orders);
+console.log(cnOrders);
+console.log(dlOrders[0].product);
   res.render('user/profile-page',{user,orders,sitedetails,cnOrders,dlOrders})
 })
 
