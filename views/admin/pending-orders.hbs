@@ -171,11 +171,12 @@ table.table .avatar {
     font-size: 13px;
 }
 </style>
+
 <script>
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 });
-</style>
+</script>
 <script>
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
@@ -226,49 +227,12 @@ $(document).ready(function(){
                         <td >
 
                             <a href="/admin/deliveredstatus?id={{this._id}}" class="settings" title="Delivered" data-toggle="tooltip"><i class="fa-solid fa-thumbs-up fa-xl"></i></a>
-                            <a href="/admin/cancelledstatus?id={{this._id}}" class="delete" title="Cancelled" data-toggle="tooltip" onclick="return confirm('Are you sure want to cancel this order')"><i class="fa-solid fa-ban fa-xl"></i></a>
-                        </td>
-                    </tr>
-
-                    {{/each}}
-{{!-- {{else}}
-
-{{#if crafts}}
-{{#each crafts}}
-
-                   <tr>
-                        <td>{{@key}}</td>
-                        <td><a href="#"><img src="/product-images/{{this._id}}1.jpg" class="avatar" style="width: 50px; height: 50px;" alt="Avatar">{{this.Name}}</a></td>
-                        <td>{{this.Category}}</td>                        
-                        <td>{{this.Subcategory}}</td>
-                        <td>{{this.Price}}</td>
-                        <td>
-                            <a href="/admin/edit-crafts?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a href="/admin/delete-product?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
-                        </td>
-                    </tr>
-
-                    {{/each}}
-                    
-{{else}}
- 
-     {{#each gifts}}
-
-                   <tr>
-                        <td>{{@key}}</td>
-                        <td><a href="#"><img src="/product-images/{{this._id}}1.jpg" class="avatar" style="width: 50px; height: 50px;" alt="Avatar">{{this.Name}}</a></td>
-                        <td>{{this.Category}}</td>                        
-                        <td>{{this.Subcategory}}</td>
-                        <td>{{this.Price}}</td>
-                        <td>
-                            <a href="/admin/edit-gifts?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a href="/admin/delete-product?id={{this._id}}" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Are you sure want to delete {{this.Name}}')"><i class="material-icons">&#xE5C9;</i></a>
+                            <a  class="delete" title="Cancelled" data-toggle="tooltip" onclick="cancelled('{{this._id}}')"><i class="fa-solid fa-ban fa-xl"></i></a>
                         </td>
                     </tr>
 
                     {{/each}}
 
-                    {{/if}} --}}
                 
                     
                 </tbody>
@@ -287,15 +251,51 @@ $(document).ready(function(){
 
         </div>
     </div>
-</div>     
-</body>
-</html>
+</div> 
+
+
+
 
 <script>
+ 
+
+function cancelled(orderId){
+  
+swal("Enter Cancellation Reason:", {
+  content: "input",
+})
+.then((value) => {
+    if(value.length<1){
+  swal(`Enter Reason for Cancelled!`, {icon: 'error'});
+
+    }else{
+        
+$.ajax({
+    url:'/admin/cancelledstatus',
+    data:{
+      id:orderId,
+      errmsg:value
+    },
+    method:'post',
+    success:(response)=>{
+       
+     window.location.reload();
+    }
+})
+
+    }
+});
+}
+
 
 
 $(document).ready( function () {
     $('#table_id').DataTable();
 } );
 
+
+
+
 </script>
+</body>
+</html>

@@ -22,7 +22,7 @@
                             </div>
                             <div class="col">
                                 <a class="cursor-property"  style="font-size: 15px;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</a>
-                                <a href="#" class="" style="font-size: 15px;" id="{{this.product._id}}"  >{{this.quantity}}</a>
+                                <a href="#"  style="font-size: 15px;" id="{{this.product._id}}"  >{{this.quantity}}</a>
                                 <a class="cursor-property" style="font-size: 15px;" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</a>
                             </div>
                             <div class="col ">₹ {{this.product.Price}}<a  onclick="removeCartItem('{{this._id}}','{{this.product._id}}')" class="close cursor-property">&#10005;</a></div>

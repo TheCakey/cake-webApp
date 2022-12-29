@@ -122,7 +122,8 @@ return new Promise(async(resolve,reject)=>{
                     $project:{
                         item:'$product.item',
                         quantity:'$product.quantity',
-                        weight:'$product.weight'
+                        weight:'$product.weight',
+                        message:'$product.message'
                     }
                 },
                 {
@@ -135,7 +136,7 @@ return new Promise(async(resolve,reject)=>{
                 },
                 {
                     $project:{
-                       item:1,quantity:1,weight:1,product:{$arrayElemAt:['$product',0]}
+                       item:1,quantity:1,weight:1,message:1,product:{$arrayElemAt:['$product',0]}
                     }
                 }
 
@@ -377,6 +378,15 @@ return new Promise(async(resolve,reject)=>{
         return new Promise((resolve,reject)=>{
           
             let status=order['payment-method']==='COD'?'placed':'pending'
+
+            //order id generation
+            let td=(new Date()).getDate()
+let tm=(new Date()).getMonth()+1
+let yr=(new Date()).getFullYear()
+ yr = String(yr).slice(-2)
+let num=Math.floor(1000 + Math.random() * 9000);
+let Orderid=num+''+td+''+tm+''+yr
+Orderid = Number(Orderid);
            let nwdate=new Date()
             var date= moment(nwdate).format('MMM Do YYYY');
             var time= moment(nwdate).format('LT')
@@ -396,6 +406,7 @@ return new Promise(async(resolve,reject)=>{
 
 
                 },
+                orderId:Orderid,
                 userId:objectId(order.userId),
                 paymentMethod:order['payment-method'],
                 product:product,

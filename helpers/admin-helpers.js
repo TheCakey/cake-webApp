@@ -175,9 +175,11 @@ module.exports={
          resolve()
         })
     },
-    cancelledstatus:(Id)=>{
+    cancelledstatus:(Id,errmsg)=>{
         return new Promise((resolve,reject)=>{
-                db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(Id)},{ $set: { "status" : 'cancelled' } })
+            console.log(Id);
+            console.log(errmsg);
+                db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(Id)},{ $set: { status : 'cancelled' , errmsg: errmsg} })
          resolve()
         })
     },

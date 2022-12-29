@@ -407,6 +407,8 @@ router.post('/checkout',async(req,res)=>{
       res.json({cod_success:true})
     }else{
       userHelper.generateRazorPay(orderId,price,usr).then((response)=>{
+        console.log("heeheeheheehe");
+        console.log(response);
        res.json(response)
       })
     }

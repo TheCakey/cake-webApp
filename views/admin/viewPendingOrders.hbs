@@ -83,7 +83,7 @@ a {
                   <i class="bi bi-three-dots-vertical"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Edit</a></li>
+                  
                   <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i> Print</a></li>
                 </ul>
               </div>
@@ -99,12 +99,13 @@ a {
                       <img src="/product-images/{{this.item}}1.jpg" alt="" width="35" class="img-fluid">
                     </div>
                     <div class="flex-lg-grow-1 ms-3">
-                      <h6 class="small mb-0"><a href="#" class="text-reset">{{this.product.Name}}</a></h6>
-                      <span class="small">Color: Black</span>
+                      <h6 class="small mb-0"><a  href="/product-detail-page?id={{this.item}}" class="text-reset">{{this.product.Name}}</a></h6>
+                      <span class="small">Weight: {{this.weight}}kg</span>
                     </div>
                   </div>
                 </td>
-                <td>1</td>
+                
+                <td  class="small">Qty: {{this.quantity}}</td>
                 <td class="text-end">₹{{this.product.Price}}</td>
               </tr>
 
@@ -173,8 +174,10 @@ a {
           <address>
             <strong>{{orderdata.deliveryDetails.name}}</strong><br>
             {{orderdata.deliveryDetails.address}}<br>
-             {{orderdata.deliveryDetails.city}},  {{orderdata.deliveryDetails.pincode}}<br>
-            <abbr title="Phone">Mob:</abbr> (+91){{orderdata.deliveryDetails.mobile}}
+             {{orderdata.deliveryDetails.place}},  {{orderdata.deliveryDetails.pincode}}<br>
+             city : {{orderdata.deliveryDetails.city}} <br> state : {{orderdata.deliveryDetails.state}} <br>
+            <abbr title="Phone">Mob:</abbr> (+91){{orderdata.deliveryDetails.mobile}}<br>
+             <abbr title="Phone">Alt:</abbr> (+91){{orderdata.deliveryDetails.altNum}}
           </address>
         </div>
       </div>
