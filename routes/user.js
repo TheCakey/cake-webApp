@@ -412,19 +412,32 @@ router.post('/checkout',async(req,res)=>{
         console.log(response);
        res.json(response)
       }).catch((err)=>{
-        res.json(false)
+        userHelper.deleteOrder(orderId).then((response)=>{
+          console.log(err);
+          res.json(false)
+        })
+      
       })
     }
   })
 })
 
 router.post('/verify-payment',(req,res)=>{
-  userHelper.verifyPayment(req.body).then(()=>{
-   userHelper.changePaymentStatus(req.body['order[receipt]']).then(()=>{
+  let user=req.session.user
+  userHelper.verifyPayment(req.body).then((pid)=>{
+    console.log("piiid"+pid);
+    console.log(req.body['order[receipt]']);
+   userHelper.changePaymentStatus(req.body['order[receipt]'],pid).then(()=>{
+    console.log("change success");
      res.json({status:true})
+   }).catch(()=>{
+    res.render('user/paymenterror',{user})
    })
   }).catch((err)=>{
-    res.json({status:false})
+    userHelper.deleteOrder(req.body['order[receipt]']).then((response)=>{
+      res.json({status:false})
+    })
+   
   })
 })
 
@@ -436,9 +449,10 @@ router.get('/payment-error',async (req,res)=>{
 
 router.get('/ordered-response',async (req,res)=>{
   sitedetails = await adminHelpers.getSiteDetails()
+  let oder;
   let user=req.session.user
   let mode=req.query.id
-  let cod;
+  let cod=false;
     let products =await userHelper.getCartProducts(user.id);
     userHelper.deleteuserCart(user._id)
  
@@ -446,7 +460,8 @@ router.get('/ordered-response',async (req,res)=>{
     cod=true
   }
   else{
-    cod=false
+   order=await userHelper.getOrderDetails(mode)
+
   }
   res.render('user/order-response',{user,cod,sitedetails})
 })

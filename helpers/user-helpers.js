@@ -272,9 +272,10 @@ return new Promise(async(resolve,reject)=>{
 
     getOrderDetails:(orderId)=>{
         return new Promise(async (resolve,reject)=>{
-            let order=await db.get().collection(collection.ORDER_COLLECTION).findOne({_id:objectId(orderId)})
+            let order=await db.get().collection(collection.ORDER_COLLECTION).findOne({orderId:orderId})
             resolve(order)
         })
+        
 
     },
 
@@ -424,10 +425,19 @@ Orderid = Number(Orderid);
             }
             db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
               
-                resolve(response.insertedId)
+                resolve(Orderid)
             })
         })
     },
+
+  deleteOrder:(orderId)=>{
+ return new Promise((resolve,reject)=>{
+        db.get().collection(collection.ORDER_COLLECTION).deleteOne({orderId:orderId}).then((response)=>{
+            resolve(response)
+        })
+ })
+  },
+
 
     generateRazorPay:(orderId,price,user)=>{
         return new Promise((resolve,reject)=>{
@@ -441,6 +451,7 @@ Orderid = Number(Orderid);
                      if(err){
                          reject(err)
                      }else{
+                        console.log("order"+order);
                          order.user=user
                     resolve(order)
                      }
@@ -450,26 +461,40 @@ Orderid = Number(Orderid);
     
 verifyPayment:(details)=>{
     return new Promise((resolve,reject)=>{
+        console.log(details);
+        let pid=details['payment[razorpay_payment_id]'];
+        // let oid=details.response.razorpay_order_id
+        // let sid=details.response.razorpay_signature
+
+        console.log("hehehehhehehehehe");
+        console.log(process.env.RAZORPAY_KEY_VERIFY);
         const crypto = require('crypto');
-        let hmac = crypto.createHmac('sha256', 'hIB4Fe2CyR04m633aO8507ll');
+        let hmac = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_VERIFY);
         hmac.update(details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]']);
         hmac=hmac.digest('hex')
         if(hmac==details['payment[razorpay_signature]']){
-            resolve()
+            console.log("payment success");
+            console.log("pid"+pid);
+            resolve(pid)
         }else{
+            console.log("payment failed");
             reject()
         }
     })
 },
-changePaymentStatus:(orderId)=>{
+changePaymentStatus:(orderId,pid)=>{
     return new Promise((resolve,reject)=>{
-        db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(orderId)},
+        db.get().collection(collection.ORDER_COLLECTION).updateOne({orderId:orderId},
         {
             $set:{
-                status:'placed'
+                status:'placed',
+                 paymentId:pid
+
             }
         }).then(()=>{
             resolve()
+        }).catch(()=>{
+            reject()
         })
     })
 },

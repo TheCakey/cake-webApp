@@ -332,7 +332,7 @@ $(function(){
             data:$('#checkout-form').serialize(),
             success:(res)=>{
               if(res==false){
-
+  location.href='/payment-error'
               }else{
  if(res.cod_success){
                     location.href='/ordered-response?id=cod'
@@ -360,8 +360,8 @@ $(function(){
     "key": order.razorkey, 
     "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     "currency": "INR",
-    "name": "MohammedYaseen",
-    "description": "Test Transaction",
+    "name": "theCakey",
+    "description": "Online transaction for your products from thecakey",
     "image": "img/cakey1.png",
     "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
@@ -369,6 +369,7 @@ $(function(){
        // alert(response.razorpay_order_id);
        // alert(response.razorpay_signature)
         verifyPayment(response,order)
+       
     },
     "prefill": {
         "name": order.user.fullname ,
@@ -399,7 +400,11 @@ $(function(){
                 if(response.status){
                     location.href='/ordered-response'
                 }else{
-                    alert('payment failed')
+                     location.href='/payment-error'
+
+                    //show payment failed error page 
+                    //cart page have data
+                    //if payment gone contact us
                 }
             }
         })
