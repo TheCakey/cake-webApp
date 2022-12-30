@@ -60,7 +60,7 @@ a {
 <div class="container dsec">
   <!-- Title -->
   <div class="d-flex justify-content-between align-items-center py-3">
-    <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #16123222</h2>
+    <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order {{orderdata.orderId}}</h2>
   </div>
 
   <!-- Main content -->
@@ -72,7 +72,7 @@ a {
           <div class="mb-3 d-flex justify-content-between">
             <div>
               <span class="me-3">{{orderdata.date}}</span>
-              <span class="me-3">#16123222</span>
+              <span class="me-3">{{orderdata.orderId}}</span>
               {{!-- <span class="me-3">Visa -1234</span> --}}
               <span class="badge rounded-pill bg-info">{{orderdata.status}}</span>
             </div>

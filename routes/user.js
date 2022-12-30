@@ -404,11 +404,17 @@ router.post('/checkout',async(req,res)=>{
   let products =await userHelper.getCartProducts(user);
    userHelper.PlaceOrder(req.body,products,price).then((orderId)=>{
     if(req.body['payment-method']=='COD'){
-      res.json({cod_success:true})
+      console.log("orderId"+orderId);
+ let response={
+    cod_success:true,
+    OrderId:orderId
+  }
+      res.json(response)
     }else{
       userHelper.generateRazorPay(orderId,price,usr).then((response)=>{
        
         response.razorkey=process.env.RAZORPAY_KEY_ID;
+        response.OrderId=orderId;
         console.log(response);
        res.json(response)
       }).catch((err)=>{
@@ -449,21 +455,22 @@ router.get('/payment-error',async (req,res)=>{
 
 router.get('/ordered-response',async (req,res)=>{
   sitedetails = await adminHelpers.getSiteDetails()
-  let oder;
+  let order=null;
   let user=req.session.user
-  let mode=req.query.id
+  let id=req.query.id
+  let mode=req.query.mode
   let cod=false;
-    let products =await userHelper.getCartProducts(user.id);
+    
     userHelper.deleteuserCart(user._id)
  
   if(mode=='cod'){
     cod=true
   }
-  else{
-   order=await userHelper.getOrderDetails(mode)
 
-  }
-  res.render('user/order-response',{user,cod,sitedetails})
+ order=await userHelper.getOrderDetails(id)
+
+
+  res.render('user/order-response',{user,cod,sitedetails,order,id})
 })
 
 
@@ -480,12 +487,13 @@ let couponId=req.body.discountCode;
   }
     })
   
- 
+
     router.get('/viewDetailedOrder',async(req,res)=>{
       sitedetails = await adminHelpers.getSiteDetails()
 let paymentmethod=null;
+console.log(req.query.id);
 userHelper.getOrderDetails(req.query.id).then((response)=>{
-
+console.log(response);
   if(response.paymentMethod=="ONLINE"){
    
     paymentmethod=response.paymentMethod;

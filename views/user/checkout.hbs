@@ -272,7 +272,7 @@
   
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2022 Cakey</p>
+    <p class="mb-1">&copy; 2023 theCakey</p>
     <ul class="list-inline">
       <li class="list-inline-item"><a href="#">Privacy</a></li>
       <li class="list-inline-item"><a href="#">Terms</a></li>
@@ -331,11 +331,14 @@ $(function(){
             method:'post',
             data:$('#checkout-form').serialize(),
             success:(res)=>{
+              alert(res)
               if(res==false){
   location.href='/payment-error'
               }else{
  if(res.cod_success){
-                    location.href='/ordered-response?id=cod'
+  console.log(res)
+  alert(res.OrderId)
+                    location.href='/ordered-response?mode=cod&id='+res.OrderId;
                 }
                 else{
                  
@@ -368,6 +371,7 @@ $(function(){
        // alert(response.razorpay_payment_id);
        // alert(response.razorpay_order_id);
        // alert(response.razorpay_signature)
+       
         verifyPayment(response,order)
        
     },
@@ -398,7 +402,7 @@ $(function(){
             method:'post',
             success:(response)=>{
                 if(response.status){
-                    location.href='/ordered-response'
+                    location.href='/ordered-response?id='+order.OrderId
                 }else{
                      location.href='/payment-error'
 

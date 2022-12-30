@@ -214,8 +214,8 @@ $(document).ready(function(){
 
                    <tr>
                         <td>{{@key}}</td>
-                        <td>{{this.deliveryDetails.name}}</td>
-                        <td>{{this.date}}</td>                        
+                        <td><a href="/admin/viewPendingOrders?id={{this.orderId}}" > {{this.deliveryDetails.name}}</a></td>
+                        <td>{{this.deliveryDetails.expectedDate}}</td>                        
                         <td>{{this.deliveryDetails.pincode}}</td>
                         <td>{{this.totalAmount}}</td>
                         <td>{{this.status}}</td>

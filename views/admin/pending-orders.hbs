@@ -220,14 +220,14 @@ $(document).ready(function(){
 
                    <tr  >
                         <td>{{@key}}</td>
-                    <td>  <a href="/admin/viewPendingOrders?id={{this._id}}" >  {{this.deliveryDetails.name}}</a></td>
+                    <td>  <a href="/admin/viewPendingOrders?id={{this.orderId}}" >  {{this.deliveryDetails.name}}</a></td>
                         <td>{{this.deliveryDetails.expectedDate}}</td>                        
                         <td>{{this.deliveryDetails.pincode}}</td>
                         <td>₹ {{this.totalAmount}}</td>
                         <td >
 
-                            <a href="/admin/deliveredstatus?id={{this._id}}" class="settings" title="Delivered" data-toggle="tooltip"><i class="fa-solid fa-thumbs-up fa-xl"></i></a>
-                            <a  class="delete" title="Cancelled" data-toggle="tooltip" onclick="cancelled('{{this._id}}')"><i class="fa-solid fa-ban fa-xl"></i></a>
+                            <a href="/admin/deliveredstatus?id={{this.orderId}}" class="settings" title="Delivered" data-toggle="tooltip"><i class="fa-solid fa-thumbs-up fa-xl"></i></a>
+                            <a  class="delete" title="Cancelled" data-toggle="tooltip" onclick="cancelled('{{this.orderId}}')"><i class="fa-solid fa-ban fa-xl"></i></a>
                         </td>
                     </tr>
 
