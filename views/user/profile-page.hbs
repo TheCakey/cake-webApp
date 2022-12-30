@@ -281,7 +281,8 @@
             <button type="button" onclick="cancelledMob()" class="btn btn-outline-primary mb-3 ml-1" style="border-radius: 7px; padding: 8px;">Cancelled</button>
             <button type="button" onclick="deliveredMob()" class="btn btn-outline-primary mb-3 ml-1" style="border-radius: 7px; padding: 8px;">Buy Again</button>
                              
-          <div id="mobtab-1">                             
+          <div id="mobtab-1">       
+            {{#if orders}}                      
                                {{#each orders}}   
                                                     
       <div class="myaccount-table table-responsive ">
@@ -317,11 +318,21 @@
               </div>
                    </div>
   {{/each}}
+    {{else}}
+  <div class="myaccount-content">
+    <h3>Orders</h3>
+    <div class="welcome">
+        <p>You dont have any orders</p>
+    </div>
+    </div>
+{{/if}}
   </div>
 
   {{!-- oooooooooooooooooooooooooooooooooooooo --}}
 
-  <div id="mobtab-2">                             
+  <div id="mobtab-2">    
+    {{#if cnOrders}}                      
+                               
                                {{#each cnOrders}}   
                                                     
       <div class="myaccount-table table-responsive ">
@@ -357,11 +368,20 @@
               </div>
                    </div>
   {{/each}}
+    {{else}}
+  <div class="myaccount-content">
+    <h3>Cancelled</h3>
+    <div class="welcome">
+        <p>You have no cancelled orders</p>
+    </div>
+    </div>
+{{/if}}
   </div>
 
   {{!-- oooooooooooooooooooooooooooooooooooooo --}}
 
-  <div id="mobtab-3">                             
+  <div id="mobtab-3"> 
+    {{#if dlOrders}}                            
                                {{#each dlOrders}}   
                                                     
       <div class="myaccount-table table-responsive ">
@@ -397,6 +417,14 @@
               </div>
                    </div>
   {{/each}}
+    {{else}}
+  <div class="myaccount-content">
+    <h3>Delivered</h3>
+    <div class="welcome">
+        <p>You have no delivered orders</p>
+    </div>
+    </div>
+{{/if}}
   </div>
 
   {{!-- oooooooooooooooooooooooooooooooooooooo --}}
@@ -410,7 +438,7 @@
 
                       </div>
                           </div>
-  
+  {{!-- mobile ends here --}}
   
   
   
