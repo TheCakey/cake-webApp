@@ -5,6 +5,12 @@
   "scripts": {
     "start": "nodemon ./bin/www"
   },
+  "eslintConfig": {
+    "env": {
+        "browser": true,
+        "node": true
+    }
+  },
   "dependencies": {
     "@emailjs/browser": "^3.9.1",
     "bcrypt": "^5.0.1",

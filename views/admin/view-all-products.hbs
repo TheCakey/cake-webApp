@@ -192,8 +192,8 @@ $(document).ready(function(){
                         <h2>Cake <b>Management</b></h2>
                     </div>
                     <div class="col-sm-7">
-                        <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Products</span></a>
-                        <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>						
+                        <a href="/admin/product-add" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Products</span></a>
+                        {{!-- <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>						 --}}
                     </div>
                 </div>
             </div>
@@ -202,8 +202,8 @@ $(document).ready(function(){
                     <tr>
                         <th>#</th>
                         <th>Name</th>						
+                        <th>Flavour</th>
                         <th>Category</th>
-                        <th>Sub-Category</th>
                         <th>Price</th>
                         <th>Action</th>
                     </tr>
@@ -215,8 +215,8 @@ $(document).ready(function(){
                    <tr>
                         <td>{{@key}}</td>
                         <td><a href="#"><img src="/product-images/{{this._id}}1.jpg" class="avatar" style="width: 50px; height: 50px;" alt="Avatar">{{this.Name}}</a></td>
-                        <td>{{this.Category}}</td>                        
-                        <td>{{this.Subcategory}}</td>
+                        <td>{{this.flavour}}</td>                        
+                        <td>{{this.Category}}</td>
                         <td>{{this.Price}}</td>
                         <td>
                             <a href="/admin/edit-cakes?id={{this._id}}" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>

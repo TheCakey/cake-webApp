@@ -499,10 +499,13 @@ router.get('/deliveredstatus',verifyLogin,(req,res)=>{
 })
 
 
-router.get('/cancelledstatus',verifyLogin,(req,res)=>{
+router.post('/cancelledstatus',verifyLogin,(req,res)=>{
   
-    adminHelpers.cancelledstatus(req.query.id).then(()=>{
-      res.redirect('/admin/pending-orders')
+  
+
+    adminHelpers.cancelledstatus(req.body.id,req.body.errmsg).then(()=>{
+      
+      res.json({status:true})
     })
 })
 

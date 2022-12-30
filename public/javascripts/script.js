@@ -1,5 +1,7 @@
+
+
 function addToCart(prodId,weight,message){
-   
+
 $.ajax({
     url:'/addtocart/'+prodId+'/'+weight+'/'+message,
 method:'get',
@@ -29,38 +31,7 @@ if(response===false){
 }
 
 
-function razorpayPayment (order){
-    var options = {
-"key": process.env.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
-"amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-"currency": "INR",
-"name": "TheCakey",
-"description": "Test Transaction",
-"image": "img/cakey1.png",
-"order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-"handler": function (response){
-   // alert(response.razorpay_payment_id);
-   // alert(response.razorpay_order_id);
-   // alert(response.razorpay_signature)
-console.log(response);
-    verifyPayment(response,order)
-},
-"prefill": {
-    "name": order.user.fullname ,
-    "email":  order.user.emailaddress,
-    "contact": order.user.mobnum
-},
-"notes": {
-    "address":  order.user.permanentaddress
-},
-"theme": {
-    "color": "#3399cc"
-}
-};
-var rzp1 = new Razorpay(options);
-rzp1.open();
 
-}
 
 
 

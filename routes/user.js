@@ -407,7 +407,12 @@ router.post('/checkout',async(req,res)=>{
       res.json({cod_success:true})
     }else{
       userHelper.generateRazorPay(orderId,price,usr).then((response)=>{
+       
+        response.razorkey=process.env.RAZORPAY_KEY_ID;
+        console.log(response);
        res.json(response)
+      }).catch((err)=>{
+        res.json(false)
       })
     }
   })
@@ -421,6 +426,12 @@ router.post('/verify-payment',(req,res)=>{
   }).catch((err)=>{
     res.json({status:false})
   })
+})
+
+router.get('/payment-error',async (req,res)=>{
+  let user=req.session.user
+  sitedetails = await adminHelpers.getSiteDetails()
+  res.render('user/paymenterror',{user})
 })
 
 router.get('/ordered-response',async (req,res)=>{
