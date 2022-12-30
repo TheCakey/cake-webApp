@@ -439,7 +439,7 @@ Orderid = Number(Orderid);
                  notes: {    key1: "value3",    key2: "value2"  }},(err,order)=>{
                     
                      if(err){
-                         
+                         reject(err)
                      }else{
                          order.user=user
                     resolve(order)
