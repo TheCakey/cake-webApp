@@ -30,11 +30,17 @@ if(req.session.adminLoggedIn){
    ordersList=await adminHelpers.getAllorder();
    pincodeList=await adminHelpers.getAllpincodes();
    productList=await productHelpers.getProductCake();
+   let pOrder = await adminHelpers.viewAllPendingOrders()
+   let dOrder = await adminHelpers.viewAlldeliveredOrders()
+   let cOrder = await adminHelpers.viewAllCancelledOrders()
+    pOrder= pOrder.length;
+    dOrder= dOrder.length;
+    cOrder= cOrder.length;
   let usrlength = usersList.length;
   let orderlength = ordersList.length;
   let productlength = productList.length;
   let pincodelength = pincodeList.length;
-  res.render('admin/index',{admin:true,users:usersList,usrlength,orderlength,productlength,pincodelength,adminName}); 
+  res.render('admin/index',{admin:true,users:usersList,usrlength,orderlength,productlength,pincodelength,adminName,pOrder,dOrder,cOrder}); 
 }
 else{
   res.redirect('admin/login')

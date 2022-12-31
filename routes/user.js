@@ -51,8 +51,13 @@ cakes=cakes.slice(0, 8);
 router.get('/browse-season-product',async function (req, res, next) {
   sitedetails = await adminHelpers.getSiteDetails()
   let season = req.query.name
-  let seasonalProducts = await productHelper.getSeasonalProducts(season)
-  res.render('user/browse-season-product',{sitedetails,seasonalProducts,season})
+  let seasonalProducts = await productHelper.getSeasonalProducts(season).then((response)=>{
+    
+    res.render('user/browse-season-product',{sitedetails,seasonalProducts,season})
+
+}).catch((err)=>{
+  res.redirect('/error')
+})
 
 })
 
@@ -74,7 +79,7 @@ router.get('/signup',(req,res)=>{
 router.post('/mob-num-submission',async (req,res)=>{
  req.session.tempUser=req.body.mobnum
  let mobno=req.body.mobnum
- console.log(mobno)
+ 
   loginErr=null;
   mobnum=await userHelper.findUserByMobNum(req.body.mobnum);
   if(mobnum){
@@ -127,6 +132,10 @@ router.post('/full-details-form',(req,res)=>{
     }else{
       res.redirect('/')
     }
+  }).catch((err)=>{
+    
+
+    res.redirect('/error')
   })
  
 })
@@ -151,6 +160,12 @@ loginErr=null;
 })
 
 
+router.get('/error',(req,res)=>{
+  res.render('user/errorpage1')
+  
+  
+})
+
 router.post('/login-mob-num-submission',(req,res)=>{
  let mobno=req.body.mobnum
   userHelper.findUserByMobNum(mobno).then((response)=>{
@@ -161,10 +176,7 @@ router.post('/login-mob-num-submission',(req,res)=>{
 // //otp send to mobile number
 //     }
 otp = Math.floor(1000 + Math.random() * 9000);
-console.log(otp);
- 
-   
-console.log(mobno);
+
    
     // const client = require("twilio")(accountSid, authToken);
     
@@ -231,6 +243,8 @@ router.post('/pass-mob-num-submission',(req,res)=>{
    res.json(response)
   }
 
+  }).catch((err)=>{
+   res.redirect('/error')
   })
 
  
@@ -251,15 +265,11 @@ router.post('/pass-mob-num-submission',(req,res)=>{
 //user profile--------------------------------------------
 router.get('/profile',verifyLogin,async (req,res)=>{
   sitedetails = await adminHelpers.getSiteDetails()
-  user = req.session.user;
- // let Orders = await adminHelpers.viewAllPendingOrders()
-let orders= await userHelper.getPendingOrderProducts(user._id)
+    user = req.session.user;
+let orders  = await userHelper.getPendingOrderProducts(user._id)
 let cnOrders= await userHelper.getCancelledOrderProducts(user._id)
 let dlOrders= await userHelper.getDeliveredOrderProducts(user._id)
-console.log('profileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-console.log(orders);
-console.log(cnOrders);
-console.log(dlOrders[0].product);
+
   res.render('user/profile-page',{user,orders,sitedetails,cnOrders,dlOrders})
 })
 
@@ -276,6 +286,8 @@ router.post('/edit-user-details',(req,res)=>{
   userHelper.editUserDetails(req.body,req.session.user._id).then((user)=>{
     req.session.user=user;
     res.redirect('/profile')
+  }).catch((err)=>{
+    res.redirect('/error')
   })
 })
 
@@ -330,6 +342,8 @@ router.get('/addtocart/:id/:weight/:msg',async(req,res)=>{
     let weight= parseFloat(req.params.weight)
     userHelper.addToCart(req.session.user._id,req.params.id,weight,req.params.msg).then(()=>{
       res.json(req.params.id)
+    }).catch((err)=>{
+      res.redirect('/error')
     })
   }else{
     res.json(false)
@@ -355,6 +369,8 @@ router.post('/change-product-quantity',(req,res)=>{
     // }
   }
     res.json(response)
+  }).catch((err)=>{
+    res.redirect('/error')
   })
 })
 
@@ -362,6 +378,8 @@ router.post('/change-product-quantity',(req,res)=>{
 router.post('/remove-cart-products',(req,res,next)=>{
   userHelper.removeCartProducts(req.body).then((response)=>{
     res.json(response)
+  }).catch((err)=>{
+    res.redirect('/error')
   })
 })
 

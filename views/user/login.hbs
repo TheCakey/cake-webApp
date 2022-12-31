@@ -56,7 +56,7 @@
                 <p class="text-danger" id="invalid-user" >User Not Found, Check your number or <a href="/signup"> Create new account</a></p>
                  <p class="text-danger" id="blocked-user" >Account blocked by admin try <a href="/signup"> Signup</a></p>
                    <p class="text-danger" id="wrong-psw" >Wrong password try again<a href="/login">Login</a></p>
-              {{#if loginErr}}
+              {{#if err}}
                   <p class="text-danger" id="otp-error">Wrong Otp</p>
                   {{/if}}
             </div>
