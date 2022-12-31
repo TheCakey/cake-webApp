@@ -7994,9 +7994,17 @@ fieldset:disabled .btn {
 .p-3 {
     padding: 1rem !important
 }
+@media(max-width: 450px){
+    .p-4 {
+        padding: .7rem !important
 
+}
+}
+@media(min-width: 450px){
 .p-4 {
     padding: 1.5rem !important
+}
+
 }
 
 .p-5 {

@@ -115,7 +115,7 @@
 
                         
                         <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                            <a class="btn btn-primary rounded-pill py-3 px-5" href="/products-page">Browse More Products</a>
+                            <a class="btn btn-secondary rounded-pill py-2 px-3" href="/products-page">Browse More Cakes</a>
                         </div>
                     </div>
                 </div>
@@ -127,15 +127,15 @@
 
 
     <!-- Firm Visit Start -->
-    <div class="container-fluid bg-primary bg-icon1 mt-5 py-6">
+    <div class="container-fluid bg-primary bg-icon1 mt-3 py-4">
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
                     <h1 class="display-5 text-white mb-3">Visit Our Firm</h1>
-                    <p class="text-white mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.</p>
+                    <p class="text-white mb-0">Cakey is an online cake delivery portal offering a new natural style of cakes using quality ingredients, attention to detail with great care, and offering personalized attention in both our services and online shop catering</p>
                 </div>
                 <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
-                    <a class="btn btn-lg btn-secondary rounded-pill py-3 px-5" href="">Visit Now</a>
+                    <a class="btn btn-lg btn-secondary rounded-pill py-1 " href="">Visit Now</a>
                 </div>
             </div>
         </div>
@@ -145,13 +145,22 @@
 
 
 {{#if SeasonName}}
+
+{{!-- Special Title --}}
+<div>
+    <p class="special-title"><span class="special-span">{{SeasonName}} Specials</span></p>
+</div>
+
+{{!-- Ends soecial title --}}
+
  <!-- Product Start -->
-    <div class="container-xxl py-5">
+    <div class="container-xxl py-3">
         <div class="container">
             <div class="row g-0 gx-5 align-items-end">
                 <div class="col-lg-6">
-                    <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                        <h1 class="display-5 mb-3">{{SeasonName}}</h1>
+                    {{!-- <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;"> --}}
+                        {{!-- <h1 class="display-5 mb-3">{{SeasonName}}</h1> --}}
+                        
                         {{!-- <p>Tempor ut dolore lorem kasd vero ipsum sit eirmo</p> --}}
                     </div>
                 </div>
@@ -191,7 +200,7 @@
 
                         
                         <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                            <a class="btn btn-primary rounded-pill py-3 px-5" href="/browse-season-product?name={{SeasonName}}">Browse More Products</a>
+                            <a class="btn btn-secondary rounded-pill py-2 px-3" href="/browse-season-product?name={{SeasonName}}">Browse More Cakes</a>
                         </div>
                     </div>
                 </div>
@@ -461,114 +470,7 @@ account_circle
 
 <style>
 
-@media (max-width: 768px) {
-    .special-title{
-    margin: 3vh auto;
-    text-align: center;
-    position: relative;
-    color: #FF6D23;
-    font-size: 1rem;
-    font-weight: bolder;
-    
-}
-.special-title::before{
-    content: "";
-    height: 4px;
-    width: 50vw;
-    background-color: #FF6D23;
-    color: #FF6D23;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    z-index: -2;
-}
-.special-title::after{
-    content: "";
-    height: 4px;
-    width: 50vw;
-    background-color: #FF6D23;
-    color: #FF6D23;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    z-index: -2;
-}
-
-.special-span{
-    background: white;
-    padding: 0;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 0;
-}
-}
-
-@media (min-width: 768px) {
-    .special-title{
-    margin: 10vh auto;
-    text-align: center;
-    position: relative;
-    color: #FF6D23;
-    font-size: 1.7rem;
-    font-weight: bold;
-    
-}
-.special-title::before{
-    content: "";
-    height: 7px;
-    width: 50vw;
-    background-color: #FF6D23;
-    color: #FF6D23;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    z-index: -2;
-}
-.special-title::after{
-    content: "";
-    height: 7px;
-    width: 50vw;
-    background-color: #FF6D23;
-    color: #FF6D23;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    z-index: -2;
-}
-
-.special-span{
-    background: white;
-    padding: 0;
-    padding-left: 15%;
-    padding-right: 15%;
-    padding-bottom: 0;
-}
-}
-
-
-
-    {{!-- owl carousel  stars --}}
-  .owl-carousel .owl-item img {
-    display: block;
-    width: 100%;
-    border-radius: 15px;
-  }
-  .BO-edit{
-    
-    border-left: 3px solid #FF6D23;
-    font-family: mon-bold !important;
-    text-align: left;
-    color: #000;
-    font-size: 30px !important;
-    padding-left: 5px;
-    margin-left: 15px;
-    margin-top: 25px;
-    font-weight: bold;
-}
-  
-  {{!-- owl carousel ends --}}
-
-
+   
 </style>
 
 <script>
