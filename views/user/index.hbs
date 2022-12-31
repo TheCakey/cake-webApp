@@ -51,31 +51,23 @@
     <!-- Carousel End -->
 
 
+{{!-- first-owl-carasoul --}}
   
-<div class="home-demo">
-  <h3>Carousel</h3>
-  <div class="owl-carousel owl-theme">
-    <div class="item"  style="background-color: red;">
-      <h2>Swipe</h2>
+<div class="home-demo container-fluid ">
+    <div class="row ml-4">
+  <p class="BO-edit">Best Offers</p>
+  <div class="owl-carousel ">
+    {{#each cakes}}
+    <div class="item box-edit"  >
+      <a href="/product-detail-page?id={{this._id}}"> <img class="img-fluid w-100"  src="product-images/{{this._id}}1.jpg" alt=""  ></a>
     </div>
-    <div class="item"  style="background-color: red;">
-      <h2>Drag</h2>
-    </div>
-    <div class="item"  style="background-color: red;">
-      <h2>Responsive</h2>
-    </div>
-    <div class="item"  style="background-color: red;">
-      <h2>CSS3</h2>
-    </div>
-    <div class="item"  style="background-color: red;">
-      <h2>Fast</h2>
-    </div>
-    <div class="item"  style="background-color: red;">
-      <h2>Easy</h2>
-    </div>
+   {{/each}}
    
   </div>
 </div>
+</div>
+
+{{!-- first owl carasoul ends here --}}
 
 
     <!-- Product Start -->
@@ -132,75 +124,6 @@
         </div>
     </div>
     <!-- Product End -->
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 col-6">
-      <div id="news-slider" class="owl-carousel">
-        <div class="post-slide">
-          <div class="post-img">
-            <img src="https://www.cakezone.com/themes/organie1/img/general-img/offers/flat80-offer1.webp" alt="">
-            <a href="#" class="over-layer"><i class=""></i></a>
-          </div>
-         
-        </div>
-        
-        <div class="post-slide">
-          <div class="post-img">
-            <img src="https://www.cakezone.com/themes/organie1/img/general-img/offers/flat50-offer2.webp" alt="">
-            <a href="#" class="over-layer"><i class=""></i></a>
-          </div>
-     
-        </div>
-        
-        <div class="post-slide mob-hide">
-          <div class="post-img">
-            <img src="https://www.cakezone.com/themes/organie1/img/general-img/offers/flat-125.webp" alt="">
-            <a href="#" class="over-layer"><i class=""></i></a>
-          </div>
-     
-        </div>
-        
-       
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 col-md-6 col-6">
-      <div id="news-slider" class="owl-carousel">
-        <div class="post-slide ">
-          <div class="post-img">
-            <img src="https://www.cakezone.com/themes/organie1/img/general-img/offers/flat80-offer1.webp" alt="">
-            <a href="#" class="over-layer"><i class=""></i></a>
-          </div>
-         
-        </div>
-        
-        <div class="post-slide ">
-          <div class="post-img">
-            <img src="https://www.cakezone.com/themes/organie1/img/general-img/offers/flat50-offer2.webp" alt="">
-            <a href="#" class="over-layer"><i class=""></i></a>
-          </div>
-     
-        </div>
-        
-        <div class="post-slide mob-hide">
-          <div class="post-img">
-            <img src="https://www.cakezone.com/themes/organie1/img/general-img/offers/flat-125.webp" alt="">
-            <a href="#" class="over-layer"><i class=""></i></a>
-          </div>
-     
-        </div>
-        
-       
-      </div>
-    </div>
-  </div>
-</div>
-
 
 
     <!-- Firm Visit Start -->
@@ -514,173 +437,58 @@ account_circle
 </footer>
 
 <style>
-    @media only screen and (max-width:991px) {
-    .mob-hide{
-        display: none;
-    }
-}
-    #news-slider{
-    margin-top: 80px;
-}
-.post-slide{
-    background: #fff;
-    margin: 20px 15px 20px;
-    border-radius: 15px;
-    padding-top: 1px;
-    box-shadow: 0px 14px 22px -9px #bbcbd8;
-}
-.post-slide .post-img{
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    margin: -12px 15px 8px 15px;
-    margin-left: -10px;
-}
-.post-slide .post-img img{
-    width: 100%;
-    height: auto;
-    transform: scale(1,1);
-    transition:transform 0.2s linear;
-}
-.post-slide:hover .post-img img{
-    transform: scale(1.1,1.1);
-}
-.post-slide .over-layer{
-    width:100%;
-    height:100%;
-    position: absolute;
-    top:0;
-    left:0;
-    opacity:0;
-    background: linear-gradient(-45deg, rgba(6,190,244,0.75) 0%, rgba(45,112,253,0.6) 100%);
-    transition:all 0.50s linear;
-}
-.post-slide:hover .over-layer{
-    opacity:1;
-    text-decoration:none;
-}
-.post-slide .over-layer i{
-    position: relative;
-    top:45%;
-    text-align:center;
+  .owl-carousel .owl-item img {
     display: block;
-    color:#fff;
-    font-size:25px;
-}
-.post-slide .post-content{
-    background:#fff;
-    padding: 2px 20px 40px;
+    width: 100%;
     border-radius: 15px;
+  }
+  .BO-edit{
+    
+    border-left: 3px solid #FF6D23;
+    font-family: mon-bold !important;
+    text-align: left;
+    color: #000;
+    font-size: 30px !important;
+    padding-left: 5px;
+    margin-left: 15px;
+    margin-top: 25px;
+    font-weight: bold;
 }
-.post-slide .post-title a{
-    font-size:15px;
-    font-weight:bold;
-    color:#333;
-    display: inline-block;
-    text-transform:uppercase;
-    transition: all 0.3s ease 0s;
-}
-.post-slide .post-title a:hover{
-    text-decoration: none;
-    color:#3498db;
-}
-.post-slide .post-description{
-    line-height:24px;
-    color:#808080;
-    margin-bottom:25px;
-}
-.post-slide .post-date{
-    color:#a9a9a9;
-    font-size: 14px;
-}
-.post-slide .post-date i{
-    font-size:20px;
-    margin-right:8px;
-    color: #CFDACE;
-}
-.post-slide .read-more{
-    padding: 7px 20px;
-    float: right;
-    font-size: 12px;
-    background: #2196F3;
-    color: #ffffff;
-    box-shadow: 0px 10px 20px -10px #1376c5;
-    border-radius: 25px;
-    text-transform: uppercase;
-}
-.post-slide .read-more:hover{
-    background: #3498db;
-    text-decoration:none;
-    color:#fff;
-}
-.owl-controls .owl-buttons{
-    text-align:center;
-    margin-top:20px;
-}
-.owl-controls .owl-buttons .owl-prev{
-    background: #fff;
-    position: absolute;
-    top:-13%;
-    left:15px;
-    padding: 0 18px 0 15px;
-    border-radius: 50px;
-    box-shadow: 3px 14px 25px -10px #92b4d0;
-    transition: background 0.5s ease 0s;
-}
-.owl-controls .owl-buttons .owl-next{
-    background: #fff;
-    position: absolute;
-    top:-13%;
-    right: 15px;
-    padding: 0 15px 0 18px;
-    border-radius: 50px;
-    box-shadow: -3px 14px 25px -10px #92b4d0;
-    transition: background 0.5s ease 0s;
-}
-.owl-controls .owl-buttons .owl-prev:after,
-.owl-controls .owl-buttons .owl-next:after{
-    content:"\f104";
-    font-family: FontAwesome;
-    color: #333;
-    font-size:30px;
-}
-.owl-controls .owl-buttons .owl-next:after{
-    content:"\f105";
-}
-@media only screen and (max-width:1280px) {
-    .post-slide .post-content{
-        padding: 0px 15px 25px 15px;
-    }
-}
-
+  
 </style>
 
 <script>
 
+     $(document).ready(function(){
+  $('.owl-carousel').owlCarousel({
+    center: true,
+    loop:true,
+    margin:10,
+    autoplay:true,
+    autoplayTimeout:2500,
+    autoplayHoverPause:true,
+    responsive:{
+        0:{
+            items:2
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    },
+    
+});
+$('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[1000])
+})
+$('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+})
 
-$(document).ready(function() {
-    $("#news-slider").owlCarousel({
-        items : 3,
-        itemsDesktop:[1199,3],
-        itemsDesktopSmall:[980,2],
-        itemsMobile : [600,1],
-        navigation:true,
-        navigationText:["",""],
-        pagination:true,
-        autoPlay:true
-    });
 });
 
-
-$(function() {
-  // Owl Carousel
-  var owl = $(".owl-carousel");
-  owl.owlCarousel({
-    items: 3,
-    margin: 10,
-    loop: true,
-    nav: true
-  });
-});
 
 </script>
+
