@@ -711,6 +711,8 @@ router.post("/editSocialLinks", verifyLogin, async (req, res) => {
 
 router.get("/viewPendingOrders", verifyLogin, async (req, res) => {
   let paymentmethod = null;
+  console.log('Pppppppppppppppppppppppppppppppppppppppppppppp')
+  console.log(req.query.id);
   userHelper.getOrderDetails(req.query.id).then((response) => {
     if (response.paymentMethod == "ONLINE") {
       paymentmethod = response.paymentMethod;
@@ -743,5 +745,18 @@ router.post("/add-baker", verifyLogin, (req, res) => {
     res.redirect("/admin");
   });
 });
+
+router.get('/track-order',verifyLogin,async(req,res)=>{
+  
+    res.render("admin/track-order",{admin:true})
+
+})
+
+router.post('/track-order',verifyLogin,async(req,res)=>{
+  let order=await adminHelpers.trackOrder(req.query.id)
+  console.log(order)
+  res.render("admin/view",{admin:true,order})
+});
+
 
 module.exports = router;
