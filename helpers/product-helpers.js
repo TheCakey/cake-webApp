@@ -100,6 +100,21 @@ module.exports={
     })
     }
    ,
+   getProductsBasedonCategory:(category)=>{
+    return new Promise(async(resolve,reject)=>{
+
+        viewAllCategory:()=>{
+            return new Promise (async (resolve,reject)=>{
+               let category = await db.get().collection(collection.CATEGORY_COLLECTION).find().toArray()
+                resolve(category)
+            })
+          }
+
+        db.get().collection(collection.PRODUCT_COLLECTION).find({Category:category}).toArray().then((data)=>{
+           resolve(data)
+        })
+    })
+    }
    
 
 }
