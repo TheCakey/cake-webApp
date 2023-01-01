@@ -1,7 +1,7 @@
 var db=require('../config/connection')
 var collection=require('../config/collection')
 var objectId=require('mongodb').ObjectID
-
+const adminHelpers = require("./admin-helpers");
 module.exports={
   
     addProduct:(product,callback)=>{
@@ -102,17 +102,45 @@ module.exports={
    ,
    getProductsBasedonCategory:(category)=>{
     return new Promise(async(resolve,reject)=>{
+        let product=[];
+        adminHelpers.viewAllCategory().then((category)=>{
+            let length=category.length
+            for(let i=0;i<length;i++){
+              
+                db.get().collection(collection.PRODUCT_COLLECTION).find({Category:category[i].Name}).toArray().then((data)=>{
+                    console.log(category[i].Name );
+                  
+                    if(data.length>0){
+                       var obj=  {
+                           "category":category[i].Name,
+                           "products":data
+                         }
 
-        viewAllCategory:()=>{
-            return new Promise (async (resolve,reject)=>{
-               let category = await db.get().collection(collection.CATEGORY_COLLECTION).find().toArray()
-                resolve(category)
-            })
-          }
+                        product.push(obj)
+                    }
+                   
+                    
+                    console.log(product);
+                    if(i==length-1){
+                        resolve(product)
+                    }
+                 })
 
-        db.get().collection(collection.PRODUCT_COLLECTION).find({Category:category}).toArray().then((data)=>{
-           resolve(data)
+
+
+
+                }
+                
+        
+        
+        
         })
+
+
+
+
+
+      
     })
     }
    

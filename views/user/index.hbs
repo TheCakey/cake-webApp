@@ -148,7 +148,7 @@
 
 {{!-- Special Title --}}
 <div>
-    <p class="special-title"><span class="special-span">{{SeasonName}} Specials</span></p>
+    <p class="special-title"><span class="special-span">{{SeasonName}}</span></p>
 </div>
 
 {{!-- Ends soecial title --}}
@@ -214,8 +214,9 @@
 {{/if}}
 
 {{!-- Special Title --}}
+{{#each categoryProducts}}
 <div>
-    <p class="special-title"><span class="special-span">Birthday Specials</span></p>
+    <p class="special-title"><span class="special-span">{{this.category}}</span></p>
 </div>
 
 {{!-- Ends soecial title --}}
@@ -225,7 +226,7 @@
 <div class="home-demo container-fluid mb-3">
     <div class="row ml-4">
   <div class="owl-carousel owl-two owl-theme">
-    {{#each cakes}}
+    {{#each this.products}}
     <div class="item box-edit"  >
       <a href="/product-detail-page?id={{this._id}}"> <img class="img-fluid w-100"  src="product-images/{{this._id}}1.jpg" alt=""  ></a>
     </div>
@@ -234,6 +235,7 @@
   </div>
 </div>
 </div>
+{{/each}}
 
 {{!-- Second owl carasoul ends here --}}
 

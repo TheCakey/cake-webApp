@@ -24,11 +24,20 @@ const verifyLogin = (req, res, next) => {
   }
 };
 
+router.get('/check',(req,res)=>{
+    productHelper.getProductsBasedonCategory().then((category)=>{
+      
+        res.json(category)
+
+    })
+})
+
 router.get("/", async function (req, res, next) {
   sitedetails = await adminHelpers.getSiteDetails();
   let cakes = null;
   let SeasonName = null;
   let seasonalProducts = null;
+  let categoryProducts = null;
   cakes = await productHelper.getProductCake();
   season = await productHelper.getCurrentSeason();
   if (season) {
@@ -38,12 +47,15 @@ router.get("/", async function (req, res, next) {
     seasonalProducts = await productHelper.getSeasonalProducts(season.season);
   }
 
+  categoryProducts = await productHelper.getProductsBasedonCategory();
+
   cakes = cakes.slice(0, 8);
   res.render("user/index", {
     cakes,
     sitedetails,
     SeasonName,
     seasonalProducts,
+    categoryProducts,
   });
 });
 
