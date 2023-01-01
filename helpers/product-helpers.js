@@ -54,6 +54,7 @@ module.exports={
                 $set:{
                     Name:ProDetails.Name,
                     Price:ProDetails.Price,
+                    Oldprice:ProDetails.Oldprice,
                     Category:ProDetails.Category,
                     ProductDescription:ProDetails.ProductDescription,
                     flavour:ProDetails.flavour,

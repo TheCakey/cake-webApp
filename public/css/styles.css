@@ -826,6 +826,8 @@ footer {
   background: #eeeeee;
       grid-template-areas: "logo help shop company" "copyright copyright copyright copyright";
   -ms-grid-columns: 1fr (2fr)[3];
+  /* -ms-grid-columns: 1fr repeat(3, 2fr); */
+
       grid-template-columns: 1fr repeat(3, 2fr);
   grid-gap: 1rem;
 }

@@ -52,20 +52,33 @@
 
 
 {{!-- first-owl-carasoul --}}
-  
+
+{{#if SeasonName}}
+  <div>
+      <p class="BO-edit">{{SeasonName}}</p>
+
+  </div>
 <div class="home-demo container-fluid ">
     <div class="row ml-4">
-  <p class="BO-edit">Best Offers</p>
-  <div class="owl-carousel owl-one ">
-    {{#each cakes}}
+  <div class="owl-carousel owl-one owl-theme ">
+    {{#each seasonalProducts}}
     <div class="item "  >
-      <a href="/product-detail-page?id={{this._id}}"> <img class="img-fluid w-100"  src="product-images/{{this._id}}1.jpg" alt=""  ></a>
-    </div>
+    <div class="position-relative bg-light overflow-hidden" >
+                            <a href="/product-detail-page?id={{this._id}}"> <img class="img-fluid w-100"  src="product-images/{{this._id}}1.jpg" alt=""  ></a>  
+                                    {{!-- <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div> --}}
+                                </div>
+                                <div class="text-center p-2">
+                                    <a class="d-block h5 mb-2" href="/product-detail-page?id={{this._id}}">{{this.Name}}</a>
+                                    
+                                </div>  
+                                  </div>
    {{/each}}
    
   </div>
 </div>
 </div>
+
+{{/if}}
 
 {{!-- first owl carasoul ends here --}}
 
@@ -99,6 +112,8 @@
                                 <div class="text-center p-4">
                                     <a class="d-block h6 mb-2"  href="/product-detail-page?id={{this._id}}">{{this.Name}}</a>
                                     <span style="font-weight: 550;" class="text-primary  ">₹ {{this.Price}}</span>
+                                  <span class="text-body text-decoration-line-through">{{this.Oldprice}}</span>
+
                                 </div>
                                 {{!-- <div class="d-flex border-top">
                                     <small class="w-50 text-center border-end py-2">
@@ -144,79 +159,14 @@
 
 
 
-{{#if SeasonName}}
-
-{{!-- Special Title --}}
-<div>
-    <p class="special-title"><span class="special-span">{{SeasonName}}</span></p>
-</div>
-
-{{!-- Ends soecial title --}}
-
- <!-- Product Start -->
-    <div class="container-xxl py-3">
-        <div class="container">
-            <div class="row g-0 gx-5 align-items-end">
-                <div class="col-lg-6">
-                    {{!-- <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;"> --}}
-                        {{!-- <h1 class="display-5 mb-3">{{SeasonName}}</h1> --}}
-                        
-                        {{!-- <p>Tempor ut dolore lorem kasd vero ipsum sit eirmo</p> --}}
-                    </div>
-                </div>
-               
-            </div>
-            <div class="tab-content">
-                <div id="tab-1" class="tab-pane fade show p-0 active">
-                    <div class="row g-4">
-                      
-                       
-                       {{#each seasonalProducts}}
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
-                            
-                            <div class="product-item">
-                                <div class="position-relative bg-light overflow-hidden" >
-                            <a href="/product-detail-page?id={{this._id}}"> <img class="img-fluid w-100"  src="product-images/{{this._id}}1.jpg" alt=""  ></a>  
-                                    {{!-- <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div> --}}
-                                </div>
-                                <div class="text-center p-4">
-                                    <a class="d-block h5 mb-2" href="/product-detail-page?id={{this._id}}">{{this.Name}}</a>
-                                    <span class="text-primary me-1">{{this.Price}}</span>
-                                    <span class="text-body text-decoration-line-through">₹999</span>
-                                </div>
-                                {{!-- <div class="d-flex border-top">
-                                    <small class="w-50 text-center border-end py-2">
-                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>
-                                    </small>
-                                    <small class="w-50 text-center py-2">
-                                        <a onclick="addToCart('{{this._id}}')" class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
-                                    </small>
-                                </div> --}}
-                            </div>
-                        </div>
-                        {{/each}}
 
 
-                        
-                        <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                            <a class="btn btn-secondary rounded-pill py-2 px-3" href="/browse-season-product?name={{SeasonName}}">Browse More Cakes</a>
-                        </div>
-                    </div>
-                </div>
-               
-            </div>
-        </div>
-    </div>
-    <!-- Product End -->
 
-
-{{/if}}
 
 {{!-- Special Title --}}
 {{#each categoryProducts}}
 <div>
-    <p class="special-title"><span class="special-span">{{this.category}}</span></p>
+    <p class="BO-edit">{{this.category}}</p>
 </div>
 
 {{!-- Ends soecial title --}}
@@ -481,27 +431,39 @@ account_circle
 
      $(document).ready(function(){
   $('.owl-one').owlCarousel({
-    center: true,
-    loop:true,
+    ltr:true,
+    
+ 
     margin:10,
     autoplay:true,
-    autoplayTimeout:2500,
+    autoplayTimeout:2000,
     autoplayHoverPause:true,
+    dots: false,
     responsive:{
         0:{
-            items:2
+             loop:true,
+            items:2,
+      
         },
         600:{
+             loop:false,
             items:3
         },
         1000:{
-            items:4
+             loop:false,
+            items:4,
+            
+            nav: true,
+        dots: false,
+		navText: ['<span aria-label="Previous">‹</span>','<span aria-label="Next">›</span>'],
+		lazyLoad:true,
         }
     },
     
 });
 {{!-- second owl carousel startsss--}}
 $('.owl-two').owlCarousel({
+    
    loop:true,
     margin:10,
     responsiveClass:true,
@@ -525,13 +487,13 @@ $('.owl-two').owlCarousel({
 
 {{!-- second owl carousel endsss--}}
 
-
-$('.play').on('click',function(){
+      $('.play').on('click',function(){
     owl.trigger('play.owl.autoplay',[1000])
 })
 $('.stop').on('click',function(){
     owl.trigger('stop.owl.autoplay')
 })
+
 
 
 });

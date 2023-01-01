@@ -578,91 +578,6 @@
   
    /* Blanspaace fix code ends here  */
 
-   /* special title code starts */
-  
-  @media (max-width: 768px) {
-      .special-title{
-      margin: 3vh auto;
-      text-align: center;
-      position: relative;
-      color: #FF6D23;
-      font-size: 1.2rem;
-      font-weight: bolder;
-      
-  }
-  .special-title::before{
-      content: "";
-      height: 4px;
-      width: 50vw;
-      background-color: #FF6D23;
-      color: #FF6D23;
-      position: absolute;
-      top: 50%;
-      right: 0;
-      z-index: -2;
-  }
-  .special-title::after{
-      content: "";
-      height: 4px;
-      width: 50vw;
-      background-color: #FF6D23;
-      color: #FF6D23;
-      position: absolute;
-      top: 50%;
-      left: 0;
-      z-index: -2;
-  }
-  
-  .special-span{
-      background: white;
-      padding: 0;
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-bottom: 0;
-  }
-  }
-  
-  @media (min-width: 768px) {
-      .special-title{
-      margin: 5vh auto;
-      text-align: center;
-      position: relative;
-      color: #FF6D23;
-      font-size: 1.7rem;
-      font-weight: bold;
-      
-  }
-  .special-title::before{
-      content: "";
-      height: 7px;
-      width: 50vw;
-      background-color: #FF6D23;
-      color: #FF6D23;
-      position: absolute;
-      top: 50%;
-      right: 0;
-      z-index: -2;
-  }
-  .special-title::after{
-      content: "";
-      height: 7px;
-      width: 50vw;
-      background-color: #FF6D23;
-      color: #FF6D23;
-      position: absolute;
-      top: 50%;
-      left: 0;
-      z-index: -2;
-  }
-  
-  .special-span{
-      background: white;
-      padding: 0;
-      padding-left: 15%;
-      padding-right: 15%;
-      padding-bottom: 0;
-  }
-  }
   
   /* special title code ends */
   
@@ -671,6 +586,7 @@
       display: block;
       width: 100%;
       border-radius: 15px;
+      
     }
     .BO-edit{
       
