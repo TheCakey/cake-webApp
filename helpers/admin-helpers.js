@@ -184,7 +184,12 @@ module.exports={
         })
     },
 
-
+   trackOrder:(Id)=>{
+    return new Promise (async (resolve,reject)=>{
+        let order = await db.get().collection(collection.ORDER_COLLECTION).findOne({orderId:Id})
+            resolve(order)
+        })
+    },
 
 
     //pincode

@@ -102,7 +102,7 @@
 
   <div class="submit-wrapper ">
 
-<a href="/signup" type="button" class="" style=" ">Create Your Cakey Account </a>
+<a href="/signup" type="button" >Create Your Cakey Account </a>
   </div>
           
         </div>
@@ -150,15 +150,6 @@ $.ajax({
     }
 
 
-
-document.querySelector('#div-display1').addEventListener("click",function(){
-     document.querySelector("#div-display2").style.display = "none";
-     document.querySelector("#btn-none2").style.display = "none";
-})
-document.querySelector('#div-display2').addEventListener("click",function(){
-     document.querySelector("#div-display1").style.display = "none";
-     document.querySelector("#btn-none1").style.display = "none";
-})
 
 
 //otp sending function
@@ -222,7 +213,9 @@ var timeleft = 60;
 
 
     document.querySelector("#div-display1").addEventListener("click", function(){
-  
+   document.querySelector("#div-display2").style.display = "none";
+     document.querySelector("#btn-none2").style.display = "none";
+
     var mobNum = document.getElementById('div-num').value
         var filter = /^\d*(?:\.\d{1,2})?$/;
         if (filter.test(mobNum)) {
@@ -249,7 +242,9 @@ var timeleft = 60;
 {{!-- Button two PAssword --}}
 
      document.querySelector("#div-display2").addEventListener("click", function(){
-  
+   document.querySelector("#div-display1").style.display = "none";
+     document.querySelector("#btn-none1").style.display = "none";
+
     var mobNum = document.getElementById('div-num').value
         var filter = /^\d*(?:\.\d{1,2})?$/;
         if (filter.test(mobNum)) {

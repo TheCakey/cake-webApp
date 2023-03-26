@@ -24,16 +24,19 @@ const verifyLogin = (req, res, next) => {
   }
 };
 
-router.get('/check',(req,res)=>{
-    productHelper.getProductsBasedonCategory().then((category)=>{
-      
+router.get('/check',async (req,res)=>{
+  let category = await productHelper.getProductsBasedonCategory()
         res.json(category)
 
     })
-})
 
 router.get("/", async function (req, res, next) {
-  sitedetails = await adminHelpers.getSiteDetails();
+  try{
+    sitedetails = await adminHelpers.getSiteDetails();
+  }catch(err){
+    sitedetails=""
+  }
+
   let cakes = null;
   let SeasonName = null;
   let seasonalProducts = null;
@@ -178,18 +181,22 @@ router.post("/login-mob-num-submission", (req, res) => {
   let mobno = req.body.mobnum;
   userHelper.findUserByMobNum(mobno).then((response) => {
     loginErr = null;
-    //     if(req.body.pass===false){
-    // //otp send to mobile number
-
-    // //otp send to mobile number
-    //     }
-    otp = Math.floor(1000 + Math.random() * 9000);
+    console.log('huhuu');
+console.log(req.body.pass)
+        if(req.body.pass===false){
+          console.log('hellooooooooooooooooo');
+    //otp send to mobile number
+    // otp = Math.floor(1000 + Math.random() * 9000);
 
     // const client = require("twilio")(accountSid, authToken);
 
     // client.messages
     //   .create({ body:"Your cakey login otp "+otp, from: "+12067597347", to: "+917356252657"})
     //   .then(message => console.log(message.sid));
+
+   
+        }
+        console.log('hhehehehhee');
 
     req.session.tempUser = response;
     res.json(response);

@@ -101,13 +101,19 @@ module.exports={
     })
     }
    ,
-   getProductsBasedonCategory:(category)=>{
+   getProductsBasedonCategory:()=>{
     return new Promise(async(resolve,reject)=>{
         let product=[];
+        console.log("hiiiii");
+        let season= await db.get().collection(collection.SEASON_COLLECTION).findOne()
+        console.log(season.season);
         adminHelpers.viewAllCategory().then((category)=>{
             let length=category.length
             for(let i=0;i<length;i++){
-              
+              if(category[i].Name==season.season){
+
+continue;
+              }
                 db.get().collection(collection.PRODUCT_COLLECTION).find({Category:category[i].Name}).toArray().then((data)=>{
                     console.log(category[i].Name );
                   
