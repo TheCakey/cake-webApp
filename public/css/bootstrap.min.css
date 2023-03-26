@@ -8001,8 +8001,8 @@ fieldset:disabled .btn {
 }
 }
 @media(min-width: 450px){
-.p-4 {
-    padding: 1.5rem !important
+    .p-4 {
+       padding: 1.5rem !important
 }
 
 }
