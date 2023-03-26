@@ -159,15 +159,80 @@
 
 
 
-
-
-
+{{#if SeasonName}}
 
 {{!-- Special Title --}}
-{{#each categoryProducts}}
 <div>
-    <p class="BO-edit">{{this.category}}</p>
-</div>
+      <p class="BO-edit">{{SeasonName}}</p>
+
+  </div>
+
+{{!-- Ends soecial title --}}
+
+ <!-- Product Start -->
+    <div class="container-xxl py-3">
+        <div class="container">
+            <div class="row g-0 gx-5 align-items-end">
+                <div class="col-lg-6">
+                    {{!-- <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;"> --}}
+                        {{!-- <h1 class="display-5 mb-3">{{SeasonName}}</h1> --}}
+                        
+                        {{!-- <p>Tempor ut dolore lorem kasd vero ipsum sit eirmo</p> --}}
+                    </div>
+                </div>
+               
+            </div>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="row g-4">
+                      
+                       
+                       {{#each seasonalProducts}}
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
+                            
+                            <div class="product-item">
+                                <div class="position-relative bg-light overflow-hidden" >
+                            <a href="/product-detail-page?id={{this._id}}"> <img class="img-fluid w-100"  src="product-images/{{this._id}}1.jpg" alt=""  ></a>  
+                                    {{!-- <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div> --}}
+                                </div>
+                                <div class="text-center p-4">
+                                    <a class="d-block h5 mb-2" href="/product-detail-page?id={{this._id}}">{{this.Name}}</a>
+                                    <span class="text-primary me-1">{{this.Price}}</span>
+                                    <span class="text-body text-decoration-line-through">₹999</span>
+                                </div>
+                                {{!-- <div class="d-flex border-top">
+                                    <small class="w-50 text-center border-end py-2">
+                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                    </small>
+                                    <small class="w-50 text-center py-2">
+                                        <a onclick="addToCart('{{this._id}}')" class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                    </small>
+                                </div> --}}
+                            </div>
+                        </div>
+                        {{/each}}
+
+
+                        
+                        <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                            <a class="btn btn-secondary rounded-pill py-2 px-3" href="/browse-season-product?name={{SeasonName}}">Browse More Cakes</a>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <!-- Product End -->
+
+
+{{/if}}
+
+{{!-- Special Title --}}
+<div>
+      <p class="BO-edit">Best Offers</p>
+  </div>
 
 {{!-- Ends soecial title --}}
 
@@ -176,7 +241,7 @@
 <div class="home-demo container-fluid mb-3">
     <div class="row ml-4">
   <div class="owl-carousel owl-two owl-theme">
-    {{#each this.products}}
+    {{#each cakes}}
     <div class="item box-edit"  >
       <a href="/product-detail-page?id={{this._id}}"> <img class="img-fluid w-100"  src="product-images/{{this._id}}1.jpg" alt=""  ></a>
     </div>
@@ -185,7 +250,6 @@
   </div>
 </div>
 </div>
-{{/each}}
 
 {{!-- Second owl carasoul ends here --}}
 
@@ -282,8 +346,7 @@ Delivered on time too.</p>
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <img width="250px" height="80px"class="mb-4" src="img/cakeylogo.png" alt="">
-                    {{!-- <h1 class="fw-bold text-danger mb-4">{{sitedetails.0.siteName}}</h1> --}}
+                    <h1 class="fw-bold text-danger mb-4">{{sitedetails.0.siteName}}</h1>
                     <p class="text-light ">{{sitedetails.0.SiteDescription}} </p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
@@ -326,9 +389,12 @@ Delivered on time too.</p>
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 text-light">
-                        &copy; <a href="#">Hexameta Technologies</a>, All Right Reserved.
+                        &copy; <a href="#">{{sitedetails.0.domainName}}</a>, All Right Reserved.
                     </div>
-                   
+                    <div class="col-md-6 text-center text-md-end">
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        {{!-- Designed By <a href="https://htmlcodex.com">HTML Codex</a> --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -417,4 +483,3 @@ $('.stop').on('click',function(){
 
 
 </script>
-
