@@ -107,6 +107,7 @@ module.exports={
         console.log("hiiiii");
         let season= await db.get().collection(collection.SEASON_COLLECTION).findOne()
         console.log(season.season);
+       try{
         adminHelpers.viewAllCategory().then((category)=>{
             let length=category.length
             for(let i=0;i<length;i++){
@@ -142,7 +143,9 @@ continue;
         
         
         })
-
+       }catch(err){
+reject(err)
+       }
 
 
 

@@ -8,6 +8,7 @@ var productHelper = require("../helpers/product-helpers");
 const adminHelpers = require("../helpers/admin-helpers");
 const twilio = require("twilio");
 const { response } = require("../app");
+const { log } = require("handlebars");
 // CommonJS
 
 let otp;
@@ -50,16 +51,24 @@ router.get("/", async function (req, res, next) {
   if (SeasonName != null) {
     seasonalProducts = await productHelper.getSeasonalProducts(season.season);
   }
+console.log('jiiiiiiiiiiiiiiiiiiiiiiii');
 
-  categoryProducts = await productHelper.getProductsBasedonCategory();
+    productHelper.getProductsBasedonCategory().then((response)=>{
+      console.log(response)
+      
+    }).catch((err)=>{
+      console.log(err)
+    })
 
   cakes = cakes.slice(0, 8);
+  console.log("eoeeoeoeoeoeoieeeeeeeeeeeeueeeeuieeeheeeieeb")
+  console.log(cakes);
   res.render("user/index", {
     cakes,
     sitedetails,
     SeasonName,
     seasonalProducts,
-    categoryProducts,
+    // categoryProducts,
   });
 });
 
