@@ -107,22 +107,22 @@ router.post("/mob-num-submission", async (req, res) => {
     otp = Math.floor(1000 + Math.random() * 9000);
     console.log(otp);
 
-    var req = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
+    var request = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
 
-req.headers({
+    request.headers({
   "authorization": process.env.FAST_SMS_API
 });
 
-req.form({
+request.form({
   "variables_values": otp,
   "route": "otp",
   "numbers": mobno,
 });
 
-req.end(function (res) {
-  if (res.error) throw new Error(res.error);
+request.end(function (response) {
+  if (response.error) throw new Error(response.error);
 
-  console.log(res.body);
+  console.log(response.body);
 });
 
 
@@ -210,7 +210,8 @@ router.post("/login-mob-num-submission", (req, res) => {
     otp = Math.floor(1000 + Math.random() * 9000);
 console.log(otp);
    
-    var request = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
+if(response!=null){
+  var request = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
 
     request.headers({
       "authorization": process.env.FAST_SMS_API
@@ -229,12 +230,14 @@ console.log(otp);
     });
     
     
+}
+  
    
         console.log('hhehehehhee');
 
     req.session.tempUser = response;
     res.json(response);
-  });
+  })
 });
 
 router.post("/login-otp", (req, res) => {
