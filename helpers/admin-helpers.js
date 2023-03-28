@@ -145,7 +145,7 @@ module.exports={
 
     viewAllPendingOrders:()=>{
         return new Promise (async (resolve,reject)=>{
-            let pendingOrders = await db.get().collection(collection.ORDER_COLLECTION).find({status:'placed'}).toArray()
+            let pendingOrders = await db.get().collection(collection.ORDER_COLLECTION).find({status:'pending'}).toArray()
              resolve(pendingOrders)
          })
 

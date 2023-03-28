@@ -52,12 +52,10 @@ router.get("/", async function (req, res, next) {
   if (SeasonName != null) {
     seasonalProducts = await productHelper.getSeasonalProducts(season.season);
   }
-console.log('jiiiiiiiiiiiiiiiiiiiiiiii');
 
   // categoryProducts = await productHelper.getProductsBasedonCategory();
 
   cakes = cakes.slice(0, 8);
-  console.log("huuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
   res.render("user/index", {
     cakes,
     sitedetails,
