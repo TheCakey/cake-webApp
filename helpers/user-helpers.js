@@ -245,9 +245,10 @@ return new Promise(async(resolve,reject)=>{
     getPendingOrderProducts:(userId)=>{
         return new Promise(async (resolve, reject)=>{
             
-          let  order=await db.get().collection(collection.ORDER_COLLECTION).find({$and: [  {userId:objectId(userId)},{status:"placed"}] }).toArray()
-        
+          let  order=await db.get().collection(collection.ORDER_COLLECTION).find({$and: [  {userId:objectId(userId)},{status:"pending"}] }).toArray()
+        console.log(order)
         resolve(order)
+        
         })
     },
 
