@@ -676,4 +676,9 @@ router.post("/subscription", (req, res) => {
     });
 });
 
+router.get("/contact-page",  (req, res) => {
+ 
+  res.render("user/contact-page");
+});
+
 module.exports = router;
