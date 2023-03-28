@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var unirest = require("unirest");
 //var productHelper=require('../helpers/product-helpers')
 var userHelper = require("../helpers/user-helpers");
 
@@ -106,17 +107,37 @@ router.post("/mob-num-submission", async (req, res) => {
     otp = Math.floor(1000 + Math.random() * 9000);
     console.log(otp);
 
-    console.log(process.env.TWILIO_AUTH_TOKEN);
+    var req = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
 
-    const client = require("twilio")(accountSid, authToken);
+req.headers({
+  "authorization": process.env.FAST_SMS_API
+});
 
-    client.messages
-      .create({
-        body: "Your cakey login otp " + otp,
-        from: "+12067597347",
-        to: "+91" + mobno,
-      })
-      .then((message) => console.log(message.sid));
+req.form({
+  "variables_values": otp,
+  "route": "otp",
+  "numbers": mobno,
+});
+
+req.end(function (res) {
+  if (res.error) throw new Error(res.error);
+
+  console.log(res.body);
+});
+
+
+    // console.log(process.env.TWILIO_AUTH_TOKEN);
+
+    // const client = require("twilio")(accountSid, authToken);
+
+    // client.messages
+    //   .create({
+    //     body: "Your cakey login otp " + otp,
+    //     from: "+12067597347",
+    //     to: "+91" + mobno,
+    //   })
+    //   .then((message) => console.log(message.sid));
+
 
     res.json(true);
   }
@@ -182,20 +203,33 @@ router.post("/login-mob-num-submission", (req, res) => {
   userHelper.findUserByMobNum(mobno).then((response) => {
     loginErr = null;
     console.log('huhuu');
-console.log(req.body.pass)
-        if(req.body.pass===false){
+
+ 
           console.log('hellooooooooooooooooo');
-    //otp send to mobile number
-    // otp = Math.floor(1000 + Math.random() * 9000);
-
-    // const client = require("twilio")(accountSid, authToken);
-
-    // client.messages
-    //   .create({ body:"Your cakey login otp "+otp, from: "+12067597347", to: "+917356252657"})
-    //   .then(message => console.log(message.sid));
-
+    // otp send to mobile number
+    otp = Math.floor(1000 + Math.random() * 9000);
+console.log(otp);
    
-        }
+    var request = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
+
+    request.headers({
+      "authorization": process.env.FAST_SMS_API
+    });
+    
+    request.form({
+      "variables_values": otp,
+      "route": "otp",
+      "numbers": mobno,
+    });
+    
+    request.end(function (resp) {
+      if (resp.error) throw new Error(resp.error);
+    
+      console.log(resp.body);
+    });
+    
+    
+   
         console.log('hhehehehhee');
 
     req.session.tempUser = response;
