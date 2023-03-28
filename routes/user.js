@@ -35,6 +35,7 @@ router.get("/", async function (req, res, next) {
   try{
     sitedetails = await adminHelpers.getSiteDetails();
   }catch(err){
+    console.log(err);
     sitedetails=""
   }
 
@@ -51,16 +52,18 @@ router.get("/", async function (req, res, next) {
     seasonalProducts = await productHelper.getSeasonalProducts(season.season);
   }
 
-  categoryProducts = await productHelper.getProductsBasedonCategory();
+  // categoryProducts = await productHelper.getProductsBasedonCategory();
 
   cakes = cakes.slice(0, 8);
+  console.log("huuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
   res.render("user/index", {
     cakes,
     sitedetails,
     SeasonName,
     seasonalProducts,
-    categoryProducts,
+    //categoryProducts,
   });
+
 });
 
 router.get("/browse-season-product", async function (req, res, next) {
