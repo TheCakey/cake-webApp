@@ -36,6 +36,7 @@ router.get("/", async function (req, res, next) {
   try{
     sitedetails = await adminHelpers.getSiteDetails();
   }catch(err){
+    console.log(err);
     sitedetails=""
   }
 
@@ -53,23 +54,20 @@ router.get("/", async function (req, res, next) {
   }
 console.log('jiiiiiiiiiiiiiiiiiiiiiiii');
 
-    productHelper.getProductsBasedonCategory().then((response)=>{
-      console.log(response)
-      
-    }).catch((err)=>{
-      console.log(err)
-    })
+  // categoryProducts = await productHelper.getProductsBasedonCategory();
 
   cakes = cakes.slice(0, 8);
-  console.log("eoeeoeoeoeoeoieeeeeeeeeeeeueeeeuieeeheeeieeb")
-  console.log(cakes);
+  console.log("huuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
   res.render("user/index", {
     cakes,
     sitedetails,
     SeasonName,
     seasonalProducts,
-    // categoryProducts,
+
+    //categoryProducts,
+
   });
+
 });
 
 router.get("/browse-season-product", async function (req, res, next) {
@@ -133,19 +131,6 @@ request.end(function (response) {
 
   console.log(response.body);
 });
-
-
-    // console.log(process.env.TWILIO_AUTH_TOKEN);
-
-    // const client = require("twilio")(accountSid, authToken);
-
-    // client.messages
-    //   .create({
-    //     body: "Your cakey login otp " + otp,
-    //     from: "+12067597347",
-    //     to: "+91" + mobno,
-    //   })
-    //   .then((message) => console.log(message.sid));
 
 
     res.json(true);
@@ -213,8 +198,12 @@ router.post("/login-mob-num-submission", (req, res) => {
     loginErr = null;
     console.log('huhuu');
 
- 
-          console.log('hellooooooooooooooooo');
+ console.log("responseeeeeeeeeeeeeeeeeeee",req.body.pass);
+ console.log(req.body);
+    if(req.body.pass==="true"){
+      console.log("indindidn");
+    }else{
+console.log("illaillaailaa");
     // otp send to mobile number
     otp = Math.floor(1000 + Math.random() * 9000);
 console.log(otp);
@@ -240,6 +229,7 @@ if(response!=null){
     
     
 }
+  }
   
    
         console.log('hhehehehhee');
