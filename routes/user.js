@@ -126,19 +126,6 @@ request.end(function (response) {
 });
 
 
-    // console.log(process.env.TWILIO_AUTH_TOKEN);
-
-    // const client = require("twilio")(accountSid, authToken);
-
-    // client.messages
-    //   .create({
-    //     body: "Your cakey login otp " + otp,
-    //     from: "+12067597347",
-    //     to: "+91" + mobno,
-    //   })
-    //   .then((message) => console.log(message.sid));
-
-
     res.json(true);
   }
 });
@@ -204,8 +191,12 @@ router.post("/login-mob-num-submission", (req, res) => {
     loginErr = null;
     console.log('huhuu');
 
- 
-          console.log('hellooooooooooooooooo');
+ console.log("responseeeeeeeeeeeeeeeeeeee",req.body.pass);
+ console.log(req.body);
+    if(req.body.pass==="true"){
+      console.log("indindidn");
+    }else{
+console.log("illaillaailaa");
     // otp send to mobile number
     otp = Math.floor(1000 + Math.random() * 9000);
 console.log(otp);
@@ -231,6 +222,7 @@ if(response!=null){
     
     
 }
+  }
   
    
         console.log('hhehehehhee');
